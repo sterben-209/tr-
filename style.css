@@ -1,0 +1,588 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.intro-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Chiều cao bằng chiều cao cửa sổ trình duyệt */
+  overflow: hidden; /* Ẩn phần thừa của video */
+}
+
+.intro-vid {
+  width: 100vw; /* 100% chiều rộng màn hình */
+  height: 100vh; /* 100% chiều cao màn hình */
+  object-fit: cover; /* Tự động cắt tỉ lệ thừa để lấp đầy màn hình */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Đặt video phía sau các phần tử khác */
+  filter: brightness(0.8);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  /* opacity: 0; */
+  position: fixed;
+  width: 100%;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  /* font-weight: bold; */
+  padding-left: 1rem;
+  letter-spacing: -0.025rem;
+}
+
+.logo-2 {
+  font-family: "Playfair Display", serif;
+  font-size: 12rem;
+  color: #d4a373;
+  text-decoration: none;
+  /* font-weight: bold; */
+  padding-left: 1rem;
+  letter-spacing: -0.025rem;
+  position: absolute;
+}
+
+.sub-logo {
+  font-family: "Inter", serif;
+  font-size: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: lighter;
+  letter-spacing: 0.3em;
+  opacity: 0.7;
+  padding-left: 1rem;
+  /* visibility: hidden; */
+}
+
+.sub2-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.sub2-logo p:first-child {
+  color: #d4a373;
+  font-family: "Inter", serif;
+  font-size: 1.25rem;
+}
+
+.logo-2 {
+  position: relative;
+  top: -2rem;
+  color: white;
+}
+
+.sub2-logo p:last-child {
+  font-family: "Inter", serif;
+  /* color: #44190B; */
+}
+
+.nav-menu {
+  /* visibility: hidden; */
+  display: flex;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.nav-menu a {
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-menu:hover a {
+  opacity: 0.3;
+}
+
+.nav-menu a:hover {
+  opacity: 1 !important;
+}
+
+.nav-menu a {
+  transition: opacity 0.3s ease;
+  text-decoration: none;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-action {
+  /* visibility: hidden; */
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+.nav-action a {
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.healing {
+  width: 100%;
+  height: 110vh;
+  overflow: hidden;
+  display: flex ;
+  flex-direction: column;
+  align-items: center;
+  object-fit: cover;
+}
+
+.healing img {
+  position: absolute;
+  width: 100%;
+  filter: brightness(0.3);
+  z-index: -1;
+  object-fit: cover;
+}
+
+
+.personal-choice {
+  position: relative;
+  top: 25%;
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  color: white;
+  letter-spacing: 0.3em;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4rem;
+}
+
+.find {
+  position: relative;
+  font-family: "Playfair Display", serif;
+  font-size: 6rem;
+  
+  top: 25%;
+  color: white;
+  
+}
+
+.your-own {
+  position: relative;
+  top: 20%;
+  font-family: "Playfair Display", serif;
+  font-size: 6rem;
+  font-weight: lighter;
+  font-style: italic;
+  color: #d4a373;
+}
+
+.healing p:last-child {
+  position: relative;
+  top: 20%;
+  font-family: "mulish", serif;
+  font-weight: lighter;
+  font-size: 1.5rem;
+  color: white;
+  width: 50%;
+  text-align: center;
+  line-height: 1.25rem;
+  opacity: 0.7;
+}
+
+.start-choice {
+  position: relative;
+  top: 25%;
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  color: white;
+  letter-spacing: 0.3em;
+  border: 1px solid rgba(255, 255, 255, 1);
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.start-choice:hover {
+  background-color: #d4a373;
+  color: black;
+}
+
+.slider {
+  overflow: hidden;
+  /* height: 100vh; */
+  scroll-snap-type: y mandatory;
+}
+
+section{
+  scroll-snap-align:top;
+}
+
+.slide1 {
+  height: 110vh;
+  width: 100%;
+  background: #2A3052;
+  position: relative;
+  scroll-snap-align: start;
+}
+.slide2 {
+  height: 110vh;
+  width: 100%;
+  background: #D4A373;
+  position: relative;
+  scroll-snap-align: start;
+
+}
+.slide3 {
+  height: 110vh;
+  width: 100%;
+  background: #4F772D;
+  position: relative;
+  scroll-snap-align: start;
+
+}
+
+.collection{
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  color: white;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3em;
+  position: absolute;
+  left: 15%;
+  padding-top: 10rem;
+}
+
+.title{
+  font-family: "Playfair Display", serif;
+  font-size: 6rem;
+  color: white;
+  padding-top: 11rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0;
+  position: absolute;
+  left: 15%;
+}
+
+.title::first-letter {
+    text-decoration: underline;
+    text-decoration-thickness: 1px; /* Độ dày nét gạch (tùy chọn) */
+    text-underline-offset: 1.5rem; /* Khoảng cách với chữ (tùy chọn) */
+}
+
+.subtitle{
+  font-family: "Playfair Display", serif;
+  font-size: 9rem;
+  color: white;
+  opacity: 0.2;
+  position:relative;
+  left: 40%;
+  transform: translate(0%, -50%) rotate(-90deg);
+  color: transparent;
+  -webkit-text-stroke: 1.5px white;
+}
+
+.description{
+  font-family: "mulish", serif;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: lighter ;
+  color: white;
+  width: 18%;
+  position: relative;
+  left: 15%;
+  letter-spacing: 1px;
+  top: 10rem;
+  opacity: 0.7;
+  margin-left: 1rem;
+}
+
+.KEY{
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  color: white;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  letter-spacing: 0.2em;
+  position: relative;
+  left: 15%;
+  top: 10rem;
+  opacity: 0.4;
+}
+
+.ingre-contain{
+  width: 400px;
+  left: 15%;
+  margin-left: 1rem;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ingre{
+  font-family: "mulish", serif;
+  font-size: 0.5rem;
+  color: white;
+  margin-top: 0.5rem;
+  position: relative;
+  top: 10rem;
+  opacity: 0.7;
+  border: 1px solid white;
+  padding: 0.5rem;
+  display: inline-block;
+  letter-spacing: 2px;
+}
+
+.learnmore{
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  color: white;
+  margin-top: 3rem;
+  margin-left: 1rem;
+  letter-spacing: 0.3em;
+  position: relative;
+  left: 15%;
+  top: 10rem;
+  opacity: 0.7;
+  border: 1px solid white;
+  display: inline-block;
+  padding: 0.5rem;
+  text-decoration: none;
+  z-index: 2;
+}
+
+.learnmore:hover{
+  background-color: white;
+  color: black;
+}
+
+.deco{
+  color: white;
+  opacity: 0.4;
+  position: relative;
+  font-family: "Bodoni Moda", serif;
+  left: 80%;
+  top: 11rem;
+}
+
+.decor-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.square {
+  position: absolute;
+  width: 400px;
+  height: 175px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  top: 50%;
+  left: 15%;
+  color: transparent;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.square2 {
+  position: absolute;
+  width: 400px;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  /* top: 50%; */
+  left: 25%;
+  color: transparent;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.big-circle-solid {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  top: 25%;
+  left: 25%;
+  z-index: 1;
+}
+
+.big-circle-dashed {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  top: 10%;
+  left: 25%;
+  z-index: 1;
+}
+
+.ilu {
+  position: absolute;
+  object-fit: cover;
+  width: 350px;
+  height: 450px;
+  background-color: rgba(255, 255, 255, 0);
+  top: 20%;
+  left: 50%;
+  rotate: -10deg;
+  border-radius: 100px 0 ;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.slide2 .ilu {
+  rotate: 10deg;
+}
+
+.slide3 .ilu {
+  border-radius: 50%;
+  height: 350px;
+  top: 25%;
+}
+
+.ilu img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
+}
+
+.comunity{
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.comunity img{
+  position: absolute;
+  width: 100%;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.container{
+  width: 800px;
+  height: 800px;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.subtitle1{
+  position: relative;
+  top: 15%;
+  font-family:'Inter',serif ;
+  letter-spacing: 0.2rem;
+  font-weight: 200;
+  font-size: small;
+
+}
+
+.title1{
+  position: relative;
+  top: 15%;
+  font-family: 'Playfair Display',sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+
+}
+
+.title2{
+  position: relative;
+  top: 12%;
+  font-family: 'Playfair Display',sans-serif;
+  font-size: 4rem;
+  font-weight: bold;
+
+}
+
+.container p{
+  position: relative;
+  top: 15%;
+  align-items: center;
+  justify-content: center;
+  word-spacing: 0.25rem;
+}
+
+.container input{
+  position: relative;
+  width: 50%;
+  top: 20%;
+  align-items: center;
+  border: transparent;
+  border-bottom: 1px solid black;
+  padding: 1rem;
+}
+
+.container input:focus{
+  outline: none;
+  border-bottom: 1px solid #D4A373;
+}
+
+.container input::placeholder{
+  font-family: 'playfair',sans-serif;
+  text-align: center;
+  font-size:1rem;
+}
+
+.container button{
+  position: relative;
+  top: 23%;
+  font-family: 'Muslish',sans-serif;
+  font-weight: lighter;
+  font-size: 1rem;
+  width: 50%;
+  padding: 0.5rem;
+  background-color: black;
+  color: white;
+}
+
+.container button:hover{
+  background-color: #D4A373;
+  outline: none;
+}
+
+.contact{
+  position: relative;
+  top: 27%;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;  
+}
+
+.contact a {
+  color: black;
+  font-family: 'Mulish',serif;
+  font-weight: lighter;
+  text-decoration: none;
+  opacity: 0.3;
+}
+
+.contact a:hover{
+  opacity: 1;
+}
