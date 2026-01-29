@@ -43,8 +43,8 @@
           <div class="relative group cursor-pointer">
              <span class="hover:underline underline-offset-4 decoration-1 decoration-white/50 transition-all">Sản Phẩm</span>
              <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-32 py-2 bg-white/95 backdrop-blur-sm rounded text-stone-800 text-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl">
-               <a href="#" class="block px-4 py-2 hover:bg-stone-100">Fresh</a>      
-               <a href="#" class="block px-4 py-2 hover:bg-stone-100">Ease</a>        
+               <a href="fresh.html" class="block px-4 py-2 hover:bg-stone-100">Fresh</a>      
+               <a href="free.html" class="block px-4 py-2 hover:bg-stone-100">Free</a>        
                <a href="rest.html" class="block px-4 py-2 hover:bg-stone-100">Rest</a>        
              </div>
           </div>
@@ -65,166 +65,46 @@
         </button>
         <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 translate-x-full">
           <a href="index.html" class="text-2xl font-serif">Trang Chủ</a>
-          <a href="#" class="text-xl">Fresh Collection</a>
-          <a href="#" class="text-xl">Ease Collection</a>
+          <a href="fresh.html" class="text-xl">Fresh Collection</a>
+          <a href="free.html" class="text-xl">Free Collection</a>
           <a href="rest.html" class="text-xl">Rest Collection</a>
         </div>
       </div>
     </nav>
 
-    <!-- Product Page for EASE -->
+    <!-- Product Layout for EASE/FREE -->
     <div class="min-h-screen font-sans transition-colors duration-700" style="background-color: #cbaa7d; color: #ffffff;">
 
-      <!-- 1. Hero Section (Lời Ngỏ) -->
+      <!-- Hero Section -->
       <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">     
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1974&auto=format&fit=crop" alt="EASE" class="w-full h-full object-cover brightness-[0.7]">
-        </div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h1 class="font-serif text-5xl md:text-7xl mb-4 tracking-tight leading-tight">Bản Giao Hưởng Thảo Mộc – Free & Tái Tạo</h1>
-            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
-              "Khi cơ thể lên tiếng, hãy để thảo mộc trả lời."
-            </p>
-            <p class="text-base leading-relaxed opacity-80 max-w-2xl mx-auto font-light">
-              Trong nhịp sống hiện đại, đôi khi điều ta cần không phải là một ly cà phê để tỉnh táo, mà là một tách trà để vỗ về. Sản phẩm FREE là sự kết hợp tinh tế giữa <strong>Cam Thảo, Đậu Biếc và Cỏ Mần Trầu</strong>, tạo nên một liệu trình chăm sóc sức khỏe dịu nhẹ từ sâu bên trong.
-            </p>
-        </div>
-      </section>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vh] h-[120vh] border border-white/20 rounded-full animate-pulse opacity-20 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/3 w-[80vh] h-[80vh] border border-white/10 rounded-full opacity-30 pointer-events-none"></div>
 
-      <!-- 2. The Ingredients (Câu Chuyện Thành Phần) -->
-      <section class="py-24 px-6 bg-black/5 backdrop-blur-sm">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl md:text-5xl mb-4">Câu Chuyện Thành Phần</h2>
-                <div class="w-24 h-px bg-white/50 mx-auto"></div>
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 h-full items-center">
+          <div class="lg:col-span-5 flex flex-col justify-center pt-20 lg:pt-0">
+            <p class="text-xs tracking-[0.4em] uppercase mb-4 opacity-80">Emotea Collection</p>       
+            <h1 class="font-serif text-7xl md:text-9xl mb-2 tracking-tighter leading-none">FREE</h1>
+            <div class="w-24 h-0.5 bg-white/50 mb-8 mt-2"></div>
+            <p class="font-serif italic text-lg md:text-xl opacity-90 mb-8 leading-relaxed max-w-md">"Một cái ôm ấm áp từ thảo mộc. Giúp xoa dịu những nơ-ron thần kinh đang căng thẳng, đưa bạn về trạng thái cân bằng."</p>
+            <div class="mb-12">
+               <p class="text-xs tracking-[0.2em] uppercase mb-4 opacity-70 border-b border-white/20 pb-2 inline-block">Key Ingredients</p>
+               <div class="flex flex-wrap gap-3">
+                 <span class="px-3 py-1 border border-white/30 text-xs uppercase tracking-wider rounded-none hover:bg-white hover:text-stone-900 transition-colors cursor-default">Cam Thảo</span>
+                 <span class="px-3 py-1 border border-white/30 text-xs uppercase tracking-wider rounded-none hover:bg-white hover:text-stone-900 transition-colors cursor-default">Đậu Biếc</span>
+                 <span class="px-3 py-1 border border-white/30 text-xs uppercase tracking-wider rounded-none hover:bg-white hover:text-stone-900 transition-colors cursor-default">Cỏ Mần Trầu</span>
+               </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                <!-- Ingredient 1: Cam Thảo -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🌿</div>
-                    <h3 class="font-serif text-2xl mb-2">Cam Thảo – "Vị Ngọt Vỗ Về"</h3>
-                    <p class="font-light text-sm opacity-80">Không chỉ là chất dẫn giúp cân bằng vị trà, Cam thảo đóng vai trò là "người chữa lành" cho vùng cổ họng.</p>
-                    <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
-                        <li><strong>Làm dịu:</strong> Giảm ngay cảm giác gắt, đau rát.</li>
-                        <li><strong>Thư giãn:</strong> Giảm căng thẳng thần kinh nhẹ.</li>
-                        <li><strong>Vị giác:</strong> Hậu vị ngọt thanh, mượt mà.</li>
-                    </ul>
-                </div>
-                <!-- Ingredient 2: Đậu Biếc -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🪻</div>
-                    <h3 class="font-serif text-2xl mb-2">Đậu Biếc – "Sắc Tím Cho Đôi Mắt"</h3>
-                    <p class="font-light text-sm opacity-80">Giàu Anthocyanin, món quà cho người làm việc cường độ cao với màn hình.</p>
-                    <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
-                        <li><strong>Hỗ trợ thị lực:</strong> Giảm mỏi mắt, khô mắt.</li>
-                        <li><strong>Cân bằng cảm xúc:</strong> Sắc tím tự nhiên giúp an thần.</li>
-                    </ul>
-                </div>
-                <!-- Ingredient 3: Cỏ Mần Trầu -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🌱</div>
-                    <h3 class="font-serif text-2xl mb-2">Cỏ Mần Trầu – "Nguồn Thanh Nhiệt"</h3>
-                    <p class="font-light text-sm opacity-80">Vị thuốc dân gian giúp cơ thể thoát khỏi sự bức bối của môi trường.</p>
-                     <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
-                        <li><strong>Thanh nhiệt:</strong> Làm mát cơ thể từ bên trong.</li>
-                        <li><strong>Giải tỏa:</strong> Loại bỏ cảm giác bứt rứt, khó chịu.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-      </section>
-      
-      <!-- 3. Value Proposition -->
-      <section class="py-24 px-6">
-          <div class="container mx-auto max-w-4xl">
-              <div class="text-center mb-16">
-                  <h2 class="font-serif text-4xl md:text-5xl mb-4">Tại Sao Nên Chọn FREE?</h2>
-                  <div class="w-24 h-px bg-white/50 mx-auto"></div>
-              </div>
-              <table class="w-full text-left border-collapse">
-                  <thead>
-                      <tr>
-                          <th class="border-b border-white/30 p-4 text-sm uppercase tracking-widest font-normal">Đặc điểm</th>
-                          <th class="border-b border-white/30 p-4 text-sm uppercase tracking-widest font-normal">Lợi ích cho bạn</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class="border-b border-white/20">
-                          <td class="p-4 font-bold">Công thức cân bằng</td>
-                          <td class="p-4 font-light opacity-80">Không gây mất ngủ, có thể dùng mọi thời điểm trong ngày.</td>
-                      </tr>
-                      <tr class="border-b border-white/20">
-                          <td class="p-4 font-bold">Màu sắc tự nhiên</td>
-                          <td class="p-4 font-light opacity-80">Sắc xanh tím thư thái, hoàn toàn không phẩm màu nhân tạo.</td>
-                      </tr>
-                      <tr>
-                          <td class="p-4 font-bold">Tiện lợi</td>
-                          <td class="p-4 font-light opacity-80">Phù hợp cho cả dân văn phòng, học sinh sinh viên và người cao tuổi.</td>
-                      </tr>
-                  </tbody>
-              </table>
+            <button class="w-fit px-8 py-4 border border-white/50 hover:bg-white hover:text-stone-900 transition-all duration-300 uppercase text-sm tracking-[0.2em]">Tìm Hiểu Thêm</button>
           </div>
-      </section>
-
-      <!-- 4. Target Audience -->
-       <section class="py-24 px-6 bg-black/5 backdrop-blur-sm">
-        <div class="container mx-auto max-w-4xl grid md:grid-cols-2 gap-12 items-center">
-            <div class="text-center md:text-left">
-                <h2 class="font-serif text-4xl md:text-5xl mb-4">Dành cho ai?</h2>
-                <ul class="space-y-4 font-light opacity-80 text-lg">
-                    <li>✓ Dân văn phòng thường xuyên nhìn màn hình > 8 tiếng/ngày.</li>
-                    <li>✓ Giáo viên, tư vấn viên, người cần làm dịu cổ họng.</li>
-                    <li>✓ Người hay lo âu, cần một khoảng lặng cân bằng cảm xúc.</li>
-                    <li>✓ Người hay cảm thấy bức bối, nóng trong người.</li>
-                </ul>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=2070&auto=format&fit=crop" alt="Audience" class="rounded shadow-xl w-full h-full object-cover">
-            </div>
-        </div>
-      </section>
-
-      <!-- 5. How to enjoy -->
-      <section class="py-24 px-6">
-        <div class="container mx-auto text-center max-w-4xl">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl md:text-5xl mb-4">Trải Nghiệm Thưởng Trà</h2>
-                <div class="w-24 h-px bg-white/50 mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="text-center">
-                    <div class="font-serif text-6xl opacity-30 mb-2">1.</div>
-                    <h3 class="font-serif text-xl mb-2">Đánh thức trà</h3>
-                    <p class="font-light opacity-80">Cho trà vào ấm, rót nước nóng và đợi trong giây lát.</p>
-                </div>
-                <div class="text-center">
-                    <div class="font-serif text-6xl opacity-30 mb-2">2.</div>
-                    <h3 class="font-serif text-xl mb-2">Ngắm nhìn</h3>
-                    <p class="font-light opacity-80">Đợi 3-5 phút để sắc xanh tím của Đậu biếc từ từ lan tỏa.</p>
-                </div>
-                <div class="text-center">
-                    <div class="font-serif text-6xl opacity-30 mb-2">3.</div>
-                    <h3 class="font-serif text-xl mb-2">Cảm nhận</h3>
-                    <p class="font-light opacity-80">Hít hà hương thơm dịu nhẹ và cảm nhận vị ngọt của cam thảo.</p>
-                </div>
-            </div>
-        </div>
-      </section>
-
-      <!-- 6. Call to Action -->
-      <section class="py-32 text-center relative overflow-hidden bg-black/10">
-        <div class="container mx-auto px-6 relative z-10">
-            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
-              "Đừng đợi đến khi mệt mỏi mới nghỉ ngơi. Hãy để mỗi tách trà là một khoảng lặng quý giá trong ngày."
-            </p>
-           <div class="font-serif text-4xl md:text-6xl mb-6 mt-12">125,000 VND</div>
-           <p class="opacity-60 mb-12 uppercase tracking-widest text-sm">Hộp 20 túi lọc kim tự tháp</p>
-           <div class="flex flex-col md:flex-row justify-center gap-6">
-              <button class="bg-white text-stone-900 px-10 py-4 uppercase tracking-[0.2em] text-sm hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
-                ĐẶT HÀNG NGAY
-              </button>
-           </div>
-            <p class="text-xs mt-6 opacity-70">*Miễn phí giao hàng cho đơn hàng từ 3 sản phẩm.*</p>
+          <div class="lg:col-span-7 h-[50vh] lg:h-full relative flex items-center justify-center">    
+             <div class="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
+               <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1974&auto=format&fit=crop" alt="FREE" class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>     
+             </div>
+             <div class="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block opacity-10 pointer-events-none select-none">
+                <span class="vertical-text font-serif text-[12rem] text-white leading-none tracking-widest text-transparent stroke-white" style="-webkit-text-stroke: 2px white;">FREE</span>
+             </div>
+          </div>
         </div>
       </section>
     </div>
@@ -232,8 +112,6 @@
     <!-- Footer -->
     <footer class="bg-white text-stone-800 pt-20 pb-10">
       <div class="container mx-auto px-6">
-
-        </div>
       </div>
     </footer>
 
