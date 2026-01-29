@@ -14,6 +14,11 @@ html{
   scroll-snap-stop: always;
 }
 
+#quiz-screen.hidden, #result-screen.hidden, #loading.hidden {
+  display: none !important;
+}
+
+
 
 .hidden{
   display: none !important;
