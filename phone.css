@@ -1,0 +1,244 @@
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: row; /* Keep it as a row for space-between */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .logo { font-size: 3rem; padding-left: 0; }
+  .sub-logo { font-size: 0.9rem; padding-left: 0; }
+  
+  /* HIDE desktop nav elements on mobile */
+  .nav-menu,
+  .nav-action {
+    display: none;
+  }
+  
+  /* All other previous styles */
+  .sub2-logo p:first-child {
+      font-size: 1.2rem;
+    }
+  .logo-2 {
+      font-size: 6rem;
+      top: -1rem;
+    }
+  .sub2-logo h1:last-of-type {
+      font-size: 1.8rem;
+    }
+  .sub2-logo p:last-child {
+      font-size: 1.1rem;
+      width: 80%;
+      margin: 0 auto;
+    }
+  .healing { height: 100vh; }
+  .healing img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+  .personal-choice { top: 15%; font-size: 0.6rem; padding: 0.4rem 0.6rem; }
+  .find {
+      font-size: 3.5rem;
+      top: 15%;
+    }
+  .your-own {
+      font-size: 3.5rem;
+      top: 16%;
+    }
+  .healing p:last-child { font-size: 1.8rem; width: 80%; top: 12%; }
+  .start-choice { top: 15%; font-size: 1.2rem; padding: 0.8rem; }
+  #quiz-screen { /* Add padding to the quiz screen container */
+    padding-top: 10rem; /* Adjust as needed to clear the fixed header */
+    position: relative;
+  }
+  .id { font-size: 5.25rem; left: 5%; top: 10%; }
+  .progress-bar {
+      width: 80%;
+      left: 15%;
+      top: 10%; /* Adjusted for better spacing */
+    }
+  .question-text {
+      font-size: 1.8rem;
+      left: 5%;
+      top: 20%;
+      width: 90%;
+    }
+  .options-container {
+    position: absolute; /* Changed to absolute positioning */
+    left: 0;
+    right: 0;
+    top: 45%; /* Position below question text */
+    height: 40%; /* Cover remaining bottom part */
+    width: auto; /* Allow absolute positioning to control width */
+    margin: 0 auto; /* No need for margin auto with left/right 0 */
+    align-items: center; /* Keep aligning items to center */
+    justify-content: space-evenly; /* Evenly distribute space between options */
+  }
+  .option {
+      padding: 1.5rem 1rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem; /* Reduced spacing between options */
+    }
+  .slide1, .slide2, .slide3 { height: 100vh; padding-bottom: 5rem; }
+  .collection { font-size: 0.9rem; margin-left: 5%; padding-top: 5rem; position: relative; left: auto; }
+  .title { font-size: 4.5rem; margin-left: 5%; padding-top: 1rem; position: relative; left: auto; }
+  .title::first-letter { text-underline-offset: 0.8rem; }
+  .subtitle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); font-size: 60vw; color: transparent; -webkit-text-stroke: 2px rgba(255, 255, 255, 0.3); z-index: 0; margin: 0; }
+  .description { font-size: 1.2rem; width: 90%; margin-left: 5%; margin-top: 1rem; position: relative; left: auto; top: auto; opacity: 0.7; }
+  .KEY { font-size: 0.9rem; margin-left: 5%; margin-top: 1rem; position: relative; left: auto; top: auto; opacity: 0.4; }
+  .ingre-contain { width: 90%; margin-left: 5%; margin-top: 0.5rem; position: relative; left: auto; top: auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ingre { font-size: 0.6rem; margin-top: 0.5rem; position: relative; top: auto; opacity: 0.7; }
+  .learnmore { font-family: "Inter", serif; font-size: 1.125rem; color: white; margin-top: 1.5rem; margin-left: 5%; letter-spacing: 0.3em; position: relative; left: auto; top: auto; opacity: 0.7; border: 1px solid white; display: inline-block; padding: 0.5rem; text-decoration: none; z-index: 2; }
+  .deco { color: white; opacity: 0.4; position: relative; font-family: "Bodoni Moda", serif; margin-left: 5%; margin-top: 1rem; left: auto; top: auto; font-size: 3rem; }
+  .ilu {
+    position: relative; /* Change to relative positioning */
+    width: 90%; /* Widened */
+    height: 200px; /* Shortened */
+    margin: 2rem auto; /* Center horizontally with vertical margin */
+    left: auto; /* Remove fixed left */
+    top: auto; /* Remove fixed top */
+    transform: none; /* Remove transform */
+    rotate: 0deg; /* Reset rotation */
+    border-radius: 50px 0;
+    display: block; /* Make it a block element to apply auto margins */
+  }
+  .slide2 .ilu { rotate: 0deg; }
+  .slide3 .ilu {
+    border-radius: 50%;
+    width: 150px; /* Smaller */
+    height: 150px; /* Smaller */
+    top: auto; /* Override the fixed 'top' property */
+  }
+  .decor-background { display: none; }
+  .comunity { height: 100vh; padding: 2rem 0; }
+  .comunity img {
+    position: absolute;
+    width: 100vw; /* Fill viewport width */
+    height: 100vh; /* Fill viewport height */
+    object-fit: cover; /* Ensure it covers the area */
+    opacity: 0.2;
+    z-index: -1;
+  }
+  .container { width: 90%; height: auto; padding: 1rem; }
+  .subtitle1 { top: 5%; font-size: 0.9rem; }
+  .title1, .title2 { font-size: 3rem; top: 5%; }
+  .container p { top: 5%; font-size: 1.1rem; text-align: center; width: 90%; }
+  .container input { width: 80%; top: 10%; padding: 0.6rem; font-size: 1.1rem; }
+  .container input::placeholder { font-size: 0.9rem; }
+  .container button { top: 13%; width: 80%; font-size: 1rem; padding: 0.5rem; }
+  .contact { top: 17%; width: 80%; }
+
+  /* --- Hamburger Menu Styles (Corrected) --- */
+  #hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+  }
+  #hamburger-icon span {
+    display: block;
+    width: 2rem;
+    height: 0.25rem;
+    background: white;
+    border-radius: 10px;
+  }
+  #mobile-nav-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12, 12, 12, 0.95);
+    transform: translateY(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 100;
+  }
+  #mobile-nav-container.active {
+    display: flex;
+    transform: translateY(0);
+  }
+  #mobile-nav-container .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  #mobile-nav-container .mobile-nav-links a {
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+  }
+  #close-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+
+  /* --- Result Screen Mobile Layout --- */
+  #result-screen {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  #result-screen img {
+    position: static;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  #tea-name {
+    position: static;
+    font-size: 3rem;
+    border-bottom: none;
+    text-align: center;
+  }
+  #advice1 {
+    position: static;
+    width: 90%;
+    font-size: 1rem;
+    text-align: center;
+    word-spacing: normal;
+  }
+  #advice2 {
+    display: none;
+  }
+  #price {
+    position: static;
+    font-size: 2.5rem;
+    opacity: 0.8;
+  }
+  #addtocart,
+  #retry-btn {
+    position: static;
+    font-size: 1.2rem;
+    width: 80%;
+    max-width: 300px;
+    margin: 0.5rem 0;
+  }
+}

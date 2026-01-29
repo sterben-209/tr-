@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emotea - Rest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', 'serif'],
+              sans: ['"Lato"', 'sans-serif'],
+            },
+            colors: {
+              'emotea-fresh': '#4a6741',
+              'emotea-free': '#cbaa7d',
+              'emotea-rest': '#2e344e',
+              'emotea-dark': '#1a1a1a',
+              'emotea-light': '#f5f5f5',
+              'emotea-rest-light': '#fef9c3', // Light Yellow
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="rest.css">
+  </head>
+  <body class="bg-stone-50 text-stone-800 antialiased font-sans selection:bg-stone-300">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center text-white">
+        <a href="index.html" class="flex flex-col items-start group">
+          <span class="font-serif text-3xl tracking-wide font-medium group-hover:opacity-80 transition-opacity">Emotea</span>
+          <span class="text-[0.6rem] tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Mental Care Tea</span>
+        </a>
+        <div class="hidden md:flex items-center space-x-12 text-sm tracking-widest font-light uppercase">
+          <a href="index.html" class="hover:underline underline-offset-4 decoration-1 decoration-white/50 transition-all">Trang Chủ</a>
+          <div class="relative group cursor-pointer">
+             <span class="hover:underline underline-offset-4 decoration-1 decoration-white/50 transition-all">Sản Phẩm</span>
+             <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-32 py-2 bg-white/95 backdrop-blur-sm rounded text-stone-800 text-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl">
+               <a href="fresh.html" class="block px-4 py-2 hover:bg-stone-100">Fresh</a>      
+               <a href="#" class="block px-4 py-2 hover:bg-stone-100">Ease</a>        
+               <a href="rest.html" class="block px-4 py-2 hover:bg-stone-100">Rest</a>        
+             </div>
+          </div>
+          <a href="#" class="hover:underline underline-offset-4 decoration-1 decoration-white/50 transition-all opacity-70 cursor-not-allowed">Câu Chuyện</a>
+          <a href="#" class="hover:underline underline-offset-4 decoration-1 decoration-white/50 transition-all opacity-70 cursor-not-allowed">Liên Hệ</a>
+        </div>
+        <div class="hidden md:flex items-center space-x-6">
+          <button class="hover:opacity-70 transition-opacity flex items-center gap-2">
+            <span class="text-xs uppercase tracking-wider">Giỏ hàng</span>
+          </button>
+          <button class="hover:opacity-70 transition-opacity flex items-center gap-2">
+            <span class="text-xs uppercase tracking-wider">Account</span>
+          </button>
+        </div>
+        <button id="mobile-menu-toggle" class="md:hidden z-50">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+        </button>
+        <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 translate-x-full">
+          <a href="index.html" class="text-2xl font-serif">Trang Chủ</a>
+          <a href="fresh.html" class="text-xl">Fresh Collection</a>
+          <a href="#" class="text-xl">Ease Collection</a>
+          <a href="rest.html" class="text-xl">Rest Collection</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Product Page for REST -->
+    <div class="min-h-screen font-sans transition-colors duration-700" style="background-color: #fef9c3; color: #1a1a1a;">
+
+      <!-- 1. Hero Section (Lời Ngỏ) -->
+      <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">     
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=2071&auto=format&fit=crop" alt="REST" class="w-full h-full object-cover brightness-[0.8]">
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center text-white">
+            <h1 class="font-serif text-5xl md:text-7xl mb-4 tracking-tight leading-tight">VỖ VỀ GIẤC NỒNG – GÓI TRỌN BÌNH YÊN</h1>
+            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
+              "Khi thế giới ngoài kia tạm nghỉ, hãy để tâm trí bạn được nâng niu."
+            </p>
+            <p class="text-base leading-relaxed opacity-80 max-w-2xl mx-auto font-light">
+              Sau một ngày dài đối mặt với áp lực, cơ thể bạn xứng đáng có một "khoảng lặng" đúng nghĩa. Dòng trà <strong>Rest</strong> không chỉ đơn thuần là thức uống, mà là một liệu pháp vỗ về hệ thần kinh, giúp bạn gác lại âu lo để chìm vào giấc ngủ một cách tự nhiên và trọn vẹn nhất.
+            </p>
+        </div>
+      </section>
+
+      <!-- 2. The Healing Ingredients -->
+      <section class="py-24 px-6 bg-white/30 backdrop-blur-sm">
+        <div class="container mx-auto max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Những "Người Bạn" Chăm Sóc Giấc Ngủ</h2>
+                <div class="w-24 h-px bg-stone-800/50 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <!-- Ingredient 1: Táo Đỏ -->
+                <div class="flex flex-col items-center">
+                    <div class="p-4 border border-stone-800/20 rounded-full mb-4">🍎</div>
+                    <h3 class="font-serif text-2xl mb-2">Táo Đỏ – "Vị Ngọt Ấm Áp"</h3>
+                    <p class="font-light text-sm opacity-80">Xoa dịu mệt mỏi, tạo cảm giác ấm áp, và làm dịu tâm trí, giảm bớt sự hối hả trong suy nghĩ.</p>
+                </div>
+                <!-- Ingredient 2: Lá Sen Khô -->
+                <div class="flex flex-col items-center">
+                    <div class="p-4 border border-stone-800/20 rounded-full mb-4">🍃</div>
+                    <h3 class="font-serif text-2xl mb-2">Lá Sen Khô – "Hương Sen Thanh Khiết"</h3>
+                    <p class="font-light text-sm opacity-80">An thần nhẹ nhàng, giúp bạn đi vào giấc ngủ tự nhiên mà không gây "nặng đầu" hay mệt mỏi khi thức dậy.</p>
+                </div>
+                <!-- Ingredient 3: Cây Lạc Tiên -->
+                <div class="flex flex-col items-center">
+                    <div class="p-4 border border-stone-800/20 rounded-full mb-4">🌱</div>
+                    <h3 class="font-serif text-2xl mb-2">Cây Lạc Tiên – "Liều Thuốc Bình Yên"</h3>
+                    <p class="font-light text-sm opacity-80">Làm dịu cảm xúc mạnh, giảm lo âu và hỗ trợ duy trì giấc ngủ sâu hơn, ổn định hơn.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+      
+      <!-- 3. The Sensory Experience -->
+       <section class="py-24 px-6">
+          <div class="container mx-auto max-w-5xl">
+              <div class="text-center mb-16">
+                  <h2 class="font-serif text-4xl md:text-5xl mb-4">Trải Nghiệm Thư Giãn Tuyệt Đối</h2>
+                  <div class="w-24 h-px bg-stone-800/50 mx-auto"></div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                  <div>
+                      <h3 class="font-serif text-2xl mb-2 border-b border-stone-800/20 pb-2">Thị giác</h3>
+                      <p class="mt-4 font-light opacity-80">Sắc nước <strong>Vàng Nhạt</strong> trong trẻo, tự nhiên, gợi lên sự thanh bình và nhẹ nhàng.</p>
+                  </div>
+                   <div>
+                      <h3 class="font-serif text-2xl mb-2 border-b border-stone-800/20 pb-2">Khứu giác</h3>
+                      <p class="mt-4 font-light opacity-80">Mùi thơm mộc mạc của lá sen khô hòa quyện cùng hương thảo mộc thanh tao của lạc tiên.</p>
+                  </div>
+                   <div>
+                      <h3 class="font-serif text-2xl mb-2 border-b border-stone-800/20 pb-2">Vị giác</h3>
+                      <p class="mt-4 font-light opacity-80">Vị ngọt dịu từ táo đỏ đọng lại nơi đầu lưỡi, tạo nên một cảm giác mượt mà và ấm áp.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- 4. Value Proposition -->
+      <section class="py-24 px-6 bg-white/30 backdrop-blur-sm">
+          <div class="container mx-auto max-w-4xl">
+              <div class="text-center mb-16">
+                  <h2 class="font-serif text-4xl md:text-5xl mb-4">Cam Kết Cho Một Đêm Ngon Giấc</h2>
+                  <div class="w-24 h-px bg-stone-800/50 mx-auto"></div>
+              </div>
+              <table class="w-full text-left border-collapse">
+                  <thead>
+                      <tr>
+                          <th class="border-b border-stone-800/30 p-4 text-sm uppercase tracking-widest font-normal">Đặc điểm</th>
+                          <th class="border-b border-stone-800/30 p-4 text-sm uppercase tracking-widest font-normal">Lợi ích cho bạn</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="border-b border-stone-800/20">
+                          <td class="p-4 font-bold">Thảo mộc 100%</td>
+                          <td class="p-4 font-light opacity-80">Không chất bảo quản, không hương liệu nhân tạo.</td>
+                      </tr>
+                      <tr class="border-b border-stone-800/20">
+                          <td class="p-4 font-bold">Không gây phụ thuộc</td>
+                          <td class="p-4 font-light opacity-80">Cơ chế hỗ trợ tự nhiên, an toàn khi sử dụng lâu dài.</td>
+                      </tr>
+                      <tr>
+                          <td class="p-4 font-bold">Thức dậy sảng khoái</td>
+                          <td class="p-4 font-light opacity-80">Không có cảm giác mệt mỏi hay uể oải sau khi ngủ dậy.</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </section>
+
+      <!-- 5. How to enjoy -->
+      <section class="py-24 px-6">
+        <div class="container mx-auto text-center max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Nghi Thức Trước Giờ Đi Ngủ</h2>
+                <div class="w-24 h-px bg-stone-800/50 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="font-serif text-5xl opacity-30 mb-2">1.</div>
+                    <h3 class="font-serif text-xl mb-2">Chuẩn bị</h3>
+                    <p class="font-light opacity-80">Pha một túi trà với nước nóng, đợi 5-7 phút.</p>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-5xl opacity-30 mb-2">2.</div>
+                    <h3 class="font-serif text-xl mb-2">Tách biệt</h3>
+                    <p class="font-light opacity-80">Rời xa các thiết bị điện tử, tắt bớt đèn.</p>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-5xl opacity-30 mb-2">3.</div>
+                    <h3 class="font-serif text-xl mb-2">Thưởng thức</h3>
+                    <p class="font-light opacity-80">Nhấp từng ngụm trà ấm, hít thở sâu.</p>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-5xl opacity-30 mb-2">4.</div>
+                    <h3 class="font-serif text-xl mb-2">Chìm vào giấc ngủ</h3>
+                    <p class="font-light opacity-80">Dùng trà trước khi ngủ 30 - 60 phút.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <!-- 6. Call to Action -->
+      <section class="py-32 text-center relative overflow-hidden bg-white/30">
+        <div class="container mx-auto px-6 relative z-10">
+            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
+              "Giấc ngủ ngon là khởi đầu của một ngày rạng rỡ. Hãy để Rest chăm sóc đêm nay của bạn."
+            </p>
+           <div class="font-serif text-4xl md:text-6xl mb-6 mt-12">125,000 VND</div>
+           <p class="opacity-60 mb-12 uppercase tracking-widest text-sm">Hộp 20 túi lọc kim tự tháp</p>
+           <div class="flex flex-col md:flex-row justify-center gap-6">
+              <button class="bg-stone-800 text-white px-10 py-4 uppercase tracking-[0.2em] text-sm hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+                CHĂM SÓC GIẤC NGỦ NGAY
+              </button>
+           </div>
+            <p class="text-xs mt-6 opacity-70">*Gợi ý: Mua combo "Bình Yên" để nhận ưu đãi đặc biệt.*</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white text-stone-800 pt-20 pb-10">
+      <div class="container mx-auto px-6">
+        <div class="border-t border-stone-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-stone-400">
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        // Since the main background is light, we need to adjust the navbar logic.
+        // It should probably start with a dark text and turn into a solid bar.
+        // For simplicity, we'll keep the white text and assume the hero image provides enough contrast.
+        if (window.scrollY > 50) {
+          navbar.classList.add('bg-white/10', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+          navbar.classList.remove('bg-transparent', 'py-6');
+        } else {
+          navbar.classList.remove('bg-white/10', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+          navbar.classList.add('bg-transparent', 'py-6');
+        }
+      });
+
+      // Mobile menu toggle
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('translate-x-full');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      });
+    </script>
+  </body>
+</html>

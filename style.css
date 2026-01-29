@@ -4,6 +4,36 @@
   box-sizing: border-box;
 }
 
+html{
+  scroll-snap-type:y mandatory;
+}
+
+.scroll{
+  overflow-x: hidden !important;
+  scroll-snap-align: start ;
+  scroll-snap-stop: always;
+}
+
+
+.hidden{
+  display: none !important;
+}
+
+@keyframes flyInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fly-in {
+  animation: flyInUp 0.8s ease-out forwards;
+}
+
 .intro-container {
   position: relative;
   width: 100%;
@@ -136,6 +166,22 @@
   font-family: "Inter", sans-serif;
 }
 
+#hamburger-icon, #mobile-nav-container {
+  display: none;
+}
+
+.question-container{
+  width: 100%;
+  min-height: 110vh;
+  color: transparent;
+}
+
+.screen{
+  width: 100%;
+  height: 110vh;
+  background-color: #0c0c0c;
+}
+
 .healing {
   width: 100%;
   height: 110vh;
@@ -210,22 +256,228 @@
   border: 1px solid rgba(255, 255, 255, 1);
   padding: 1rem;
   text-decoration: none;
+  background-color: transparent;
 }
 
 .start-choice:hover {
   background-color: #d4a373;
   color: black;
+  cursor: pointer;
+}
+
+.id{
+  position: absolute;
+  color: rgba(255, 255, 255, 0.5);;
+  font-size: 5rem;
+  font-family: 'Bodoni Moda',sans-serif;
+  font-weight: bolder;
+  left: 13%;
+  padding-top: 5%;
+}
+
+.progress-bar{
+  position: relative;
+  width: 64%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.507);
+  top: 20%;
+  left: 25%;
+}
+
+.sub-bar{
+  height: 1px;
+  width: 25%;
+  background-color: #d4a373;
+  transition: width 0.4s ease-in-out;
+}
+
+.question-text{
+  position: relative;
+  display: flex;
+  color: white;
+  font-size: 3rem;
+  left: 13%;
+  top: 30%;
+}
+
+.options-container{
+  position: relative;
+  display: flex;
+  flex-direction:column ;
+  width: 75vw;
+  height: 50vh;
+  margin-left:auto;
+  margin-right:auto;
+  align-items: center;
+  justify-content: space-between;
+  bottom: -14rem;
+}
+
+.option{
+  background-color: transparent;
+  width: 100%;
+  height: 1.5rem;
+  padding: 2.75rem 1rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  /* font-family: 'Playafair',sans-serif; */
+  font-size: 2rem;
+  font-weight: lighter;
+}
+
+.option:hover{
+  border: 1px solid rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.loading{
+  height: 110vh;
+  width: 100%;
+  position: relative;
+  background-color: #0c0c0c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.loading h3{
+  font-weight: 200;
+  color: white;
+  font-size: 2rem;
+}
+
+/* Vòng quay tròn sang trọng */
+.loader {
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(212, 163, 115, 0.2); /* Màu vàng đồng nhạt */
+  border-top: 5px solid #d4a373; /* Màu vàng đồng đậm làm điểm nhấn quay */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.result-screen{
+  position: relative;
+  width: 100%;
+  height: 200vh;
+  background-color: #D4A373;
+  scroll-snap-align: start end;
+}
+
+.result-screen::-webkit-scrollbar{
+  display: none;
+}
+
+.result-screen img{
+  height: 100%;
+  width: 30%;
+  object-fit: cover;
+  position: relative;
+  left: 65%;
+}
+
+#tea-name{
+  position: absolute;
+  color: white;
+  font-size: 4rem;
+  top: 5%;
+  left: 20%;
+  border-bottom: 1px solid white;
+}
+
+#advice1{
+  position: absolute;
+  color: white;
+  top: 15%;
+  left: 5%;
+  width: 55%;
+  word-spacing: 0.5rem;
+  font-size: 1.5rem;
+  text-align: justify;
+  /* background-color: beige; */
+}
+
+#advice2{
+  position: absolute;
+  color: white;
+  top: 50%;
+  left:10%;
+  width: 50%;
+  font-size: 1.5rem;
+  word-spacing: 0.5rem;
+  text-align: right;
+}
+
+#price{
+  position: absolute;
+  color: white;
+  font-size: 4rem;
+  font-family: 'Bodoni Moda',sans-serif;
+  font-weight: 200;
+  opacity: 0.5;
+  top: 85%;
+  left: 25%;
+  
+}
+
+#addtocart{
+  position: relative;
+  left: -20% ;
+  top: -3%;
+  background-color: transparent;
+  font-size: 2rem;
+  padding: 0.25rem;
+  border: 1px solid white;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#addtocart:hover{
+  cursor: pointer;
+  color:#D4A373;
+  background-color:rgba(255, 255, 255, 0.5);
+}
+
+#retry-btn{
+  position: relative;
+  left: -20% ;
+  top: -3%;
+  background-color: transparent;
+  font-size: 2rem;
+  padding: 0.25rem 0.25rem;
+  
+  border: 1px solid white;
+  color: rgba(255, 255, 255, 0.5);
+
+}
+
+#retry-btn:hover{
+  cursor: pointer;
+  color:#D4A373;
+  background-color:rgba(255, 255, 255, 0.5);
 }
 
 .slider {
-  overflow: hidden;
-  /* height: 100vh; */
-  scroll-snap-type: y mandatory;
+  overflow-x: hidden;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
 }
 
-section{
-  scroll-snap-align:top;
+.slider::-webkit-scrollbar{
+  display: none;
 }
+
 
 .slide1 {
   height: 110vh;
@@ -233,6 +485,7 @@ section{
   background: #2A3052;
   position: relative;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 .slide2 {
   height: 110vh;
@@ -240,7 +493,7 @@ section{
   background: #D4A373;
   position: relative;
   scroll-snap-align: start;
-
+  scroll-snap-stop: always;
 }
 .slide3 {
   height: 110vh;
@@ -248,7 +501,7 @@ section{
   background: #4F772D;
   position: relative;
   scroll-snap-align: start;
-
+  scroll-snap-stop: always;
 }
 
 .collection{
@@ -545,7 +798,7 @@ section{
 }
 
 .container input::placeholder{
-  font-family: 'playfair',sans-serif;
+  font-family: 'Playfair Display',sans-serif;
   text-align: center;
   font-size:1rem;
 }

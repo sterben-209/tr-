@@ -14,12 +14,19 @@
       href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <!-- <link rel="stylesheet" href="test.css"> -->
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="phone.css" />
   </head>
   <body>
-    <div id="home" class="intro-container">
+    <div id="home" class="intro-container scroll">
       <video
         src="./img/intro.mp4"
         autoplay
@@ -43,6 +50,22 @@
           <a href="#giỏ hàng" class="buy-now-btn">giỏ hàng</a>
           <a href="#acount" class="acount">account</a>
         </div>
+        <button id="hamburger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div id="mobile-nav-container">
+        <button id="close-icon">&times;</button>
+        <div class="mobile-nav-links">
+            <a href="#home">trang chủ</a>
+            <a href="#healing">câu chuyện</a>
+            <a href="#slider">sản phẩm</a>
+            <a href="#comunity">liên hệ</a>
+            <a href="#giỏ hàng">giỏ hàng</a>
+            <a href="#acount">account</a>
+        </div>
       </div>
 
       <div class="sub2-logo">
@@ -50,35 +73,28 @@
         <h1 class="logo-2">Emotea</h1>
         <h1>Sip Your Feeling</h1>
         <p>
-          Không chỉ là thức uống. Đây là giải pháp chăm sóc sức khỏe
-          tinh thần dành cho thế hệ không ngừng chuyển động.
+          Không chỉ là thức uống. Đây là giải pháp chăm sóc sức khỏe tinh thần
+          dành cho thế hệ không ngừng chuyển động.
         </p>
       </div>
     </div>
-    <div id="healing" class="healing">
-      <img src="./img/thumb-1920-435612.jpg" alt="" />
-      <p class="personal-choice">PERSONAL CHOICE</p>
-      <h1 class="find">Tìm Vị Trà</h1>
-      <h1 class="your-own">Của Riêng Bạn</h1>
-      <p>Mỗi cảm xúc đều có một hương vị riêng. Hãy dành 30 giây để khám phá loại trà được sinh ra dành cho tâm trạng và thể trạng hiện tại của bạn.</p>
-      <a href="" class="start-choice">BẮT ĐẦU TRẮC NGHIỆM</a>
-    </div>
-    <div id="slider" class="slider">
+
+    <div id="slider" class="slider scroll">
       <section class="slide1">
         <p class="collection">EMOTEA COLLECTION</p>
-        <h1 class="title">REST</h1>
+        <h1 class="title animate-fly-in">REST</h1>
         <h1 class="subtitle">REST</h1>
-        <p class="description">
+        <p class="description animate-fly-in">
           Hỗ trợ cơ thể thư giãn sâu, dễ dàng đi vào trạng thái nghỉ ngơi và
           phục hồi năng lượng sau ngày dài
         </p>
         <p class="KEY">KEY INGREDIENTS:</p>
         <div class="ingre-contain">
-          <p class="ingre">HOA CÚC LA MÃ</p>
-          <p class="ingre">KHÔNG CAFEIN</p>
-          <p class="ingre">HƯƠNG LAVENDER</p>
+          <p class="ingre">TÁO ĐỎ</p>
+          <p class="ingre">LÁ SEN</p>
+          <p class="ingre">LẠC TIÊN</p>
         </div>
-        <a href="#slide1" class="learnmore">TÌM HIỂU THÊM</a>
+        <a href="rest.html" class="learnmore">TÌM HIỂU THÊM</a>
         <h2 class="deco">Tìm Lại Giấc Mơ</h2>
         <div class="decor-background">
           <div class="big-circle-solid"></div>
@@ -92,19 +108,19 @@
       </section>
       <section class="slide2">
         <p class="collection">EMOTEA COLLECTION</p>
-        <h1 class="title">EASE</h1>
-        <h1 class="subtitle">EASE</h1>
-        <p class="description">
+        <h1 class="title animate-fly-in">FREE</h1>
+        <h1 class="subtitle">FREE</h1>
+        <p class="description animate-fly-in">
           Một cái ôm ấm áp từ thảo mộc. Giúp xoa dịu những nơ-ron thần kinh đang
           căng thẳng, đưa bạn về trạng thái cân bằng
         </p>
         <p class="KEY">KEY INGREDIENTS:</p>
         <div class="ingre-contain">
-          <p class="ingre">HƯƠNG QUẾ ẤM</p>
-          <p class="ingre">TÁO ĐỎ</p>
-          <p class="ingre">THƯ GIẢN CƠ BẮP</p>
+          <p class="ingre">CAM THẢO</p>
+          <p class="ingre">ĐẬU BIẾC</p>
+          <p class="ingre">CỎ MÀN THẦU</p>
         </div>
-        <a href="#EASE" class="learnmore">TÌM HIỂU THÊM</a>
+        <a href="free.html" class="learnmore">TÌM HIỂU THÊM</a>
         <h2 class="deco">Ôm Ấp Tâm Hồn</h2>
         <div class="decor-background">
           <div class="big-circle-solid"></div>
@@ -118,9 +134,9 @@
       </section>
       <section class="slide3">
         <p class="collection">EMOTEA COLLECTION</p>
-        <h1 class="title">FRESH</h1>
+        <h1 class="title animate-fly-in">FRESH</h1>
         <h1 class="subtitle">FRESH</h1>
-        <p class="description">
+        <p class="description animate-fly-in">
           Thay thế cà phê bằng sự tỉnh táo êm dịu. Đánh thức sự tập trung và
           sáng tạo mà không gây bồn chồn
         </p>
@@ -130,7 +146,7 @@
           <p class="ingre">BẠC HÀ MÁT LẠNH</p>
           <p class="ingre">SÁNG TẠO</p>
         </div>
-        <a href="#FRESH" class="learnmore">TÌM HIỂU THÊM</a>
+        <a href="fresh.html" class="learnmore">TÌM HIỂU THÊM</a>
         <h2 class="deco">Bật Tung Hứng Khởi</h2>
         <div class="decor-background">
           <div class="big-circle-solid"></div>
@@ -143,15 +159,62 @@
         </div>
       </section>
     </div>
-    <div id="comunity" class="comunity">
-      <img src="./img/cộng đồng.avif" alt="">
+
+    <div class="question-container scroll">
+      <section>
+        <div id="healing" class="healing">
+          <img src="./img/thumb-1920-435612.jpg" alt="" />
+          <p class="personal-choice">PERSONAL CHOICE</p>
+          <h1 class="find">Tìm Vị Trà</h1>
+          <h1 class="your-own">Của Riêng Bạn</h1>
+          <p>
+            Mỗi cảm xúc đều có một hương vị riêng. Hãy dành 30 giây để khám phá
+            loại trà được sinh ra dành cho tâm trạng và thể trạng hiện tại của
+            bạn.
+          </p>
+          <!-- <a href="" class="start-choice">BẮT ĐẦU TRẮC NGHIỆM</a> -->
+          <button class="start-choice">BẮT ĐẦU TRẮC NGHIỆM</button>
+        </div>
+      </section>
+
+      <section id="quiz-screen" class="screen hidden">
+        <div id="id" class="id">01</div>
+        <div id="progress-bar" class="progress-bar">
+          <div id="sub-bar" class="sub-bar"></div>
+        </div>
+        <h2 id="question-text" class="question-text">ví dụ</h2>
+        <div id="options-container" class="options-container">
+          <button id="op1" class="option">op1</button>
+          <button id="op2" class="option">op2</button>
+          <button id="op3" class="option">op3</button>
+        </div>
+      </section>
+
+      <section id="loading" class="loading hidden">
+        <div class="loader"></div>
+        <h3>Đang pha chế cảm xúc</h3>
+      </section>
+
+      <section id="result-screen" class="result-screen hidden">
+        <img src="./img/result-free.png" alt="" id="img1" />
+        <h1 id="tea-name">Tên loại trà</h1>
+        <p id="advice1">advice1</p>
+        <p id="advice2">advice2</p>
+        <h2 id="price">100000 VND</h2>
+        <button id="addtocart">THÊM VÀO GIỎ</button>
+        <button id="retry-btn">TÌM VỊ TRÀ KHÁC</button>
+      </section>
+    </div>
+
+    <div id="comunity" class="comunity scroll">
+      <img src="./img/cộng đồng.avif" alt="" />
       <div class="container">
         <div class="subtitle1">MENTAL HEALTH AWARENESS</div>
         <div class="title1">Cộng Đồng</div>
         <div class="title2">Emotea</div>
         <p>Chúng tôi xây dựng một cộng đồng nơi cảm xúc được tôn trọng.</p>
         <p>Hãy chia sẻ câu chuyện của bạn.</p>
-        <input type="text" placeholder="Email của bạn">
+        <input type="text" placeholder="Email của bạn" />
         <button class="btn">THAM GIA</button>
         <div class="contact">
           <a href="">FACEBOOK</a>
@@ -161,4 +224,5 @@
       </div>
     </div>
   </body>
+  <script src="script.js"></script>
 </html>
