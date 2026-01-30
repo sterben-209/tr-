@@ -495,7 +495,7 @@ html{
 .slide2 {
   height: 110vh;
   width: 100%;
-  background: #D4A373;
+  background: #314373;
   position: relative;
   scroll-snap-align: start;
   scroll-snap-stop: always;
