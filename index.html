@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>emote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
       rel="stylesheet"
@@ -23,6 +23,7 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="phone.css" />
   </head>
@@ -48,8 +49,11 @@
           <a href="#comunity">Liên hệ</a>
         </div>
         <div class="nav-action">
-          <a href="#giỏ hàng" class="buy-now-btn">giỏ hàng</a>
-          <a href="#acount" class="acount">account</a>
+          <a href="cart.html" class="buy-now-btn" style="position: relative;">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-badge" style="position: absolute; top: -5px; right: -10px; background-color: #A0522D; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; display: none;"></span>
+          </a>
+          <a href="account.html" class="acount"><i class="fas fa-user"></i></a>
         </div>
         <button id="hamburger-icon">
           <span></span>
@@ -64,8 +68,8 @@
             <a href="#healing">câu chuyện</a>
             <a href="#slider">sản phẩm</a>
             <a href="#comunity">liên hệ</a>
-            <a href="#giỏ hàng">giỏ hàng</a>
-            <a href="#acount">account</a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="account.html"><i class="fas fa-user"></i></a>
         </div>
       </div>
 
@@ -203,7 +207,6 @@
         <p id="advice1">advice1</p>
         <p id="advice2">advice2</p>
         <h2 id="price">100000 VND</h2>
-        <button id="addtocart">THÊM VÀO GIỎ</button>
         <button id="retry-btn">TÌM VỊ TRÀ KHÁC</button>
       </section>
     </div>
@@ -226,5 +229,6 @@
       </div>
     </div>
   </body>
+  <script src="utils.js"></script>
   <script src="script.js"></script>
 </html>
