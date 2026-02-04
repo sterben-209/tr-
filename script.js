@@ -170,21 +170,21 @@ RESULT=[
         name : "REST",
         advice1 :"Sau một ngày dài gánh vác những lo toan, đôi khi điều duy nhất chúng ta cần không phải là một giấc ngủ ép buộc, mà là một cái ôm an yên cho tâm hồn. Hãy để vị ngọt thanh của táo đỏ xoa dịu đi những mệt mỏi đang đè nặng, và để lạc tiên nhẹ nhàng làm lắng xuống những cảm xúc xao động trong lòng. Đây không phải là sự phụ thuộc, mà là cách bạn chọn để yêu thương chính mình. Một chút hương trà thoảng nhẹ sẽ đưa bạn vào giấc ngủ tự nhiên nhất, nơi tâm trí được thả lỏng hoàn toàn, không còn những nặng nề hay âu lo, chỉ còn lại sự thư thái và bình yên tuyệt đối",
         advice2 : "Có những lúc tâm trí chúng ta giống như một mặt hồ bị xáo động, cần lắm một khoảng lặng để mọi thứ trở nên trong trẻo trở lại. Sự kết hợp giữa lá sen và các thảo mộc tự nhiên chính là món quà để giúp bạn tìm lại nhịp điệu bình lặng vốn có. Không cần phải cố gắng gượng ép, hãy cứ để cơ thể được thả lỏng theo sắc trà vàng nhạt thuần khiết. Từng ngụm trà ấm sẽ giúp giảm bớt căng thẳng thần kinh, đưa bạn đến một giấc ngủ sâu và trọn vẹn. Khi thức dậy vào sáng mai, bạn sẽ cảm nhận được một sự khởi đầu mới đầy tỉnh táo, bởi trái tim bạn đã được chăm sóc và 'sạc' đầy năng lượng sau một đêm nghỉ ngơi đúng nghĩa.",
-        price : "100000 Vnd",
+        price : "35000 Vnd",
         img : "./img/result-rest.jpg"
     },
     {
         name : "FREE",
         advice1 :"Sau một ngày dài gánh vác những lo toan, đôi khi điều duy nhất chúng ta cần không phải là một giấc ngủ ép buộc, mà là một cái ôm an yên cho tâm hồn. Hãy để vị ngọt thanh của táo đỏ xoa dịu đi những mệt mỏi đang đè nặng, và để lạc tiên nhẹ nhàng làm lắng xuống những cảm xúc xao động trong lòng. Đây không phải là sự phụ thuộc, mà là cách bạn chọn để yêu thương chính mình. Một chút hương trà thoảng nhẹ sẽ đưa bạn vào giấc ngủ tự nhiên nhất, nơi tâm trí được thả lỏng hoàn toàn, không còn những nặng nề hay âu lo, chỉ còn lại sự thư thái và bình yên tuyệt đối",
         advice2 : "Có những lúc tâm trí chúng ta giống như một mặt hồ bị xáo động, cần lắm một khoảng lặng để mọi thứ trở nên trong trẻo trở lại. Sự kết hợp giữa lá sen và các thảo mộc tự nhiên chính là món quà để giúp bạn tìm lại nhịp điệu bình lặng vốn có. Không cần phải cố gắng gượng ép, hãy cứ để cơ thể được thả lỏng theo sắc trà vàng nhạt thuần khiết. Từng ngụm trà ấm sẽ giúp giảm bớt căng thẳng thần kinh, đưa bạn đến một giấc ngủ sâu và trọn vẹn. Khi thức dậy vào sáng mai, bạn sẽ cảm nhận được một sự khởi đầu mới đầy tỉnh táo, bởi trái tim bạn đã được chăm sóc và 'sạc' đầy năng lượng sau một đêm nghỉ ngơi đúng nghĩa.",
-        price : "100000 Vnd",
+        price : "35000 Vnd",
         img : "./img/result-free.png"      
     },
         {
         name : "FRESH",
         advice1 :"Sau một ngày dài gánh vác những lo toan, đôi khi điều duy nhất chúng ta cần không phải là một giấc ngủ ép buộc, mà là một cái ôm an yên cho tâm hồn. Hãy để vị ngọt thanh của táo đỏ xoa dịu đi những mệt mỏi đang đè nặng, và để lạc tiên nhẹ nhàng làm lắng xuống những cảm xúc xao động trong lòng. Đây không phải là sự phụ thuộc, mà là cách bạn chọn để yêu thương chính mình. Một chút hương trà thoảng nhẹ sẽ đưa bạn vào giấc ngủ tự nhiên nhất, nơi tâm trí được thả lỏng hoàn toàn, không còn những nặng nề hay âu lo, chỉ còn lại sự thư thái và bình yên tuyệt đối",
         advice2 : "Có những lúc tâm trí chúng ta giống như một mặt hồ bị xáo động, cần lắm một khoảng lặng để mọi thứ trở nên trong trẻo trở lại. Sự kết hợp giữa lá sen và các thảo mộc tự nhiên chính là món quà để giúp bạn tìm lại nhịp điệu bình lặng vốn có. Không cần phải cố gắng gượng ép, hãy cứ để cơ thể được thả lỏng theo sắc trà vàng nhạt thuần khiết. Từng ngụm trà ấm sẽ giúp giảm bớt căng thẳng thần kinh, đưa bạn đến một giấc ngủ sâu và trọn vẹn. Khi thức dậy vào sáng mai, bạn sẽ cảm nhận được một sự khởi đầu mới đầy tỉnh táo, bởi trái tim bạn đã được chăm sóc và 'sạc' đầy năng lượng sau một đêm nghỉ ngơi đúng nghĩa.",
-        price : "100000 Vnd",
+        price : "35000 Vnd",
         img : "./img/result-fresh.jpg"      
     }
 ];
