@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotea - Authentication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Mulish', sans-serif;
+            background-color: #0c0c0c;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            text-align: center;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #d4a373;
+            text-decoration: none;
+            display: block;
+        }
+        .subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 2.5rem;
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: 0.3s;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .tab.active {
+            opacity: 1;
+            color: #d4a373;
+            border-bottom: 2px solid #d4a373;
+        }
+        form { display: flex; flex-direction: column; gap: 1.2rem; }
+        .input-group { position: relative; text-align: left; }
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.4;
+        }
+        input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.8rem;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: #d4a373; background: rgba(255, 255, 255, 0.08); }
+        .btn-auth {
+            background: #d4a373;
+            color: black;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: 0.3s;
+        }
+        .btn-auth:hover { background: #b48454; transform: translateY(-2px); }
+        .hidden { display: none; }
+        .switch-text { margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.6; }
+        .switch-text span { color: #d4a373; cursor: pointer; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <a href="index.html" class="logo">Emotea</a>
+        <p class="subtitle">Mental Care Tea</p>
+
+        <div class="auth-tabs">
+            <div class="tab active" id="login-tab">ĐĂNG NHẬP</div>
+            <div class="tab" id="register-tab">ĐĂNG KÝ</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="login-email" placeholder="Email của bạn" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-pass" placeholder="Mật khẩu" required>
+            </div>
+            <button type="submit" class="btn-auth">VÀO CỬA HÀNG</button>
+            <p class="switch-text">Chưa có tài khoản? <span onclick="toggleAuth('register')">Đăng ký ngay</span></p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="hidden">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="reg-name" placeholder="Họ và tên" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="reg-email" placeholder="Email của bạn" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="reg-pass" placeholder="Mật khẩu" required>
+            </div>
+            <button type="submit" class="btn-auth">TẠO TÀI KHOẢN</button>
+            <p class="switch-text">Đã có tài khoản? <span onclick="toggleAuth('login')">Đăng nhập</span></p>
+        </form>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const regForm = document.getElementById('register-form');
+        const loginTab = document.getElementById('login-tab');
+        const regTab = document.getElementById('register-tab');
+
+        function toggleAuth(type) {
+            if (type === 'login') {
+                loginForm.classList.remove('hidden');
+                regForm.classList.add('hidden');
+                loginTab.classList.add('active');
+                regTab.classList.remove('active');
+            } else {
+                loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                loginTab.classList.remove('active');
+                regTab.classList.add('active');
+            }
+        }
+
+        loginTab.onclick = () => toggleAuth('login');
+        regTab.onclick = () => toggleAuth('register');
+
+        // Logic Đăng ký
+        regForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                action: "REGISTER",
+                name: document.getElementById('reg-name').value,
+                email: document.getElementById('reg-email').value,
+                password: document.getElementById('reg-pass').value
+            };
+            
+            const btn = regForm.querySelector('button');
+            btn.innerText = 'ĐANG TẠO...';
+            
+            await sendToDatabase(data);
+            alert('Đăng ký thành công! Hãy đăng nhập.');
+            toggleAuth('login');
+            btn.innerText = 'TẠO TÀI KHOẢN';
+        };
+
+        // Logic Đăng nhập
+        loginForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const btn = loginForm.querySelector('button');
+            btn.innerText = 'ĐANG KIỂM TRA...';
+            
+            try {
+                if (typeof CONFIG_GOOGLE_URL === 'undefined') {
+                    alert('Lỗi cấu hình! Hãy đảm bảo utils.js được nhúng đúng cách.');
+                    return;
+                }
+
+                const response = await fetch(`${CONFIG_GOOGLE_URL}?email=${email}`);
+                const dbUser = await response.json();
+                
+                if (dbUser && dbUser.email) {
+                    localStorage.setItem('user', JSON.stringify({ name: dbUser.name, email: dbUser.email }));
+                    if (dbUser.cart && dbUser.cart !== "[]") {
+                        localStorage.setItem('cart', dbUser.cart);
+                    }
+                    alert('Chào mừng ' + dbUser.name + ' quay trở lại!');
+                    window.location.href = 'account.html';
+                } else {
+                    alert('Không tìm thấy tài khoản hoặc mật khẩu không đúng (Demo hiện tại chỉ kiểm tra email).');
+                }
+            } catch (error) {
+                console.error('Lỗi chi tiết:', error);
+                alert('Lỗi kết nối Database: ' + error.message + '\n\nHãy đảm bảo bạn đã: \n1. Deploy bản New Deployment.\n2. Chọn quyền Anyone.\n3. Dán đúng link /exec.');
+            } finally {
+                btn.innerText = 'VÀO CỬA HÀNG';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -7,23 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Montserrat+Alternates:wght@200;300&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat+Alternates:wght@200;300&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="phone.css" />
   </head>
@@ -201,13 +192,9 @@
         <h3>Đang pha chế cảm xúc</h3>
       </section>
 
+      <!-- Result Screen Container -->
       <section id="result-screen" class="result-screen hidden">
-        <img src="./img/result-free.png" alt="" id="img1" />
-        <h1 id="tea-name">Tên loại trà</h1>
-        <p id="advice1">advice1</p>
-        <p id="advice2">advice2</p>
-        <h2 id="price">35000 VND</h2>
-        <button id="retry-btn">TÌM VỊ TRÀ KHÁC</button>
+        <!-- Content will be injected here via script.js -->
       </section>
     </div>
 
@@ -219,12 +206,12 @@
         <div class="title2">Emotea</div>
         <p>Chúng tôi xây dựng một cộng đồng nơi cảm xúc được tôn trọng.</p>
         <p>Hãy chia sẻ câu chuyện của bạn.</p>
-        <input type="text" placeholder="Email của bạn" />
-        <button class="btn">THAM GIA</button>
+        <input type="text" id="community-email" placeholder="Email của bạn" />
+        <button id="join-btn" class="btn">THAM GIA</button>
         <div class="contact">
-          <a href="">FACEBOOK</a>
-          <a href="">TIKTOK</a>
-          <a href="">INSTAGRAM</a>
+          <a href="https://facebook.com" target="_blank">FACEBOOK</a>
+          <a href="https://tiktok.com" target="_blank">TIKTOK</a>
+          <a href="https://instagram.com" target="_blank">INSTAGRAM</a>
         </div>
       </div>
     </div>

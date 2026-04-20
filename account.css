@@ -1,19 +1,19 @@
-.main-header {
+/* .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
     background-color: #F9F9F9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+} */
 
-.logo a {
+/* .logo a {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     text-decoration: none;
     color: #333;
     font-weight: 600;
-}
+} */
 
 .logo span {
     font-size: 0.6rem;
@@ -66,7 +66,7 @@
     font-size: 1.2rem;
 }
 
-.mobile-menu-container {
+/* .mobile-menu-container {
     display: none;
     position: fixed;
     top: 0;
@@ -85,7 +85,7 @@
 .mobile-menu-container.active {
     transform: translateX(0);
     display: flex;
-}
+} */
 
 
 .close-menu-btn {

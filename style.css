@@ -69,41 +69,41 @@ html {
 
 .logo {
   font-family: "Playfair Display", serif;
-  font-size: 2rem;
+  font-size: 1.5vw;
   color: white;
   text-decoration: none;
   /* font-weight: bold; */
-  padding-left: 1rem;
+  padding-left: 1vw;
   letter-spacing: -0.025rem;
 }
 
 .logo-2 {
   font-family: "Playfair Display", serif;
-  font-size: 12rem;
+  font-size: 10vw;
   color: #d4a373;
   text-decoration: none;
   /* font-weight: bold; */
-  padding-left: 1rem;
+  padding-left: 1vw;
   letter-spacing: -0.025rem;
   position: absolute;
 }
 
 .sub-logo {
   font-family: "Inter", serif;
-  font-size: 0.5rem;
+  font-size: 0.4vw;
   color: white;
   text-decoration: none;
   font-weight: lighter;
   letter-spacing: 0.3em;
   opacity: 0.7;
-  padding-left: 1rem;
+  padding-left: 1vw;
   /* visibility: hidden; */
 }
 
 .sub2-logo {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
@@ -113,25 +113,26 @@ html {
 .sub2-logo p:first-child {
   color: #d4a373;
   font-family: "Playfair Display", serif;
-  font-size: 1.25rem;
+  font-size: 1vw;
 }
 
 .logo-2 {
   position: relative;
-  top: -2rem;
+  top: -2vh;
   color: white;
 }
 
 .sub2-logo p:last-child {
   font-family: "Inter", serif;
+  font-size: 1vw;
   /* color: #44190B; */
 }
 
 .nav-menu {
   /* visibility: hidden; */
   display: flex;
-  padding-top: 1rem;
-  gap: 1rem;
+  padding-top: 2vh;
+  gap: 1.5vw;
 }
 
 .nav-menu a {
@@ -139,6 +140,7 @@ html {
   text-decoration: none;
   color: white;
   font-family: "Inter", sans-serif;
+  font-size: 0.9vw;
 }
 
 .nav-menu:hover a {
@@ -159,9 +161,9 @@ html {
 .nav-action {
   /* visibility: hidden; */
   display: flex;
-  gap: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
+  gap: 1.5vw;
+  padding-right: 1vw;
+  padding-top: 2vh;
 }
 
 .nav-action a {
@@ -169,6 +171,7 @@ html {
   text-decoration: none;
   color: white;
   font-family: "Inter", sans-serif;
+  font-size: 1.2vw;
 }
 
 #hamburger-icon,
@@ -177,19 +180,19 @@ html {
 }
 
 .question-container {
-  width: 100%;
+  width: 100vw;
   min-height: 110vh;
   color: transparent;
 }
 
 .screen {
-  width: 100%;
+  width: 100vw;
   height: 110vh;
   background-color: #0c0c0c;
 }
 
 .healing {
-  width: 100%;
+  width: 100vw;
   height: 110vh;
   overflow: hidden;
   display: flex;
@@ -200,7 +203,7 @@ html {
 
 .healing img {
   position: absolute;
-  width: 100%;
+  width: 100vw;
   filter: brightness(0.3);
   z-index: -1;
   object-fit: cover;
@@ -208,30 +211,30 @@ html {
 
 .personal-choice {
   position: relative;
-  top: 25%;
+  top: 25vh;
   font-family: "Inter", serif;
-  font-size: 0.75rem;
+  font-size: 0.7vw;
   color: white;
   letter-spacing: 0.3em;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 0.5rem 0.75rem;
-  border-radius: 4rem;
+  border: 0.1vw solid rgba(255, 255, 255, 0.5);
+  padding: 0.8vh 1vw;
+  border-radius: 4vw;
 }
 
 .find {
   position: relative;
   font-family: "Playfair Display", serif;
-  font-size: 6rem;
+  font-size: 5vw;
 
-  top: 25%;
+  top: 25vh;
   color: white;
 }
 
 .your-own {
   position: relative;
-  top: 20%;
+  top: 20vh;
   font-family: "Playfair Display", serif;
-  font-size: 6rem;
+  font-size: 5vw;
   font-weight: lighter;
   font-style: italic;
   color: #d4a373;
@@ -239,26 +242,26 @@ html {
 
 .healing p:last-child {
   position: relative;
-  top: 20%;
+  top: 20vh;
   font-family: "Mulish", sans-serif;
   font-weight: lighter;
-  font-size: 1.5rem;
+  font-size: 1.2vw;
   color: white;
-  width: 50%;
+  width: 50vw;
   text-align: center;
-  line-height: 1.25rem;
+  line-height: 2vh;
   opacity: 0.7;
 }
 
 .start-choice {
   position: relative;
-  top: 25%;
+  top: 25vh;
   font-family: "Inter", serif;
-  font-size: 0.75rem;
+  font-size: 0.8vw;
   color: white;
   letter-spacing: 0.3em;
-  border: 1px solid rgba(255, 255, 255, 1);
-  padding: 1rem;
+  border: 0.1vw solid rgba(255, 255, 255, 1);
+  padding: 1.5vh 2vw;
   text-decoration: none;
   background-color: transparent;
 }
@@ -272,24 +275,24 @@ html {
 .id {
   position: absolute;
   color: rgba(255, 255, 255, 0.5);
-  font-size: 5rem;
+  font-size: 5vw;
   font-family: "Bodoni Moda", sans-serif;
   font-weight: bolder;
-  left: 13%;
-  padding-top: 5%;
+  left: 13vw;
+  padding-top: 5vh;
 }
 
 .progress-bar {
   position: relative;
-  width: 64%;
-  height: 1px;
+  width: 64vw;
+  height: 0.1vh;
   background-color: rgba(255, 255, 255, 0.507);
-  top: 20%;
-  left: 25%;
+  top: 20vh;
+  left: 25vw;
 }
 
 .sub-bar {
-  height: 1px;
+  height: 0.1vh;
   width: 25%;
   background-color: #d4a373;
   transition: width 0.4s ease-in-out;
@@ -299,9 +302,9 @@ html {
   position: relative;
   display: flex;
   color: white;
-  font-size: 3rem;
-  left: 13%;
-  top: 30%;
+  font-size: 2.5vw;
+  left: 13vw;
+  top: 30vh;
 }
 
 .options-container {
@@ -309,37 +312,37 @@ html {
   display: flex;
   flex-direction: column;
   width: 75vw;
-  height: 50vh;
+  height: 45vh;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
   justify-content: space-between;
-  bottom: -14rem;
+  bottom: -30vh;
 }
 
 .option {
   background-color: transparent;
   width: 100%;
-  height: 1.5rem;
-  padding: 2.75rem 1rem;
+  height: 2vh;
+  padding: 3vh 2vw;
   display: flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 0.1vw solid rgba(255, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.7);
   /* font-family: 'Playafair',sans-serif; */
-  font-size: 2rem;
+  font-size: 1.5vw;
   font-weight: lighter;
 }
 
 .option:hover {
-  border: 1px solid rgba(255, 255, 255, 1);
+  border: 0.1vw solid rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
 }
 
 .loading {
   height: 110vh;
-  width: 100%;
+  width: 100vw;
   position: relative;
   background-color: #0c0c0c;
   display: flex;
@@ -351,15 +354,15 @@ html {
 .loading h3 {
   font-weight: 200;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5vw;
 }
 
 /* Vòng quay tròn sang trọng */
 .loader {
-  width: 30px;
-  height: 30px;
-  border: 2px solid rgba(212, 163, 115, 0.2); /* Màu vàng đồng nhạt */
-  border-top: 5px solid #d4a373; /* Màu vàng đồng đậm làm điểm nhấn quay */
+  width: 2vw;
+  height: 2vw;
+  border: 0.2vw solid rgba(212, 163, 115, 0.2); /* Màu vàng đồng nhạt */
+  border-top: 0.4vw solid #d4a373; /* Màu vàng đồng đậm làm điểm nhấn quay */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -373,102 +376,466 @@ html {
   }
 }
 
+/* --- Unique Layouts for Result Screen --- */
+
+.result-layout {
+    width: 100vw;
+    min-height: 100vh;
+    font-family: 'Mulish', sans-serif;
+    position: relative;
+    padding-bottom: 10vh;
+}
+
+.result-layout .label {
+    display: block;
+    margin-bottom: 2vh;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    font-size: 0.8vw;
+}
+
+/* Layout 1: AN YÊN (Midnight Luxury) */
+.layout-an-yen {
+    background-color: #0a0a0a;
+    color: #d6d3d1;
+}
+.layout-an-yen .result-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0 10vw;
+}
+.layout-an-yen .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25;
+    filter: grayscale(40%);
+}
+.layout-an-yen .hero-content {
+    position: relative;
+    z-index: 10;
+}
+.layout-an-yen h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 8vw, 10rem);
+    color: #fff7ed;
+    margin: 3vh 0;
+    letter-spacing: -0.02em;
+}
+.layout-an-yen .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 3rem);
+    color: rgba(253, 230, 138, 0.6);
+}
+.layout-an-yen .result-story {
+    padding: 25vh 20vw;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.layout-an-yen .result-story i {
+    font-size: 2.5vw;
+    color: rgba(245, 158, 11, 0.4);
+    margin-bottom: 6vh;
+    display: block;
+}
+.layout-an-yen .story-text {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    line-height: 1.8;
+    text-align: justify;
+    color: #a8a29e;
+    font-weight: 300;
+}
+.layout-an-yen .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    padding: 15vh 12vw;
+    background-color: #0f0f0f;
+    align-items: center;
+}
+.layout-an-yen .feature-img img {
+    width: 100%;
+    height: 75vh;
+    object-fit: cover;
+    border-radius: 15vw 15vw 0 0;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.layout-an-yen .feature-list h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3vw;
+    margin-bottom: 6vh;
+    color: #fff7ed;
+}
+.layout-an-yen .feature-item {
+    display: flex;
+    gap: 2.5vw;
+    padding: 4vh 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.layout-an-yen .num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8vw;
+    color: #b45309;
+    font-weight: 700;
+}
+.layout-an-yen .result-ritual {
+    padding: 20vh 20vw;
+    text-align: center;
+    background: linear-gradient(to bottom, #0f0f0f, #0a0a0a);
+}
+.layout-an-yen .ritual-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8vw;
+    margin: 5vh 0 8vh;
+    line-height: 1.6;
+    color: #d6d3d1;
+}
+
+/* Layout 2: TĨNH LẶNG (Zen Minimal Luxury) */
+.layout-tinh-lang {
+    background-color: #FDFCF8;
+    color: #292524;
+}
+.layout-tinh-lang .result-hero {
+    padding: 15vh 10vw 10vh;
+}
+.layout-tinh-lang .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: center;
+    gap: 6vw;
+}
+.layout-tinh-lang h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 7vw, 9rem);
+    line-height: 1.05;
+    color: #1c1917;
+    margin: 2vh 0;
+}
+.layout-tinh-lang .label { color: #065f46; }
+.layout-tinh-lang .hero-img img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    border-radius: 25vw 0 25vw 0;
+    box-shadow: 20px 20px 60px rgba(6, 95, 70, 0.05);
+}
+.layout-tinh-lang .tagline {
+    font-size: 1.8vw;
+    color: #57534e;
+    font-style: italic;
+    margin-top: 2vh;
+}
+.layout-tinh-lang .result-story {
+    padding: 15vh 0;
+    background-color: white;
+}
+.layout-tinh-lang .story-container {
+    max-width: 60vw;
+    margin: 0 auto;
+    text-align: center;
+}
+.layout-tinh-lang .story-container i {
+    font-size: 3vw;
+    color: #065f46;
+    opacity: 0.5;
+    margin-bottom: 5vh;
+    display: block;
+}
+.layout-tinh-lang .story-quote {
+    font-size: 2.2vw;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #064e3b;
+    line-height: 1.6;
+}
+.layout-tinh-lang .result-features {
+    padding: 15vh 10vw;
+    text-align: center;
+    background-color: #f8fafc;
+}
+.layout-tinh-lang .features-header {
+    margin-bottom: 10vh;
+}
+.layout-tinh-lang .result-features h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3vw;
+}
+.layout-tinh-lang .zen-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4vw;
+}
+.layout-tinh-lang .num-circle {
+    width: 4.5vw;
+    height: 4.5vw;
+    border: 1px solid #d1fae5;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 4vh;
+    font-size: 1.4vw;
+    color: #059669;
+    font-weight: 700;
+}
+.layout-tinh-lang .zen-feature-item p {
+    font-size: 1.1vw;
+    font-weight: 500;
+    color: #44403c;
+}
+.layout-tinh-lang .result-ritual {
+    padding: 15vh 10vw;
+    text-align: center;
+    border-top: 1px solid #e7e5e4;
+    background-color: white;
+}
+.layout-tinh-lang .ritual-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5vw;
+    margin-bottom: 5vh;
+}
+.layout-tinh-lang .ritual-text {
+    font-size: 1.3vw;
+    line-height: 1.8;
+    color: #57534e;
+    max-width: 50vw;
+    margin: 0 auto 8vh;
+}
+
+/* Layout 3: FRESH (Resort Morning) */
+.layout-fresh-new {
+    background-color: white;
+    color: #1c1917;
+}
+.layout-fresh-new .result-hero {
+    text-align: center;
+    padding: 20vh 0 10vh;
+    position: relative;
+}
+.layout-fresh-new .resort-shape {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+}
+.layout-fresh-new .shape-1 {
+    top: 0; right: 0; width: 45vw; height: 45vw;
+    background: #f7fee7; border-radius: 0 0 0 100%;
+    opacity: 0.8;
+}
+.layout-fresh-new .shape-2 {
+    bottom: 0; left: 0; width: 35vw; height: 35vw;
+    background: #fffbeb; border-radius: 0 100% 0 0;
+    opacity: 0.8;
+}
+.layout-fresh-new .hero-icon {
+    font-size: 3.5vw;
+    color: #a3e635;
+    margin-bottom: 3vh;
+    position: relative;
+}
+.layout-fresh-new .gradient-text {
+    font-size: clamp(5rem, 9vw, 12rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #3f6212, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.03em;
+    margin: 2vh 0;
+}
+.layout-fresh-new .hero-card {
+    width: 70vw;
+    height: 55vh;
+    margin: 8vh auto;
+    border-radius: 3vw;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(132, 204, 22, 0.12);
+    position: relative;
+}
+.layout-fresh-new .hero-card img { width: 100%; height: 100%; object-fit: cover; }
+.layout-fresh-new .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    padding: 15vh 12vw;
+    gap: 8vw;
+    align-items: center;
+}
+.layout-fresh-new h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4vw;
+    line-height: 1.2;
+    margin-bottom: 5vh;
+}
+.layout-fresh-new .italic-text {
+    font-style: italic;
+    color: #65a30d;
+}
+.layout-fresh-new .story-left p {
+    font-size: 1.3vw;
+    line-height: 1.8;
+    color: #44403c;
+}
+.layout-fresh-new .story-right {
+    background: #f9fafb;
+    padding: 6vh 4vw;
+    border-radius: 3vw;
+    border: 1px solid #f3f4f6;
+    position: relative;
+}
+.layout-fresh-new .story-right i {
+    position: absolute;
+    top: -2vh;
+    right: 2vw;
+    font-size: 3vw;
+    color: #facc15;
+}
+.layout-fresh-new .story-right ul {
+    list-style: none;
+    margin-top: 4vh;
+}
+.layout-fresh-new .story-right li {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+    font-size: 1.2vw;
+    margin-bottom: 3vh;
+    font-weight: 600;
+    color: #374151;
+}
+.layout-fresh-new .dot {
+    width: 0.8vw;
+    height: 0.8vw;
+    background: #84cc16;
+    border-radius: 50%;
+}
+.layout-fresh-new .ritual-card {
+    max-width: 60vw;
+    margin: 0 auto;
+    padding: 10vh 6vw;
+    background-color: white;
+    border-radius: 4vw;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+    border: 1px solid #f3f4f6;
+    text-align: center;
+}
+
+/* Button Styles */
+.result-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    margin-top: 8vh;
+}
+
+.btn-main {
+    background: #b45309;
+    color: white !important;
+    padding: 2.5vh 5vw;
+    border-radius: 100px;
+    border: none;
+    font-size: 1vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(180, 83, 9, 0.3);
+}
+.btn-main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(180, 83, 9, 0.4);
+    background: #92400e;
+}
+
+.btn-zen {
+    background: #064e3b;
+    color: white !important;
+    padding: 2.5vh 5vw;
+    border: none;
+    font-size: 1vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+    transition: all 0.4s ease;
+}
+.btn-zen:hover {
+    background: #065f46;
+    padding-right: 6vw;
+}
+
+.btn-dark {
+    background: #1c1917;
+    color: white !important;
+    padding: 2.5vh 6vw;
+    border-radius: 100px;
+    border: none;
+    font-size: 1vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+.btn-dark:hover {
+    background: #000;
+    transform: scale(1.05);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.6) !important;
+    padding: 1.8vh 4vw;
+    border-radius: 100px;
+    font-size: 0.8vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-ghost:hover {
+    border-color: white;
+    color: white !important;
+}
+
+.btn-link {
+    background: transparent;
+    border: none;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.4;
+    font-size: 0.9vw;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+.btn-link:hover { opacity: 1; text-decoration: underline; }
+
 .result-screen {
   position: relative;
-  width: 100%;
-  height: 200vh;
-  background-color: #d4a373;
-  scroll-snap-align: start end;
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  overflow-x: hidden;
 }
 
 .result-screen::-webkit-scrollbar {
   display: none;
-}
-
-.result-screen img {
-  height: 100%;
-  width: 30%;
-  object-fit: cover;
-  position: relative;
-  left: 65%;
-}
-
-#tea-name {
-  position: absolute;
-  color: white;
-  font-size: 4rem;
-  top: 5%;
-  left: 20%;
-  border-bottom: 1px solid white;
-}
-
-#advice1 {
-  position: absolute;
-  color: white;
-  top: 15%;
-  left: 5%;
-  width: 55%;
-  word-spacing: 0.5rem;
-  font-size: 1.5rem;
-  text-align: justify;
-  /* background-color: beige; */
-}
-
-#advice2 {
-  position: absolute;
-  color: white;
-  top: 50%;
-  left: 10%;
-  width: 50%;
-  font-size: 1.5rem;
-  word-spacing: 0.5rem;
-  text-align: right;
-}
-
-#price {
-  position: absolute;
-  color: white;
-  font-size: 4rem;
-  font-family: "Bodoni Moda", sans-serif;
-  font-weight: 200;
-  opacity: 0.5;
-  top: 85%;
-  left: 25%;
-}
-
-#addtocart {
-  position: relative;
-  left: -20%;
-  top: -3%;
-  background-color: transparent;
-  font-size: 2rem;
-  padding: 0.25rem;
-  border: 1px solid white;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-#addtocart:hover {
-  cursor: pointer;
-  color: #d4a373;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-#retry-btn {
-  position: relative;
-  left: -20%;
-  top: -3%;
-  background-color: transparent;
-  font-size: 2rem;
-  padding: 0.25rem 0.25rem;
-
-  border: 1px solid white;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-#retry-btn:hover {
-  cursor: pointer;
-  color: #d4a373;
-  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .slider {
@@ -485,7 +852,7 @@ html {
 
 .slide1 {
   height: 110vh;
-  width: 100%;
+  width: 100vw;
   background: #44192d;
   position: relative;
   scroll-snap-align: start;
@@ -493,7 +860,7 @@ html {
 }
 .slide2 {
   height: 110vh;
-  width: 100%;
+  width: 100vw;
   background: #314373;
   position: relative;
   scroll-snap-align: start;
@@ -501,7 +868,7 @@ html {
 }
 .slide3 {
   height: 110vh;
-  width: 100%;
+  width: 100vw;
   background: #4f772d;
   position: relative;
   scroll-snap-align: start;
@@ -510,110 +877,110 @@ html {
 
 .collection {
   font-family: "Inter", serif;
-  font-size: 0.75rem;
+  font-size: 0.75vw;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 1vh;
   letter-spacing: 0.3em;
   position: absolute;
-  left: 15%;
-  padding-top: 10rem;
+  left: 15vw;
+  padding-top: 20vh;
 }
 
 .title {
   font-family: "Playfair Display", serif;
-  font-size: 6rem;
+  font-size: 6vw;
   color: white;
-  padding-top: 11rem;
-  margin-bottom: 1rem;
+  padding-top: 22vh;
+  margin-bottom: 1vh;
   letter-spacing: 0;
   position: absolute;
-  left: 15%;
+  left: 15vw;
 }
 
 .title::first-letter {
   text-decoration: underline;
-  text-decoration-thickness: 1px; /* Độ dày nét gạch (tùy chọn) */
-  text-underline-offset: 1.5rem; /* Khoảng cách với chữ (tùy chọn) */
+  text-decoration-thickness: 0.1vw; /* Độ dày nét gạch (tùy chọn) */
+  text-underline-offset: 3vh; /* Khoảng cách với chữ (tùy chọn) */
 }
 
 .subtitle {
   font-family: "Playfair Display", serif;
-  font-size: 9rem;
+  font-size: 9vw;
   color: white;
   opacity: 0.2;
   position: relative;
-  left: 40%;
+  left: 40vw;
   transform: translate(0%, -50%) rotate(-90deg);
   color: transparent;
-  -webkit-text-stroke: 1.5px white;
+  -webkit-text-stroke: 0.1vw white;
 }
 
 .description {
   font-family: "Mulish", sans-serif;
-  font-size: 1rem;
-  line-height: 1.25rem;
+  font-size: 1vw;
+  line-height: 1.5vw;
   font-weight: lighter;
   color: white;
-  width: 18%;
+  width: 18vw;
   position: relative;
-  left: 15%;
-  letter-spacing: 1px;
-  top: 10rem;
+  left: 15vw;
+  letter-spacing: 0.1vw;
+  top: 20vh;
   opacity: 0.7;
-  margin-left: 1rem;
+  margin-left: 1vw;
 }
 
 .KEY {
   font-family: "Inter", serif;
-  font-size: 0.75rem;
+  font-size: 0.75vw;
   color: white;
-  margin-top: 2rem;
-  margin-left: 1rem;
+  margin-top: 4vh;
+  margin-left: 1vw;
   letter-spacing: 0.2em;
   position: relative;
-  left: 15%;
-  top: 10rem;
+  left: 15vw;
+  top: 20vh;
   opacity: 0.4;
 }
 
 .ingre-contain {
-  width: 400px;
-  left: 15%;
-  margin-left: 1rem;
+  width: 25vw;
+  left: 15vw;
+  margin-left: 1vw;
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.5vw;
+  top: 20vh;
 }
 
 .ingre {
   font-family: "Mulish", sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.5vw;
   color: white;
-  margin-top: 0.5rem;
+  margin-top: 1vh;
   position: relative;
-  top: 10rem;
   opacity: 0.7;
-  border: 1px solid white;
-  padding: 0.5rem;
+  border: 0.1vw solid white;
+  padding: 0.5vw 1vw;
   display: inline-block;
-  letter-spacing: 2px;
+  letter-spacing: 0.2vw;
 }
 
 .learnmore {
   font-family: "Inter", serif;
-  font-size: 0.75rem;
+  font-size: 0.75vw;
   color: white;
-  margin-top: 3rem;
-  margin-left: 1rem;
+  margin-top: 6vh;
+  margin-left: 1vw;
   letter-spacing: 0.3em;
   position: relative;
-  left: 15%;
-  top: 10rem;
+  left: 15vw;
+  top: 20vh;
   opacity: 0.7;
-  border: 1px solid white;
+  border: 0.1vw solid white;
   display: inline-block;
-  padding: 0.5rem;
+  padding: 0.8vw 1.5vw;
   text-decoration: none;
   z-index: 2;
 }
@@ -628,79 +995,80 @@ html {
   opacity: 0.4;
   position: relative;
   font-family: "Bodoni Moda", serif;
-  left: 80%;
-  top: 11rem;
+  left: 80vw;
+  top: 22vh;
+  font-size: 3vw;
 }
 
 .decor-background {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   z-index: 0;
 }
 
 .square {
   position: absolute;
-  width: 400px;
-  height: 175px;
+  width: 20vw;
+  height: 25vh;
   background-color: rgba(255, 255, 255, 0);
   z-index: 1;
-  top: 50%;
-  left: 15%;
+  top: 50vh;
+  left: 15vw;
   color: transparent;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 0.1vw solid rgba(255, 255, 255, 0.3);
 }
 
 .square2 {
   position: absolute;
-  width: 400px;
+  width: 20vw;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0);
   z-index: 1;
   /* top: 50%; */
-  left: 25%;
+  left: 25vw;
   color: transparent;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 0.1vw solid rgba(255, 255, 255, 0.3);
 }
 
 .big-circle-solid {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 30vw;
+  height: 30vw;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  top: 25%;
-  left: 25%;
+  border: 0.1vw solid rgba(255, 255, 255, 0.3);
+  top: 25vh;
+  left: 25vw;
   z-index: 1;
 }
 
 .big-circle-dashed {
   position: absolute;
-  width: 700px;
-  height: 700px;
+  width: 45vw;
+  height: 45vw;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.3);
-  top: 10%;
-  left: 25%;
+  border: 0.1vw dashed rgba(255, 255, 255, 0.3);
+  top: 10vh;
+  left: 25vw;
   z-index: 1;
 }
 
 .ilu {
   position: absolute;
   object-fit: cover;
-  width: 350px;
-  height: 450px;
+  width: 20vw;
+  height: 30vw;
   background-color: rgba(255, 255, 255, 0);
-  top: 20%;
-  left: 50%;
+  top: 20vh;
+  left: 50vw;
   rotate: -10deg;
-  border-radius: 100px 0;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 5vw 0;
+  border: 0.1vw solid rgba(255, 255, 255, 0.7);
   z-index: 1;
   overflow: hidden;
 }
@@ -711,8 +1079,8 @@ html {
 
 .slide3 .ilu {
   border-radius: 50%;
-  height: 350px;
-  top: 25%;
+  height: 20vw;
+  top: 25vh;
 }
 
 .ilu img {
@@ -740,91 +1108,96 @@ html {
 }
 
 .container {
-  width: 800px;
-  height: 800px;
+  width: 50vw;
+  height: 80vh;
   position: relative;
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
   color: black;
+  margin-top: 10vh;
 }
 
 .subtitle1 {
   position: relative;
-  top: 15%;
+  top: 10vh;
   font-family: "Inter", serif;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.2vw;
   font-weight: 200;
-  font-size: small;
+  font-size: 0.8vw;
 }
 
 .title1 {
   position: relative;
-  top: 15%;
+  top: 10vh;
   font-family: "Playfair Display", sans-serif;
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: bold;
 }
 
 .title2 {
   position: relative;
-  top: 12%;
+  top: 8vh;
   font-family: "Playfair Display", sans-serif;
-  font-size: 4rem;
+  font-size: 4vw;
   font-weight: bold;
 }
 
 .container p {
   position: relative;
-  top: 15%;
+  top: 10vh;
   align-items: center;
   justify-content: center;
-  word-spacing: 0.25rem;
+  word-spacing: 0.2vw;
+  font-size: 1vw;
 }
 
 .container input {
   position: relative;
-  width: 50%;
-  top: 20%;
+  width: 30vw;
+  top: 15vh;
   align-items: center;
   border: transparent;
-  border-bottom: 1px solid black;
-  padding: 1rem;
+  border-bottom: 0.1vw solid black;
+  padding: 1vh 1vw;
+  font-size: 1vw;
 }
 
 .container input:focus {
   outline: none;
-  border-bottom: 1px solid #d4a373;
+  border-bottom: 0.1vw solid #d4a373;
 }
 
 .container input::placeholder {
   font-family: "Playfair Display", sans-serif;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1vw;
 }
 
 .container button {
   position: relative;
-  top: 23%;
+  top: 18vh;
   font-family: "Muslish", sans-serif;
   font-weight: lighter;
-  font-size: 1rem;
-  width: 50%;
-  padding: 0.5rem;
+  font-size: 1vw;
+  width: 30vw;
+  padding: 1.5vh;
   background-color: black;
   color: white;
+  border: none;
 }
 
 .container button:hover {
   background-color: #d4a373;
   outline: none;
+  cursor: pointer;
 }
 
 .contact {
   position: relative;
-  top: 27%;
-  width: 50%;
+  top: 22vh;
+  width: 30vw;
   display: flex;
   justify-content: space-around;
 }
@@ -835,6 +1208,7 @@ html {
   font-weight: lighter;
   text-decoration: none;
   opacity: 0.3;
+  font-size: 1vw;
 }
 
 .font-light {
