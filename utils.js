@@ -53,7 +53,7 @@ function updateCartBadge() {
     }
 }
 
-const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbzwOu8E5uJahV5GeSF5-jLq3WqEalnvs-uKqxxREPz2TYLKGb7xQVnUYTFfbBVBJXkE/exec';
+const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxGF3fS2a0gT7XSeo699O6LRqo3AKe-4KPNvuIg9fjnknOXvZxBkjU7-bgqsP_xh63c/exec';
 
 // Xử lý gửi dữ liệu khách hàng (Google Apps Script API)
 async function sendToDatabase(data) {

@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="feedback.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -221,5 +223,89 @@
             }
         };
     </script>
+    <!-- Floating Feedback Button -->
+    <div id="feedback-trigger" class="feedback-trigger">
+        <i class="fas fa-star"></i>
+        <span>Góp ý</span>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="feedback-modal">
+        <div id="feedback-overlay" class="feedback-overlay"></div>
+        <div class="feedback-container glass-panel rounded-3xl p-8">
+            <span id="close-feedback" class="close-feedback">&times;</span>
+            
+            <!-- Form nhập phản hồi -->
+            <div id="feedback-form-container" class="transition-all duration-500">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-1 tracking-tight">Góp ý cho tụi mình nhé! ✨</h2>
+                    <p class="text-gray-700 font-medium text-xs">Trải nghiệm của bạn là mảnh ghép quan trọng nhất.</p>
+                </div>
+
+                <form id="feedback-form" class="space-y-4">
+                    
+                    <!-- Phần đánh giá Emoji -->
+                    <div class="flex flex-col items-center mb-2">
+                        <label class="block text-xs font-bold text-gray-800 mb-2">Cảm xúc của bạn lúc này?</label>
+                        <div class="flex justify-between w-full px-4" id="emoji-rating">
+                            <span class="emoji-btn" data-value="1" title="Tồi tệ">😡</span>
+                            <span class="emoji-btn" data-value="2" title="Không vui">😟</span>
+                            <span class="emoji-btn" data-value="3" title="Bình thường">😐</span>
+                            <span class="emoji-btn" data-value="4" title="Hài lòng">😊</span>
+                            <span class="emoji-btn" data-value="5" title="Tuyệt vời">😍</span>
+                        </div>
+                        
+                        <!-- Text hiển thị cảm xúc -->
+                        <div id="feeling-text" class="h-4 mt-2 text-base font-bold text-indigo-700 opacity-0 transition-opacity duration-300">
+                            Tuyệt vời
+                        </div>
+
+                        <!-- Input ẩn -->
+                        <input type="hidden" name="rating" id="rating-input" required>
+                        <p id="rating-error" class="text-red-600 font-medium text-xs mt-1 hidden bg-red-100/80 px-3 py-1 rounded-full">Oops! Bạn quên chọn biểu cảm kìa.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div>
+                            <label for="name" class="block text-xs font-bold text-gray-800 mb-1 ml-1">Tên của bạn</label>
+                            <input type="text" id="name" name="name" placeholder="Ví dụ: Hoàng Bách" class="w-full px-3 py-2 rounded-xl glass-input transition-all text-sm">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-gray-800 mb-1 ml-1">Email (Tùy chọn)</label>
+                            <input type="email" id="email" name="email" placeholder="bach@example.com" class="w-full px-3 py-2 rounded-xl glass-input transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-xs font-bold text-gray-800 mb-1 ml-1">Điều gì làm bạn ấn tượng nhất? <span class="text-red-500">*</span></label>
+                        <textarea id="message" name="message" rows="2" required placeholder="Cứ thoải mái chia sẻ nha..." class="w-full px-3 py-2 rounded-xl glass-input transition-all resize-none text-sm"></textarea>
+                    </div>
+
+                    <!-- Nút Submit -->
+                    <button type="submit" class="w-full relative group overflow-hidden bg-gray-900 text-white font-bold py-3 px-6 rounded-2xl transition-all hover:scale-[1.02] hover:shadow-xl active:scale-95">
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+                            Gửi Yêu Thương
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Màn hình cảm ơn -->
+            <div id="success-message" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-white/40 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner relative">
+                    <span class="text-3xl absolute animate-bounce" style="animation-duration: 2s;">🎉</span>
+                </div>
+                <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Đã nhận được!</h3>
+                <p class="text-gray-800 font-medium text-base px-4">Cảm ơn bạn đã dành chút thời gian. ❤️</p>
+                <button onclick="resetFeedbackForm()" class="mt-6 px-5 py-2 bg-white/50 hover:bg-white/80 rounded-full text-gray-900 font-bold transition-all shadow-sm">
+                    Viết thêm cái nữa?
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="feedback.js"></script>
 </html>
