@@ -53,24 +53,34 @@ function updateCartBadge() {
     }
 }
 
-const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxGF3fS2a0gT7XSeo699O6LRqo3AKe-4KPNvuIg9fjnknOXvZxBkjU7-bgqsP_xh63c/exec';
+// Hàm băm mật khẩu SHA-256 (Tạo mã định danh không thể dịch ngược)
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbzxHF2h_4OWuBbj1bU4tWn_0bmqL1MJP3HncfuecifFYiJ1rTO0KEZgATNFx9JrEIPQ/exec';
 
 // Xử lý gửi dữ liệu khách hàng (Google Apps Script API)
 async function sendToDatabase(data) {
     try {
-        await fetch(CONFIG_GOOGLE_URL, {
+        // Sử dụng phương pháp tối ưu cho Google Apps Script
+        const response = await fetch(CONFIG_GOOGLE_URL, {
             method: 'POST',
-            mode: 'no-cors', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            // Lưu ý: Không dùng headers Content-Type: application/json 
+            // vì Google Script đôi khi coi đó là Preflight request và chặn CORS.
+            // Dùng text/plain hoặc để mặc định thường an toàn hơn cho Google Script.
         });
         return true;
-    } catch (e) { 
-        console.error('Lỗi Database:', e); 
+    } catch (e) {
+        console.error('Lỗi Database:', e);
         return false;
     }
 }
-
 // Lắng nghe sự kiện đăng ký cộng đồng ở Footer
 document.addEventListener('DOMContentLoaded', () => {
     const joinBtn = document.getElementById('join-btn');
@@ -86,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     date: new Date().toLocaleString()
                 };
                 sendToDatabase(data);
-                alert('Cảm ơn bạn đã tham gia cộng đồng Emotea!');
+                console.log('Cảm ơn bạn đã tham gia cộng đồng Emotea!');
                 emailInput.value = '';
             } else {
                 alert('Vui lòng nhập email hợp lệ.');

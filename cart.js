@@ -146,14 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 await sendToDatabase(orderData);
-                alert('Cảm ơn ' + (user ? user.name : '') + '! Đơn hàng đã được đặt thành công.');
+                console.log('Đơn hàng đã được đặt thành công.');
                 localStorage.removeItem('cart');
                 renderCartItems();
                 updateCart();
                 updateCartBadge();
             } catch (error) {
                 console.error('Lỗi đặt hàng:', error);
-                alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
             } finally {
                 checkoutBtn.innerText = 'THANH TOÁN';
                 checkoutBtn.disabled = false;

@@ -173,18 +173,21 @@
         // Logic Đăng ký
         regForm.onsubmit = async (e) => {
             e.preventDefault();
+            const btn = regForm.querySelector('button');
+            btn.innerText = 'ĐANG TẠO...';
+
+            const rawPassword = document.getElementById('reg-pass').value;
+            const hashedPassword = await hashPassword(rawPassword); // Băm ngay lập tức
+
             const data = {
                 action: "REGISTER",
                 name: document.getElementById('reg-name').value,
                 email: document.getElementById('reg-email').value,
-                password: document.getElementById('reg-pass').value
+                password: hashedPassword // Chỉ gửi mã hash
             };
             
-            const btn = regForm.querySelector('button');
-            btn.innerText = 'ĐANG TẠO...';
-            
             await sendToDatabase(data);
-            alert('Đăng ký thành công! Hãy đăng nhập.');
+            console.log('Đăng ký thành công!');
             toggleAuth('login');
             btn.innerText = 'TẠO TÀI KHOẢN';
         };
@@ -192,32 +195,41 @@
         // Logic Đăng nhập
         loginForm.onsubmit = async (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
             const btn = loginForm.querySelector('button');
             btn.innerText = 'ĐANG KIỂM TRA...';
+
+            const email = document.getElementById('login-email').value;
+            const rawPassword = document.getElementById('login-pass').value;
+            const inputHash = await hashPassword(rawPassword); // Băm ngay lập tức
             
             try {
-                if (typeof CONFIG_GOOGLE_URL === 'undefined') {
-                    alert('Lỗi cấu hình! Hãy đảm bảo utils.js được nhúng đúng cách.');
-                    return;
-                }
+                if (typeof CONFIG_GOOGLE_URL === 'undefined') return;
 
+                // Lấy thông tin từ Google Sheet dựa trên email
                 const response = await fetch(`${CONFIG_GOOGLE_URL}?email=${email}`);
+                
+                // Nếu bị lỗi CORS ở đây, trình duyệt sẽ nhảy thẳng vào khối catch
+                if (!response.ok) throw new Error('Kết nối Database thất bại');
+
                 const dbUser = await response.json();
                 
                 if (dbUser && dbUser.email) {
-                    localStorage.setItem('user', JSON.stringify({ name: dbUser.name, email: dbUser.email }));
-                    if (dbUser.cart && dbUser.cart !== "[]") {
-                        localStorage.setItem('cart', dbUser.cart);
+                    const inputHash = await hashPassword(rawPassword);
+                    if (inputHash === dbUser.password) {
+                        localStorage.setItem('user', JSON.stringify({ name: dbUser.name, email: dbUser.email }));
+                        if (dbUser.cart && dbUser.cart !== "[]") {
+                            localStorage.setItem('cart', dbUser.cart);
+                        }
+                        console.log('Chào mừng quay trở lại!');
+                        window.location.href = 'account.html';
+                    } else {
+                        alert('Mật khẩu không chính xác!');
                     }
-                    alert('Chào mừng ' + dbUser.name + ' quay trở lại!');
-                    window.location.href = 'account.html';
                 } else {
-                    alert('Không tìm thấy tài khoản hoặc mật khẩu không đúng (Demo hiện tại chỉ kiểm tra email).');
+                    alert('Tài khoản không tồn tại hoặc lỗi kết nối. Hãy thử lại bằng Tab ẩn danh!');
                 }
             } catch (error) {
-                console.error('Lỗi chi tiết:', error);
-                alert('Lỗi kết nối Database: ' + error.message + '\n\nHãy đảm bảo bạn đã: \n1. Deploy bản New Deployment.\n2. Chọn quyền Anyone.\n3. Dán đúng link /exec.');
+                console.error('Lỗi:', error);
             } finally {
                 btn.innerText = 'VÀO CỬA HÀNG';
             }

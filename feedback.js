@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 successMsg.classList.add('fade-in');
             }, 300);
         } else {
-            alert('Có lỗi xảy ra khi gửi góp ý. Vui lòng thử lại sau!');
+            console.error('Có lỗi xảy ra khi gửi góp ý.');
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnContent;
         }

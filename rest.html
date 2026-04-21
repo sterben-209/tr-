@@ -50,6 +50,14 @@
       </div>
     </nav>
 
+    <!-- Mobile Menu for Sub-pages -->
+    <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 z-[60] transform translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center space-y-8 text-white">
+      <a href="index.html" class="font-serif text-3xl">Trang Chủ</a>
+      <a href="index.html#slider" class="font-serif text-3xl">Sản Phẩm</a>
+      <a href="cart.html" class="font-serif text-3xl">Giỏ Hàng</a>
+      <a href="account.html" class="font-serif text-3xl">Tài Khoản</a>
+    </div>
+
     <!-- Product Page for REST -->
     <div
       class="min-h-screen font-sans transition-colors duration-700"
@@ -70,17 +78,17 @@
           class="container mx-auto px-6 relative z-10 text-center text-white"
         >
           <h1
-            class="font-serif text-5xl md:text-7xl mb-4 tracking-tight leading-tight"
+            class="font-serif text-3xl md:text-7xl mb-4 tracking-tight leading-tight px-2"
           >
             VỖ VỀ GIẤC NỒNG – GÓI TRỌN BÌNH YÊN
           </h1>
           <p
-            class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"
+            class="font-serif italic text-base md:text-xl opacity-90 my-6 md:my-8 max-w-3xl mx-auto"
           >
             "Khi thế giới ngoài kia tạm nghỉ, hãy để tâm trí bạn được nâng niu."
           </p>
           <p
-            class="text-lg leading-loose opacity-80 max-w-2xl mx-auto font-light"
+            class="text-sm md:text-lg leading-relaxed md:leading-loose opacity-80 max-w-2xl mx-auto font-light px-4"
           >
             Sau một ngày dài đối mặt với áp lực, cơ thể bạn xứng đáng có một
             "khoảng lặng" đúng nghĩa. Dòng trà <strong>Rest</strong> không chỉ
@@ -92,48 +100,48 @@
       </section>
 
       <!-- 2. The Healing Ingredients -->
-      <section class="py-24 px-6 bg-white/30 backdrop-blur-sm">
+      <section class="py-16 md:py-24 px-6 bg-white/30 backdrop-blur-sm">
         <div class="container mx-auto max-w-5xl">
-          <div class="text-center mb-16">
-            <h2 class="font-serif text-4xl md:text-5xl mb-4">
+          <div class="text-center mb-12 md:text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl mb-4">
               Những "Người Bạn" Chăm Sóc Giấc Ngủ
             </h2>
             <div class="w-24 h-px bg-stone-800/50 mx-auto"></div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
             <!-- Ingredient 1: Táo Đỏ -->
-            <div class="flex flex-col items-center">
-              <div class="p-4 border border-stone-800/20 rounded-full mb-4">
+            <div class="flex flex-col items-center p-4 md:p-0">
+              <div class="p-4 border border-stone-800/20 rounded-full mb-4 bg-white/50">
                 🍎
               </div>
-              <h3 class="font-serif text-2xl mb-2">Táo Đỏ – "Vị Ngọt Ấm Áp"</h3>
-              <p class="font-light text-base leading-relaxed opacity-80">
+              <h3 class="font-serif text-xl md:text-2xl mb-2">Táo Đỏ – "Vị Ngọt Ấm Áp"</h3>
+              <p class="font-light text-sm md:text-base leading-relaxed opacity-80">
                 Xoa dịu mệt mỏi, tạo cảm giác ấm áp, và làm dịu tâm trí, giảm
                 bớt sự hối hả trong suy nghĩ.
               </p>
             </div>
             <!-- Ingredient 2: Lá Sen Khô -->
-            <div class="flex flex-col items-center">
-              <div class="p-4 border border-stone-800/20 rounded-full mb-4">
+            <div class="flex flex-col items-center p-4 md:p-0">
+              <div class="p-4 border border-stone-800/20 rounded-full mb-4 bg-white/50">
                 🍃
               </div>
-              <h3 class="font-serif text-2xl mb-2">
+              <h3 class="font-serif text-xl md:text-2xl mb-2">
                 Lá Sen Khô – "Hương Sen Thanh Khiết"
               </h3>
-              <p class="font-light text-base leading-relaxed opacity-80">
+              <p class="font-light text-sm md:text-base leading-relaxed opacity-80">
                 An thần nhẹ nhàng, giúp bạn đi vào giấc ngủ tự nhiên mà không
                 gây "nặng đầu" hay mệt mỏi khi thức dậy.
               </p>
             </div>
             <!-- Ingredient 3: Cây Lạc Tiên -->
-            <div class="flex flex-col items-center">
-              <div class="p-4 border border-stone-800/20 rounded-full mb-4">
+            <div class="flex flex-col items-center p-4 md:p-0">
+              <div class="p-4 border border-stone-800/20 rounded-full mb-4 bg-white/50">
                 🌱
               </div>
-              <h3 class="font-serif text-2xl mb-2">
+              <h3 class="font-serif text-xl md:text-2xl mb-2">
                 Cây Lạc Tiên – "Liều Thuốc Bình Yên"
               </h3>
-              <p class="font-light text-base leading-relaxed opacity-80">
+              <p class="font-light text-sm md:text-base leading-relaxed opacity-80">
                 Làm dịu cảm xúc mạnh, giảm lo âu và hỗ trợ duy trì giấc ngủ sâu
                 hơn, ổn định hơn.
               </p>
@@ -343,18 +351,6 @@
           );
           navbar.classList.add("bg-transparent", "py-6");
         }
-      });
-
-      // Mobile menu toggle
-      const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const menuIcon = document.getElementById("menu-icon");
-      const closeIcon = document.getElementById("close-icon");
-
-      mobileMenuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("translate-x-full");
-        menuIcon.classList.toggle("hidden");
-        closeIcon.classList.toggle("hidden");
       });
     </script>
     <!-- Floating Feedback Button -->

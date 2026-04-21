@@ -161,16 +161,28 @@ body {
 }
 
 @media (max-width: 768px) {
+    .cart-header h1 {
+        font-size: 1.8rem;
+    }
     .cart-body {
         grid-template-columns: 1fr;
     }
     .cart-item {
-        grid-template-columns: 80px 1fr;
-        grid-template-rows: auto auto auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+        padding: 2rem 0;
     }
     .cart-item img {
-        grid-row: 1 / 4;
-        width: 80px;
-        height: 80px;
+        width: 150px;
+        height: 150px;
+    }
+    .item-quantity {
+        margin: 0.5rem auto;
+    }
+    .order-summary {
+        padding: 1.5rem;
     }
 }

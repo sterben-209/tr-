@@ -186,7 +186,13 @@
             try {
                 if (typeof CONFIG_GOOGLE_URL === 'undefined') return;
 
-                const response = await fetch(`${CONFIG_GOOGLE_URL}?email=${userSession.email}`);
+                const response = await fetch(`${CONFIG_GOOGLE_URL}?email=${userSession.email}`, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+
+                if (!response.ok) throw new Error('Network error');
+
                 const dbUser = await response.json();
                 
                 if (dbUser.email) {
@@ -245,10 +251,9 @@
         async function saveCustomerData(data) {
             if (typeof sendToDatabase === 'function') {
                 await sendToDatabase(data);
-                alert('Thông tin đã được lưu lại!');
+                console.log('Thông tin đã được lưu lại!');
             }
-        }
-    </script>
+        }    </script>
     <!-- Floating Feedback Button -->
     <div id="feedback-trigger" class="feedback-trigger">
         <i class="fas fa-star"></i>

@@ -47,58 +47,66 @@
             <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
           </button>
-        </div>
-      </nav>
-    <!-- Product Page for EASE -->
-    <div class="min-h-screen font-sans transition-colors duration-700" style="background-color: #cbaa7d; color: #ffffff;">
+          </div>
+          </nav>
 
-      <!-- 1. Hero Section (Lời Ngỏ) -->
-      <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">     
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1974&auto=format&fit=crop" alt="EASE" class="w-full h-full object-cover brightness-[0.7]">
-        </div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h1 class="font-serif text-5xl md:text-7xl mb-4 tracking-tight leading-tight">Bản Giao Hưởng Thảo Mộc – Free & Tái Tạo</h1>
-            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
-              "Khi cơ thể lên tiếng, hãy để thảo mộc trả lời."
-            </p>
-            <p class="text-base leading-relaxed opacity-80 max-w-2xl mx-auto font-light">
-              Trong nhịp sống hiện đại, đôi khi điều ta cần không phải là một ly cà phê để tỉnh táo, mà là một tách trà để vỗ về. Sản phẩm FREE là sự kết hợp tinh tế giữa <strong>Cam Thảo, Đậu Biếc và Cỏ Mần Trầu</strong>, tạo nên một liệu trình chăm sóc sức khỏe dịu nhẹ từ sâu bên trong.
-            </p>
-        </div>
-      </section>
+          <!-- Mobile Menu for Sub-pages -->
+          <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 z-[60] transform translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center space-y-8 text-white">
+          <a href="index.html" class="font-serif text-3xl">Trang Chủ</a>
+          <a href="index.html#slider" class="font-serif text-3xl">Sản Phẩm</a>
+          <a href="cart.html" class="font-serif text-3xl">Giỏ Hàng</a>
+          <a href="account.html" class="font-serif text-3xl">Tài Khoản</a>
+          </div>
 
-      <!-- 2. The Ingredients (Câu Chuyện Thành Phần) -->
-      <section class="py-24 px-6 bg-black/5 backdrop-blur-sm">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl md:text-5xl mb-4">Câu Chuyện Thành Phần</h2>
-                <div class="w-24 h-px bg-white/50 mx-auto"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                <!-- Ingredient 1: Cam Thảo -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🌿</div>
-                    <h3 class="font-serif text-2xl mb-2">Cam Thảo – "Vị Ngọt Vỗ Về"</h3>
-                    <p class="font-light text-sm opacity-80">Không chỉ là chất dẫn giúp cân bằng vị trà, Cam thảo đóng vai trò là "người chữa lành" cho vùng cổ họng.</p>
-                    <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
-                        <li><strong>Làm dịu:</strong> Giảm ngay cảm giác gắt, đau rát.</li>
-                        <li><strong>Thư giãn:</strong> Giảm căng thẳng thần kinh nhẹ.</li>
-                        <li><strong>Vị giác:</strong> Hậu vị ngọt thanh, mượt mà.</li>
-                    </ul>
-                </div>
-                <!-- Ingredient 2: Đậu Biếc -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🪻</div>
-                    <h3 class="font-serif text-2xl mb-2">Đậu Biếc – "Sắc Tím Cho Đôi Mắt"</h3>
-                    <p class="font-light text-sm opacity-80">Giàu Anthocyanin, món quà cho người làm việc cường độ cao với màn hình.</p>
-                    <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
-                        <li><strong>Hỗ trợ thị lực:</strong> Giảm mỏi mắt, khô mắt.</li>
-                        <li><strong>Cân bằng cảm xúc:</strong> Sắc tím tự nhiên giúp an thần.</li>
-                    </ul>
-                </div>
-                <!-- Ingredient 3: Cỏ Mần Trầu -->
-                <div class="flex flex-col items-center">
+          <!-- Product Page for EASE -->
+          <div class="min-h-screen font-sans transition-colors duration-700" style="background-color: #cbaa7d; color: #ffffff;">
+
+          <!-- 1. Hero Section (Lời Ngỏ) -->
+          <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">     
+          <div class="absolute inset-0 z-0">
+              <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=1974&auto=format&fit=crop" alt="EASE" class="w-full h-full object-cover brightness-[0.7]">
+          </div>
+          <div class="container mx-auto px-6 relative z-10 text-center">
+              <h1 class="font-serif text-3xl md:text-7xl mb-4 tracking-tight leading-tight px-2">BẢN GIAO HƯỞNG THẢO MỘC – FREE & TÁI TẠO</h1>
+              <p class="font-serif italic text-base md:text-xl opacity-90 my-6 md:my-8 max-w-3xl mx-auto"> 
+                "Khi cơ thể lên tiếng, hãy để thảo mộc trả lời."
+              </p>
+              <p class="text-sm md:text-lg leading-relaxed md:leading-loose opacity-80 max-w-2xl mx-auto font-light px-4">
+                Trong nhịp sống hiện đại, đôi khi điều ta cần không phải là một ly cà phê để tỉnh táo, mà là một tách trà để vỗ về. Sản phẩm FREE là sự kết hợp tinh tế giữa <strong>Cam Thảo, Đậu Biếc và Cỏ Mần Trầu</strong>, tạo nên một liệu trình chăm sóc sức khỏe dịu nhẹ từ sâu bên trong.
+              </p>
+          </div>
+          </section>
+
+          <!-- 2. The Ingredients (Câu Chuyện Thành Phần) -->
+          <section class="py-16 md:py-24 px-6 bg-black/5 backdrop-blur-sm">
+          <div class="container mx-auto max-w-5xl">
+              <div class="text-center mb-12 md:mb-16">
+                  <h2 class="font-serif text-3xl md:text-5xl mb-4">Câu Chuyện Thành Phần</h2>
+                  <div class="w-24 h-px bg-white/50 mx-auto"></div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                  <!-- Ingredient 1: Cam Thảo -->
+                  <div class="flex flex-col items-center p-4 md:p-0">
+                      <div class="p-4 border border-white/20 rounded-full mb-4">🌿</div>
+                      <h3 class="font-serif text-xl md:text-2xl mb-2">Cam Thảo – "Vị Ngọt Vỗ Về"</h3>
+                      <p class="font-light text-sm opacity-80">Không chỉ là chất dẫn giúp cân bằng vị trà, Cam thảo đóng vai trò là "người chữa lành" cho vùng cổ họng.</p>
+                      <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
+                          <li><strong>Làm dịu:</strong> Giảm ngay cảm giác gắt, đau rát.</li>
+                          <li><strong>Thư giãn:</strong> Giảm căng thẳng thần kinh nhẹ.</li>
+                          <li><strong>Vị giác:</strong> Hậu vị ngọt thanh, mượt mà.</li>
+                      </ul>
+                  </div>
+                  <!-- Ingredient 2: Đậu Biếc -->
+                  <div class="flex flex-col items-center p-4 md:p-0">
+                      <div class="p-4 border border-white/20 rounded-full mb-4">🪻</div>
+                      <h3 class="font-serif text-xl md:text-2xl mb-2">Đậu Biếc – "Sắc Tím Cho Đôi Mắt"</h3>
+                      <p class="font-light text-sm opacity-80">Giàu Anthocyanin, món quà cho người làm việc cường độ cao với màn hình.</p>
+                      <ul class="text-left list-disc list-inside mt-4 font-light text-sm space-y-2 opacity-80">
+                          <li><strong>Hỗ trợ thị lực:</strong> Giảm mỏi mắt, khô mắt.</li>
+                          <li><strong>Cân bằng cảm xúc:</strong> Sắc tím tự nhiên giúp an thần.</li>
+                      </ul>
+                  </div>
+                  <!-- Ingredient 3: Cỏ Mần Trầu -->                <div class="flex flex-col items-center">
                     <div class="p-4 border border-white/20 rounded-full mb-4">🌱</div>
                     <h3 class="font-serif text-2xl mb-2">Cỏ Mần Trầu – "Nguồn Thanh Nhiệt"</h3>
                     <p class="font-light text-sm opacity-80">Vị thuốc dân gian giúp cơ thể thoát khỏi sự bức bối của môi trường.</p>
@@ -232,20 +240,7 @@
           navbar.classList.add('bg-transparent', 'py-6');
         }
       });
-
-      // Mobile menu toggle
-      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.getElementById('menu-icon');
-      const closeIcon = document.getElementById('close-icon');
-
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('translate-x-full');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-      });
-    </script>
-    <!-- Floating Feedback Button -->
+    </script>    <!-- Floating Feedback Button -->
     <div id="feedback-trigger" class="feedback-trigger">
         <i class="fas fa-star"></i>
         <span>Góp ý</span>

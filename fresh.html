@@ -50,6 +50,14 @@
       </div>
     </nav>
 
+    <!-- Mobile Menu for Sub-pages -->
+    <div id="mobile-menu" class="fixed inset-0 bg-stone-900/95 z-[60] transform translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center space-y-8 text-white">
+      <a href="index.html" class="font-serif text-3xl">Trang Chủ</a>
+      <a href="index.html#slider" class="font-serif text-3xl">Sản Phẩm</a>
+      <a href="cart.html" class="font-serif text-3xl">Giỏ Hàng</a>
+      <a href="account.html" class="font-serif text-3xl">Tài Khoản</a>
+    </div>
+
     <!-- Product Page for FRESH -->
     <div class="min-h-screen font-sans transition-colors duration-700" style="background-color: #fdf2f8; color: #1a1a1a;">
 
@@ -58,46 +66,46 @@
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=2070&auto=format&fit=crop" alt="FRESH" class="w-full h-full object-cover brightness-[0.7]">
         </div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h1 class="font-serif text-5xl md:text-7xl mb-4 tracking-tight leading-tight">ĐÁNH THỨC BẢN LĨNH – KHƠI NGUỒN NĂNG LƯỢNG</h1>
-            <p class="font-serif italic text-lg md:text-xl opacity-90 my-8 max-w-3xl mx-auto"> 
+        <div class="container mx-auto px-6 relative z-10 text-center text-white">
+            <h1 class="font-serif text-3xl md:text-7xl mb-4 tracking-tight leading-tight px-2">ĐÁNH THỨC BẢN LĨNH – KHƠI NGUỒN NĂNG LƯỢNG</h1>
+            <p class="font-serif italic text-base md:text-xl opacity-90 my-6 md:my-8 max-w-3xl mx-auto"> 
               "Tạm biệt uể oải, đón đầu sảng khoái."
             </p>
-            <p class="text-lg leading-loose opacity-80 max-w-2xl mx-auto font-light">
+            <p class="text-sm md:text-lg leading-relaxed md:leading-loose opacity-80 max-w-2xl mx-auto font-light px-4">
               Bạn cần sự tập trung nhưng đã quá ngán ngẩm với vị đắng của cà phê? FRESH mang đến một luồng gió mới cho ngày làm việc của bạn. Không chỉ là tỉnh táo, đó là sự tỉnh táo <strong>tự nhiên, nhẹ nhàng và tràn đầy hứng khởi.</strong>
             </p>
         </div>
       </section>
 
       <!-- 2. The Fresh Core (Công Thức "Tỉnh Táo Tự Nhiên") -->
-      <section class="py-24 px-6 bg-black/5 backdrop-blur-sm">
+      <section class="py-16 md:py-24 px-6 bg-black/5 backdrop-blur-sm">
         <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl md:text-5xl mb-4">Công Thức "Tỉnh Táo Tự Nhiên"</h2>
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="font-serif text-3xl md:text-5xl mb-4">Công Thức "Tỉnh Táo Tự Nhiên"</h2>
                 <div class="w-24 h-px bg-white/50 mx-auto"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 text-center">
                 <!-- Ingredient 1: Trần Bì -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🍊</div>
-                    <h3 class="font-serif text-2xl mb-2">Trần Bì – "Cú Hích Tinh Dầu"</h3>
-                    <p class="font-light text-base leading-relaxed opacity-80">Hương thơm đặc trưng kích thích hệ thần kinh, giúp đầu óc minh mẫn và sảng khoái tức thì.</p>
+                <div class="flex flex-col items-center p-4 md:p-0">
+                    <div class="p-4 border border-white/20 rounded-full mb-4 bg-white/10">🍊</div>
+                    <h3 class="font-serif text-xl md:text-2xl mb-2">Trần Bì – "Cú Hích Tinh Dầu"</h3>
+                    <p class="font-light text-sm md:text-base leading-relaxed opacity-80">Hương thơm đặc trưng kích thích hệ thần kinh, giúp đầu óc minh mẫn và sảng khoái tức thì.</p>
                 </div>
                 <!-- Ingredient 2: Lá Sả Khô -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🍋</div>
-                    <h3 class="font-serif text-2xl mb-2">Lá Sả Khô – "Năng Lượng Thảo Mộc"</h3>
-                    <p class="font-light text-base leading-relaxed opacity-80">Giúp bạn tỉnh táo bền bỉ mà không gây hồi hộp, trong một trạng thái thư giãn tỉnh thức đặc biệt.</p>
+                <div class="flex flex-col items-center p-4 md:p-0">
+                    <div class="p-4 border border-white/20 rounded-full mb-4 bg-white/10">🍋</div>
+                    <h3 class="font-serif text-xl md:text-2xl mb-2">Lá Sả Khô – "Năng Lượng Thảo Mộc"</h3>
+                    <p class="font-light text-sm md:text-base leading-relaxed opacity-80">Giúp bạn tỉnh táo bền bỉ mà không gây hồi hộp, trong một trạng thái thư giãn tỉnh thức đặc biệt.</p>
                 </div>
                 <!-- Ingredient 3: Lá Trà Xanh Khô -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🍃</div>
-                    <h3 class="font-serif text-2xl mb-2">Lá Trà Xanh – "Bản Nguyên Minh Mẫn"</h3>
-                    <p class="font-light text-base leading-relaxed opacity-80">Cung cấp caffeine nhẹ và L-theanine giúp bạn bình tĩnh xử lý mọi deadline.</p>
+                <div class="flex flex-col items-center p-4 md:p-0">
+                    <div class="p-4 border border-white/20 rounded-full mb-4 bg-white/10">🍃</div>
+                    <h3 class="font-serif text-xl md:text-2xl mb-2">Lá Trà Xanh – "Bản Nguyên Minh Mẫn"</h3>
+                    <p class="font-light text-sm md:text-base leading-relaxed opacity-80">Cung cấp caffeine nhẹ và L-theanine giúp bạn bình tĩnh xử lý mọi deadline.</p>
                 </div>
                  <!-- Ingredient 4: Bụp Giấm -->
-                <div class="flex flex-col items-center">
-                    <div class="p-4 border border-white/20 rounded-full mb-4">🌺</div>
+                <div class="flex flex-col items-center p-4 md:p-0">
+                    <div class="p-4 border border-white/20 rounded-full mb-4 bg-white/10">🌺</div>
                     <h3 class="font-serif text-2xl mb-2">Bụp Giấm – "Sắc Đỏ Rực Rỡ"</h3>
                     <p class="font-light text-base leading-relaxed opacity-80">Vị chua thanh và màu đỏ ruby giàu vitamin, chống oxy hóa, tái tạo năng lượng.</p>
                 </div>
@@ -228,18 +236,6 @@
           navbar.classList.remove('bg-white/10', 'backdrop-blur-md', 'shadow-sm', 'py-4');
           navbar.classList.add('bg-transparent', 'py-6');
         }
-      });
-
-      // Mobile menu toggle
-      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.getElementById('menu-icon');
-      const closeIcon = document.getElementById('close-icon');
-
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('translate-x-full');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
       });
     </script>
     <!-- Floating Feedback Button -->

@@ -120,6 +120,11 @@ let currentQuestionIndex = 0;
 function renderquestion(){
     const screen = document.getElementById('quiz-screen');
     screen.classList.remove('hidden');
+    
+    // Thêm class animation
+    screen.classList.remove('question-fade');
+    void screen.offsetWidth; // Trigger reflow
+    screen.classList.add('question-fade');
 
     const CurrentQuestion = QUESTIONS[currentQuestionIndex];
 
@@ -368,42 +373,59 @@ RESULT=[
 ];
 
 function retry() {
-  const retry = document.getElementById('retry-btn');
+  const retryBtn = document.getElementById('retry-btn');
   const result = document.getElementById('result-screen');
   const healing = document.getElementById('healing');
-  retry.addEventListener('click',() => {
-    result.classList.add('hidden');
-    healing.classList.remove('hidden');
-    scores = {REST:0, FREE:0, FRESH:0};
-    currentQuestionIndex = 0;
-    const progress = document.getElementById('sub-bar');
-    progress.style.width = '25%';
-  });
-
+  
+  if (retryBtn) {
+    retryBtn.addEventListener('click',() => {
+      result.classList.add('hidden');
+      healing.classList.remove('hidden');
+      scores = {REST:0, FREE:0, FRESH:0};
+      currentQuestionIndex = 0;
+      const progress = document.getElementById('sub-bar');
+      if (progress) progress.style.width = '25%';
+    });
+  }
 };
 
 retry();
 
-/* --- Hamburger Menu Logic (Corrected) --- */
-document.addEventListener('DOMContentLoaded', () => {
+/* --- Hamburger Menu Logic --- */
+function initHamburger() {
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeIcon = document.getElementById('close-icon');
     const mobileNavContainer = document.getElementById('mobile-nav-container');
-    
-    // Correctly select the links inside the new container
-    const navLinks = mobileNavContainer.querySelectorAll('.mobile-nav-links a');
 
-    hamburgerIcon.addEventListener('click', () => {
+    if (!hamburgerIcon || !mobileNavContainer) {
+        console.error('Menu elements not found!');
+        return;
+    }
+
+    hamburgerIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         mobileNavContainer.classList.add('active');
+        console.log('Menu opened');
     });
 
-    closeIcon.addEventListener('click', () => {
-        mobileNavContainer.classList.remove('active');
-    });
+    if (closeIcon) {
+        closeIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            mobileNavContainer.classList.remove('active');
+            console.log('Menu closed');
+        });
+    }
 
+    const navLinks = mobileNavContainer.querySelectorAll('.mobile-nav-links a');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             mobileNavContainer.classList.remove('active');
         });
     });
-});
+}
+
+// Chạy ngay lập tức và cả khi DOMContentLoaded
+initHamburger();
+document.addEventListener('DOMContentLoaded', initHamburger);
