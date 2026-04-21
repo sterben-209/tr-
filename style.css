@@ -6,6 +6,21 @@
 
 html {
   scroll-snap-type: y mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .scroll {
@@ -180,19 +195,20 @@ html {
 }
 
 .question-container {
-  width: 100vw;
+  width: 100%;
   min-height: 110vh;
   color: transparent;
+  overflow-x: hidden;
 }
 
 .screen {
-  width: 100vw;
+  width: 100%;
   height: 110vh;
   background-color: #0c0c0c;
 }
 
 .healing {
-  width: 100vw;
+  width: 100%;
   height: 110vh;
   overflow: hidden;
   display: flex;
@@ -203,7 +219,7 @@ html {
 
 .healing img {
   position: absolute;
-  width: 100vw;
+  width: 100%;
   filter: brightness(0.3);
   z-index: -1;
   object-fit: cover;
@@ -323,20 +339,23 @@ html {
 .option {
   background-color: transparent;
   width: 100%;
-  height: 2vh;
-  padding: 3vh 2vw;
+  min-height: 10vh;
+  padding: 3vh 4vw;
   display: flex;
   align-items: center;
-  border: 0.1vw solid rgba(255, 255, 255, 0.3);
+  border: 0.1vw solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.7);
-  /* font-family: 'Playafair',sans-serif; */
-  font-size: 1.5vw;
-  font-weight: lighter;
+  font-size: 1.4vw;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  margin-bottom: 2vh;
 }
 
 .option:hover {
   border: 0.1vw solid rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 1);
+  padding-left: 5vw;
   cursor: pointer;
 }
 
@@ -842,8 +861,9 @@ html {
   overflow-x: hidden;
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 .slider::-webkit-scrollbar {
@@ -851,7 +871,7 @@ html {
 }
 
 .slide1 {
-  height: 110vh;
+  height: 100vh;
   width: 100vw;
   background: #44192d;
   position: relative;
@@ -859,7 +879,7 @@ html {
   scroll-snap-stop: always;
 }
 .slide2 {
-  height: 110vh;
+  height: 100vh;
   width: 100vw;
   background: #314373;
   position: relative;
@@ -867,7 +887,7 @@ html {
   scroll-snap-stop: always;
 }
 .slide3 {
-  height: 110vh;
+  height: 100vh;
   width: 100vw;
   background: #4f772d;
   position: relative;
@@ -881,38 +901,25 @@ html {
   color: white;
   margin-bottom: 1vh;
   letter-spacing: 0.3em;
-  position: absolute;
-  left: 15vw;
-  padding-top: 20vh;
+  position: relative;
+  left: 16vw;
+  padding-top: 12vh; /* Giảm padding để kéo toàn bộ nội dung lên */
 }
 
 .title {
   font-family: "Playfair Display", serif;
   font-size: 6vw;
   color: white;
-  padding-top: 22vh;
-  margin-bottom: 1vh;
+  margin-bottom: 2vh; /* Giảm khoảng cách giữa tiêu đề và mô tả */
   letter-spacing: 0;
-  position: absolute;
-  left: 15vw;
+  position: relative;
+  left: 16vw;
 }
 
 .title::first-letter {
   text-decoration: underline;
-  text-decoration-thickness: 0.1vw; /* Độ dày nét gạch (tùy chọn) */
-  text-underline-offset: 3vh; /* Khoảng cách với chữ (tùy chọn) */
-}
-
-.subtitle {
-  font-family: "Playfair Display", serif;
-  font-size: 9vw;
-  color: white;
-  opacity: 0.2;
-  position: relative;
-  left: 40vw;
-  transform: translate(0%, -50%) rotate(-90deg);
-  color: transparent;
-  -webkit-text-stroke: 0.1vw white;
+  text-decoration-thickness: 0.1vw;
+  text-underline-offset: 3vh;
 }
 
 .description {
@@ -923,35 +930,51 @@ html {
   color: white;
   width: 18vw;
   position: relative;
-  left: 15vw;
+  left: 16vw;
   letter-spacing: 0.1vw;
-  top: 20vh;
   opacity: 0.7;
   margin-left: 1vw;
+  margin-bottom: 2vh;
 }
 
 .KEY {
   font-family: "Inter", serif;
   font-size: 0.75vw;
   color: white;
-  margin-top: 4vh;
+  margin-top: 2vh;
   margin-left: 1vw;
   letter-spacing: 0.2em;
   position: relative;
-  left: 15vw;
-  top: 20vh;
+  left: 16vw;
   opacity: 0.4;
 }
 
 .ingre-contain {
   width: 25vw;
-  left: 15vw;
+  left: 16vw;
   margin-left: 1vw;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5vw;
-  top: 20vh;
+  margin-bottom: 4vh;
+}
+
+.subtitle {
+  font-family: "Playfair Display", serif;
+  font-size: 22vh;
+  color: transparent;
+  -webkit-text-stroke: 0.15vw rgba(255, 255, 255, 0.25);
+  opacity: 0.2;
+  position: absolute;
+  right: -2vw;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .ingre {
@@ -971,12 +994,12 @@ html {
   font-family: "Inter", serif;
   font-size: 0.75vw;
   color: white;
-  margin-top: 6vh;
+  margin-top: 4vh; /* Khoảng cách phía trên nút */
   margin-left: 1vw;
   letter-spacing: 0.3em;
   position: relative;
-  left: 15vw;
-  top: 20vh;
+  left: 16vw; /* Căn thẳng hàng với các phần tử trên */
+  top: 0; /* Đưa về vị trí tự nhiên, đẩy lên cao hơn 20vh cũ */
   opacity: 0.7;
   border: 0.1vw solid white;
   display: inline-block;
@@ -993,11 +1016,12 @@ html {
 .deco {
   color: white;
   opacity: 0.4;
-  position: relative;
+  position: absolute;
   font-family: "Bodoni Moda", serif;
-  left: 80vw;
-  top: 22vh;
-  font-size: 3vw;
+  right: 30px;
+  bottom: 110px;
+  font-size: 2.5vw;
+  z-index: 2;
 }
 
 .decor-background {
