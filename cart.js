@@ -119,43 +119,145 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const checkoutBtn = document.querySelector('.checkout-btn');
-    
+    const checkoutModal = document.getElementById('checkout-modal');
+    const checkoutModalContent = document.getElementById('checkout-modal-content');
+    const closeCheckoutModal = document.getElementById('close-checkout-modal');
+    const checkoutInfoForm = document.getElementById('checkout-info-form');
+    const guestFields = document.getElementById('guest-fields');
+    const loginPrompt = document.getElementById('login-prompt');
+    const checkoutPhoneInput = document.getElementById('checkout-phone');
+    const checkoutAddressInput = document.getElementById('checkout-address');
+    const checkoutNameInput = document.getElementById('checkout-name');
+
+    function openModal() {
+        checkoutModal.classList.remove('hidden');
+        checkoutModal.classList.add('flex');
+        setTimeout(() => {
+            checkoutModalContent.classList.remove('scale-95', 'opacity-0');
+            checkoutModalContent.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeModal() {
+        checkoutModalContent.classList.remove('scale-100', 'opacity-100');
+        checkoutModalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            checkoutModal.classList.remove('flex');
+            checkoutModal.classList.add('hidden');
+        }, 300);
+    }
+
+    if (closeCheckoutModal) {
+        closeCheckoutModal.addEventListener('click', closeModal);
+    }
+
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', async () => {
+        checkoutBtn.addEventListener('click', () => {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const user = JSON.parse(localStorage.getItem('user')); 
-            
             if (cart.length === 0) {
                 alert('Giỏ hàng của bạn đang trống.');
                 return;
             }
 
+            const user = JSON.parse(localStorage.getItem('user'));
+            const userProfile = JSON.parse(localStorage.getItem('user_profile')) || {};
+
+            if (user) {
+                // Đã đăng nhập
+                const phone = userProfile.phone || "";
+                const address = userProfile.address || "";
+
+                if (!phone || !address) {
+                    // Thiếu thông tin
+                    guestFields.classList.add('hidden');
+                    loginPrompt.classList.remove('hidden');
+                    checkoutPhoneInput.value = phone;
+                    checkoutAddressInput.value = address;
+                    checkoutNameInput.required = false;
+                    openModal();
+                } else {
+                    // Đủ thông tin, đặt hàng luôn hoặc hiện modal để xác nhận lại (tùy chọn)
+                    // Ở đây tôi chọn hiện modal để họ xác nhận địa chỉ cuối cùng
+                    guestFields.classList.add('hidden');
+                    loginPrompt.classList.add('hidden');
+                    checkoutPhoneInput.value = phone;
+                    checkoutAddressInput.value = address;
+                    checkoutNameInput.required = false;
+                    openModal();
+                }
+            } else {
+                // Khách vãng lai
+                guestFields.classList.remove('hidden');
+                loginPrompt.classList.add('hidden');
+                checkoutNameInput.required = true;
+                openModal();
+            }
+        });
+    }
+
+    if (checkoutInfoForm) {
+        checkoutInfoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const user = JSON.parse(localStorage.getItem('user'));
+            
+            const name = user ? user.name : checkoutNameInput.value;
+            const email = user ? user.email : "guest@example.com";
+            const phone = checkoutPhoneInput.value;
+            const address = checkoutAddressInput.value;
+            
             const orderDetails = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
             const totalAmount = grandTotalElement.innerText;
 
             const orderData = {
                 action: "ORDER",
-                name: user ? user.name : "Khách vãng lai",
-                email: user ? user.email : "guest@example.com",
+                name: name,
+                email: email,
+                phone: phone,
+                address: address,
                 order_details: orderDetails,
-                total: totalAmount
+                total: totalAmount,
+                date: new Date().toLocaleString()
             };
 
-            checkoutBtn.innerText = 'ĐANG XỬ LÝ...';
-            checkoutBtn.disabled = true;
+            const confirmBtn = document.getElementById('confirm-order-btn');
+            const originalBtnText = confirmBtn.innerHTML;
+            confirmBtn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> ĐANG XỬ LÝ...';
+            confirmBtn.disabled = true;
 
             try {
-                await sendToDatabase(orderData);
-                console.log('Đơn hàng đã được đặt thành công.');
-                localStorage.removeItem('cart');
-                renderCartItems();
-                updateCart();
-                updateCartBadge();
+                const success = await sendToDatabase(orderData);
+                if (success) {
+                    // Nếu là user đã đăng nhập, cập nhật profile luôn
+                    if (user) {
+                        const updatedProfile = { phone, address };
+                        localStorage.setItem('user_profile', JSON.stringify(updatedProfile));
+                        // Gửi update profile lên database ngầm
+                        sendToDatabase({
+                            action: "UPDATE_USER",
+                            name: user.name,
+                            email: user.email,
+                            phone: phone,
+                            address: address
+                        });
+                    }
+
+                    alert('Đặt hàng thành công! Emotea sẽ sớm liên hệ với bạn.');
+                    localStorage.removeItem('cart');
+                    closeModal();
+                    renderCartItems();
+                    updateCart();
+                    updateCartBadge();
+                } else {
+                    alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
+                }
             } catch (error) {
                 console.error('Lỗi đặt hàng:', error);
+                alert('Có lỗi xảy ra. Vui lòng kiểm tra kết nối.');
             } finally {
-                checkoutBtn.innerText = 'THANH TOÁN';
-                checkoutBtn.disabled = false;
+                confirmBtn.innerHTML = originalBtnText;
+                confirmBtn.disabled = false;
             }
         });
     }

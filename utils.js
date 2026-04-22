@@ -62,7 +62,7 @@ async function hashPassword(password) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbzxHF2h_4OWuBbj1bU4tWn_0bmqL1MJP3HncfuecifFYiJ1rTO0KEZgATNFx9JrEIPQ/exec';
+const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxUZc1JIarbb40qJi-4dTOcX9JTW7VVy2Wn3BjhGkKa8mRVygWSjo249kInG9wXsBye/exec';
 
 // Xử lý gửi dữ liệu khách hàng (Google Apps Script API)
 async function sendToDatabase(data) {
