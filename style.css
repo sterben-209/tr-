@@ -1262,6 +1262,79 @@ body::-webkit-scrollbar {
   background-color: #333;
 }
 
+/* Tea Mood Tracker Styling */
+.tea-type-btn {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tea-type-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(212, 163, 115, 0.5);
+}
+
+.tea-type-btn.active-tea {
+    background: #d4a373 !important;
+    border-color: #d4a373 !important;
+    color: #1a1a1a !important;
+    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
+}
+
+.mood-tracker-container {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.mood-slider {
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.15);
+    height: 8px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.mood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #d4a373;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(212, 163, 115, 0.6);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid #fff;
+}
+
+.diary-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.diary-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(212, 163, 115, 0.4);
+    transform: translateY(-5px) scale(1.01);
+}
+
+.mood-score-badge {
+    background: #d4a373;
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 900;
+    box-shadow: 0 2px 10px rgba(212, 163, 115, 0.3);
+}
+
+.tea-name-label {
+    color: #d4a373;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
 .nav-light-theme .logo,
 .nav-light-theme .nav-menu a,
 .nav-light-theme .nav-action a {
@@ -1274,4 +1347,77 @@ body::-webkit-scrollbar {
 
 .nav-light-theme #hamburger-icon span {
   background-color: #333;
+}
+
+/* Tea Mood Tracker Styling */
+.tea-type-btn {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tea-type-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(212, 163, 115, 0.5);
+}
+
+.tea-type-btn.active-tea {
+    background: #d4a373 !important;
+    border-color: #d4a373 !important;
+    color: #1a1a1a !important;
+    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
+}
+
+.mood-tracker-container {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.mood-slider {
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.15);
+    height: 8px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.mood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #d4a373;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(212, 163, 115, 0.6);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid #fff;
+}
+
+.diary-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.diary-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(212, 163, 115, 0.4);
+    transform: translateY(-5px) scale(1.01);
+}
+
+.mood-score-badge {
+    background: #d4a373;
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 900;
+    box-shadow: 0 2px 10px rgba(212, 163, 115, 0.3);
+}
+
+.tea-name-label {
+    color: #d4a373;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
