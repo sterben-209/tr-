@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotea - Community Insights Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Mulish', sans-serif; background-color: #0c0c0c; color: #fff; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 2rem; padding: 2rem; }
+        .stat-badge { background: rgba(212, 163, 115, 0.1); color: #d4a373; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+    <!-- Navbar (Simplified) -->
+    <nav class="py-8 px-10 flex justify-between items-center border-b border-white/5">
+        <a href="index.html" class="flex flex-col items-start group">
+          <span class="font-serif text-3xl tracking-tight font-bold text-[#d4a373]">Emotea</span>
+          <span class="text-[0.5rem] tracking-[0.4em] uppercase text-white/40 font-bold">Insights Hub</span>
+        </a>
+        <div class="flex items-center gap-6">
+            <span class="text-xs text-white/40 italic">Cập nhật: <span id="last-update">--/--/----</span></span>
+            <a href="survey.html" class="bg-[#d4a373] text-black text-xs font-bold px-4 py-2 rounded-lg hover:bg-white transition-all">LÀM KHẢO SÁT</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 mt-12">
+        <div class="mb-12">
+            <h1 class="text-4xl font-serif font-bold mb-2">Nhịp Đập Cộng Đồng</h1>
+            <p class="text-white/50">Dữ liệu thực tế từ những người đang tìm kiếm sự bình yên cùng Emotea.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Summary Stats -->
+            <div class="glass-card flex flex-col justify-center text-center">
+                <span class="stat-badge mb-4 mx-auto">Tổng số khảo sát</span>
+                <div class="text-5xl font-serif font-bold text-[#d4a373]" id="total-surveys">1,248</div>
+            </div>
+            <div class="glass-card flex flex-col justify-center text-center">
+                <span class="stat-badge mb-4 mx-auto">Tỷ lệ hài lòng</span>
+                <div class="text-5xl font-serif font-bold text-green-400">96.4%</div>
+            </div>
+            <div class="glass-card flex flex-col justify-center text-center">
+                <span class="stat-badge mb-4 mx-auto">Sẵn sàng mua lại</span>
+                <div class="text-5xl font-serif font-bold text-blue-400">88.2%</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Chart 1: Customer Classification -->
+            <div class="glass-card">
+                <h3 class="text-xl font-serif font-bold mb-8">Phân Loại Nhu Cầu Chữa Lành</h3>
+                <div class="h-[300px] flex items-center justify-center">
+                    <canvas id="needChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Before/After Matrix -->
+            <div class="glass-card">
+                <h3 class="text-xl font-serif font-bold mb-8">Ma Trận Thay Đổi Cảm Xúc (%)</h3>
+                <div class="h-[300px] flex items-center justify-center">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3: Sensory Radar -->
+            <div class="glass-card">
+                <h3 class="text-xl font-serif font-bold mb-8">Đánh Giá Trải Nghiệm Đa Giác Quan</h3>
+                <div class="h-[350px] flex items-center justify-center">
+                    <canvas id="sensoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 4: Pricing Validation -->
+            <div class="glass-card">
+                <h3 class="text-xl font-serif font-bold mb-8">Mức Độ Phù Hợp Về Giá</h3>
+                <div class="h-[350px] flex items-center justify-center">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Summary Table -->
+        <div class="glass-card mt-12 overflow-x-auto">
+            <h3 class="text-xl font-serif font-bold mb-8">Cảm Nhận Trực Tiếp Từ Khách Hàng</h3>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-white/40 text-[10px] uppercase tracking-widest border-b border-white/5">
+                        <th class="pb-4 px-4">Thời gian</th>
+                        <th class="pb-4 px-4">Trạng thái</th>
+                        <th class="pb-4 px-4">Hương vị</th>
+                        <th class="pb-4 px-4">Cảm nhận nhanh</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm" id="feedback-table-body">
+                    <!-- Data will be injected here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="insights.js"></script>
+</body>
+</html>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="insights.js"></script>
+</body>
+</html>

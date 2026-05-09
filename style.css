@@ -1208,6 +1208,31 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+.survey-link-btn {
+  position: relative;
+  top: 20vh;
+  font-family: "Mulish", sans-serif;
+  font-weight: bold;
+  font-size: 0.9vw;
+  width: 30vw;
+  padding: 1.5vh;
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.survey-link-btn:hover {
+  background-color: #d4a373;
+  border-color: #d4a373;
+  color: white;
+}
+
 .contact {
   position: relative;
   top: 22vh;

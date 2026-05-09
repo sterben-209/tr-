@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotea - Khảo Sát Insight & Trải Nghiệm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:wght@200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Mulish', sans-serif; background-color: #fdfcf8; color: #1c1917; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .progress-bar { transition: width 0.4s ease; }
+        .option-card { cursor: pointer; transition: all 0.3s ease; border: 1px solid #e7e5e4; }
+        .option-card:hover { border-color: #d4a373; background-color: #fefaf6; }
+        .option-card.selected { border-color: #d4a373; background-color: #fefaf6; box-shadow: 0 0 0 2px #d4a373; }
+        input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: #e7e5e4; border-radius: 5px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #d4a373; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
+        input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-12 px-6">
+    <div class="max-w-2xl w-full">
+        <div class="text-center mb-10">
+            <a href="index.html" class="font-serif text-4xl font-bold text-[#d4a373] tracking-tight">Emotea</a>
+            <p class="text-[0.6rem] tracking-[0.4em] uppercase text-stone-400 font-bold mt-1">Mental Care Tea</p>
+            <h1 class="text-2xl font-serif font-bold mt-8">Khảo Sát & Trải Nghiệm Sản Phẩm</h1>
+            <p class="text-sm text-stone-500 mt-2">Cảm ơn bạn đã đồng hành cùng Emotea trong hành trình chữa lành.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-stone-200 h-1.5 rounded-full mb-12 overflow-hidden">
+            <div id="progress" class="progress-bar bg-[#d4a373] h-full w-[20%]"></div>
+        </div>
+
+        <form id="survey-form" class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-sm border border-stone-100">
+            
+            <!-- STEP 1: Bối cảnh & Hành vi -->
+            <div class="step active" data-step="1">
+                <h2 class="text-xl font-serif font-bold mb-6">1. Bối cảnh & Hành vi</h2>
+                
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Bạn mô tả thế nào về ngày áp lực nhất của mình?</label>
+                    <textarea name="worst_day_desc" rows="3" class="w-full p-4 rounded-2xl border border-stone-200 focus:border-[#d4a373] outline-none transition-all resize-none" placeholder="Chia sẻ một chút với tụi mình nha..."></textarea>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Trong lúc đó, bạn có xu hướng thế nào?</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="coping_mechanism" data-value="run_away">
+                            <i class="fas fa-person-running text-[#d4a373]"></i>
+                            <span>Muốn "chạy trốn" để tìm khoảng không riêng</span>
+                        </div>
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="coping_mechanism" data-value="face_it">
+                            <i class="fas fa-hand-fist text-[#d4a373]"></i>
+                            <span>Muốn "đối diện" và giải quyết vấn đề ngay</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="coping_mechanism" required>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Bạn thường tìm đến đồ uống khi nào?</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="timing" data-value="hit_bottom">
+                            <i class="fas fa-arrow-down-long text-[#d4a373]"></i>
+                            <span>Khi cảm xúc đã "chạm đáy"</span>
+                        </div>
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="timing" data-value="prevent_falling">
+                            <i class="fas fa-shield-heart text-[#d4a373]"></i>
+                            <span>Uống để ngăn mình không rơi xuống đáy</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="timing" required>
+                </div>
+            </div>
+
+            <!-- STEP 2: Rào cản & Concept -->
+            <div class="step" data-step="2">
+                <h2 class="text-xl font-serif font-bold mb-6">2. Rào cản & Concept</h2>
+                
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Khi uống cafe chạy deadline, bạn có thấy lo lắng hay tim đập nhanh?</label>
+                    <div class="flex gap-4">
+                        <label class="flex-1">
+                            <input type="radio" name="coffee_side_effect" value="yes" class="hidden peer">
+                            <div class="peer-checked:bg-[#d4a373] peer-checked:text-white border border-stone-200 p-3 text-center rounded-xl cursor-pointer transition-all">Có, rất mệt</div>
+                        </label>
+                        <label class="flex-1">
+                            <input type="radio" name="coffee_side_effect" value="no" class="hidden peer">
+                            <div class="peer-checked:bg-[#d4a373] peer-checked:text-white border border-stone-200 p-3 text-center rounded-xl cursor-pointer transition-all">Không, tôi ổn</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Bạn nghĩ sao về việc đặt tên trà theo cảm xúc (An Yên) thay vì nguyên liệu (Hoa Cúc)?</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="naming_preference" data-value="emotion">
+                            <i class="fas fa-heart text-[#d4a373]"></i>
+                            <span>Làm tôi tò mò và thấy gần gũi hơn</span>
+                        </div>
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="naming_preference" data-value="ingredient">
+                            <i class="fas fa-leaf text-[#d4a373]"></i>
+                            <span>Tôi thích biết rõ thành phần hơn</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="naming_preference" required>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Giữa "Hết buồn" và "Thêm vui", bạn cần cái nào hơn?</label>
+                    <div class="flex gap-4">
+                        <label class="flex-1">
+                            <input type="radio" name="emotional_need" value="stop_sad" class="hidden peer">
+                            <div class="peer-checked:bg-stone-800 peer-checked:text-white border border-stone-200 p-4 text-center rounded-xl cursor-pointer transition-all font-bold">Hết buồn</div>
+                        </label>
+                        <label class="flex-1">
+                            <input type="radio" name="emotional_need" value="add_joy" class="hidden peer">
+                            <div class="peer-checked:bg-[#d4a373] peer-checked:text-white border border-stone-200 p-4 text-center rounded-xl cursor-pointer transition-all font-bold">Thêm vui</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3: Thử nghiệm Mù & Cảm nhận -->
+            <div class="step" data-step="3">
+                <h2 class="text-xl font-serif font-bold mb-2">3. Thử nghiệm Mù</h2>
+                <p class="text-xs text-stone-500 mb-8">Hãy nhấp một ngụm trà và cho tụi mình biết cảm nhận của bạn nhé!</p>
+                
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-bold">Hương vị (Taste)</label>
+                            <span class="text-[#d4a373] font-bold" id="val-taste">3</span>
+                        </div>
+                        <input type="range" name="score_taste" min="1" max="5" value="3" oninput="document.getElementById('val-taste').innerText = this.value">
+                        <div class="flex justify-between text-[10px] text-stone-400 mt-1 uppercase tracking-widest">
+                            <span>Nhạt/Chát</span>
+                            <span>Đậm đà/Mượt</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-bold">Mùi hương (Scent)</label>
+                            <span class="text-[#d4a373] font-bold" id="val-scent">3</span>
+                        </div>
+                        <input type="range" name="score_scent" min="1" max="5" value="3" oninput="document.getElementById('val-scent').innerText = this.value">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-bold">Bao bì & Concept</label>
+                            <span class="text-[#d4a373] font-bold" id="val-pack">3</span>
+                        </div>
+                        <input type="range" name="score_packaging" min="1" max="5" value="3" oninput="document.getElementById('val-pack').innerText = this.value">
+                    </div>
+
+                    <div class="pt-4">
+                        <label class="block text-sm font-bold mb-4">Bạn có cảm thấy thay đổi gì ngay lập tức không?</label>
+                        <input type="text" name="immediate_feeling" class="w-full p-4 rounded-xl border border-stone-200 focus:border-[#d4a373] outline-none transition-all" placeholder="VD: Mát cổ họng, ấm bụng...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4: Định giá & Hoàn tất -->
+            <div class="step" data-step="4">
+                <h2 class="text-xl font-serif font-bold mb-6">4. Định giá & Hoàn tất</h2>
+                
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Mức giá 35.000đ/hộp cho trải nghiệm này, bạn thấy thế nào?</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="price_opinion" data-value="reasonable">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Hợp lý cho sức khỏe tinh thần</span>
+                        </div>
+                        <div class="option-card p-4 rounded-xl flex items-center gap-4" data-name="price_opinion" data-value="expensive">
+                            <i class="fas fa-circle-exclamation text-amber-500"></i>
+                            <span>Hơi cao, cần cân nhắc</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="price_opinion" required>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-4">Bạn có sẵn sàng mua lại không?</label>
+                    <select name="buy_again" class="w-full p-4 rounded-xl border border-stone-200 focus:border-[#d4a373] outline-none transition-all appearance-none bg-white">
+                        <option value="yes">Chắc chắn rồi!</option>
+                        <option value="maybe">Có thể nếu có dịp</option>
+                        <option value="no">Chưa phù hợp với tôi</option>
+                    </select>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-bold mb-2">Email của bạn (Để tụi mình gửi quà nhỏ nhé!)</label>
+                    <input type="email" name="email" class="w-full p-4 rounded-xl border border-stone-200 focus:border-[#d4a373] outline-none transition-all" placeholder="email@example.com">
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-12 pt-8 border-t border-stone-100">
+                <button type="button" id="prev-btn" class="text-stone-400 font-bold px-6 py-2 rounded-xl hover:text-stone-800 transition-all opacity-0 pointer-events-none">QUAY LẠI</button>
+                <button type="button" id="next-btn" class="bg-stone-800 text-white font-bold px-10 py-3 rounded-2xl hover:bg-stone-900 transition-all shadow-lg active:scale-95">TIẾP TỤC</button>
+                <button type="submit" id="submit-btn" class="hidden bg-[#d4a373] text-white font-bold px-10 py-3 rounded-2xl hover:bg-[#b48454] transition-all shadow-lg active:scale-95">GỬI KẾT QUẢ</button>
+            </div>
+        </form>
+
+        <div id="success-view" class="hidden text-center bg-white p-12 rounded-[2.5rem] shadow-sm border border-stone-100 animate-fadeIn">
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="text-3xl font-serif font-bold mb-4">Cảm ơn bạn!</h2>
+            <p class="text-stone-500 mb-8">Những chia sẻ của bạn là mảnh ghép vô cùng quan trọng giúp Emotea hoàn thiện hơn mỗi ngày. Một món quà nhỏ đã được gửi tới email của bạn nhé!</p>
+            <div class="flex flex-col gap-4">
+                <a href="index.html" class="bg-stone-800 text-white font-bold py-4 rounded-2xl">VỀ TRANG CHỦ</a>
+                <a href="insights.html" class="text-[#d4a373] font-bold text-sm underline">XEM KẾT QUẢ CỘNG ĐỒNG</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="survey.js"></script>
+</body>
+</html>
