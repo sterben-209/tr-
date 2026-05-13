@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emoticons Pack Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-container": "#efeded",
+                "surface-tint": "#6b5e28",
+                "on-primary-fixed-variant": "#524612",
+                "on-surface-variant": "#4b463a",
+                "tertiary": "#7e5262",
+                "on-error-container": "#93000a",
+                "surface": "#fbf9f8",
+                "error": "#ba1a1a",
+                "on-primary-container": "#786932",
+                "tertiary-fixed-dim": "#efb7ca",
+                "secondary-fixed": "#c7e7ff",
+                "primary-container": "#ffeba7",
+                "on-tertiary-fixed": "#31101e",
+                "error-container": "#ffdad6",
+                "secondary-container": "#b6dffd",
+                "secondary-fixed-dim": "#a3cce9",
+                "outline-variant": "#cdc6b6",
+                "surface-container-high": "#eae8e7",
+                "tertiary-container": "#ffe5ec",
+                "on-tertiary-fixed-variant": "#633b4a",
+                "inverse-primary": "#d8c685",
+                "surface-container-lowest": "#ffffff",
+                "primary-fixed": "#f5e29f",
+                "primary": "#6b5e28",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed": "#001e2e",
+                "surface-bright": "#fbf9f8",
+                "surface-dim": "#dbd9d9",
+                "on-background": "#1b1c1c",
+                "on-surface": "#1b1c1c",
+                "on-error": "#ffffff",
+                "inverse-surface": "#303030",
+                "surface-container-highest": "#e4e2e2",
+                "on-tertiary-container": "#8a5d6d",
+                "on-primary": "#ffffff",
+                "on-secondary-container": "#3b637d",
+                "on-primary-fixed": "#221b00",
+                "secondary": "#3a637c",
+                "primary-fixed-dim": "#d8c685",
+                "outline": "#7c7769",
+                "surface-container-low": "#f5f3f3",
+                "tertiary-fixed": "#ffd9e4",
+                "on-secondary": "#ffffff",
+                "background": "#fbf9f8",
+                "on-secondary-fixed-variant": "#204b63",
+                "inverse-on-surface": "#f2f0f0",
+                "surface-variant": "#e4e2e2"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "stack-md": "16px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "margin-page": "20px",
+                "gutter": "12px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Quicksand"
+                ],
+                "label-sm": [
+                        "Quicksand"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Quicksand"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "22px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "26px",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+  /* Custom hand-drawn outline styles */
+  .hand-drawn-border {
+    border: 2px solid #4b463a;
+    border-radius: 8px 12px 10px 8px / 12px 8px 10px 12px;
+  }
+  .hand-drawn-border-sm {
+    border: 1.5px solid #4b463a;
+    border-radius: 6px 8px 7px 6px / 8px 6px 7px 8px;
+  }
+  .solid-shadow {
+    box-shadow: 4px 4px 0px 0px #primary-container;
+  }
+  .solid-shadow-dark {
+    box-shadow: 4px 4px 0px 0px #4b463a;
+  }
+  .button-press:active {
+    box-shadow: 0px 0px 0px 0px #4b463a;
+    transform: translate(4px, 4px);
+  }
+  
+  /* Svg filter for wobble effect if needed, though pure CSS radius often suffices for light touch */
+  .wobble {
+      filter: url('#wobble');
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- SVG Filter for Wobble (Optional subtle effect) -->
+<svg height="0" style="visibility: hidden; position: absolute;" version="1.1" width="0" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="wobble">
+<feturbulence basefrequency="0.01 0.02" numoctaves="1" result="warp" type="fractalNoise"></feturbulence>
+<fedisplacementmap in="SourceGraphic" in2="warp" scale="2" xchannelselector="R" ychannelselector="G"></fedisplacementmap>
+</filter>
+</defs>
+</svg>
+<!-- Mobile Top App Bar (Hidden on Desktop) -->
+<header class="flex justify-between items-center px-margin-page py-stack-sm w-full bg-surface dark:bg-surface border-b-2 border-outline-variant dark:border-outline md:hidden">
+<button aria-label="Menu" class="text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface dark:text-on-surface-variant font-bold">Store</h1>
+<button aria-label="Cart" class="text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</header>
+<!-- Desktop Side Navigation -->
+<aside class="hidden md:flex flex-col w-64 h-screen border-r-2 border-outline-variant bg-surface sticky top-0 py-stack-lg px-margin-page">
+<div class="mb-12 flex items-center gap-2">
+<span class="material-symbols-outlined text-3xl text-primary">book</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">My Scrapbook</h1>
+</div>
+<nav class="flex flex-col gap-4 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-bold hand-drawn-border-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col px-margin-page py-stack-lg md:px-12 md:py-12 pb-32 md:pb-12 max-w-5xl mx-auto w-full">
+<!-- Back Navigation (Desktop only, or standard) -->
+<div class="hidden md:flex items-center gap-2 mb-8 text-on-surface-variant hover:text-on-surface cursor-pointer w-max">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-sm text-label-sm">Back to Store</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+<!-- Left Column: Pack Preview -->
+<div class="flex flex-col gap-6">
+<div class="bg-secondary-container p-8 hand-drawn-border solid-shadow-dark relative flex items-center justify-center min-h-[300px] md:min-h-[400px]">
+<!-- Washi tape detail -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-tertiary-container opacity-80 hand-drawn-border-sm rotate-[-2deg]"></div>
+<img alt="A whimsical digital illustration of a bright sunny day with cheerful, minimalist hand-drawn clouds and a large smiling sun. The background is a soft, warm pastel peach and yellow gradient. The overall style mimics a cozy, tactile digital scrapbook with slight imperfections in the line art, conveying a sense of calm and gentle positivity." class="w-full h-full object-cover rounded-md opacity-90 mix-blend-multiply" data-alt="A whimsical digital illustration of a bright sunny day with cheerful, minimalist hand-drawn clouds and a large smiling sun. The background is a soft, warm pastel peach and yellow gradient. The overall style mimics a cozy, tactile digital scrapbook with slight imperfections in the line art, conveying a sense of calm and gentle positivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBinD-Gq0WmdvB9-7rKZf8wngmg51m0Qez1rr-kAoytRDdti5ZvWzk1PyonxMbzX06NbFJ-2ERNSsc58DrAInuFER22SVj4bXHanPqOKOGKB41CHmbAeCYC-8Sns50I6KVNBBMX3Q-g0YG6om8qmZs1vSbjGvREZmnAQMU4E82mUBQB2RXfbJRFJSJx65jlPDrw1g7H_d3rkkf_-TUSPxudkpU0RfA-QfYBtclT2yxIhR1Sov2ZBbhjYtxxEiGzozEsVoCJQx6-Vao-"/>
+</div>
+</div>
+<!-- Right Column: Details & Grid -->
+<div class="flex flex-col gap-8">
+<!-- Header Info -->
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Sunny Days Pack</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Brighten up your diary entries with these cheerful, hand-drawn summer emoticons. Perfect for those perfect beach days or just a sunny disposition.</p>
+</div>
+<!-- Buy Action -->
+<div class="flex items-center gap-6 pb-6 border-b border-outline-variant border-dashed">
+<span class="font-headline-md text-headline-md font-bold text-primary">$1.99</span>
+<button class="bg-primary text-on-primary px-8 py-3 font-label-sm text-label-sm uppercase tracking-wider hand-drawn-border solid-shadow-dark button-press transition-all duration-150">
+            Buy Pack
+          </button>
+</div>
+<!-- Emoticon Grid Preview -->
+<div class="flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Includes 12 Stickers</h3>
+<div class="grid grid-cols-4 gap-4">
+<!-- Icon 1 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">wb_sunny</span>
+</div>
+<!-- Icon 2 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">local_florist</span>
+</div>
+<!-- Icon 3 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">favorite</span>
+</div>
+<!-- Icon 4 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">star</span>
+</div>
+<!-- Icon 5 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">cruelty_free</span>
+</div>
+<!-- Icon 6 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">icecream</span>
+</div>
+<!-- Icon 7 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">sailing</span>
+</div>
+<!-- Icon 8 -->
+<div class="aspect-square bg-surface-container p-2 flex items-center justify-center hand-drawn-border-sm hover:bg-primary-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-surface-tint">water_drop</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Nav Bar (Hidden on Desktop) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface dark:bg-surface px-2 py-3 border-t-2 border-outline-variant md:hidden z-50 rounded-t-xl pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm mt-1">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-container text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+<span class="font-label-sm text-label-sm mt-1">Store</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm mt-1">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Account</span>
+</a>
+</nav>
+</body></html>

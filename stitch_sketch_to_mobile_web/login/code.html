@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Digital Scrapbook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#6b5e28",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#6b5e28",
+                        "on-surface-variant": "#4b463a",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#ffe5ec",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "tertiary-fixed": "#ffd9e4",
+                        "on-secondary-container": "#3b637d",
+                        "surface-dim": "#dbd9d9",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf9f8",
+                        "outline": "#7c7769",
+                        "secondary-container": "#b6dffd",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed-dim": "#d8c685",
+                        "inverse-primary": "#d8c685",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#524612",
+                        "surface": "#fbf9f8",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "tertiary": "#7e5262",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-container": "#efeded",
+                        "secondary": "#3a637c",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "on-primary-fixed": "#221b00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#31101e",
+                        "outline-variant": "#cdc6b6",
+                        "on-error": "#ffffff",
+                        "primary-container": "#ffeba7",
+                        "surface-container-low": "#f5f3f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#786932",
+                        "primary-fixed": "#f5e29f",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary-fixed": "#001e2e",
+                        "inverse-surface": "#303030",
+                        "secondary-fixed": "#c7e7ff",
+                        "surface-variant": "#e4e2e2",
+                        "surface-bright": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#204b63"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-page": "20px",
+                        "gutter": "12px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for organic minimalism */
+        .hand-drawn-border {
+            border: 2px solid theme('colors.outline');
+            border-radius: 8px 12px 6px 10px / 10px 6px 12px 8px;
+        }
+        
+        .hand-drawn-border-input {
+            border-bottom: 2px solid theme('colors.outline');
+        }
+
+        .shadow-block {
+            box-shadow: 4px 4px 0px 0px theme('colors.primary-fixed-dim');
+        }
+
+        .shadow-block:active {
+            box-shadow: 0px 0px 0px 0px theme('colors.primary-fixed-dim');
+            transform: translate(4px, 4px);
+        }
+
+        .bg-grid-pattern {
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(to right, theme('colors.surface-variant') 1px, transparent 1px),
+                linear-gradient(to bottom, theme('colors.surface-variant') 1px, transparent 1px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center justify-center bg-grid-pattern px-margin-page">
+<!-- Login Container -->
+<main class="w-full max-w-md">
+<!-- Header Section -->
+<header class="text-center mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your scrapbook is waiting for you.</p>
+</header>
+<!-- Login Form Card -->
+<div class="bg-surface hand-drawn-border shadow-block p-6 mb-stack-lg transition-transform duration-200">
+<form action="#" class="space-y-stack-md" method="POST">
+<!-- Email/Username Field -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2 ml-1" for="email">Email or Username</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant ml-2">person</span>
+<input class="w-full bg-transparent hand-drawn-border-input pb-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors font-body-lg text-body-lg" id="email" name="email" placeholder="hello@example.com" required="" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2 ml-1" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant ml-2">lock</span>
+<input class="w-full bg-transparent hand-drawn-border-input pb-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary transition-colors font-body-lg text-body-lg" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Forgot Password Link -->
+<div class="flex justify-end mt-2">
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-secondary-container transition-colors" href="#">Forgot Password?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md py-3 hand-drawn-border shadow-block mt-stack-md flex items-center justify-center gap-2" type="submit">
+<span>Log In</span>
+<span class="material-symbols-outlined">login</span>
+</button>
+</form>
+</div>
+<!-- Sign Up Option -->
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                New to the scrapbook? 
+                <a class="font-headline-md text-headline-md text-primary hover:text-on-primary-container transition-colors ml-1" href="#">Sign Up</a>
+</p>
+</div>
+</main>
+</body></html>

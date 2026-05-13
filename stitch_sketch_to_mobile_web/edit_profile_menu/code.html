@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Profile - Calm Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#b6dffd",
+                      "on-surface-variant": "#4b463a",
+                      "on-surface": "#1b1c1c",
+                      "on-error": "#ffffff",
+                      "on-tertiary-container": "#8a5d6d",
+                      "primary": "#6b5e28",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "secondary-fixed": "#c7e7ff",
+                      "outline": "#7c7769",
+                      "tertiary-fixed-dim": "#efb7ca",
+                      "secondary": "#3a637c",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "on-secondary-container": "#3b637d",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#efeded",
+                      "outline-variant": "#cdc6b6",
+                      "surface-container-high": "#eae8e7",
+                      "tertiary": "#7e5262",
+                      "surface": "#fbf9f8",
+                      "on-primary-fixed": "#221b00",
+                      "primary-container": "#ffeba7",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#fbf9f8",
+                      "primary-fixed-dim": "#d8c685",
+                      "surface-container-highest": "#e4e2e2",
+                      "inverse-primary": "#d8c685",
+                      "surface-dim": "#dbd9d9",
+                      "inverse-on-surface": "#f2f0f0",
+                      "surface-tint": "#6b5e28",
+                      "on-primary-container": "#786932",
+                      "background": "#fbf9f8",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f5f3f3",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "on-tertiary-fixed": "#31101e",
+                      "on-background": "#1b1c1c",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#ffe5ec",
+                      "surface-variant": "#e4e2e2",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#303030",
+                      "on-secondary-fixed": "#001e2e",
+                      "on-primary-fixed-variant": "#524612",
+                      "tertiary-fixed": "#ffd9e4",
+                      "primary-fixed": "#f5e29f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "12px",
+                      "stack-sm": "8px",
+                      "stack-lg": "32px",
+                      "margin-page": "20px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Quicksand"
+                      ],
+                      "label-sm": [
+                              "Quicksand"
+                      ],
+                      "body-lg": [
+                              "Quicksand"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #7c7769;
+            border-radius: 12px 10px 14px 11px / 11px 13px 10px 12px;
+        }
+        .hand-drawn-avatar {
+            border: 2px solid #7c7769;
+            border-radius: 50% 48% 52% 49% / 49% 51% 48% 50%;
+        }
+        .hand-drawn-divider {
+            border-bottom: 1.5px solid #cdc6b6;
+            transform: rotate(-0.5deg);
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary font-headline-md text-headline-md flex justify-between items-center px-margin-page py-stack-sm w-full top-0 z-10 sticky">
+<button class="text-primary hover:bg-primary-container p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="text-on-surface">Edit Profile</h1>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</header>
+<!-- Main Content -->
+<main class="px-margin-page py-stack-md flex flex-col gap-stack-lg max-w-md mx-auto">
+<!-- Avatar Section -->
+<section class="flex flex-col items-center gap-stack-sm mt-stack-md">
+<div class="w-24 h-24 bg-surface-container hand-drawn-avatar flex items-center justify-center relative overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A softly lit, pastel-toned portrait of a young person in a casual setting, suitable for a profile avatar in a gentle, journaling app. The image features soft focus, warm lighting, and a calm, approachable mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcHqgafQ5xK7eBn7wRncWP8uHOaF3M7U_DzIgOYc2GueFFeTKp82a2K9lGYbRedHkpJE2iYadzI4GWIlhpo0FW9tpxvu_cAHTv7acPFc7hAWniwnlW8vXVvDYX1LBgord_eVQMirGmdIStYP0LayFsNOfgKPbRB3BhxdTD9-TOIdH80-IJ0YAQY64bO71RQc8My-IKus-Opt3JNBCOnxX6TaXIYTr1cBPAL2R0W4rvqplIT9_6fMtaT5jPKTxvPueEWMTpMD0UPUXh"/>
+</div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1 px-3 border border-outline-variant rounded-full mt-2">
+                Change Avatar
+            </button>
+</section>
+<!-- Profile Items List -->
+<section class="bg-surface-container-lowest hand-drawn-border p-4 flex flex-col gap-4">
+<!-- Item: Nickname -->
+<button class="flex items-center justify-between py-2 group w-full text-left">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Nickname</span>
+<span class="font-body-md text-body-md text-on-surface">cua thúi</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<div class="hand-drawn-divider w-full my-1"></div>
+<!-- Item: Introduction -->
+<button class="flex items-center justify-between py-2 group w-full text-left">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Introduction</span>
+<span class="font-body-md text-body-md text-on-surface-variant truncate max-w-[200px]">You can fill in your interests...</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<div class="hand-drawn-divider w-full my-1"></div>
+<!-- Item: ID -->
+<button class="flex items-center justify-between py-2 group w-full text-left">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">ID</span>
+<span class="font-body-md text-body-md text-on-surface">123456</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">content_copy</span>
+</button>
+<div class="hand-drawn-divider w-full my-1"></div>
+<!-- Item: Email -->
+<button class="flex items-center justify-between py-2 group w-full text-left">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Email</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Not linked</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</section>
+<section class="flex justify-center mt-stack-md">
+<button class="bg-primary-container text-on-primary-container hand-drawn-border px-8 py-3 font-body-lg text-body-lg hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+               Save Changes
+           </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 z-50 md:hidden pb-safe">
+<!-- Inactive: Calendar -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm mt-1">Calendar</span>
+</button>
+<!-- Inactive: Store -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-label-sm text-label-sm mt-1">Store</span>
+</button>
+<!-- Inactive: Diary -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm mt-1">Diary</span>
+</button>
+<!-- Active: Account -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 duration-200 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1">Account</span>
+</button>
+</nav>
+</body></html>

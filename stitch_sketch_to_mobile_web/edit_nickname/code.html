@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Nickname</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#eae8e7",
+                      "on-surface-variant": "#4b463a",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-primary-container": "#786932",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#b6dffd",
+                      "primary-fixed-dim": "#d8c685",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#001e2e",
+                      "secondary-fixed": "#c7e7ff",
+                      "tertiary-fixed": "#ffd9e4",
+                      "on-background": "#1b1c1c",
+                      "surface": "#fbf9f8",
+                      "on-tertiary-container": "#8a5d6d",
+                      "surface-container": "#efeded",
+                      "surface-bright": "#fbf9f8",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#ffe5ec",
+                      "on-tertiary-fixed": "#31101e",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#6b5e28",
+                      "primary": "#6b5e28",
+                      "secondary": "#3a637c",
+                      "on-primary-fixed-variant": "#524612",
+                      "on-primary-fixed": "#221b00",
+                      "on-secondary-container": "#3b637d",
+                      "surface-container-highest": "#e4e2e2",
+                      "outline-variant": "#cdc6b6",
+                      "inverse-primary": "#d8c685",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "surface-container-low": "#f5f3f3",
+                      "on-error-container": "#93000a",
+                      "background": "#fbf9f8",
+                      "tertiary-fixed-dim": "#efb7ca",
+                      "outline": "#7c7769",
+                      "on-surface": "#1b1c1c",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "surface-dim": "#dbd9d9",
+                      "tertiary": "#7e5262",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e4e2e2",
+                      "inverse-surface": "#303030",
+                      "primary-fixed": "#f5e29f",
+                      "primary-container": "#ffeba7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-page": "20px",
+                      "stack-lg": "32px",
+                      "stack-md": "16px",
+                      "gutter": "12px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Quicksand"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Quicksand"
+                      ],
+                      "label-sm": [
+                              "Quicksand"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Notebook Grid Pattern */
+        .bg-notebook-grid {
+            background-color: theme('colors.surface');
+            background-image: 
+                linear-gradient(theme('colors.outline-variant' / 20%) 1px, transparent 1px),
+                linear-gradient(90deg, theme('colors.outline-variant' / 20%) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Hand-drawn organic border for input */
+        .hand-drawn-shape {
+            border-radius: 12px 16px 10px 14px / 14px 10px 16px 12px;
+        }
+        
+        /* Simulating the blinking cursor at the end of text */
+        .fake-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: theme('colors.primary');
+            font-weight: 400;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-notebook-grid text-on-surface font-body-md h-screen w-full overflow-hidden flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header (Task-focused, no global nav shell) -->
+<header class="flex justify-between items-center px-margin-page py-stack-md w-full bg-surface/80 backdrop-blur-sm sticky top-0 z-10 shrink-0">
+<button aria-label="Close" class="p-2 -ml-2 text-on-surface hover:bg-surface-container-high rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-outline-variant">
+<span class="material-symbols-outlined text-[28px] font-bold">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface text-center flex-1">Edit Nickname</h1>
+<button aria-label="Save" class="p-2 -mr-2 text-on-surface hover:bg-surface-container-high rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-outline-variant">
+<span class="material-symbols-outlined text-[28px] font-bold">check</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-lg mx-auto px-margin-page pt-stack-lg flex flex-col items-center">
+<!-- Input Container -->
+<div class="relative w-full">
+<input class="w-full bg-surface-container border-2 border-outline-variant py-4 pl-5 pr-12 font-body-lg text-body-lg text-on-surface focus:outline-none focus:border-outline focus:ring-4 focus:ring-primary-container/40 transition-all caret-primary hand-drawn-shape shadow-[3px_3px_0px_rgba(205,198,182,0.4)] hover:shadow-[1px_1px_0px_rgba(205,198,182,0.4)]" style="box-shadow: 2px 3px 0px var(--tw-colors-outline-variant);" type="text" value="cua thúi"/>
+<!-- Clear Button -->
+<button aria-label="Clear text" class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-outline hover:text-on-surface transition-colors focus:outline-none bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">close</span>
+</button>
+</div>
+</main>
+<!-- Static Mobile Keyboard Mockup -->
+<footer class="w-full bg-surface-container-highest shrink-0 pb-8 pt-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/30">
+<!-- Autocorrect/Suggestion Bar -->
+<div class="flex justify-center items-center h-10 px-4 mb-2 font-body-md text-body-md text-on-surface">
+<div class="flex-1 text-center border-r border-outline-variant/50 text-on-surface-variant">"thúi"</div>
+<div class="flex-1 text-center border-r border-outline-variant/50 text-on-surface-variant"></div>
+<div class="flex-1 text-center text-on-surface-variant"></div>
+</div>
+<!-- Keyboard Rows -->
+<div class="px-2 flex flex-col gap-2 max-w-lg mx-auto">
+<!-- Row 1 -->
+<div class="flex justify-center gap-1.5 w-full">
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">q</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">w</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">e</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">r</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">t</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">y</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">u</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">i</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">o</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">p</button>
+</div>
+<!-- Row 2 -->
+<div class="flex justify-center gap-1.5 w-[90%] mx-auto">
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">a</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">s</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">d</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">f</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">g</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">h</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">j</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">k</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">l</button>
+</div>
+<!-- Row 3 -->
+<div class="flex justify-center gap-1.5 w-full">
+<button class="w-[12%] bg-outline-variant text-on-surface-variant flex items-center justify-center rounded-lg shadow-[0_1px_0_rgba(0,0,0,0.1)] active:bg-outline active:shadow-none active:translate-y-[1px]">
+<span class="material-symbols-outlined text-[20px] font-bold" style="font-variation-settings: 'FILL' 1;">shift</span>
+</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">z</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">x</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">c</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">v</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">b</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">n</button>
+<button class="flex-1 bg-surface text-on-surface font-body-lg py-3 rounded-lg shadow-[0_1px_0_var(--tw-colors-outline-variant)] active:bg-surface-container-low active:shadow-none active:translate-y-[1px]">m</button>
+<button class="w-[12%] bg-outline-variant text-on-surface-variant flex items-center justify-center rounded-lg shadow-[0_1px_0_rgba(0,0,0,0.1)] active:bg-outline active:shadow-none active:translate-y-[1px]">
+<span class="material-symbols-outlined text-[20px] font-bold" style="font-variation-settings: 'FILL' 1;">backspace</span>
+</button>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,3 +1,72 @@
+/* --- Calm Diary Design System --- */
+:root {
+  --surface: #fbf9f8;
+  --on-surface: #1b1c1c;
+  --primary-scrapbook: #6b5e28;
+  --primary-container: #ffeba7;
+  --secondary-container: #b6dffd;
+  --tertiary-container: #ffe5ec;
+  --outline: #7c7769;
+  --outline-variant: #cdc6b6;
+}
+
+.hand-drawn-border {
+  border: 2px solid var(--on-surface);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.pencil-shadow {
+  box-shadow: 4px 4px 0px 0px var(--outline);
+}
+
+.washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 80px;
+  height: 24px;
+  opacity: 0.8;
+  clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%, 5% 50%);
+  z-index: 10;
+}
+
+.organic-card {
+  border-radius: 20px 20px 25px 15px/15px 25px 20px 20px;
+}
+
+.flat-shadow {
+  box-shadow: 4px 4px 0px 0px var(--primary-container);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.flat-shadow:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--primary-container);
+}
+
+.diary-section-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--on-surface);
+  position: relative;
+  display: inline-block;
+}
+
+.diary-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--primary-container);
+  z-index: -1;
+  opacity: 0.5;
+  transform: skewX(-15deg);
+}
+
+/* --- End Design System --- */
+
 * {
   margin: 0;
   padding: 0;
@@ -1360,89 +1429,93 @@ body::-webkit-scrollbar {
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.nav-light-theme .logo,
-.nav-light-theme .nav-menu a,
-.nav-light-theme .nav-action a {
-  color: #333;
+/* --- Mood Selection Styles --- */
+.hand-drawn-circle {
+    border: 2px solid var(--on-surface);
+    border-radius: 48% 52% 49% 51% / 51% 49% 52% 48%;
 }
 
-.nav-light-theme .sub-logo {
-  color: #555;
+.hand-drawn-shadow {
+    box-shadow: 4px 4px 0px 0px var(--primary-container);
 }
 
-.nav-light-theme #hamburger-icon span {
-  background-color: #333;
+.hand-drawn-shadow-hover:hover {
+    box-shadow: 2px 2px 0px 0px var(--primary-container);
+    transform: translate(2px, 2px);
 }
 
-/* Tea Mood Tracker Styling */
-.tea-type-btn {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.blur-overlay {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-.tea-type-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(212, 163, 115, 0.5);
+.mood-ring {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
 }
 
-.tea-type-btn.active-tea {
-    background: #d4a373 !important;
-    border-color: #d4a373 !important;
-    color: #1a1a1a !important;
-    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
+@media (min-width: 768px) {
+    .mood-ring {
+        width: 320px;
+        height: 320px;
+    }
 }
 
-.mood-tracker-container {
-    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.08);
+.mood-item {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin: -30px;
+    transition: transform 0.2s ease;
 }
 
-.mood-slider {
-    -webkit-appearance: none;
-    background: rgba(255, 255, 255, 0.15);
-    height: 8px;
-    border-radius: 10px;
-    outline: none;
+@media (min-width: 768px) {
+    .mood-item {
+        width: 80px;
+        height: 80px;
+        margin: -40px;
+    }
 }
 
-.mood-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 24px;
-    height: 24px;
-    background: #d4a373;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(212, 163, 115, 0.6);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 3px solid #fff;
+.mood-item:hover {
+    transform: scale(1.1);
 }
 
-.diary-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* Positioning for 6 items in a circle */
+.mood-item:nth-child(1) { transform: rotate(270deg) translate(90px) rotate(-270deg); }
+.mood-item:nth-child(2) { transform: rotate(330deg) translate(90px) rotate(-330deg); }
+.mood-item:nth-child(3) { transform: rotate(30deg) translate(90px) rotate(-30deg); }
+.mood-item:nth-child(4) { transform: rotate(90deg) translate(90px) rotate(-90deg); }
+.mood-item:nth-child(5) { transform: rotate(150deg) translate(90px) rotate(-150deg); }
+.mood-item:nth-child(6) { transform: rotate(210deg) translate(90px) rotate(-210deg); }
+
+@media (min-width: 768px) {
+    .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
+    .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
+    .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
+    .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
+    .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
+    .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
 }
 
-.diary-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(212, 163, 115, 0.4);
-    transform: translateY(-5px) scale(1.01);
-}
+.mood-item:nth-child(1):hover { transform: rotate(270deg) translate(90px) rotate(-270deg) scale(1.1); }
+.mood-item:nth-child(2):hover { transform: rotate(330deg) translate(90px) rotate(-330deg) scale(1.1); }
+.mood-item:nth-child(3):hover { transform: rotate(30deg) translate(90px) rotate(-30deg) scale(1.1); }
+.mood-item:nth-child(4):hover { transform: rotate(90deg) translate(90px) rotate(-90deg) scale(1.1); }
+.mood-item:nth-child(5):hover { transform: rotate(150deg) translate(90px) rotate(-150deg) scale(1.1); }
+.mood-item:nth-child(6):hover { transform: rotate(210deg) translate(90px) rotate(-210deg) scale(1.1); }
 
-.mood-score-badge {
-    background: #d4a373;
-    color: #000;
-    padding: 4px 10px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 900;
-    box-shadow: 0 2px 10px rgba(212, 163, 115, 0.3);
+@media (min-width: 768px) {
+    .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
+    .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
+    .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
+    .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
+    .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
+    .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
 }
+/* --- End Mood Selection Styles --- */
 
-.tea-name-label {
-    color: #d4a373;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}

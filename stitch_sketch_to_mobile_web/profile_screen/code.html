@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - Calm Diary</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            surface: {
+              DEFAULT: '#fbf9f8',
+              dim: '#dbd9d9',
+            },
+            ink: {
+              DEFAULT: '#292524',
+              light: '#57534e',
+            },
+            accent: {
+              yellow: '#ffeba7',
+              blue: '#bae6fd',
+              pink: '#fbcfe8',
+              green: '#bbf7d0',
+            }
+          },
+          boxShadow: {
+            'sketch': '3px 3px 0px 0px rgba(41, 37, 36, 1)',
+            'sketch-sm': '2px 2px 0px 0px rgba(41, 37, 36, 1)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Sketchy Elements -->
+<style data-purpose="sketch-utilities">
+    /* Hand-drawn style borders */
+    .sketch-border {
+      border: 2.5px solid #292524;
+      border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    }
+    .sketch-button {
+      transition: all 0.2s ease;
+    }
+    .sketch-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+    
+    /* Slightly irregular avatar border */
+    .avatar-border {
+      border: 2.5px solid #292524;
+      border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+    }
+  </style>
+</head>
+<body class="bg-surface text-ink font-sans antialiased min-h-screen flex justify-center">
+<!-- Mobile Device Constraint Wrapper -->
+<div class="w-full max-w-[400px] bg-surface relative min-h-screen flex flex-col shadow-2xl overflow-hidden" id="app-container">
+<!-- BEGIN: Top AppBar -->
+<header class="flex items-center justify-between px-5 pt-12 pb-4 border-b-[1.5px] border-ink/10 bg-surface z-10 sticky top-0" data-purpose="app-header">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-black/5">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<line x1="19" x2="5" y1="12" y2="12"></line>
+<polyline points="12 19 5 12 12 5"></polyline>
+</svg>
+</button>
+<h1 class="text-xl font-bold flex-1 text-center pr-8">cua thúi</h1>
+</header>
+<!-- END: Top AppBar -->
+<!-- BEGIN: Main Scrollable Content -->
+<main class="flex-1 overflow-y-auto pb-28">
+<!-- BEGIN: User Profile Info -->
+<section class="px-5 pt-6 pb-4 flex items-center" data-purpose="user-stats-header">
+<!-- Avatar -->
+<div class="w-[84px] h-[84px] avatar-border bg-white flex items-center justify-center shrink-0 relative shadow-sketch-sm">
+<svg class="text-ink" fill="none" height="48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="48">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+<line x1="9" x2="9.01" y1="9" y2="9"></line>
+<line x1="15" x2="15.01" y1="9" y2="9"></line>
+</svg>
+</div>
+<!-- Statistics -->
+<div class="flex flex-1 justify-around ml-4 items-center h-full pt-2">
+<div class="flex flex-col items-center">
+<span class="font-bold text-xl leading-none">2.000</span>
+<span class="text-[11px] font-semibold text-ink-light mt-1 uppercase tracking-wider">Nhật kí</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-bold text-xl leading-none">700</span>
+<span class="text-[11px] font-semibold text-ink-light mt-1 uppercase tracking-wider">Good mood</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-bold text-xl leading-none">400</span>
+<span class="text-[11px] font-semibold text-ink-light mt-1 uppercase tracking-wider">Bad mood</span>
+</div>
+</div>
+</section>
+<!-- END: User Profile Info -->
+<!-- BEGIN: User Bio -->
+<section class="px-5 pt-2 pb-4" data-purpose="user-bio">
+<p class="text-[13px] font-bold text-ink mb-1">Since 20.7.2023</p>
+<p class="text-[14px] text-ink-light leading-snug font-medium">
+          You can fill in your interests, mood and wishes, introduce yourself.
+        </p>
+</section>
+<!-- END: User Bio -->
+<!-- BEGIN: Action Buttons -->
+<section class="px-5 py-2 flex gap-3" data-purpose="profile-actions">
+<button class="sketch-button flex-1 py-3 bg-white border-[2.5px] border-ink rounded-xl font-bold text-[15px] shadow-sketch">
+          Edit Profile
+        </button>
+<button class="sketch-button flex-1 py-3 bg-white border-[2.5px] border-ink rounded-xl font-bold text-[15px] shadow-sketch">
+          Viết nhật kí
+        </button>
+</section>
+<!-- END: Action Buttons -->
+<!-- BEGIN: Emotional Trend Graphic -->
+<section class="mt-10 px-5 flex flex-col items-center pb-8" data-purpose="emotional-trend">
+<h2 class="text-[15px] font-bold text-ink-light mb-6 self-start text-center w-full relative">
+<span class="bg-surface px-4 relative z-10">ly cảm xúc thời gian dùng app</span>
+<!-- Decorative line behind text -->
+<div class="absolute w-full h-[1.5px] bg-ink/10 top-1/2 left-0 -translate-y-1/2 z-0"></div>
+</h2>
+<!-- Custom SVG Teacup Illustration -->
+<div class="w-full max-w-[320px] aspect-square relative flex items-center justify-center">
+<svg height="100%" viewbox="0 0 300 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+<!-- Wavy background line inside cup -->
+<path d="M 40 100 Q 150 140, 260 90" fill="none" stroke="#dbd9d9" stroke-dasharray="6 4" stroke-linecap="round" stroke-width="2"></path>
+<!-- Left Foot -->
+<ellipse cx="90" cy="205" fill="white" rx="25" ry="12" stroke="#292524" stroke-width="2.5" transform="rotate(-15 90 205)"></ellipse>
+<!-- Right Foot -->
+<ellipse cx="210" cy="205" fill="white" rx="25" ry="12" stroke="#292524" stroke-width="2.5" transform="rotate(15 210 205)"></ellipse>
+<!-- Teacup Bowl Background Fill -->
+<path d="M 40 70 C 40 220, 260 220, 260 70 Z" fill="white"></path>
+<!-- Handle -->
+<path d="M 250 100 C 310 100, 310 160, 240 170" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M 255 115 C 290 115, 290 145, 245 155" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="1.5"></path>
+<!-- Emoticon 1: Angry/Sad (Pink) -->
+<g transform="translate(95, 175)">
+<circle cx="0" cy="0" fill="#fbcfe8" r="28" stroke="#292524" stroke-width="2.5"></circle>
+<!-- Cross eyes -->
+<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-10" x2="-4" y1="-8" y2="-2"></line>
+<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-4" x2="-10" y1="-8" y2="-2"></line>
+<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="4" x2="10" y1="-8" y2="-2"></line>
+<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="10" x2="4" y1="-8" y2="-2"></line>
+<!-- Frown -->
+<path d="M -8 10 Q 0 4, 8 10" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
+</g>
+<!-- Emoticon 2: Neutral/Sad (Blue) -->
+<g transform="translate(150, 185)">
+<circle cx="0" cy="0" fill="#bae6fd" r="28" stroke="#292524" stroke-width="2.5"></circle>
+<circle cx="-8" cy="-4" fill="#292524" r="2"></circle>
+<circle cx="8" cy="-4" fill="#292524" r="2"></circle>
+<!-- Flat line mouth -->
+<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-6" x2="6" y1="8" y2="8"></line>
+</g>
+<!-- Emoticon 3: Happy (Yellow) -->
+<g transform="translate(205, 160)">
+<circle cx="0" cy="0" fill="#ffeba7" r="28" stroke="#292524" stroke-width="2.5"></circle>
+<!-- Happy eyes -->
+<path d="M -12 -2 Q -8 -8, -4 -2" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
+<path d="M 4 -2 Q 8 -8, 12 -2" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
+<!-- Smile -->
+<path d="M -10 6 Q 0 16, 10 6" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
+</g>
+<!-- Teacup Bowl Outline (Drawn last to cover faces slightly at edges) -->
+<path d="M 40 70 C 40 220, 260 220, 260 70" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="3"></path>
+<!-- Teacup Rim -->
+<ellipse cx="150" cy="70" fill="white" rx="110" ry="12" stroke="#292524" stroke-width="2.5"></ellipse>
+<!-- Inner rim detail -->
+<ellipse cx="150" cy="72" fill="none" opacity="0.3" rx="100" ry="6" stroke="#292524" stroke-width="1"></ellipse>
+<!-- Tea Tag String -->
+<path d="M 120 75 Q 110 100, 95 125" fill="none" stroke="#292524" stroke-dasharray="2 2" stroke-width="1.5"></path>
+<!-- Tea Tag -->
+<g transform="translate(95, 125) rotate(-10)">
+<rect fill="white" height="30" rx="2" stroke="#292524" stroke-width="2" width="24" x="-12" y="0"></rect>
+<!-- Staple -->
+<line stroke="#292524" stroke-width="1.5" x1="-4" x2="4" y1="4" y2="4"></line>
+</g>
+</svg>
+</div>
+</section>
+<!-- END: Emotional Trend Graphic -->
+</main>
+<!-- END: Main Scrollable Content -->
+<!-- BEGIN: Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-[#fbf9f8] border-t-[1.5px] border-ink/10 flex justify-around items-end px-2 pb-6 pt-3 z-50 rounded-t-3xl" data-purpose="bottom-navigation">
+<!-- Calendar -->
+<a class="flex flex-col items-center w-16 gap-1 group" href="#">
+<div class="w-12 h-10 flex items-center justify-center rounded-2xl transition-colors group-hover:bg-black/5">
+<svg class="text-ink" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+<path d="M8 14h.01"></path>
+<path d="M12 14h.01"></path>
+<path d="M16 14h.01"></path>
+<path d="M8 18h.01"></path>
+<path d="M12 18h.01"></path>
+<path d="M16 18h.01"></path>
+</svg>
+</div>
+<span class="text-[11px] font-bold text-ink">Calendar</span>
+</a>
+<!-- Store -->
+<a class="flex flex-col items-center w-16 gap-1 group" href="#">
+<div class="w-12 h-10 flex items-center justify-center rounded-2xl transition-colors group-hover:bg-black/5">
+<svg class="text-ink" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<path d="M16 10a4 4 0 0 1-8 0"></path>
+</svg>
+</div>
+<span class="text-[11px] font-bold text-ink">Store</span>
+</a>
+<!-- Diary -->
+<a class="flex flex-col items-center w-16 gap-1 group" href="#">
+<div class="w-12 h-10 flex items-center justify-center rounded-2xl transition-colors group-hover:bg-black/5">
+<svg class="text-ink" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+<path d="M12 2v10l-3-3-3 3V2"></path>
+</svg>
+</div>
+<span class="text-[11px] font-bold text-ink">Diary</span>
+</a>
+<!-- Account (Active) -->
+<a class="flex flex-col items-center w-16 gap-1" href="#">
+<div class="w-16 h-10 flex items-center justify-center rounded-2xl bg-accent-yellow">
+<svg class="text-ink" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="24">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</div>
+<span class="text-[11px] font-bold text-ink">Account</span>
+</a>
+</nav>
+<!-- END: Bottom Navigation -->
+</div>
+</body></html>

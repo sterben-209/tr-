@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calm Diary - Forgot Password</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#6b5e28",
+                        "on-tertiary-fixed": "#31101e",
+                        "surface-bright": "#fbf9f8",
+                        "tertiary": "#7e5262",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#d8c685",
+                        "surface-container-highest": "#e4e2e2",
+                        "primary-fixed": "#f5e29f",
+                        "on-tertiary-container": "#8a5d6d",
+                        "tertiary-container": "#ffe5ec",
+                        "on-primary": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "surface-variant": "#e4e2e2",
+                        "primary-container": "#ffeba7",
+                        "outline-variant": "#cdc6b6",
+                        "outline": "#7c7769",
+                        "secondary-fixed": "#c7e7ff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary": "#3a637c",
+                        "surface-container": "#efeded",
+                        "primary": "#6b5e28",
+                        "background": "#fbf9f8",
+                        "surface-container-high": "#eae8e7",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "on-background": "#1b1c1c",
+                        "secondary-container": "#b6dffd",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "tertiary-fixed": "#ffd9e4",
+                        "on-secondary-container": "#3b637d",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-fixed-variant": "#524612",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "on-surface-variant": "#4b463a",
+                        "on-primary-container": "#786932",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed": "#001e2e",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#d8c685",
+                        "inverse-surface": "#303030",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "gutter": "12px",
+                        "margin-page": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Quicksand"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #1b1c1c;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .wobbly-card {
+            border: 2px solid #1b1c1c;
+            border-radius: 12px 24px 14px 28px;
+            box-shadow: 4px 4px 0px #1b1c1c;
+        }
+        .wobbly-button {
+            border: 2px solid #1b1c1c;
+            border-radius: 8px 16px 12px 10px;
+            box-shadow: 4px 4px 0px #1b1c1c;
+            transition: all 0.1s ease;
+        }
+        .wobbly-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #1b1c1c;
+        }
+        .sketchy-underline {
+            background-image: linear-gradient(to right, #6b5e28 100%, rgba(255,255,255,0) 0%);
+            background-position: 0 100%;
+            background-repeat: repeat-x;
+            background-size: 4px 2px;
+            padding-bottom: 2px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Header Section (Process Screen - Minimal Nav) -->
+<header class="flex items-center px-margin-page py-stack-md">
+<button class="text-on-surface flex items-center justify-center w-10 h-10 rounded-full">
+<span class="material-symbols-outlined" style="font-size: 24px;">arrow_back</span>
+</button>
+<span class="ml-2 font-headline-md text-on-surface">Back</span>
+</header>
+<main class="flex-1 flex flex-col items-center justify-center px-margin-page py-stack-lg relative overflow-hidden">
+<!-- Whimsical Background Elements -->
+<div class="absolute top-10 left-10 opacity-20 transform -rotate-12">
+<span class="material-symbols-outlined text-primary" style="font-size: 48px;">star</span>
+</div>
+<div class="absolute bottom-20 right-10 opacity-20 transform rotate-45">
+<span class="material-symbols-outlined text-secondary" style="font-size: 40px;">attach_file</span>
+</div>
+<div class="absolute top-1/2 -right-4 opacity-10">
+<span class="material-symbols-outlined text-tertiary" style="font-size: 120px;">cloud</span>
+</div>
+<!-- Main Card Container -->
+<div class="w-full max-w-md bg-surface-container-lowest wobbly-card p-8 flex flex-col items-center text-center relative">
+<!-- Washi Tape Accent -->
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-secondary-container opacity-80 transform rotate-2 hand-drawn-border border-none"></div>
+<!-- Illustration -->
+<div class="mb-stack-md w-32 h-32 flex items-center justify-center bg-primary-container rounded-full hand-drawn-border overflow-hidden">
+<img class="w-20 h-20 object-contain" data-alt="A soft, hand-drawn charcoal illustration of a small mail envelope with tiny heart bubbles floating out of it. The aesthetic is minimalist and whimsical, set against a warm pastel yellow circular background. The linework is deliberately wobbly to mimic a sketchbook feel, emphasizing a sense of gentle care and calm reassurance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY1MBVGRT-S0FH-y0OlJ2xGGsSt3VJraN91JmecUHwismr2jOUmqg1c2Q-XZp4VDtirkZfDw0YnTio3ueZ8qjBrNsyKk03k4ISA1a1kTr-FW2cxSYsBNzr5s32x1O0AJTTtG-bLBEA4viRG7Ieep9PS7oQ7RcrTOSWikEGi10gIvfyUhj3FVww8hnrQr__Ss48aGNqvdbTFDcIaWxOjNkaHhU3e709lS6a4dGRG8OjeByhmto0hplMEaKomcbpZ6LKSKwOzfKEQ0Qd"/>
+</div>
+<!-- Heading -->
+<h1 class="font-headline-lg text-on-surface mb-stack-sm">Forgot Password?</h1>
+<!-- Description -->
+<p class="font-body-md text-on-surface-variant mb-stack-lg px-2">
+                No worries! Enter your email address and we'll send you a link to reset your password.
+            </p>
+<!-- Input Field -->
+<div class="w-full flex flex-col gap-2 mb-stack-lg text-left">
+<label class="font-label-sm text-outline ml-1">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center text-outline">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 bg-surface text-on-surface font-body-md hand-drawn-border focus:ring-0 focus:border-primary border-2 placeholder:text-outline-variant outline-none" placeholder="hello@calmdiary.com" type="email"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-primary text-on-primary font-headline-md wobbly-button mb-stack-md">
+                Send Reset Link
+            </button>
+<!-- Secondary Action -->
+<a class="font-label-sm text-secondary-fixed-variant hover:text-secondary flex items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-sm">keyboard_backspace</span>
+<span class="sketchy-underline">Back to Login</span>
+</a>
+</div>
+<!-- Footnote Illustration -->
+<div class="mt-stack-lg flex gap-4 opacity-30">
+<span class="material-symbols-outlined text-primary" data-weight="fill">favorite</span>
+<span class="material-symbols-outlined text-secondary" data-weight="fill">draw</span>
+<span class="material-symbols-outlined text-tertiary" data-weight="fill">auto_awesome</span>
+</div>
+</main>
+<!-- Footer Space -->
+<footer class="p-margin-page text-center">
+<p class="text-[10px] font-label-sm text-outline-variant uppercase tracking-widest">
+            A safe space for your thoughts • Calm Diary
+        </p>
+</footer>
+</body></html>

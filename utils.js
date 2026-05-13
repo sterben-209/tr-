@@ -55,6 +55,10 @@ function updateCartBadge() {
 
 // Hàm băm mật khẩu SHA-256 (Tạo mã định danh không thể dịch ngược)
 async function hashPassword(password) {
+    if (!window.crypto || !crypto.subtle) {
+        alert("CẢNH BÁO: Trình duyệt của bạn đang chặn tính năng bảo mật (Web Crypto). Hãy chạy ứng dụng trên HTTPS hoặc Localhost để đăng nhập được nhé!");
+        return password; // Fallback (không an toàn nhưng giúp debug)
+    }
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
@@ -62,23 +66,61 @@ async function hashPassword(password) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbx-agc_5kZZWy1VVgVGmkxyZAlWOcha80sP0SY7sMVnqgkhbQTlwRZfnJ67B22AVhI/exec';
+const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxP4MSii24vi0fJwsEHonZRHF4NBIfNwjnWPtbKu8NzyuvT5QRhvmPibNu1r8zCavPU/exec';
+
+// Tự động xác định Base URL cho Link Reset (Local vs Deploy)
+function getBaseURL() {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const deployedURL = 'https://sterben-209.github.io/tr-/';
+    
+    if (isLocal) {
+        let path = window.location.pathname;
+        const sub = 'stitch_sketch_to_mobile_web/';
+        
+        // Nếu đang ở trong thư mục con, lùi về thư mục gốc của project
+        if (path.includes(sub)) {
+            path = path.substring(0, path.indexOf(sub));
+        } else if (path.endsWith('.html')) {
+            path = path.substring(0, path.lastIndexOf('/') + 1);
+        }
+        
+        // Đảm bảo path kết thúc bằng /
+        if (!path.endsWith('/')) path += '/';
+        
+        return window.location.origin + path;
+    }
+    return deployedURL;
+}
 
 // Xử lý gửi dữ liệu khách hàng (Google Apps Script API)
 async function sendToDatabase(data) {
     try {
-        // Sử dụng phương pháp tối ưu cho Google Apps Script
         const response = await fetch(CONFIG_GOOGLE_URL, {
             method: 'POST',
             body: JSON.stringify(data),
-            // Lưu ý: Không dùng headers Content-Type: application/json 
-            // vì Google Script đôi khi coi đó là Preflight request và chặn CORS.
-            // Dùng text/plain hoặc để mặc định thường an toàn hơn cho Google Script.
         });
-        return true;
+        const result = await response.json();
+        return result;
     } catch (e) {
         console.error('Lỗi Database:', e);
-        return false;
+        return { result: "error", message: e.message };
+    }
+}
+
+// Xử lý lấy dữ liệu có phản hồi từ Server
+async function fetchFromDatabase(data) {
+    console.log('--- Database Request ---', data);
+    try {
+        const response = await fetch(CONFIG_GOOGLE_URL, {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        console.log('--- Database Response ---', result);
+        return result;
+    } catch (e) {
+        console.error('Lỗi Fetch Database:', e);
+        return { result: "error", message: e.message };
     }
 }
 // Lắng nghe sự kiện đăng ký cộng đồng ở Footer
@@ -107,3 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Luôn cập nhật badge khi load
     updateCartBadge();
 });
+
+
+
+

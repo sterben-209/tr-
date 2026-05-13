@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calm Diary - Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#1b1c1c",
+                      "surface-dim": "#dbd9d9",
+                      "on-tertiary-container": "#8a5d6d",
+                      "primary-fixed-dim": "#d8c685",
+                      "primary-fixed": "#f5e29f",
+                      "on-surface-variant": "#4b463a",
+                      "on-primary-container": "#786932",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fbf9f8",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-background": "#1b1c1c",
+                      "inverse-primary": "#d8c685",
+                      "on-secondary-fixed": "#001e2e",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#ffd9e4",
+                      "background": "#fbf9f8",
+                      "primary": "#6b5e28",
+                      "secondary-fixed": "#c7e7ff",
+                      "outline-variant": "#cdc6b6",
+                      "surface-container-highest": "#e4e2e2",
+                      "on-tertiary-fixed": "#31101e",
+                      "inverse-surface": "#303030",
+                      "surface-container-high": "#eae8e7",
+                      "outline": "#7c7769",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "on-primary-fixed": "#221b00",
+                      "tertiary": "#7e5262",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#ffe5ec",
+                      "on-secondary-container": "#3b637d",
+                      "surface-tint": "#6b5e28",
+                      "on-tertiary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#efeded",
+                      "surface-variant": "#e4e2e2",
+                      "primary-container": "#ffeba7",
+                      "secondary": "#3a637c",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#f5f3f3",
+                      "surface": "#fbf9f8",
+                      "on-primary-fixed-variant": "#524612",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "secondary-container": "#b6dffd",
+                      "tertiary-fixed-dim": "#efb7ca"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "margin-page": "20px",
+                      "gutter": "12px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Quicksand"],
+                      "body-lg": ["Quicksand"],
+                      "label-sm": ["Quicksand"]
+              },
+              "fontSize": {
+                      "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .hand-drawn-border {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-drawn-border-alt {
+            border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+        }
+        .avatar-shape {
+            border-radius: 50% 40% 60% 40% / 40% 50% 40% 50%;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex h-screen w-full">
+<nav class="hidden md:flex w-72 flex-col border-r-2 border-outline-variant bg-surface py-stack-lg px-margin-page shrink-0 relative z-20">
+<div class="mb-12 px-4">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight relative inline-block">
+                    My Diary
+                    <svg class="absolute -bottom-1 left-0 w-full h-2 text-primary-fixed" preserveaspectratio="none" viewbox="0 0 100 10"><path d="M0 5 Q 50 8 100 2" fill="transparent" stroke="currentColor" stroke-width="3"></path></svg>
+</h1>
+</div>
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-sm text-label-sm border-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-2xl">calendar_month</span>
+                        Calendar
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-sm text-label-sm border-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-2xl">local_mall</span>
+                        Store
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-sm text-label-sm border-2 border-transparent" href="#">
+<span class="material-symbols-outlined text-2xl">book</span>
+                        Diary
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary-container text-on-primary-container font-label-sm text-label-sm border-2 border-outline hand-drawn-border relative group" href="#">
+<div class="absolute inset-0 bg-primary-fixed translate-x-1 translate-y-1 rounded-xl -z-10 border-2 border-outline transition-transform group-active:translate-x-0 group-active:translate-y-0 hand-drawn-border"></div>
+<span class="material-symbols-outlined text-2xl fill-current" style="font-variation-settings: 'FILL' 1;">person</span>
+                        Account
+                    </a>
+</li>
+</ul>
+</nav>
+<main class="flex-1 flex flex-col h-full overflow-y-auto relative">
+<header class="flex justify-between items-center px-margin-page py-stack-sm w-full border-b-2 border-outline-variant bg-surface sticky top-0 z-10">
+<button class="p-2 hover:bg-primary-container rounded-full transition-colors group">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform">mood</span>
+</button>
+<h2 class="font-headline-md text-headline-md text-on-surface">May 2026</h2>
+<button class="p-2 hover:bg-primary-container rounded-full transition-colors group">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform">menu_book</span>
+</button>
+</header>
+<div class="p-margin-page md:p-10 max-w-6xl mx-auto w-full space-y-16 pb-32">
+<section class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 items-start">
+<div class="relative w-48 h-48 shrink-0 mx-auto lg:mx-0 group cursor-pointer">
+<div class="absolute inset-0 bg-secondary-fixed translate-x-3 translate-y-3 border-2 border-outline avatar-shape transition-transform group-hover:translate-x-4 group-hover:translate-y-4 duration-300"></div>
+<div class="absolute inset-0 bg-primary-fixed translate-x-1.5 translate-y-1.5 border-2 border-outline avatar-shape"></div>
+<img alt="Profile Avatar" class="relative w-full h-full object-cover border-2 border-outline avatar-shape z-10" data-alt="A gentle, soft-focus portrait of a young woman with a relaxed, warm expression, serving as a user profile avatar. The image is bathed in bright, soft white lighting that creates a modern light-mode aesthetic, consistent with a calming digital scrapbook. The color palette incorporates subtle pastel tones that echo the primary yellow and gentle whites of the UI, creating a harmonious, reassuring, and perfectly imperfect mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXtPm2iRBEBKtTNuSK7mvb5kkE_4nWd-bq3w9UcjJOYvy28nxhKNCro0k4oWq4oNqiVLWu3dDxT7OAuDOPKFVOTvmMvRGzv1MVuHVbjwgA-snBVqeaarneKwkATTWHSJITYEq7KdxyGUxkugtLely99VEfpCtyZqa42Y6Kj-SxZvwFSZtikEzFU4pZXWU6VWIuShuubRVZ4cbjX-Y_lc5zKB7CeUfOkv_5BVNliJQcFSUI1YprKKPtLaL_Nv93Hswq3zdydEHXi5gO"/>
+<div class="absolute -bottom-2 -right-2 bg-tertiary-container border-2 border-outline rounded-full p-2 z-20 hover:scale-110 transition-transform hand-drawn-border">
+<span class="material-symbols-outlined text-on-tertiary-container">edit</span>
+</div>
+</div>
+<div class="flex flex-col gap-6 pt-2">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Mia Thompson</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-xl">
+                                Collecting quiet moments and daily thoughts. Learning to appreciate the messy, perfectly imperfect beautiful days.
+                            </p>
+<p class="font-label-sm text-label-sm text-outline mt-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">history</span> Joined March 2025
+                            </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-5 mt-2">
+<div class="bg-surface-container-lowest border-2 border-outline p-5 relative group hand-drawn-border">
+<div class="absolute inset-0 bg-primary-container translate-x-1.5 translate-y-1.5 -z-10 border-2 border-outline hand-drawn-border transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+<div class="flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-primary">128</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Diary Entries</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-outline p-5 relative group hand-drawn-border-alt">
+<div class="absolute inset-0 bg-tertiary-container translate-x-1.5 translate-y-1.5 -z-10 border-2 border-outline hand-drawn-border-alt transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+<div class="flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-tertiary flex items-center gap-1"><span class="material-symbols-outlined text-xl">sentiment_satisfied</span> 84</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Good Mood</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border-2 border-outline p-5 relative group hand-drawn-border col-span-2 md:col-span-1">
+<div class="absolute inset-0 bg-surface-variant translate-x-1.5 translate-y-1.5 -z-10 border-2 border-outline hand-drawn-border transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+<div class="flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-outline flex items-center gap-1"><span class="material-symbols-outlined text-xl">sentiment_dissatisfied</span> 12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Bad Mood</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 mt-2">
+<button class="relative bg-primary text-on-primary font-label-sm text-label-sm px-6 py-3 border-2 border-outline hand-drawn-border group active:translate-x-1 active:translate-y-1 transition-all">
+<span class="absolute inset-0 border-2 border-outline hand-drawn-border translate-x-1 translate-y-1 -z-10 bg-on-surface-variant group-active:translate-x-0 group-active:translate-y-0 transition-all"></span>
+                                Edit Profile
+                            </button>
+<button class="relative bg-surface text-on-surface font-label-sm text-label-sm px-6 py-3 border-2 border-outline hand-drawn-border-alt group active:translate-x-1 active:translate-y-1 transition-all">
+<span class="absolute inset-0 border-2 border-outline hand-drawn-border-alt translate-x-1 translate-y-1 -z-10 bg-surface-dim group-active:translate-x-0 group-active:translate-y-0 transition-all"></span>
+                                Write Diary
+                            </button>
+</div>
+</div>
+</section>
+<section class="mt-8 relative">
+<div class="absolute -top-6 left-10 w-24 h-6 bg-tertiary-container border-2 border-outline rotate-[-3deg] z-20 shadow-sm mix-blend-multiply opacity-80"></div>
+<div class="bg-surface-container-lowest border-2 border-outline p-8 md:p-12 relative hand-drawn-border-alt">
+<div class="absolute inset-0 bg-secondary-container/30 translate-x-2 translate-y-2 -z-10 border-2 border-outline hand-drawn-border-alt"></div>
+<div class="mb-8 flex justify-between items-end">
+<h3 class="font-headline-md text-headline-md text-on-surface relative inline-block">
+                                Mood Tracking
+                                <svg class="absolute -bottom-2 left-0 w-full h-2 text-primary" preserveaspectratio="none" viewbox="0 0 100 10"><path d="M0 5 Q 25 0 50 5 T 100 5" fill="transparent" stroke="currentColor" stroke-width="2"></path></svg>
+</h3>
+<span class="font-label-sm text-label-sm text-outline">Last 30 Days</span>
+</div>
+<div class="w-full aspect-[2/1] md:aspect-[3/1] bg-surface border-2 border-outline relative overflow-hidden hand-drawn-border">
+<div class="absolute inset-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&amp;fit=crop&amp;w=1200&amp;q=80')] bg-cover bg-center mix-blend-multiply opacity-20" data-alt="A whimsical, digitally sketched illustration of a large 'mood cup' filling up with vibrant, pastel-colored abstract liquid layers. The visual style embraces organic minimalism, resembling a hand-drawn pencil sketch within a digital scrapbook. The background is a pristine, soft white, allowing the primary yellow, gentle pink, and soft blue tones of the liquid to pop. The overall aesthetic is gentle, calming, and embodies a perfectly imperfect tactile quality."></div>
+<div class="absolute bottom-0 left-0 w-full h-full flex items-end justify-center p-8 z-10">
+<div class="w-64 h-full max-h-64 border-4 border-outline rounded-b-[40%] rounded-t-lg relative overflow-hidden bg-white/50 backdrop-blur-sm shadow-[8px_8px_0px_0px_rgba(205,198,182,0.5)]">
+<div class="absolute bottom-0 left-0 w-full h-[65%] bg-primary-container border-t-4 border-outline flex items-start justify-center pt-4 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiAvPgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxIiAvPgo8L3N2Zz4=')]"></div>
+<span class="material-symbols-outlined text-4xl text-on-primary-container relative z-10">sentiment_satisfied</span>
+</div>
+<div class="absolute bottom-[65%] left-0 w-full h-[20%] bg-tertiary-container border-t-4 border-outline flex items-start justify-center pt-2 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0iIzAwMCIgLz4KPC9zdmc+')]"></div>
+<span class="material-symbols-outlined text-2xl text-on-tertiary-container relative z-10">sentiment_very_satisfied</span>
+</div>
+<div class="absolute bottom-[85%] left-0 w-full h-[5%] bg-secondary-container border-t-4 border-outline flex items-center justify-center relative overflow-hidden">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

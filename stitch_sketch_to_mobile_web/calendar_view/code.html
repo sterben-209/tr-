@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Diary - May 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#6b5e28",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9f8",
+                        "tertiary-container": "#ffe5ec",
+                        "on-primary-fixed": "#221b00",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "tertiary-fixed": "#ffd9e4",
+                        "primary-container": "#ffeba7",
+                        "inverse-on-surface": "#f2f0f0",
+                        "outline-variant": "#cdc6b6",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbf9f8",
+                        "secondary": "#3a637c",
+                        "inverse-surface": "#303030",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container": "#efeded",
+                        "secondary-fixed": "#c7e7ff",
+                        "tertiary": "#7e5262",
+                        "inverse-primary": "#d8c685",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d8c685",
+                        "on-tertiary-fixed": "#31101e",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface-container-high": "#eae8e7",
+                        "surface-bright": "#fbf9f8",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "outline": "#7c7769",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-secondary-fixed": "#001e2e",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "surface-variant": "#e4e2e2",
+                        "secondary-container": "#b6dffd",
+                        "on-primary-fixed-variant": "#524612",
+                        "on-primary-container": "#786932",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "primary": "#6b5e28",
+                        "on-surface-variant": "#4b463a",
+                        "on-secondary-container": "#3b637d",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#f5e29f",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#efb7ca"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-page": "20px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "gutter": "12px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #4b463a;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-drawn-circle {
+            border: 2px solid #4b463a;
+            border-radius: 48% 52% 50% 50% / 51% 49% 51% 49%;
+        }
+        .wobble-shadow {
+            box-shadow: 4px 4px 0px 0px #ffeba7;
+            border: 2px solid #4b463a;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border: 2px solid #4b463a;
+            border-radius: 20px;
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #4b463a;
+            border-bottom: 0;
+            margin-left: -10px;
+            margin-bottom: -10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface fixed top-0 w-full z-40 border-b-2 border-outline-variant dark:border-outline flex justify-between items-center px-margin-page py-stack-sm h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="mood">mood</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface dark:text-on-surface-variant tracking-tight">May 2026</h1>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="menu_book">menu_book</span>
+</div>
+</header>
+<main class="pt-24 px-margin-page">
+<!-- Calendar Grid -->
+<div class="mb-stack-lg">
+<div class="grid grid-cols-7 gap-gutter text-center mb-stack-sm">
+<div class="font-label-sm text-label-sm text-on-surface-variant">S</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">M</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">T</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">W</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">T</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">F</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">S</div>
+</div>
+<div class="grid grid-cols-7 gap-y-6 gap-x-2">
+<!-- Row 1: Starts Friday (May 1 2026) -->
+<div class="h-12 w-12 flex items-center justify-center opacity-0"></div>
+<div class="h-12 w-12 flex items-center justify-center opacity-0"></div>
+<div class="h-12 w-12 flex items-center justify-center opacity-0"></div>
+<div class="h-12 w-12 flex items-center justify-center opacity-0"></div>
+<div class="h-12 w-12 flex items-center justify-center opacity-0"></div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">1</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-primary-container">
+<span class="material-symbols-outlined text-primary" data-icon="mood">mood</span>
+</div>
+<!-- Row 2 -->
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">3</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest border-primary">4</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-secondary-container">
+<span class="material-symbols-outlined text-secondary" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">6</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">7</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-tertiary-container">
+<span class="material-symbols-outlined text-tertiary" data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">9</div>
+<!-- Row 3 -->
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">10</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-primary-container">
+<span class="material-symbols-outlined text-primary" data-icon="mood">mood</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">12</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">13</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-secondary-container">
+<span class="material-symbols-outlined text-secondary" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">15</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">16</div>
+<!-- Row 4 -->
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-tertiary-container">
+<span class="material-symbols-outlined text-tertiary" data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">18</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">19</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-primary-container">
+<span class="material-symbols-outlined text-primary" data-icon="mood">mood</span>
+</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">21</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">22</div>
+<div class="hand-drawn-circle h-12 w-12 flex items-center justify-center font-body-md text-on-surface bg-surface-container-lowest">23</div>
+</div>
+</div>
+<!-- Weekly Stats Bento -->
+<section class="grid grid-cols-2 gap-stack-md mt-10">
+<div class="hand-drawn-border p-4 bg-white wobble-shadow">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Weekly Mood</p>
+<div class="flex items-end gap-1 h-12">
+<div class="w-2 bg-primary-container h-8 rounded-full"></div>
+<div class="w-2 bg-secondary-container h-10 rounded-full"></div>
+<div class="w-2 bg-primary-container h-6 rounded-full"></div>
+<div class="w-2 bg-tertiary-container h-12 rounded-full"></div>
+<div class="w-2 bg-primary-container h-9 rounded-full"></div>
+</div>
+</div>
+<div class="hand-drawn-border p-4 bg-white wobble-shadow flex flex-col justify-center items-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="local_fire_department">local_fire_department</span>
+<p class="font-headline-md text-headline-md">12 Days</p>
+<p class="font-label-sm text-label-sm">Diary Streak</p>
+</div>
+</section>
+<!-- Floating Speech Bubble -->
+<div class="mt-12 flex justify-center">
+<div class="speech-bubble p-4 text-center max-w-[200px] bg-white">
+<p class="font-body-md text-on-surface">How are you feeling today?</p>
+</div>
+</div>
+<div class="mt-4 flex justify-center">
+<img alt="Mascot" class="w-16 h-16" data-alt="A cute hand-drawn minimalist mascot illustration of a little pencil character with simple dot eyes and a tiny smile. The style is kawaii and sketch-like, featuring wobbly charcoal outlines and a soft pastel yellow fill. The background is a clean, off-white paper texture that matches the digital scrapbook aesthetic of the journaling app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA8VjzKwSxBDpNP7y2N6dm-P2pHldlA4ai8XQmhXXasA50uXbupClkIdGjPW8bVIRXbdfsoq1dH5hBRJTe_6f4Nt09jCyATzPV3p1kvOqI2i5LwTLllsXf01mo7w9dfA9RIoRXr64val6j_JmqGZq2O6eSWnb24A8xVdC0JbycrW1Lp2GLAb-TIVBxRYHfDl1I_-2STuaIdvL30CaotZE2CcztuZHUrdG9rIOAZaSjBFPuqG9dkM3FqXuwkx83KmOMkUFexYey7Hc_"/>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface dark:bg-surface px-2 py-3 border-t-2 border-outline-variant z-50 rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-container text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 scale-90 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</button>
+</nav>
+</body></html>

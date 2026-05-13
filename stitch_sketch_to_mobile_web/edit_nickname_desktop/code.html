@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Nickname</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#c7e7ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "on-secondary-fixed": "#001e2e",
+                        "tertiary": "#7e5262",
+                        "outline-variant": "#cdc6b6",
+                        "on-surface-variant": "#4b463a",
+                        "primary-fixed-dim": "#d8c685",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-container": "#ffe5ec",
+                        "on-secondary-container": "#3b637d",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf9f8",
+                        "secondary": "#3a637c",
+                        "on-primary-container": "#786932",
+                        "surface-variant": "#e4e2e2",
+                        "surface-dim": "#dbd9d9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-tertiary-fixed": "#31101e",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "outline": "#7c7769",
+                        "on-primary-fixed-variant": "#524612",
+                        "surface-container": "#efeded",
+                        "surface": "#fbf9f8",
+                        "surface-tint": "#6b5e28",
+                        "surface-container-highest": "#e4e2e2",
+                        "primary": "#6b5e28",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#221b00",
+                        "on-background": "#1b1c1c",
+                        "secondary-container": "#b6dffd",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#d8c685",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "surface-container-high": "#eae8e7",
+                        "primary-container": "#ffeba7",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#f5e29f",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "inverse-surface": "#303030"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "stack-md": "16px",
+                        "margin-page": "20px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #1b1c1c;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-drawn-shadow {
+            box-shadow: 4px 4px 0px 0px #d8c685;
+        }
+        .hand-drawn-shadow-active:active {
+            box-shadow: 0px 0px 0px 0px #d8c685;
+            transform: translate(4px, 4px);
+        }
+        .ruled-line {
+            background-image: linear-gradient(transparent 95%, #cdc6b6 95%);
+            background-size: 100% 2.5rem;
+            line-height: 2.5rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen flex overflow-hidden">
+<!-- Top App Bar (Hidden on md, shown on mobile if needed, but this is a desktop spec. Including for semantic completeness but visually hiding as per layout instructions) -->
+<header class="md:hidden bg-surface text-primary flex justify-between items-center px-margin-page py-stack-sm w-full border-b-2 border-outline-variant docked full-width top-0 z-50">
+<button class="material-symbols-outlined text-primary">mood</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Account</h1>
+<button class="material-symbols-outlined text-primary">menu_book</button>
+</header>
+<!-- Side Navigation (Desktop) -->
+<nav class="hidden md:flex flex-col w-64 bg-surface h-full border-r-2 border-outline-variant py-stack-lg px-margin-page z-40 relative">
+<div class="mb-12 px-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Calm Diary</h2>
+</div>
+<ul class="space-y-4 flex-grow">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+</li>
+<li>
+<!-- Active State -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary-container text-on-primary-container hand-drawn-border" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 border-t-2 border-outline-variant z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm mt-1">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-label-sm text-label-sm mt-1">Store</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm mt-1">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1">Account</span>
+</a>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center bg-background p-margin-page overflow-y-auto relative z-10 pt-24 md:pt-margin-page pb-24 md:pb-margin-page">
+<!-- Decorative Elements behind card -->
+<div class="absolute top-1/4 left-1/4 w-32 h-32 bg-secondary-fixed rounded-full opacity-20 blur-2xl z-0 pointer-events-none"></div>
+<div class="absolute bottom-1/3 right-1/4 w-40 h-40 bg-tertiary-fixed rounded-full opacity-20 blur-2xl z-0 pointer-events-none"></div>
+<!-- Edit Nickname Card -->
+<div class="w-full max-w-md bg-surface-container-lowest hand-drawn-border p-stack-lg relative z-10 flex flex-col items-center gap-stack-lg">
+<!-- Washi Tape Accent -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-tertiary-container border border-outline-variant opacity-80 -rotate-2"></div>
+<div class="text-center w-full">
+<span class="material-symbols-outlined text-4xl text-primary mb-2">face</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Edit Nickname</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">How should we address you in your journal entries?</p>
+</div>
+<!-- Input Area -->
+<div class="w-full relative mt-4">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface ruled-line px-2 pb-1 focus:bg-primary-container focus:bg-opacity-20 transition-colors" placeholder="Enter nickname" type="text" value="Sleepy Bear"/>
+<button aria-label="Clear input" class="absolute right-2 top-2 text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-stack-md w-full mt-4">
+<button class="flex-1 py-3 px-6 bg-surface-container-low text-on-surface font-label-sm text-label-sm hand-drawn-border hover:bg-surface-container transition-colors">
+                    Cancel
+                </button>
+<button class="flex-1 py-3 px-6 bg-primary-container text-on-primary-container font-label-sm text-label-sm hand-drawn-border hand-drawn-shadow hand-drawn-shadow-active transition-all">
+                    Save
+                </button>
+</div>
+</div>
+</main>
+</body></html>

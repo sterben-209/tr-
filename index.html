@@ -19,6 +19,31 @@
     <link rel="stylesheet" href="phone.css" />
     <link rel="stylesheet" href="feedback.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'surface': '#fbf9f8',
+              'on-surface': '#1b1c1c',
+              'primary-scrapbook': '#6b5e28',
+              'primary-container': '#ffeba7',
+              'secondary-container': '#b6dffd',
+              'tertiary-container': '#ffe5ec',
+              'outline': '#7c7769',
+              'outline-variant': '#cdc6b6',
+            },
+            spacing: {
+              'margin-page': '20px',
+              'gutter': '12px',
+              'stack-sm': '8px',
+              'stack-md': '16px',
+              'stack-lg': '32px',
+            }
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- Floating Feedback Button -->

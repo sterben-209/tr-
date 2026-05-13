@@ -1,0 +1,2413 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Calm Diary - Digital Scrapbook</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="../utils.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6b5e28",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ffeba7",
+                        "on-primary-container": "#786932",
+                        "secondary": "#3a637c",
+                        "secondary-container": "#b6dffd",
+                        "on-secondary-container": "#3b637d",
+                        "tertiary": "#7e5262",
+                        "tertiary-container": "#ffe5ec",
+                        "on-tertiary-container": "#8a5d6d",
+                        "background": "#fbf9f8",
+                        "surface": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#4b463a",
+                        "outline": "#7c7769",
+                        "outline-variant": "#cdc6b6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "surface-container-highest": "#e4e2e2",
+                        "primary-fixed": "#f5e29f",
+                        "on-primary-fixed": "#221b00",
+                        "secondary-fixed": "#c7e7ff",
+                        "error": "#ba1a1a",
+                    },
+                    spacing: {
+                        "margin-page": "20px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "12px",
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Quicksand", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- HAND-DRAWN UTILITIES --- */
+        .hand-drawn-border { border: 2px solid #1b1c1c; border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; }
+        .hand-drawn-border-alt { border-radius: 15px 225px 15px 255px/255px 15px 225px 15px; border: 2px solid #1b1c1c; }
+        .hand-drawn-circle { border: 2px solid #1b1c1c; border-radius: 48% 52% 50% 50% / 51% 49% 51% 49%; }
+        .organic-card { border: 2px solid #1b1c1c; border-radius: 20px 20px 25px 15px/15px 25px 20px 20px; }
+        .avatar-shape { border: 2px solid #1b1c1c; border-radius: 50% 40% 60% 40% / 40% 50% 40% 50%; }
+        .pencil-shadow { box-shadow: 4px 4px 0px 0px #7c7769; }
+        .flat-shadow { box-shadow: 4px 4px 0px 0px #ffeba7; transition: transform 0.1s ease, box-shadow 0.1s ease; }
+        .flat-shadow:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px #ffeba7; }
+        
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .ruled-lines { 
+            background-image: repeating-linear-gradient(transparent, transparent 31px, #cdc6b6 31px, #cdc6b6 32px); 
+            background-attachment: local; 
+            line-height: 32px; 
+        }
+        
+        .washi-tape { 
+            position: absolute; 
+            top: -10px; 
+            left: 50%; 
+            transform: translateX(-50%) rotate(-2deg); 
+            width: 80px; 
+            height: 24px; 
+            opacity: 0.8; 
+            clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%, 5% 50%); 
+            z-index: 10;
+        }
+
+        .speech-bubble { 
+            position: relative; 
+            background: #ffffff; 
+            border: 2px solid #1b1c1c; 
+            border-radius: 20px; 
+        }
+        .speech-bubble:after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 50%; 
+            width: 0; 
+            height: 0; 
+            border: 10px solid transparent; 
+            border-top-color: #1b1c1c; 
+            border-bottom: 0; 
+            margin-left: -10px; 
+            margin-bottom: -10px; 
+        }
+
+        .mood-icon-circle { border: 1.5px solid #1b1c1c; border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%; }
+
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, #eae8e7 1px, transparent 1px),
+                linear-gradient(to bottom, #eae8e7 1px, transparent 1px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cdc6b6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c7769; }
+
+        .sidebar-active-pill {
+            position: absolute;
+            inset: 0;
+            background: theme('colors.primary-fixed');
+            transform: translate(4px, 4px);
+            z-index: -1;
+            border: 2px solid #1b1c1c;
+        }
+
+        .sketchy-card {
+            border: 2px solid #4b463a;
+            border-radius: 4px 10px 4px 10px/10px 4px 10px 4px;
+            box-shadow: 6px 6px 0px 0px #6b5e28;
+            transition: all 0.2s ease;
+        }
+        .sketchy-card:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #6b5e28;
+        }
+        .wobble-circle {
+            border: 2.5px solid #4b463a;
+            border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+        }
+
+        /* --- Mood Selection Styles --- */
+        .mood-ring {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .mood-ring {
+                width: 380px;
+                height: 380px;
+            }
+        }
+
+        .mood-item {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            left: 50%;
+            margin: -30px;
+            transition: transform 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .mood-item {
+                width: 80px;
+                height: 80px;
+                margin: -40px;
+            }
+        }
+
+        .mood-item:hover {
+            transform: scale(1.1);
+        }
+
+        /* Positioning for 6 items in a circle */
+        .mood-item:nth-child(1) { transform: rotate(270deg) translate(90px) rotate(-270deg); }
+        .mood-item:nth-child(2) { transform: rotate(330deg) translate(90px) rotate(-330deg); }
+        .mood-item:nth-child(3) { transform: rotate(30deg) translate(90px) rotate(-30deg); }
+        .mood-item:nth-child(4) { transform: rotate(90deg) translate(90px) rotate(-90deg); }
+        .mood-item:nth-child(5) { transform: rotate(150deg) translate(90px) rotate(-150deg); }
+        .mood-item:nth-child(6) { transform: rotate(210deg) translate(90px) rotate(-210deg); }
+
+        @media (min-width: 768px) {
+            .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
+            .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
+            .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
+            .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
+            .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
+            .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
+        }
+
+        .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(90px) rotate(-270deg) scale(1.1); }
+        .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(90px) rotate(-330deg) scale(1.1); }
+        .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(90px) rotate(-30deg) scale(1.1); }
+        .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(90px) rotate(-90deg) scale(1.1); }
+        .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(90px) rotate(-150deg) scale(1.1); }
+        .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(90px) rotate(-210deg) scale(1.1); }
+
+        @media (min-width: 768px) {
+            .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
+            .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
+            .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
+            .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
+            .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
+            .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
+        }
+
+        @keyframes pop-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pop-out {
+            0% { transform: scale(1); opacity: 1; }
+            30% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(0.5); opacity: 0; }
+        }
+
+        .animate-pop {
+            animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .animate-pop-out {
+            animation: pop-out 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col md:flex-row">
+
+    <!-- DESKTOP SIDEBAR -->
+    <aside id="sidebar" class="hidden md:flex flex-col w-72 h-screen bg-surface border-r-2 border-outline-variant py-10 px-6 shrink-0 z-50 sticky top-0 overflow-y-auto">
+        <div class="mb-16 px-4">
+            <h1 class="font-headline text-3xl font-bold tracking-tight relative inline-block">
+                <span class="text-primary-container brightness-50">mood</span> Scrapbook
+            </h1>
+        </div>
+        
+        <nav class="flex flex-col gap-2 flex-grow">
+            <a href="#calendar" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">calendar_month</span>
+                <span class="font-bold text-[10px] uppercase tracking-widest">Calendar</span>
+            </a>
+            <a href="#diary" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">book</span>
+                <span class="font-bold text-[10px] uppercase tracking-widest">Diary</span>
+            </a>
+            <a href="#store" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">local_mall</span>
+                <span class="font-bold text-[10px] uppercase tracking-widest">Store</span>
+            </a>
+            <a href="#profile" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
+                <span class="font-bold text-[10px] uppercase tracking-widest">Account</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto space-y-6">
+            <div class="p-4 bg-tertiary-container rounded-xl border-2 border-on-tertiary-container border-dashed md:block hidden">
+                <p class="font-bold text-[9px] uppercase tracking-widest text-on-tertiary-container mb-2">DAILY QUOTE</p>
+                <p class="font-medium text-xs italic text-on-tertiary-container">"Every small step is a sketch in the journey of life."</p>
+            </div>
+            <a href="#compose" onclick="toggleMoodPicker()" class="w-full flex items-center justify-center gap-2 bg-primary-container text-on-primary-container py-4 rounded-xl hand-drawn-border pencil-shadow font-bold active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+                <span class="material-symbols-outlined">edit_note</span><span>WRITE NOW</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 h-screen overflow-y-auto relative pb-24 md:pb-0 bg-surface-bright">
+        <!-- MOBILE HEADER -->
+        <header class="md:hidden flex justify-between items-center px-6 py-4 bg-surface border-b-2 border-outline-variant sticky top-0 z-40">
+            <div class="flex items-center gap-2">
+                <button id="mobile-back" onclick="goBack()" class="hidden mr-1 p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                <h2 id="mobile-title" class="font-headline text-xl font-bold tracking-tight">Store</h2>
+            </div>
+            <div class="flex items-center gap-1">
+                <a href="../index.html" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">home</span></a>
+                <button class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">menu_book</span></button>
+            </div>
+        </header>
+
+        <div id="pages-container" class="p-6 md:p-14 max-w-7xl mx-auto w-full">
+            
+            <!-- 1. CALENDAR -->
+            <section id="calendar" class="page-section active fade-in">
+                <div class="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h2 class="font-headline text-4xl font-bold mb-2">May 2026</h2>
+                        <p class="text-on-surface-variant font-medium italic nickname-greeting">Hello, friend!</p>
+                    </div>
+                    <div class="flex gap-2">
+                         <div id="streak-header-badge" class="bg-white border-2 border-on-surface px-4 py-2 hand-drawn-border text-xs font-bold uppercase tracking-widest pencil-shadow">Streak: 0 Days</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
+                    <!-- Left Column: Main Calendar -->
+                    <div class="space-y-12">
+                        <div class="bg-surface-container-lowest hand-drawn-border p-6 md:p-12 pencil-shadow relative">
+                            <div class="grid grid-cols-7 gap-gutter text-center mb-10">
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] text-error opacity-70">Sun</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] opacity-70">Mon</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] opacity-70">Tue</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] opacity-70">Wed</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] opacity-70">Thu</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] opacity-70">Fri</div>
+                                <div class="font-black text-[10px] uppercase tracking-[0.2em] text-primary opacity-70">Sat</div>
+                            </div>
+                            <div id="calendar-grid" class="grid grid-cols-7 gap-y-6 gap-x-2 md:gap-x-6">
+                                <!-- JS injects days -->
+                            </div>
+                        </div>
+
+                        <div class="mt-16 flex flex-col md:flex-row items-center justify-center gap-10">
+                             <div class="speech-bubble p-6 text-center max-w-[280px] pencil-shadow">
+                                <p class="font-bold text-sm leading-relaxed">Collecting quiet moments and daily thoughts. Every day is a gift!</p>
+                            </div>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA8VjzKwSxBDpNP7y2N6dm-P2pHldlA4ai8XQmhXXasA50uXbupClkIdGjPW8bVIRXbdfsoq1dH5hBRJTe_6f4Nt09jCyATzPV3p1kvOqI2i5LwTLllsXf01mo7w9dfA9RIoRXr64val6j_JmqGZq2O6eSWnb24A8xVdC0JbycrW1Lp2GLAb-TIVBxRYHfDl1I_-2STuaIdvL30CaotZE2CcztuZHUrdG9rIOAZaSjBFPuqG9dkM3FqXuwkx83KmOMkUFexYey7Hc_" class="w-24 h-24 opacity-60">
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Weekly Mood Tracker -->
+                    <div class="bg-white hand-drawn-border p-8 pencil-shadow relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <span class="material-symbols-outlined text-4xl">insights</span>
+                        </div>
+                        
+                        <div class="flex flex-col gap-6 mb-8">
+                            <h3 class="font-headline text-xl font-bold flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">analytics</span>
+                                Mood Insight
+                            </h3>
+
+                            <!-- View Switcher -->
+                            <div class="flex bg-surface-container-high rounded-full p-1 hand-drawn-border-alt scale-90 origin-left w-max">
+                                <button onclick="setMoodView('weekly')" id="toggle-weekly" class="py-1 px-4 rounded-full text-[9px] font-black uppercase tracking-widest transition-all bg-primary text-white">Weekly</button>
+                                <button onclick="setMoodView('monthly')" id="toggle-monthly" class="py-1 px-4 rounded-full text-[9px] font-black uppercase tracking-widest transition-all text-on-surface-variant">Monthly</button>
+                            </div>
+                        </div>
+                        
+                        <div id="mood-tracker-container-wrapper">
+                            <div id="weekly-mood-container" class="grid grid-cols-7 gap-2 h-40 items-end border-b-2 border-outline-variant pb-2">
+                                <!-- Bars injected by JS -->
+                            </div>
+                            <div id="mood-labels-grid" class="grid grid-cols-7 gap-2 mt-4 text-center">
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">M</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">T</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">W</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">T</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">F</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40">S</div>
+                                <div class="text-[8px] font-bold uppercase tracking-widest opacity-40 text-error">S</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 flex flex-col gap-3 text-[9px] font-bold uppercase tracking-widest">
+                            <div class="flex items-center gap-2"><div class="w-2 h-2 bg-primary-container hand-drawn-border"></div><span>Positive Vibes</span></div>
+                            <div class="flex items-center gap-2"><div class="w-2 h-2 bg-secondary-container hand-drawn-border"></div><span>Neutral Days</span></div>
+                            <div class="flex items-center gap-2"><div class="w-2 h-2 bg-surface-container-highest hand-drawn-border"></div><span>Low Energy</span></div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-dashed border-outline-variant">
+                            <p class="text-[10px] italic text-on-surface-variant leading-relaxed">
+                                "Your mood is like the weather, changing but always beautiful."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. DIARY LIST -->
+            <section id="diary" class="page-section fade-in">
+                <div class="mb-14">
+                    <h2 class="font-headline text-4xl font-bold mb-3">Your reflections</h2>
+                    <p class="text-on-surface-variant font-medium leading-relaxed">Take a deep breath. Here are your past thoughts.</p>
+                </div>
+                
+                <div id="diary-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Dynamic entries -->
+                </div>
+                
+                <div id="empty-diary-msg" class="hidden flex flex-col items-center justify-center py-32 opacity-20">
+                    <span class="material-symbols-outlined text-[120px] mb-6">book_5</span>
+                    <p class="font-bold text-2xl uppercase tracking-[0.4em]">Empty Pages</p>
+                </div>
+            </section>
+
+            <!-- 3. COMPOSE -->
+            <section id="compose" class="page-section fade-in">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex flex-col items-center mb-14">
+                        <div id="mood-btn" onclick="toggleMoodPicker()" class="w-28 h-28 bg-primary-container hand-drawn-circle flex items-center justify-center pencil-shadow cursor-pointer hover:scale-105 transition-all relative">
+                            <span id="current-mood-icon" class="material-symbols-outlined text-6xl text-on-primary-container">sentiment_satisfied</span>
+                            <div class="absolute -bottom-4 bg-tertiary-container border-2 border-on-surface px-3 py-1 rotate-3 text-[10px] font-black uppercase tracking-widest">Mood</div>
+                        </div>
+                        <h2 class="font-headline text-3xl font-bold mt-10">How's your day?</h2>
+                    </div>
+
+                    <div class="relative bg-white hand-drawn-border p-10 md:p-16 min-h-[600px] pencil-shadow">
+                        <div class="washi-tape bg-secondary-container"></div>
+                        
+                        <!-- Rich Text Editor Toolbar -->
+                        <div class="sticky top-0 bg-white/90 backdrop-blur-sm z-30 mb-8 flex items-center gap-1 border-b-2 border-dashed border-outline-variant pb-6 overflow-x-auto no-scrollbar whitespace-nowrap toolbar-editor">
+                            <button id="btn-bold" onclick="formatDoc('bold')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Bold"><span class="material-symbols-outlined">format_bold</span></button>
+                            <button id="btn-italic" onclick="formatDoc('italic')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Italic"><span class="material-symbols-outlined">format_italic</span></button>
+                            <button id="btn-underline" onclick="formatDoc('underline')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Underline"><span class="material-symbols-outlined">format_underlined</span></button>
+                            
+                            <div class="shrink-0 w-[1px] h-6 bg-outline-variant mx-1"></div>
+                            
+                            <select onchange="formatDoc('fontName', this.value); this.selectedIndex=0;" class="shrink-0 h-10 bg-transparent border-none text-xs font-bold focus:ring-0 cursor-pointer">
+                                <option value="" selected disabled>Font</option>
+                                <option value="Quicksand">Quicksand</option>
+                                <option value="Plus Jakarta Sans">Jakarta</option>
+                                <option value="Courier New">Monospace</option>
+                                <option value="Georgia">Serif</option>
+                            </select>
+
+                            <div class="shrink-0 w-[1px] h-6 bg-outline-variant mx-1"></div>
+                            
+                            <select onchange="formatDoc('fontSize', this.value); this.selectedIndex=0;" class="shrink-0 h-10 bg-transparent border-none text-xs font-bold focus:ring-0 cursor-pointer">
+                                <option value="" selected disabled>Size</option>
+                                <option value="3">Small</option>
+                                <option value="4">Normal</option>
+                                <option value="5">Large</option>
+                                <option value="6">Huge</option>
+                            </select>
+
+                            <div class="shrink-0 w-[1px] h-6 bg-outline-variant mx-1"></div>
+                            
+                            <button id="btn-justifyLeft" onclick="formatDoc('justifyLeft')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Left"><span class="material-symbols-outlined">format_align_left</span></button>
+                            <button id="btn-justifyCenter" onclick="formatDoc('justifyCenter')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Center"><span class="material-symbols-outlined">format_align_center</span></button>
+                            <button id="btn-justifyRight" onclick="formatDoc('justifyRight')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Right"><span class="material-symbols-outlined">format_align_right</span></button>
+                            
+                            <div class="shrink-0 w-[1px] h-6 bg-outline-variant mx-1"></div>
+                            
+                            <button id="btn-insertUnorderedList" onclick="formatDoc('insertUnorderedList')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Bullet List"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+                            <button id="btn-insertOrderedList" onclick="formatDoc('insertOrderedList')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Numbered List"><span class="material-symbols-outlined">format_list_numbered</span></button>
+                            
+                            <div class="shrink-0 w-[1px] h-6 bg-outline-variant mx-1"></div>
+                            
+                            <button onclick="triggerColorPicker('diary-color-picker')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors relative" title="Text Color">
+                                <span class="material-symbols-outlined">palette</span>
+                                <div id="color-preview" class="absolute bottom-1 w-4 h-1 rounded-full bg-on-surface-variant"></div>
+                            </button>
+                            <input type="color" id="diary-color-picker" class="absolute invisible w-0 h-0" oninput="applyTextColor(this.value, 'color-preview', 'diary-content')">
+                            <button onclick="triggerImageUpload('diary-image-upload')" class="shrink-0 w-10 h-10 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Insert Image"><span class="material-symbols-outlined">add_photo_alternate</span></button>
+                            <input type="file" id="diary-image-upload" class="hidden" accept="image/*" onchange="insertDiaryImage(this, 'diary-content')">
+                        </div>
+
+                        <div id="diary-content" class="ruled-lines min-h-[450px] outline-none text-2xl text-on-surface-variant font-medium leading-[32px]" contenteditable="true">
+                            Dear Diary, today was...
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex flex-wrap justify-between items-center gap-8 bg-surface-container-high hand-drawn-border p-6 pencil-shadow">
+                        <div class="flex gap-4 opacity-40">
+                             <span class="text-[10px] font-bold uppercase tracking-widest px-4">Editor Active</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <button onclick="goBack()" class="font-bold text-sm uppercase tracking-widest text-outline hover:text-on-surface">Discard</button>
+                            <button id="save-entry-btn" onclick="saveDiaryEntry()" class="bg-primary text-on-primary px-12 py-4 rounded-2xl hand-drawn-border pencil-shadow font-bold active:translate-x-1 active:translate-y-1 active:shadow-none transition-all uppercase tracking-[0.2em] text-sm">
+                                Save Page
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3.5 READ & APPEND -->
+            <section id="view-entry" class="page-section fade-in">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <button onclick="window.location.hash='#diary'" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                            <h2 class="text-xl font-bold font-headline uppercase tracking-widest">Read & Reflect</h2>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center mb-14">
+                        <div id="view-mood-display" onclick="if(this.classList.contains('cursor-pointer')) toggleMoodPicker()" class="w-28 h-28 bg-primary-container hand-drawn-circle flex items-center justify-center pencil-shadow relative transition-transform hover:scale-105">
+                            <span id="view-mood-icon" class="text-6xl">😊</span>
+                            <div id="view-mood-badge" class="absolute -bottom-4 bg-tertiary-container border-2 border-on-surface px-3 py-1 rotate-3 text-[10px] font-black uppercase tracking-widest">Feeling Good</div>
+                        </div>
+                        <h2 id="view-date-display" class="font-headline text-3xl font-bold mt-10">May 12, 2026</h2>
+                        <div id="edit-status-badge" class="mt-4 px-4 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-widest rounded-full border border-outline-variant">
+                            Read Only
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white hand-drawn-border p-10 md:p-16 min-h-[400px] pencil-shadow mb-8">
+                        <div class="washi-tape bg-secondary-container"></div>
+                        
+                        <!-- Toolbar (Always shown, targeting whichever editor is active) -->
+                        <div class="bg-white/90 backdrop-blur-sm z-30 mb-6 flex flex-wrap items-center gap-1 border-b border-dashed border-outline-variant pb-6 overflow-x-auto no-scrollbar whitespace-nowrap toolbar-editor">
+                            <button id="vbtn-bold" onclick="formatDoc('bold', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Bold"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+                            <button id="vbtn-italic" onclick="formatDoc('italic', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Italic"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+                            <button id="vbtn-underline" onclick="formatDoc('underline', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Underline"><span class="material-symbols-outlined text-sm">format_underlined</span></button>
+                            
+                            <div class="shrink-0 w-[1px] h-4 bg-outline-variant mx-1"></div>
+                            
+                            <select onchange="formatDoc('fontName', this.value, currentActiveEditor); this.selectedIndex=0;" class="shrink-0 h-8 bg-transparent border-none text-[10px] font-bold focus:ring-0 cursor-pointer">
+                                <option value="" selected disabled>Font</option>
+                                <option value="Quicksand">Quicksand</option>
+                                <option value="Plus Jakarta Sans">Jakarta</option>
+                                <option value="Courier New">Mono</option>
+                                <option value="Georgia">Serif</option>
+                            </select>
+
+                            <div class="shrink-0 w-[1px] h-4 bg-outline-variant mx-1"></div>
+                            
+                            <select onchange="formatDoc('fontSize', this.value, currentActiveEditor); this.selectedIndex=0;" class="shrink-0 h-8 bg-transparent border-none text-[10px] font-bold focus:ring-0 cursor-pointer">
+                                <option value="" selected disabled>Size</option>
+                                <option value="3">S</option>
+                                <option value="4">M</option>
+                                <option value="5">L</option>
+                                <option value="6">XL</option>
+                            </select>
+
+                            <div class="shrink-0 w-[1px] h-4 bg-outline-variant mx-1"></div>
+                            
+                            <button id="vbtn-justifyLeft" onclick="formatDoc('justifyLeft', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Left"><span class="material-symbols-outlined text-sm">format_align_left</span></button>
+                            <button id="vbtn-justifyCenter" onclick="formatDoc('justifyCenter', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Center"><span class="material-symbols-outlined text-sm">format_align_center</span></button>
+                            <button id="vbtn-justifyRight" onclick="formatDoc('justifyRight', null, currentActiveEditor)" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Align Right"><span class="material-symbols-outlined text-sm">format_align_right</span></button>
+                            
+                            <div class="shrink-0 w-[1px] h-4 bg-outline-variant mx-1"></div>
+                            
+                            <button onclick="triggerColorPicker('view-color-picker')" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors relative" title="Text Color">
+                                <span class="material-symbols-outlined text-sm">palette</span>
+                                <div id="view-color-preview" class="absolute bottom-1 w-3 h-0.5 rounded-full bg-on-surface-variant"></div>
+                            </button>
+                            <input type="color" id="view-color-picker" class="absolute invisible w-0 h-0" oninput="applyTextColor(this.value, 'view-color-preview', currentActiveEditor)">
+                            <button onclick="triggerImageUpload('view-image-upload')" class="shrink-0 w-8 h-8 flex items-center justify-center hover:bg-primary-container rounded-lg transition-colors" title="Insert Image"><span class="material-symbols-outlined text-sm">add_photo_alternate</span></button>
+                            <input type="file" id="view-image-upload" class="hidden" accept="image/*" onchange="insertDiaryImage(this, currentActiveEditor)">
+                        </div>
+
+                        <div id="view-old-content" class="text-xl text-on-surface-variant font-medium leading-relaxed mb-8 outline-none" contenteditable="false">
+                            <!-- Old content -->
+                        </div>
+                        
+                        <div id="append-section">
+                            <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-4">Add more thoughts...</div>
+                            <div id="append-content" class="ruled-lines min-h-[200px] outline-none text-2xl text-on-surface-variant font-medium leading-[32px]" contenteditable="true">
+                                ...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-6 mb-20">
+                        <button onclick="window.location.hash='#diary'" class="font-bold text-sm uppercase tracking-widest text-outline hover:text-on-surface">Close</button>
+                        <button id="view-save-btn" onclick="handleViewSave()" class="bg-primary text-on-primary px-12 py-4 rounded-2xl hand-drawn-border pencil-shadow font-bold active:translate-x-1 active:translate-y-1 active:shadow-none transition-all uppercase tracking-[0.2em] text-sm">
+                            Add to Page
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. ACCOUNT -->
+            <section id="profile" class="page-section fade-in">
+                <div class="max-w-4xl mx-auto space-y-20 pb-20">
+                    <header class="flex justify-between items-end border-b-2 border-outline-variant pb-8">
+                        <div>
+                            <h2 class="text-4xl font-bold font-headline nickname-display">User Name</h2>
+                            <p class="text-on-surface-variant mt-2 font-medium">Collecting quiet moments since 2026</p>
+                        </div>
+                        <button onclick="logout()" class="p-3 hover:bg-error/10 rounded-full transition-colors text-error"><span class="material-symbols-outlined text-3xl">power_settings_new</span></button>
+                    </header>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-14 items-start">
+                        <div class="relative w-56 h-56 mx-auto lg:mx-0">
+                            <div class="absolute inset-0 bg-secondary-fixed translate-x-4 translate-y-4 border-2 border-outline avatar-shape"></div>
+                            <div class="absolute inset-0 bg-primary-fixed translate-x-2 translate-y-2 border-2 border-outline avatar-shape"></div>
+                            <img id="profile-img" src="" class="relative w-full h-full object-cover border-2 border-outline avatar-shape z-10 bg-white">
+                            <button onclick="window.location.hash='#edit-profile'" class="absolute -bottom-2 -right-2 bg-tertiary-container border-2 border-on-surface rounded-full p-3 z-20 hover:scale-110 transition-transform pencil-shadow"><span class="material-symbols-outlined text-on-tertiary-container">edit</span></button>
+                        </div>
+
+                        <div class="space-y-10">
+                            <div class="bg-white p-10 hand-drawn-border-alt pencil-shadow relative">
+                                <div class="washi-tape bg-primary-container !left-12"></div>
+                                <p id="profile-intro" class="text-xl text-on-surface-variant italic font-medium leading-relaxed">"Hành trình tìm lại sự bình yên trong từng chi tiết nhỏ."</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                                <div class="bg-surface-container-lowest border-2 border-outline p-6 relative hand-drawn-border text-center">
+                                    <div class="absolute inset-0 bg-primary-container translate-x-2 translate-y-2 -z-10 border-2 border-outline hand-drawn-border"></div>
+                                    <span id="stat-entries" class="font-headline text-3xl font-bold text-primary">0</span>
+                                    <p class="font-bold text-[9px] uppercase tracking-widest mt-2 opacity-50">Total Entries</p>
+                                </div>
+                                <div class="bg-surface-container-lowest border-2 border-outline p-6 relative hand-drawn-border-alt text-center">
+                                    <div class="absolute inset-0 bg-secondary-container translate-x-2 translate-y-2 -z-10 border-2 border-outline hand-drawn-border-alt"></div>
+                                    <span id="stat-good-moods" class="font-headline text-3xl font-bold text-secondary">0</span>
+                                    <p class="font-bold text-[9px] uppercase tracking-widest mt-2 opacity-50">Good Moods</p>
+                                </div>
+                                <div class="bg-surface-container-lowest border-2 border-outline p-6 relative hand-drawn-border text-center">
+                                    <div class="absolute inset-0 bg-tertiary-container translate-x-2 translate-y-2 -z-10 border-2 border-outline hand-drawn-border"></div>
+                                    <span class="font-headline text-3xl font-bold text-tertiary">12</span>
+                                    <p class="font-bold text-[9px] uppercase tracking-widest mt-2 opacity-50">Day Streak</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mood Cup Visualization -->
+                    <div class="bg-white hand-drawn-border p-12 pencil-shadow relative overflow-hidden text-center">
+                        <div class="absolute inset-0 opacity-5 bg-grid-pattern"></div>
+                        <h3 class="font-bold text-xs uppercase tracking-[0.3em] text-outline mb-12 relative z-10">Your Emotional Cup</h3>
+                        
+                        <div class="max-w-[400px] mx-auto relative z-10">
+                             <svg viewBox="0 0 300 250" class="w-full drop-shadow-sm">
+                                <path d="M 40 70 C 40 220, 260 220, 260 70 Z" fill="white" stroke="#1b1c1c" stroke-width="3"></path>
+                                <ellipse cx="150" cy="70" rx="110" ry="12" fill="white" stroke="#1b1c1c" stroke-width="2.5"></ellipse>
+                                <path d="M 40 120 Q 150 150, 260 110" fill="none" stroke="#dbd9d9" stroke-dasharray="6 4" stroke-width="2"></path>
+                                <circle cx="150" cy="150" r="40" fill="#ffeba7" stroke="#1b1c1c" stroke-width="2"></circle>
+                                <path d="M 250 100 C 310 100, 310 160, 240 170" fill="none" stroke="#1b1c1c" stroke-width="2.5"></path>
+                                <line x1="120" y1="75" x2="95" y2="125" stroke="#1b1c1c" stroke-dasharray="2 2"></line>
+                                <rect x="83" y="125" width="24" height="30" fill="white" stroke="#1b1c1c" stroke-width="2" rx="2"></rect>
+                            </svg>
+                        </div>
+                        <p class="text-[10px] font-bold opacity-30 mt-8 uppercase tracking-widest">Perfectly Imperfect Progress</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. SETTINGS / EDIT -->
+            <section id="edit-profile" class="page-section fade-in">
+                <div class="max-w-md mx-auto space-y-12">
+                    <div class="flex items-center justify-center relative">
+                        <button onclick="window.location.hash='#profile'" class="absolute left-0 p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                        <h2 class="text-2xl font-bold font-headline text-center uppercase tracking-[0.4em]">Settings</h2>
+                    </div>
+                    
+                    <div class="flex flex-col items-center gap-6">
+                        <div class="w-36 h-36 avatar-shape bg-white border-2 border-outline overflow-hidden pencil-shadow">
+                            <img id="edit-avatar-preview" src="" class="w-full h-full object-cover">
+                        </div>
+                        <button onclick="window.location.hash='#change-avatar'" class="text-[10px] font-bold py-3 px-8 border-2 border-outline rounded-full uppercase tracking-widest hover:bg-primary-container transition-all">Change Avatar</button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white hand-drawn-border p-8 pencil-shadow cursor-pointer hover:bg-surface-container-high transition-all" onclick="window.location.hash='#edit-nickname'">
+                            <span class="text-[10px] font-bold opacity-40 uppercase tracking-widest">Your Nickname</span>
+                            <div class="flex justify-between items-center mt-2">
+                                <span id="edit-nickname-display" class="font-bold text-2xl">Name</span>
+                                <span class="material-symbols-outlined opacity-30">chevron_right</span>
+                            </div>
+                        </div>
+                        <div class="bg-white hand-drawn-border p-8 pencil-shadow cursor-pointer hover:bg-surface-container-high transition-all" onclick="window.location.hash='#edit-intro'">
+                            <span class="text-[10px] font-bold opacity-40 uppercase tracking-widest">About Me</span>
+                            <div class="flex justify-between items-center mt-2">
+                                <span id="edit-intro-display" class="text-sm italic opacity-60 truncate max-w-[220px]">Intro...</span>
+                                <span class="material-symbols-outlined opacity-30">chevron_right</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5.5 CHANGE AVATAR -->
+            <section id="change-avatar" class="page-section fade-in">
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <button onclick="goBack()" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                            <h2 class="text-2xl font-bold font-headline uppercase tracking-widest text-primary">Change Avatar</h2>
+                        </div>
+                        <div class="md:flex items-center gap-2 hidden opacity-60">
+                            <span class="material-symbols-outlined text-primary">mood</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">Editing Profile</span>
+                        </div>
+                    </div>
+
+                    <!-- Hero Selection Area -->
+                    <div class="flex flex-col lg:flex-row items-center gap-12 mb-12">
+                        <div class="relative group">
+                            <div id="avatar-editor-container" class="w-48 h-48 bg-white wobble-circle overflow-hidden p-0 flex items-center justify-center relative cursor-move">
+                                <img id="change-avatar-current" alt="Current Profile" class="absolute w-full h-full object-cover pointer-events-none select-none transition-transform duration-75" src="" style="transform: scale(1) translate(0px, 0px);">
+                                <!-- Overlay to handle drag events -->
+                                <div id="avatar-drag-overlay" class="absolute inset-0 z-10"></div>
+                            </div>
+                            
+                            <!-- Scale Control -->
+                            <div id="avatar-zoom-controls" class="mt-6 flex flex-col items-center gap-3 opacity-0 transition-opacity">
+                                <div class="flex items-center gap-4 w-full">
+                                    <span class="material-symbols-outlined text-outline text-sm">zoom_out</span>
+                                    <input type="range" id="avatar-zoom-slider" min="1" max="3" step="0.01" value="1" class="flex-1 accent-primary">
+                                    <span class="material-symbols-outlined text-outline text-sm">zoom_in</span>
+                                </div>
+                                <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-outline">Drag to position • Scroll to zoom</p>
+                            </div>
+
+                            <p class="text-center mt-2 font-bold text-[10px] uppercase tracking-widest text-outline">Preview</p>
+                        </div>
+                        <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-gutter w-full">
+                            <button id="drop-zone" onclick="triggerImageUpload('avatar-file-upload')" class="sketchy-card bg-primary-container p-8 flex flex-col items-center justify-center text-center group transition-colors">
+                                <span class="material-symbols-outlined text-4xl mb-2 text-primary">upload</span>
+                                <span class="font-bold text-xl text-primary">Upload Photo</span>
+                                <p class="text-xs text-on-surface-variant opacity-70">JPEG or PNG up to 5MB</p>
+                                <p class="text-[9px] mt-2 font-bold text-primary/40 uppercase tracking-widest hidden group-hover:block">or Drop here</p>
+                            </button>
+                            <input type="file" id="avatar-file-upload" class="hidden" accept="image/*" onchange="previewUploadedAvatar(this)">
+                            
+                            <button class="sketchy-card bg-secondary-container p-8 flex flex-col items-center justify-center text-center group">
+                                <span class="material-symbols-outlined text-4xl mb-2 text-secondary">brush</span>
+                                <span class="font-bold text-xl text-secondary">Choose Art</span>
+                                <p class="text-xs text-on-surface-variant opacity-70">Pick from our library</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Illustrations Grid -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-8">
+                            <h3 class="font-bold text-xl text-on-surface">Illustrations</h3>
+                            <div class="h-[2px] flex-1 bg-outline-variant rounded-full opacity-30"></div>
+                        </div>
+                        <div id="illustrations-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                            <!-- JS injects illustrations -->
+                        </div>
+                    </div>
+
+                    <!-- Bottom Actions -->
+                    <footer class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 pb-20">
+                        <button onclick="goBack()" class="w-full sm:w-auto px-12 py-4 bg-surface-container-high border-2 border-outline-variant font-bold uppercase tracking-widest text-on-surface-variant rounded-xl hover:bg-surface-dim transition-colors active:scale-95">
+                            Cancel
+                        </button>
+                        <button onclick="saveAvatarChange()" class="w-full sm:w-auto px-16 py-4 bg-primary border-2 border-on-surface font-bold uppercase tracking-[0.2em] text-white rounded-xl shadow-[6px_6px_0px_0px_#1b1c1c] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#1b1c1c] active:translate-y-[4px] active:shadow-none transition-all">
+                            Save Changes
+                        </button>
+                    </footer>
+                </div>
+            </section>
+
+            <section id="edit-nickname" class="page-section fade-in">
+                <div class="max-w-md mx-auto">
+                    <div class="flex items-center gap-4 mb-8">
+                        <button onclick="goBack()" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                        <h2 class="text-xl font-bold font-headline uppercase tracking-widest">Update Nickname</h2>
+                    </div>
+                    <div class="bg-white p-12 hand-drawn-border-alt pencil-shadow relative">
+                        <div class="washi-tape bg-primary-container"></div>
+                        <input id="input-nickname" type="text" class="w-full bg-transparent border-none text-2xl font-bold focus:ring-0 border-b-2 border-outline-variant ruled-lines outline-none mb-12" placeholder="...">
+                        <button onclick="saveNickname()" class="w-full py-5 bg-primary text-on-primary font-bold hand-drawn-border pencil-shadow uppercase tracking-widest text-xs hover:scale-[1.02] transition-all">Save Changes</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="edit-intro" class="page-section fade-in">
+                <div class="max-w-md mx-auto">
+                    <div class="flex items-center gap-4 mb-8">
+                        <button onclick="goBack()" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">arrow_back</span></button>
+                        <h2 class="text-xl font-bold font-headline uppercase tracking-widest">About Me</h2>
+                    </div>
+                    <div class="bg-white p-12 hand-drawn-border pencil-shadow relative">
+                        <div class="washi-tape bg-secondary-container"></div>
+                        <textarea id="input-intro" class="w-full h-56 bg-transparent border-none focus:ring-0 text-lg ruled-lines outline-none mb-12 italic leading-relaxed" placeholder="..."></textarea>
+                        <button onclick="saveIntro()" class="w-full py-5 bg-primary text-on-primary font-bold hand-drawn-border-alt pencil-shadow uppercase tracking-widest text-xs hover:scale-[1.02] transition-all">Save Changes</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GUEST / LOGIN -->
+            <section id="guest" class="page-section fade-in">
+                <div class="max-w-lg mx-auto py-10 bg-grid-pattern rounded-[3rem] px-6">
+                    <div class="bg-white border-2 border-on-surface p-10 md:p-14 hand-drawn-border pencil-shadow text-center relative">
+                        <div class="washi-tape bg-[#efb7ca] !w-24"></div>
+                        
+                        <!-- Moon Logo -->
+                        <div class="relative w-40 h-40 mx-auto mb-10">
+                            <div class="absolute inset-0 border-2 border-outline-variant rounded-full translate-x-1 translate-y-1"></div>
+                            <div class="relative w-full h-full rounded-full border-2 border-on-surface bg-[#fbf9f8] overflow-hidden flex items-center justify-center">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvppeuYYuH6d-CrW9lT3RKYGQBSimdmHIV_UNyc8VT8TQHXyPhyc4SDi3LtWDiSzGuFAF4sMztFsnJO-WYcqXR5BVM74EdA1vvMcaOiClctSNauEFM3IK8aT3WKewOplUBbMIqfbW5sEkT0RuQoJ5iWM6Qr_S75-oV03zgPCC9fitNF1IcggX_nSiro7uDSJtwvA9AzHrjj5DK0LniPcr44m8yDb5-Yh-0Av4qLYhK1FhnZRakTpvhPP2gHOQpvM5_ep9OoF5dW0nL" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <h2 class="text-3xl font-bold font-headline mb-4">Welcome to Calm Diary</h2>
+                        <p class="text-on-surface-variant mb-12 font-medium leading-relaxed text-sm">Your private, quiet space to reflect. Save your thoughts, track your mood, and build a beautiful digital scrapbook over time.</p>
+                        
+                        <div class="flex flex-col gap-4 mb-12">
+                            <button onclick="login()" class="w-full py-4 bg-[#6b5e28] text-white font-bold rounded-xl border-2 border-[#1b1c1c] shadow-[4px_4px_0px_0px_#1b1c1c] flex items-center justify-center gap-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                                Log In <span class="material-symbols-outlined text-sm">login</span>
+                            </button>
+                            <button onclick="window.location.hash='#signup'" class="w-full py-4 bg-white text-on-surface font-bold rounded-xl border-2 border-[#1b1c1c] shadow-[4px_4px_0px_0px_#1b1c1c] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                                Sign Up
+                            </button>
+                        </div>
+
+                        <!-- Guest Mode Card -->
+                        <div class="bg-surface-container-low border-2 border-outline-variant rounded-2xl p-5 flex items-center justify-between text-left cursor-pointer hover:bg-white transition-colors">
+                            <div>
+                                <h3 class="font-bold text-sm">Browse as Guest</h3>
+                                <p class="text-[10px] opacity-60">Data will only be saved to this device</p>
+                            </div>
+                            <div class="w-10 h-10 bg-[#b6dffd] rounded-full flex items-center justify-center border-2 border-on-surface">
+                                <span class="material-symbols-outlined text-primary">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LOGIN SECTION -->
+            <section id="login" class="page-section fade-in">
+                <div class="max-w-md mx-auto py-16 relative">
+                    <!-- Floating Star Decoration -->
+                    <span class="material-symbols-outlined absolute top-4 -left-12 text-6xl text-[#b6dffd] -rotate-12 opacity-60">star</span>
+                    
+                    <div class="relative">
+                        <!-- Yellow Stacked Paper Layer -->
+                        <div class="absolute inset-0 bg-[#ffeba7] border-2 border-on-surface translate-x-2 translate-y-2 hand-drawn-border-alt -z-10"></div>
+                        
+                        <div class="bg-white border-2 border-on-surface p-10 md:p-14 hand-drawn-border relative text-center">
+                            <div class="washi-tape bg-[#efb7ca] !w-24"></div>
+                            
+                            <header class="mb-12">
+                                <span class="material-symbols-outlined text-4xl text-on-primary-container mb-4">edit_note</span>
+                                <h2 class="text-3xl font-bold font-headline mb-2">Welcome Back</h2>
+                                <p class="text-on-surface-variant font-medium text-sm">Your scrapbook is waiting for you.</p>
+                            </header>
+
+                            <form id="calm-login-form" class="space-y-10 text-left">
+                                <div class="relative border-b-2 border-outline-variant py-3 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">person</span>
+                                    <input id="calm-login-email" type="email" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Email or Username" required>
+                                </div>
+                                <div class="relative border-b-2 border-outline-variant py-3 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">lock</span>
+                                    <input id="calm-login-pass" type="password" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Password" required>
+                                </div>
+                                
+                            <div class="text-right -mt-6">
+                                    <a href="#forgot-password" class="text-[10px] font-bold text-secondary uppercase tracking-widest hover:underline decoration-wavy underline-offset-4">Forgot Password?</a>
+                                </div>
+
+                                <button type="submit" class="w-full py-5 bg-[#ffeba7] text-on-surface font-bold rounded-xl border-2 border-on-surface shadow-[4px_4px_0px_0px_#1b1c1c] flex items-center justify-center gap-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-widest text-sm">
+                                    Log In <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                </button>
+                            </form>
+                            
+                            <p class="text-center mt-12 text-sm font-medium">
+                                New here? <a href="#signup" class="text-on-surface font-bold underline decoration-wavy decoration-[#ffeba7] underline-offset-4 decoration-2">Sign Up</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SIGN UP SECTION -->
+            <section id="signup" class="page-section fade-in">
+                <div class="max-w-md mx-auto py-16 relative">
+                    <div class="relative">
+                        <!-- Yellow Stacked Paper Layer -->
+                        <div class="absolute inset-0 bg-[#ffeba7] border-2 border-on-surface translate-x-2 translate-y-2 hand-drawn-border-alt -z-10"></div>
+                        
+                        <div class="bg-white border-2 border-on-surface p-10 md:p-14 hand-drawn-border relative text-center">
+                            <div class="washi-tape bg-[#efb7ca] !w-24"></div>
+                            
+                            <header class="mb-12">
+                                <div class="w-16 h-16 bg-[#ffeba7] hand-drawn-circle mx-auto mb-6 flex items-center justify-center border-2 border-on-surface">
+                                    <span class="material-symbols-outlined text-3xl">edit</span>
+                                </div>
+                                <h2 class="text-3xl font-bold font-headline mb-2">Start Your Diary</h2>
+                                <p class="text-on-surface-variant font-medium text-sm">A quiet space for your thoughts.</p>
+                            </header>
+
+                            <form id="calm-signup-form" class="space-y-8 text-left">
+                                <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">person</span>
+                                    <input id="calm-reg-name" type="text" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Nickname" required>
+                                </div>
+                                <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">mail</span>
+                                    <input id="calm-reg-email" type="email" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Email address" required>
+                                </div>
+                                <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">lock</span>
+                                    <input id="calm-reg-pass" type="password" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Create a password" required>
+                                </div>
+                                <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">lock_reset</span>
+                                    <input id="calm-reg-confirm" type="password" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Confirm password" required>
+                                </div>
+
+                                <button type="submit" class="w-full py-4 mt-4 bg-[#ffeba7] text-on-surface font-bold rounded-lg border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all uppercase tracking-widest text-[10px]">
+                                    CREATE ACCOUNT
+                                </button>
+                            </form>
+                            
+                            <p class="text-center mt-12 text-sm font-medium text-on-surface-variant">
+                                Already have a notebook? <a href="#login" class="text-on-surface font-bold underline decoration-2 decoration-on-surface underline-offset-4">Log In</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FORGOT PASSWORD SECTION -->
+            <section id="forgot-password" class="page-section fade-in">
+                <div class="max-w-md mx-auto py-16 relative">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-[#ffe5ec] border-2 border-on-surface translate-x-2 translate-y-2 hand-drawn-border-alt -z-10"></div>
+                        <div class="bg-white border-2 border-on-surface p-10 md:p-14 hand-drawn-border relative text-center">
+                            <div class="washi-tape bg-[#b6dffd] !w-24"></div>
+                            
+                            <header class="mb-12">
+                                <div class="w-24 h-24 bg-primary-container hand-drawn-circle mx-auto mb-8 flex items-center justify-center border-2 border-on-surface relative">
+                                    <span class="material-symbols-outlined text-4xl text-primary">mail</span>
+                                    <span class="absolute -top-2 -right-2 material-symbols-outlined text-secondary scale-75">auto_awesome</span>
+                                </div>
+                                <h2 class="text-3xl font-bold font-headline mb-4">Forgot Password?</h2>
+                                <p class="text-on-surface-variant font-medium text-sm leading-relaxed">Don't worry! Enter your email below and we'll send you a link to reset your password.</p>
+                            </header>
+
+                            <div class="space-y-10 text-left">
+                                <div class="relative border-b-2 border-outline-variant py-3 group focus-within:border-primary transition-colors">
+                                    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline opacity-40 group-focus-within:opacity-100 group-focus-within:text-primary transition-all">alternate_email</span>
+                                    <input id="forgot-email" type="email" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pl-10 placeholder:opacity-30 placeholder:text-outline" placeholder="hello@example.com" required>
+                                </div>
+
+                                <button onclick="sendResetLink()" class="w-full py-5 bg-primary text-on-primary font-bold rounded-xl border-2 border-on-surface shadow-[4px_4px_0px_0px_#1b1c1c] flex items-center justify-center gap-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-widest text-sm">
+                                    Send Reset Link
+                                </button>
+                                
+                                <div class="text-center">
+                                    <a href="#login" class="inline-flex items-center gap-2 text-on-surface-variant font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-sm">arrow_back</span>
+                                        Back to Login
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESET PASSWORD SECTION -->
+            <section id="reset-password" class="page-section fade-in">
+                <div class="max-w-md mx-auto py-16 relative">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-[#ffeba7] border-2 border-on-surface translate-x-2 translate-y-2 hand-drawn-border-alt -z-10"></div>
+                        <div class="bg-white border-2 border-on-surface p-10 md:p-14 hand-drawn-border relative text-center">
+                            <div class="washi-tape bg-[#ffe5ec] !w-24"></div>
+                            
+                            <header class="mb-12">
+                                <div class="w-24 h-24 bg-secondary-container hand-drawn-circle mx-auto mb-8 flex items-center justify-center border-2 border-on-surface relative">
+                                    <span class="material-symbols-outlined text-4xl text-on-secondary-container">lock_reset</span>
+                                    <div class="absolute inset-0 border-2 border-on-surface hand-drawn-circle translate-x-1 translate-y-1 opacity-30"></div>
+                                </div>
+                                <h2 class="text-3xl font-bold font-headline mb-4 relative inline-block">
+                                    Reset Password
+                                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary-container -z-10" preserveAspectRatio="none" viewBox="0 0 100 10">
+                                        <path class="opacity-70" d="M0,5 Q50,0 100,5" fill="none" stroke="currentColor" stroke-width="4"></path>
+                                    </svg>
+                                </h2>
+                                <p class="text-on-surface-variant font-medium text-sm leading-relaxed">Create a new safe word for your digital scrapbook. Make it memorable.</p>
+                            </header>
+
+                            <form id="reset-password-form" class="space-y-10 text-left">
+                                <div class="relative">
+                                    <label class="font-bold text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">New Password</label>
+                                    <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                        <input id="reset-pass" type="password" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pr-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Write softly..." required>
+                                        <button type="button" onclick="togglePassVisibility('reset-pass', this)" class="absolute right-0 top-1/2 -translate-y-1/2 text-outline opacity-40 hover:opacity-100 transition-opacity">
+                                            <span class="material-symbols-outlined">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="relative">
+                                    <label class="font-bold text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Confirm New Password</label>
+                                    <div class="relative border-b-2 border-outline-variant py-2 group focus-within:border-primary transition-colors">
+                                        <input id="reset-confirm" type="password" class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium pr-10 placeholder:opacity-30 placeholder:text-outline" placeholder="Echo it here..." required>
+                                        <button type="button" onclick="togglePassVisibility('reset-confirm', this)" class="absolute right-0 top-1/2 -translate-y-1/2 text-outline opacity-40 hover:opacity-100 transition-opacity">
+                                            <span class="material-symbols-outlined">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full py-5 bg-primary text-on-primary font-bold rounded-xl border-2 border-on-surface shadow-[4px_4px_0px_0px_#1b1c1c] flex items-center justify-center gap-3 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all uppercase tracking-widest text-sm">
+                                    Update Password <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                </button>
+                                
+                                <div class="text-center">
+                                    <a href="#login" class="inline-block font-bold text-[10px] text-secondary uppercase tracking-widest hover:underline decoration-wavy underline-offset-4 decoration-secondary-container">
+                                        Remembered it? Return to lock screen
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. STORE -->
+            <section id="store" class="page-section fade-in">
+                <div class="max-w-6xl mx-auto space-y-12">
+                    <h2 class="font-headline text-4xl font-bold tracking-tight">Store</h2>
+                    
+                    <!-- Pink Banner -->
+                    <div class="bg-[#ffe5ec] border-2 border-on-surface p-10 md:p-14 relative overflow-hidden hand-drawn-border-alt pencil-shadow flex flex-col md:flex-row justify-between items-center gap-10">
+                        <div class="relative z-10 space-y-6 max-w-xl">
+                            <span class="inline-block px-4 py-1 rounded-full border-2 border-on-surface text-[9px] font-black uppercase tracking-widest bg-white">New Arrivals</span>
+                            <h3 class="font-headline text-5xl font-extrabold">Sunny Days Pack</h3>
+                            <p class="text-on-surface-variant font-medium leading-relaxed">Brighten up your diary entries with these cheerful, hand-drawn summer emoticons.</p>
+                            <button onclick="window.location.hash='#emoticons-detail'" class="bg-[#ffeba7] border-2 border-on-surface px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 pencil-shadow hover:scale-105 transition-transform active:translate-y-1">
+                                <span class="material-symbols-outlined text-lg">shopping_cart</span> VIEW DETAIL
+                            </button>
+                        </div>
+                        <div class="relative w-64 h-64 flex items-center justify-center">
+                            <div class="absolute w-56 h-56 bg-[#efb7ca] opacity-40 avatar-shape rotate-12"></div>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBinD-Gq0WmdvB9-7rKZf8wngmg51m0Qez1rr-kAoytRDdti5ZvWzk1PyonxMbzX06NbFJ-2ERNSsc58DrAInuFER22SVj4bXHanPqOKOGKB41CHmbAeCYC-8Sns50I6KVNBBMX3Q-g0YG6om8qmZs1vSbjGvREZmnAQMU4E82mUBQB2RXfbJRFJSJx65jlPDrw1g7H_d3rkkf_-TUSPxudkpU0RfA-QfYBtclT2yxIhR1Sov2ZBbhjYtxxEiGzozEsVoCJQx6-Vao-" class="relative w-48 h-48 object-cover hand-drawn-border rotate-[-6deg] z-10 bg-white">
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div id="stickers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <!-- Dynamic items -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4.5 EMOTICONS DETAIL -->
+            <section id="emoticons-detail" class="page-section fade-in">
+                <div class="max-w-5xl mx-auto space-y-10">
+                    <!-- Back Navigation -->
+                    <div onclick="window.location.hash='#store'" class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface cursor-pointer w-max transition-colors">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <span class="font-bold text-[10px] uppercase tracking-widest">Back to Store</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                        <!-- Left Column: Pack Preview -->
+                        <div class="flex flex-col gap-6">
+                            <div class="bg-secondary-container p-8 hand-drawn-border pencil-shadow relative flex items-center justify-center min-h-[300px] md:min-h-[400px]">
+                                <!-- Washi tape detail -->
+                                <div id="pack-detail-tape" class="washi-tape bg-tertiary-container !w-24 !h-6"></div>
+                                <img id="pack-detail-img" src="" class="w-full h-full object-cover rounded-md opacity-90 mix-blend-multiply" alt="Pack Preview">
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Details & Grid -->
+                        <div class="flex flex-col gap-10">
+                            <!-- Header Info -->
+                            <div class="flex flex-col gap-4">
+                                <h2 id="pack-detail-title" class="font-headline text-4xl font-extrabold text-on-surface">Pack Title</h2>
+                                <p id="pack-detail-desc" class="text-on-surface-variant font-medium leading-relaxed">Pack description goes here...</p>
+                            </div>
+
+                            <!-- Buy Action -->
+                            <div class="flex items-center gap-8 pb-10 border-b-2 border-outline-variant border-dashed">
+                                <span id="pack-detail-price" class="font-headline text-3xl font-black text-primary">$0.00</span>
+                                <button id="pack-buy-btn" class="bg-primary text-on-primary px-10 py-4 rounded-xl font-bold uppercase tracking-[0.2em] text-xs hand-drawn-border pencil-shadow active:translate-y-1 active:shadow-none transition-all">
+                                    Buy Pack
+                                </button>
+                            </div>
+
+                            <!-- Emoticon Grid Preview -->
+                            <div class="flex flex-col gap-6">
+                                <h3 class="font-headline text-xl font-bold text-on-surface">Includes 12 Stickers</h3>
+                                <div id="pack-icons-grid" class="grid grid-cols-4 gap-4">
+                                    <!-- Dynamic icons -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Mood Selection Modal -->
+    <div id="mood-selection-modal" class="fixed inset-0 z-[1000] hidden items-center justify-center">
+        <!-- Blur Overlay -->
+        <div class="absolute inset-0 bg-surface/30 backdrop-blur-md flex flex-col items-center justify-center">
+            <!-- Circular Modal -->
+            <div class="animate-pop relative bg-surface w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full hand-drawn-circle flex flex-col items-center justify-center shadow-lg mb-8">
+                <!-- Central Text -->
+                <div class="absolute inset-0 flex items-center justify-center flex-col z-10 pointer-events-none">
+                    <h2 class="font-headline text-xl md:text-2xl text-on-surface text-center px-8">How are you<br/>today?</h2>
+                </div>
+                <!-- Mood Ring -->
+                <div class="mood-ring z-20">
+                    <!-- Calm -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_satisfied', 'Feeling Calm')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
+                    </button>
+                    <!-- Happy -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood', 'Happy')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
+                    </button>
+                    <!-- Excited -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('auto_awesome', 'Excited')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
+                    </button>
+                    <!-- Angry -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_very_dissatisfied', 'Angry')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
+                    </button>
+                    <!-- Sad -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood_bad', 'Sad')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
+                    </button>
+                    <!-- Tired -->
+                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('coffee', 'Tired')">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        </div>
+                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Close Button -->
+            <button onclick="closeMoodModal()" class="w-14 h-14 bg-surface rounded-full hand-drawn-circle flex items-center justify-center flat-shadow focus:outline-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface border-t-2 border-outline-variant py-5 px-2 z-50 rounded-t-[3rem]">
+        <a href="#calendar" class="nav-item flex flex-col items-center gap-1 w-16">
+            <span class="material-symbols-outlined text-2xl">calendar_month</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Calendar</span>
+        </a>
+        <a href="#diary" class="nav-item flex flex-col items-center gap-1 w-16">
+            <span class="material-symbols-outlined text-2xl">book</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Diary</span>
+        </a>
+        <a href="#compose" onclick="toggleMoodPicker()" class="bg-primary-container p-4 rounded-full hand-drawn-border -mt-14 pencil-shadow active:translate-y-1 transition-all">
+            <span class="material-symbols-outlined text-3xl">add</span>
+        </a>
+        <a href="#store" class="nav-item flex flex-col items-center gap-1 w-16">
+            <span class="material-symbols-outlined text-2xl">local_mall</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Store</span>
+        </a>
+        <a href="#profile" class="nav-item flex flex-col items-center gap-1 w-16">
+            <span class="material-symbols-outlined text-2xl">person</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Account</span>
+        </a>
+    </nav>
+
+    <script>
+        // CONFIG_GOOGLE_URL is already declared in utils.js
+        
+        // --- STATE & SESSION ---
+        let userData = { nickname: "Khách", intro: "...", avatar: "", email: "" };
+        let currentMood = "sentiment_satisfied";
+
+        const stickerPacks = [
+            { 
+                id: 'sunny', 
+                title: 'Hand-drawn Emo', 
+                desc: 'A collection of unique, hand-drawn expressions for your deepest reflections.', 
+                price: '$0.00', 
+                owned: true, 
+                tape: '#ffeba7', 
+                img: 'https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9',
+                icons: [
+                    'https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9',
+                    'https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY',
+                    'https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB',
+                    'https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb',
+                    'https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY',
+                    'https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1',
+                    'https://lh3.googleusercontent.com/d/1-W0qOXnFgmAn59cV7wWGxlZpOmCyUEvk',
+                    'https://lh3.googleusercontent.com/d/13E4N-OO1plPU95sf8JTJM5wm-yUcXdZD'
+                ]
+            },
+            { 
+                id: 'emmo', 
+                title: 'Classic System', 
+                desc: 'The classic collection of essential expressions for everyday journaling.', 
+                price: 'Owned', 
+                owned: true, 
+                tape: '#efb7ca', 
+                img: 'https://api.dicebear.com/7.x/bottts/svg?seed=emmo',
+                icons: ['sentiment_satisfied', 'sentiment_neutral', 'sentiment_dissatisfied', 'mood_bad', 'sentiment_very_satisfied', 'face', 'potted_plant', 'bedtime']
+            },
+            { 
+                id: 'clouds', 
+                title: 'Small Clouds', 
+                desc: 'Add a touch of weather and whimsy to your daily entries.', 
+                price: '$1.99', 
+                owned: false, 
+                tape: '#b6dffd', 
+                img: 'https://api.dicebear.com/7.x/shapes/svg?seed=clouds',
+                icons: ['cloud', 'cloud_queue', 'filter_drama', 'thunderstorm', 'rainy', 'wb_cloudy', 'air', 'wb_twilight']
+            }
+        ];
+        function getSession() { return JSON.parse(localStorage.getItem('user')); }
+
+        // --- ROUTER ---
+        const protectedRoutes = ['#calendar', '#diary', '#compose', '#profile', '#edit-profile', '#edit-nickname', '#edit-intro'];
+        
+        function navigate() {
+            let fullHash = window.location.hash || '#calendar';
+            let mainHash = fullHash.split('?')[0]; 
+            
+            // Handle query params for pack detail
+            if (mainHash === '#emoticons-detail') {
+                const params = new URLSearchParams(fullHash.split('?')[1]);
+                const packId = params.get('id') || 'sunny';
+                renderPackDetail(packId);
+            }
+            
+            let hash = mainHash;
+            const user = getSession();
+            if (protectedRoutes.includes(hash) && !user) hash = '#guest';
+
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            const activePage = document.querySelector(hash);
+            if (activePage) activePage.classList.add('active');
+
+            // UI Adjustments
+            const isSub = hash.includes('edit-') || hash === '#edit-profile' || hash === '#forgot-password' || hash === '#reset-password' || hash === '#emoticons-detail';
+            document.getElementById('mobile-back').classList.toggle('hidden', !isSub);
+            
+            const titles = { 
+                '#calendar': 'May 2026', 
+                '#diary': 'Reflections', 
+                '#compose': 'New Page', 
+                '#store': 'Store', 
+                '#emoticons-detail': 'Pack Detail',
+                '#profile': 'Account', 
+                '#edit-profile': 'Settings', 
+                '#edit-nickname': 'Nickname', 
+                '#edit-intro': 'About Me', 
+                '#view-entry': 'Read & Reflect',
+                '#forgot-password': 'Recover Access',
+                '#reset-password': 'New Safe Word'
+            };
+            document.getElementById('mobile-title').innerText = titles[hash] || 'Calm Diary';
+
+            // Desktop Nav
+            document.querySelectorAll('aside .nav-item').forEach(item => {
+                const itemHash = item.getAttribute('href');
+                const isActive = (itemHash === hash) || 
+                                 (itemHash === '#store' && hash === '#emoticons-detail') ||
+                                 (itemHash === '#profile' && (hash.includes('profile') || hash.includes('edit')));
+                const pill = item.querySelector('.sidebar-active-pill');
+                if(pill) pill.remove();
+                
+                if (isActive) {
+                    item.classList.add('bg-primary-container', 'hand-drawn-border');
+                    item.insertAdjacentHTML('afterbegin', '<div class="sidebar-active-pill organic-card"></div>');
+                } else {
+                    item.classList.remove('bg-primary-container', 'hand-drawn-border');
+                }
+            });
+
+            // Mobile Nav (Improved Responsive Design)
+            document.querySelectorAll('#bottom-nav .nav-item').forEach(item => {
+                const itemHash = item.getAttribute('href');
+                const isActive = (itemHash === hash) || 
+                                 (itemHash === '#store' && hash === '#emoticons-detail') ||
+                                 (itemHash === '#profile' && (hash.includes('profile') || hash.includes('edit') || hash === '#guest'));
+                
+                if (isActive) {
+                    item.classList.add('bg-primary-container', 'text-on-primary-container', 'rounded-full', 'px-4', 'py-1', 'scale-90');
+                    item.classList.remove('text-on-surface-variant');
+                    const label = item.querySelector('span:not(.material-symbols-outlined)');
+                    if(label) label.classList.remove('opacity-30');
+                } else {
+                    item.classList.remove('bg-primary-container', 'text-on-primary-container', 'rounded-full', 'px-4', 'py-1', 'scale-90');
+                    item.classList.add('text-on-surface-variant');
+                    const label = item.querySelector('span:not(.material-symbols-outlined)');
+                    if(label) label.classList.add('opacity-30');
+                }
+            });
+
+            if (hash === '#calendar') { 
+                initCalendar(); 
+                syncDiaryFromServer(); 
+                renderWeeklyMood();
+            }
+            if (hash === '#diary') renderDiaryEntries();
+            if (hash === '#store') renderStore();
+            if (hash === '#change-avatar') renderIllustrations();
+            if (hash === '#compose') {
+                currentlyViewingId = 'mood_' + Date.now(); // Generate ID at creation start
+                toggleMoodPicker();
+            }
+            syncUI();
+        }
+
+        // --- AVATAR MANAGEMENT ---
+        let tempSelectedAvatar = "";
+        let avatarScale = 1;
+        let avatarPos = { x: 0, y: 0 };
+        let isDraggingAvatar = false;
+        let startPos = { x: 0, y: 0 };
+
+        function initAvatarEditor() {
+            const container = document.getElementById('avatar-drag-overlay');
+            const img = document.getElementById('change-avatar-current');
+            const slider = document.getElementById('avatar-zoom-slider');
+            const zoomControls = document.getElementById('avatar-zoom-controls');
+
+            if (!container || !img || !slider) return;
+
+            // Reset state
+            avatarScale = 1;
+            avatarPos = { x: 0, y: 0 };
+            slider.value = 1;
+            updateAvatarTransform();
+            
+            // Show/Hide controls based on image presence
+            const isIllustration = tempSelectedAvatar && tempSelectedAvatar.startsWith('http');
+            zoomControls.style.opacity = tempSelectedAvatar ? "1" : "0";
+
+            // Drag to Move
+            container.onmousedown = (e) => startDrag(e.clientX, e.clientY);
+            window.onmousemove = (e) => doDrag(e.clientX, e.clientY);
+            window.onmouseup = endDrag;
+
+            // Touch Support
+            container.ontouchstart = (e) => startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            container.ontouchmove = (e) => { e.preventDefault(); doDrag(e.touches[0].clientX, e.touches[0].clientY); };
+            container.ontouchend = endDrag;
+
+            // Slider Zoom
+            slider.oninput = (e) => {
+                avatarScale = parseFloat(e.target.value);
+                updateAvatarTransform();
+            };
+
+            // Mouse Wheel Zoom
+            container.onwheel = (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                avatarScale = Math.min(Math.max(1, avatarScale + delta), 3);
+                slider.value = avatarScale;
+                updateAvatarTransform();
+            };
+
+            function startDrag(x, y) {
+                if (!tempSelectedAvatar) return;
+                isDraggingAvatar = true;
+                startPos = { x: x - avatarPos.x, y: y - avatarPos.y };
+                container.style.cursor = 'grabbing';
+            }
+
+            function doDrag(x, y) {
+                if (!isDraggingAvatar) return;
+                avatarPos.x = x - startPos.x;
+                avatarPos.y = y - startPos.y;
+                updateAvatarTransform();
+            }
+
+            function endDrag() {
+                isDraggingAvatar = false;
+                container.style.cursor = 'move';
+            }
+        }
+
+        function updateAvatarTransform() {
+            const img = document.getElementById('change-avatar-current');
+            if (img) {
+                img.style.transform = `translate(${avatarPos.x}px, ${avatarPos.y}px) scale(${avatarScale})`;
+            }
+        }
+
+        function initDragAndDrop() {
+            const dropZone = document.getElementById('drop-zone');
+            if (!dropZone) return;
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
+                dropZone.addEventListener(name, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+            });
+
+            dropZone.addEventListener('dragover', () => dropZone.classList.add('bg-primary-container/80', 'scale-[0.98]'));
+            dropZone.addEventListener('dragleave', () => dropZone.classList.remove('bg-primary-container/80', 'scale-[0.98]'));
+            
+            dropZone.addEventListener('drop', (e) => {
+                dropZone.classList.remove('bg-primary-container/80', 'scale-[0.98]');
+                const dt = e.dataTransfer;
+                if (dt.files && dt.files[0]) previewUploadedAvatar({ files: dt.files });
+            });
+        }
+
+        const illustrations = [
+            { name: "Cat", url: "https://lh3.googleusercontent.com/aida-public/AB6AXuCoZ26J3iwk2rZxulnpHIk2-XqpOMVPul6JsOdA0l4z1a3gsjgNaKH-yRqRLIg2-YuPecXRmaXaeBZ9evmaU5SYjCJTPwm6tIzXPsr3McSXnDynHU1_Qb0sbeRNHYQ-_MGZzaaoVYx8dRPF9VUTKEqTHlqdLnarxCSzgJRKc0MJlSPgkwN8ggISLCHr1Q-l_2JxLlNsrmGdKUl1omOoFwt0XWsQaCmox6yYfN583PuT9M8wWvAu9xSrQDcUDdhOf8P5tMuCHeYUqdvZ" },
+            { name: "Plant", url: "https://lh3.googleusercontent.com/aida-public/AB6AXuDX0u4NDXmPt-OqjL_VJbBbxLAE_u_srzwPWKS556hBL1a68eqIpz7nPyX_N6H5ihV_RqpNXRQLEYjvp0bcE_Mbg6XNb3WJ3h4vDunnV4F3jBharsFvD-gO62Syj5QiAfs0jp68OWBRv1k-inNKPSkkBbAn4ShlvodytVZVi3bAw6IRg-_-W9MkAqlz6ehHB-sdTswr7aULdlaVdZhh3uGRchpckobQ85mHXz7WwE4AZKFkJ4CJidG7xqEgbSwU_Uqm3WWkDWMXnlnU" },
+            { name: "Person", url: "https://lh3.googleusercontent.com/aida-public/AB6AXuApzG9OGx5rkPfenn4cYz55HG65dXNUEdGs9VuKWualun6wc0SYmcC5Fcmynyaias1QUEdT_wdgjeCJWUoinkyTjxb2JiI_B-O0-24SoqEvYEmTs-a4yhnYSfdfn8m73kiArqLXk3Jyd9M4UeatsK9mCekr3i1LbIiQXjIenL9BhfCIkwWmAEqjPLrZJ9AGjGqXt5Ncl6nBsTVSVgsupsFI4R_RC54Fiv1SVhkPnLxQwmP5ZjBMilO-PqM5sbw2gRQsWu4jt80Rm85R" },
+            { name: "Moon", url: "https://lh3.googleusercontent.com/aida-public/AB6AXuAgfbfsUVnmwcsjXZvyyXpYrP8lIwz_Oly5Ug5wyn3shLdB1fFilpNiTcz8-Lte86Gt3c0_Jm3xoJvymJsz9UxobaV1HCLMmsPn5i8fnB1Q_VFDsK5jyTqoEDrJdRuoiEB8YB_g21yzhwbOybn_ZMn6bW1XhCMZjvqo0jtTavDZj2gK0mjfF-QsY-Sq-QPHkbRjr3hOvod1Ucd3IPJPOTpmViIKhqN94eW9C2w2t9NcYTCu4ct9qWmscgFo-nS22d7_uHZBfEW5su_R" },
+            { name: "Bird", url: "https://lh3.googleusercontent.com/aida-public/AB6AXuB9Hjidd8vQTJbpT8_Lnl45IdBMDxdpQb4iAU9nX6T9hvLVtLIPE2APvCV0oVEgLnB8DZK_f554OoPPaOHMVi73nu4hXSieL8yUMowkvNA8E1tRUoguKuKwxwBddLqYLeMcZrwkAqUr_FuFT5gu7V5sXoVwsiPSpR_0SHbombd7beQ-QB-6MVrWn7ofSNA5trSjqshfsEcn4NwCU418rg-aeQJVOKDPBT1nrYab3cXSpXxsvaF1ZKuPTkSG0XKcnJV_SoCF395ArtY7" }
+        ];
+
+        function renderIllustrations() {
+            const grid = document.getElementById('illustrations-grid');
+            if (!grid) return;
+            const current = userData.avatar;
+            grid.innerHTML = illustrations.map(ill => {
+                const isSelected = ill.url === current;
+                return `
+                    <div onclick="selectIllustration('${ill.url}', this)" class="sketchy-card ${isSelected ? 'bg-primary-container ring-2 ring-primary border-primary' : 'bg-white'} p-4 flex flex-col items-center hover:scale-105 cursor-pointer transition-all">
+                        <div class="w-24 h-24 mb-3 flex items-center justify-center relative">
+                            <img alt="${ill.name}" class="w-full" src="${ill.url}">
+                            ${isSelected ? '<div class="absolute -top-2 -right-2 bg-primary text-white p-1 rounded-full text-[10px] material-symbols-outlined">check</div>' : ''}
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest ${isSelected ? 'text-on-primary-container' : 'text-on-surface-variant'}">${isSelected ? 'Selected' : ill.name}</span>
+                    </div>
+                `;
+            }).join('');
+            tempSelectedAvatar = current;
+            const previewImg = document.getElementById('change-avatar-current');
+            if (previewImg) {
+                previewImg.src = current;
+                previewImg.onload = initAvatarEditor;
+            }
+        }
+
+        function selectIllustration(url, el) {
+            tempSelectedAvatar = url;
+            document.getElementById('change-avatar-current').src = url;
+            initAvatarEditor();
+            
+            // UI Update Grid
+            document.querySelectorAll('#illustrations-grid .sketchy-card').forEach(card => {
+                card.classList.remove('bg-primary-container', 'ring-2', 'ring-primary', 'border-primary');
+                card.classList.add('bg-white');
+                const badge = card.querySelector('.material-symbols-outlined');
+                if (badge) badge.remove();
+                const label = card.querySelector('span');
+                const originalName = illustrations.find(ill => ill.url === card.querySelector('img').src)?.name || "Art";
+                label.innerText = originalName;
+                label.classList.remove('text-on-primary-container');
+                label.classList.add('text-on-surface-variant');
+            });
+
+            el.classList.add('bg-primary-container', 'ring-2', 'ring-primary', 'border-primary');
+            el.classList.remove('bg-white');
+            el.querySelector('.relative').insertAdjacentHTML('beforeend', '<div class="absolute -top-2 -right-2 bg-primary text-white p-1 rounded-full text-[10px] material-symbols-outlined">check</div>');
+            const label = el.querySelector('span');
+            label.innerText = 'Selected';
+            label.classList.replace('text-on-surface-variant', 'text-on-primary-container');
+        }
+
+        function previewUploadedAvatar(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempSelectedAvatar = e.target.result;
+                    const previewImg = document.getElementById('change-avatar-current');
+                    previewImg.src = e.target.result;
+                    
+                    previewImg.onload = function() {
+                        // AUTO-SCALE LOGIC: Fit image to container
+                        const container = document.getElementById('avatar-editor-container');
+                        const rect = container.getBoundingClientRect();
+                        
+                        // Calculate scale to fill (cover) the circle
+                        const scaleX = rect.width / previewImg.naturalWidth;
+                        const scaleY = rect.height / previewImg.naturalHeight;
+                        avatarScale = Math.max(scaleX, scaleY) * 1.2; // 20% zoom in for better fit
+                        
+                        avatarPos = { x: 0, y: 0 };
+                        document.getElementById('avatar-zoom-slider').value = avatarScale;
+                        updateAvatarTransform();
+                        initAvatarEditor();
+                    };
+                    
+                    // Deselect illustrations
+                    document.querySelectorAll('#illustrations-grid .sketchy-card').forEach(card => {
+                        card.classList.remove('bg-primary-container', 'ring-2', 'ring-primary', 'border-primary');
+                        card.classList.add('bg-white');
+                        const badge = card.querySelector('.material-symbols-outlined');
+                        if (badge) badge.remove();
+                    });
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function saveAvatarChange() {
+            if (!tempSelectedAvatar) return goBack();
+            
+            const isIllustration = illustrations.some(ill => ill.url === tempSelectedAvatar);
+            
+            if (isIllustration) {
+                // For built-in illustrations, just save the URL
+                finishSaving(tempSelectedAvatar);
+            } else {
+                // For uploaded photos, bake the crop using Canvas
+                const img = document.getElementById('change-avatar-current');
+                const container = document.getElementById('avatar-editor-container');
+                
+                const canvas = document.createElement('canvas');
+                const size = 400; // Final output size
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                
+                // Calculate mapping
+                const rect = container.getBoundingClientRect();
+                const scaleX = img.naturalWidth / img.width;
+                const scaleY = img.naturalHeight / img.height;
+                
+                // Draw to canvas
+                ctx.save();
+                // Create circular clip for the baked image
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+                ctx.clip();
+                
+                const drawScale = (size / rect.width) * avatarScale;
+                const dx = (size / 2) + (avatarPos.x * (size / rect.width));
+                const dy = (size / 2) + (avatarPos.y * (size / rect.height));
+                
+                ctx.translate(dx, dy);
+                ctx.scale(drawScale, drawScale);
+                ctx.drawImage(img, -img.width/2, -img.height/2, img.width, img.height);
+                ctx.restore();
+                
+                finishSaving(canvas.toDataURL('image/jpeg', 0.8));
+            }
+
+            function finishSaving(finalUrl) {
+                const user = getSession();
+                if (user) {
+                    user.avatar = finalUrl;
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
+                userData.avatar = finalUrl;
+                localStorage.setItem('user_avatar', finalUrl);
+                syncUI();
+                goBack();
+            }
+        }
+
+        function renderStore() {
+            const container = document.getElementById('stickers-grid');
+            if(!container) return;
+
+            container.innerHTML = stickerPacks.map(p => `
+                <div class="bg-white border-2 border-on-surface p-6 hand-drawn-border relative flex flex-col pencil-shadow group hover:translate-y-1 hover:shadow-none transition-all">
+                    ${p.tape ? `<div class="washi-tape !w-16 !h-5" style="background-color: ${p.tape}; left: 20%; top: -8px;"></div>` : ''}
+                    
+                    <div class="aspect-square bg-[#f5f3f3] border-2 border-outline-variant p-4 mb-6 relative overflow-hidden rounded-lg">
+                        <img src="${p.img}" class="w-full h-full object-contain opacity-80 mix-blend-multiply">
+                    </div>
+
+                    <h3 class="font-headline text-xl font-black mb-2">${p.title}</h3>
+                    <p class="text-on-surface-variant text-xs font-medium leading-relaxed mb-6 opacity-70">${p.desc}</p>
+                    
+                    <div class="mt-auto pt-4 border-t-2 border-dashed border-outline-variant flex justify-between items-center">
+                        <span class="font-black text-lg ${p.owned ? 'opacity-40' : ''}">${p.price}</span>
+                        <button onclick="window.location.hash='#emoticons-detail?id=${p.id}'" class="${p.owned ? 'bg-surface-container-high text-outline' : 'bg-[#ffeba7] text-on-surface'} border-2 border-on-surface px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest pencil-shadow">
+                            ${p.owned ? 'ALREADY OWNED' : 'VIEW DETAIL'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPackDetail(id) {
+            const pack = stickerPacks.find(p => p.id === id) || stickerPacks[0];
+            
+            document.getElementById('pack-detail-title').innerText = pack.title;
+            document.getElementById('pack-detail-desc').innerText = pack.desc;
+            document.getElementById('pack-detail-price').innerText = pack.price;
+            document.getElementById('pack-detail-img').src = pack.img;
+            
+            const tape = document.getElementById('pack-detail-tape');
+            if (pack.tape) {
+                tape.style.backgroundColor = pack.tape;
+                tape.classList.remove('hidden');
+            } else {
+                tape.classList.add('hidden');
+            }
+
+            const buyBtn = document.getElementById('pack-buy-btn');
+            if (pack.owned) {
+                buyBtn.innerText = 'ALREADY OWNED';
+                buyBtn.disabled = true;
+                buyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                buyBtn.innerText = 'BUY PACK';
+                buyBtn.disabled = false;
+                buyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            const grid = document.getElementById('pack-icons-grid');
+            grid.innerHTML = (pack.icons || []).map(icon => `
+                <div class="aspect-square bg-surface-container-high p-2 flex items-center justify-center hand-drawn-border-alt hover:bg-primary-container transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined text-4xl text-primary">${icon}</span>
+                </div>
+            `).join('');
+        }
+
+        async function sendResetLink() {
+            const email = document.getElementById('forgot-email').value.trim();
+            if (!email) return alert('Vui lòng nhập email!');
+            
+            const btn = document.querySelector('#forgot-password button');
+            const originalText = btn.innerText;
+            btn.innerText = 'SENDING...';
+            btn.disabled = true;
+
+            try {
+                const result = await sendToDatabase({
+                    action: "FORGOT_PASSWORD",
+                    email: email,
+                    baseUrl: getBaseURL()
+                });
+
+                if (result.result === 'success') {
+                    alert('A reset link has been sent to ' + email + '. Please check your inbox!');
+                    window.location.hash = '#login';
+                } else {
+                    alert('Lỗi: ' + (result.message || 'Không thể gửi mail lúc này.'));
+                }
+            } catch (e) {
+                alert('Lỗi kết nối: ' + e.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function togglePassVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        // --- ACTIONS ---
+        function login() { window.location.hash = '#login'; }
+        function logout() { localStorage.removeItem('user'); window.location.hash = '#guest'; navigate(); }
+        function goBack() { history.back(); }
+
+        function toggleMoodPicker() {
+            const modal = document.getElementById('mood-selection-modal');
+            const content = modal ? modal.querySelector('.animate-pop, .animate-pop-out') : null;
+            if (modal) {
+                if (content) {
+                    content.classList.remove('animate-pop-out');
+                    content.classList.add('animate-pop');
+                }
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeMoodModal() {
+            const modal = document.getElementById('mood-selection-modal');
+            const content = modal ? modal.querySelector('.animate-pop') : null;
+            if (modal && content) {
+                content.classList.remove('animate-pop');
+                content.classList.add('animate-pop-out');
+                
+                // Wait for animation to finish before hiding
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300); // Match animation duration (0.3s)
+            } else if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function selectDiaryMood(iconName, text) {
+            currentMood = iconName;
+            const emoji = getEmoji(iconName);
+            const moodText = text || getMoodText(iconName);
+
+            // Update Compose Section
+            const composeIcon = document.getElementById('current-mood-icon');
+            const composeHeader = document.querySelector('#compose h2');
+            if (composeIcon) composeIcon.innerText = iconName;
+            if (composeHeader) composeHeader.innerText = moodText;
+
+            // Update View/Read Section
+            const viewIcon = document.getElementById('view-mood-icon');
+            const viewBadge = document.getElementById('view-mood-badge');
+            if (viewIcon) viewIcon.innerText = emoji;
+            if (viewBadge) viewBadge.innerText = moodText;
+
+            closeMoodModal();
+        }
+
+        function applyTextColor(color, previewId, editorId) {
+            const editor = document.getElementById(editorId);
+            editor.focus();
+            document.execCommand('foreColor', false, color);
+            const preview = document.getElementById(previewId);
+            if (preview) preview.style.backgroundColor = color;
+            updateToolbarState();
+        }
+
+        function triggerColorPicker(id) {
+            const picker = document.getElementById(id);
+            if (picker) {
+                picker.click();
+            }
+        }
+
+        function triggerImageUpload(id) {
+            document.getElementById(id).click();
+        }
+
+        function formatDoc(cmd, value = null, editorId = 'diary-content') {
+            const editor = document.getElementById(editorId);
+            editor.focus();
+            document.execCommand(cmd, false, value);
+            updateToolbarState();
+        }
+
+        function updateToolbarState() {
+            const buttons = {
+                'bold': ['btn-bold', 'vbtn-bold'],
+                'italic': ['btn-italic', 'vbtn-italic'],
+                'underline': ['btn-underline', 'vbtn-underline'],
+                'justifyLeft': ['btn-justifyLeft', 'vbtn-justifyLeft'],
+                'justifyCenter': ['btn-justifyCenter', 'vbtn-justifyCenter'],
+                'justifyRight': ['btn-justifyRight', 'vbtn-justifyRight'],
+                'insertUnorderedList': ['btn-insertUnorderedList', 'vbtn-insertUnorderedList'],
+                'insertOrderedList': ['btn-insertOrderedList', 'vbtn-insertOrderedList']
+            };
+
+            for (const [cmd, ids] of Object.entries(buttons)) {
+                ids.forEach(id => {
+                    const btn = document.getElementById(id);
+                    if (btn) {
+                        if (document.queryCommandState(cmd)) {
+                            btn.classList.add('bg-primary-container', 'pencil-shadow');
+                        } else {
+                            btn.classList.remove('bg-primary-container', 'pencil-shadow');
+                        }
+                    }
+                });
+            }
+        }
+
+        // Update toolbar state when clicking or typing in the editor
+        ['click', 'keyup'].forEach(evt => {
+            document.getElementById('diary-content')?.addEventListener(evt, updateToolbarState);
+            document.getElementById('append-content')?.addEventListener(evt, updateToolbarState);
+            document.getElementById('view-old-content')?.addEventListener(evt, updateToolbarState);
+        });
+
+        function insertDiaryImage(input, editorId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = `<img src="${e.target.result}" class="max-w-full h-auto hand-drawn-border my-4 shadow-md transition-transform hover:scale-[1.02] cursor-pointer">`;
+                    const editor = document.getElementById(editorId);
+                    editor.focus();
+                    document.execCommand('insertHTML', false, img + '<br>');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        async function saveDiaryEntry() {
+            const content = document.getElementById('diary-content').innerHTML;
+            if (!content || content.trim() === 'Dear Diary, today was...' || content.trim() === '') return alert('Hãy viết gì đó nhé!');
+            const user = getSession();
+            
+            // Use the ID that was generated when we entered the #compose page
+            const entryId = currentlyViewingId || ('mood_' + Date.now());
+            
+            const logEntry = { 
+                action: "LOG_CALM_DIARY",
+                id: entryId, 
+                moodSymbol: currentMood, 
+                moodIcon: getEmoji(currentMood), 
+                moodText: getMoodText(currentMood), 
+                note: content, 
+                timestamp: Date.now(), 
+                email: user ? user.email : 'guest' 
+            };
+            
+            let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            // Remove existing entry if it was an "auto-save" or update of the same session ID
+            logs = logs.filter(l => l.id !== entryId);
+            logs.unshift(logEntry);
+            localStorage.setItem('calm_diary_entries', JSON.stringify(logs));
+
+            const btn = document.getElementById('save-entry-btn');
+            btn.innerText = 'SAVING...';
+            btn.disabled = true;
+
+            if (typeof sendToDatabase === 'function') {
+                const response = await sendToDatabase(logEntry);
+                if (response && response.streak !== undefined) {
+                    const updatedUser = getSession();
+                    if (updatedUser) {
+                        updatedUser.streak = response.streak;
+                        localStorage.setItem('user', JSON.stringify(updatedUser));
+                        syncUI();
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                btn.innerText = 'Save Page'; btn.disabled = false;
+                document.getElementById('diary-content').innerText = 'Dear Diary, today was...';
+                currentMood = "sentiment_satisfied";
+                document.getElementById('current-mood-icon').innerText = "sentiment_satisfied";
+                document.querySelector('#compose h2').innerText = "How's your day?";
+                currentlyViewingId = null; // Clear ID after successful save
+                window.location.hash = '#diary';
+            }, 800);
+        }
+
+        async function syncDiaryFromServer() {
+            const user = getSession();
+            if (!user || !user.email) return;
+            try {
+                const response = await fetch(`${CONFIG_GOOGLE_URL}?action=GET_CALM_DIARY&email=${user.email}`);
+                const result = await response.json();
+                if (result.result === 'success') {
+                    const serverLogs = result.data;
+                    let localLogs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+                    const logMap = new Map();
+                    localLogs.forEach(l => logMap.set(l.id, l));
+                    serverLogs.forEach(l => logMap.set(l.id, l));
+                    const merged = Array.from(logMap.values()).sort((a,b) => b.timestamp - a.timestamp);
+                    localStorage.setItem('calm_diary_entries', JSON.stringify(merged));
+                    renderDiaryEntries();
+                }
+            } catch(e) {}
+        }
+
+        function saveNickname() {
+            const val = document.getElementById('input-nickname').value;
+            const user = getSession();
+            if(user) { user.name = val; localStorage.setItem('user', JSON.stringify(user)); }
+            userData.nickname = val; syncUI(); history.back();
+        }
+
+        function saveIntro() {
+            const val = document.getElementById('input-intro').value;
+            localStorage.setItem('user_intro', val);
+            userData.intro = val; syncUI(); history.back();
+        }
+
+        // --- STREAK CALCULATION ---
+        function calculateStreak() {
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            if (logs.length === 0) return 0;
+
+            // Get unique days (YYYY-MM-DD)
+            const days = [...new Set(logs.map(log => {
+                const d = new Date(log.timestamp);
+                return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            }))].sort().reverse();
+
+            const today = new Date();
+            const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
+
+            // If no entry today and no entry yesterday, streak is 0
+            if (days[0] !== todayStr && days[0] !== yesterdayStr) return 0;
+
+            let streak = 0;
+            let checkDate = new Date(days[0]); // Start from the most recent entry date
+
+            for (let i = 0; i < days.length; i++) {
+                const currentDayStr = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
+                
+                if (days[i] === currentDayStr) {
+                    streak++;
+                    checkDate.setDate(checkDate.getDate() - 1); // Move to previous day
+                } else {
+                    break;
+                }
+            }
+            return streak;
+        }
+
+        // --- RENDERING ---
+        function syncUI() {
+            const user = getSession();
+            if (user) {
+                userData.nickname = user.name;
+                userData.email = user.email;
+                // Prioritize user avatar from session, then local storage, then fallback to seed
+                userData.avatar = user.avatar || localStorage.getItem('user_avatar') || `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.email}`;
+            } else {
+                userData.avatar = localStorage.getItem('user_avatar') || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear';
+            }
+            document.querySelectorAll('.nickname-display').forEach(el => el.innerText = userData.nickname);
+            document.querySelectorAll('.nickname-greeting').forEach(el => el.innerText = `Hello, ${userData.nickname}!`);
+            document.getElementById('profile-img').src = userData.avatar || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear';
+            document.getElementById('profile-intro').innerText = `"${userData.intro}"`;
+            document.getElementById('edit-avatar-preview').src = document.getElementById('profile-img').src;
+            document.getElementById('edit-nickname-display').innerText = userData.nickname;
+            document.getElementById('edit-intro-display').innerText = userData.intro;
+            document.getElementById('input-nickname').value = userData.nickname;
+            document.getElementById('input-intro').value = userData.intro;
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            document.getElementById('stat-entries').innerText = logs.length;
+            const goodMoods = logs.filter(l => ["😊", "✨", "🙂"].includes(l.moodIcon)).length;
+            if(document.getElementById('stat-good-moods')) {
+                document.getElementById('stat-good-moods').innerText = goodMoods;
+            }
+            
+            // Calculate and Update Streak
+            const streakCount = calculateStreak();
+            const streakDisplay = document.querySelector('.page-section#profile .font-headline.text-tertiary');
+            if (streakDisplay) streakDisplay.innerText = streakCount;
+            
+            const streakHeader = document.getElementById('streak-header-badge');
+            if (streakHeader) streakHeader.innerText = `Streak: ${streakCount} Days`;
+        }
+
+        function renderDiaryEntries() {
+            const container = document.getElementById('diary-list-container');
+            if(!container) return;
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            if (logs.length === 0) { container.innerHTML = ''; document.getElementById('empty-diary-msg').classList.remove('hidden'); return; }
+            document.getElementById('empty-diary-msg').classList.add('hidden');
+
+            const colors = ['#ffe5ec', '#b6dffd', '#f5e29f', '#ffeba7'];
+            container.innerHTML = logs.map((log, i) => {
+                const isImg = log.moodIcon && log.moodIcon.startsWith('http');
+                return `
+                <article onclick="openDiaryEntry('${log.id}')" class="relative bg-white hand-drawn-border p-6 md:p-10 pencil-shadow transition-all hover:translate-y-1 hover:shadow-none cursor-pointer group overflow-hidden">
+                    <div class="washi-tape" style="background-color: ${colors[i % colors.length]}; left: ${20 + Math.random()*60}%"></div>
+                    <div class="flex justify-between items-start mb-6 md:mb-8">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] md:text-[11px] font-bold text-primary uppercase tracking-[0.3em]">${new Date(log.timestamp).toLocaleDateString('vi-VN', { weekday: 'short', day: '2-digit', month: '2-digit' })}</span>
+                            <h3 class="font-bold text-xl md:text-2xl mt-1 leading-tight">${log.moodText}</h3>
+                        </div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-on-surface bg-primary-container flex items-center justify-center rotate-6 overflow-hidden">
+                            ${isImg ? `<img src="${log.moodIcon}" class="w-8 h-8 md:w-10 md:h-10 object-contain">` : `<span class="text-3xl md:text-4xl">${log.moodIcon}</span>`}
+                        </div>
+                    </div>
+                    <p class="text-on-surface-variant text-base md:text-lg font-medium leading-relaxed italic line-clamp-3 mb-6 md:mb-8">${log.note}</p>
+                    <div class="flex justify-between items-center pt-5 border-t border-dashed border-outline-variant text-[10px] font-bold text-outline uppercase tracking-widest">
+                        <span>${new Date(log.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
+                        <button onclick="event.stopPropagation(); deleteDiaryEntry('${log.id}')" class="text-error opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-error/10 rounded-full"><span class="material-symbols-outlined text-sm md:text-base">delete</span></button>
+                    </div>
+                </article>
+            `}).join('');
+        }
+
+        let currentlyViewingId = null;
+        let currentActiveEditor = 'append-content';
+
+        function isSameDay(d1, d2) {
+            return d1.getFullYear() === d2.getFullYear() &&
+                   d1.getMonth() === d2.getMonth() &&
+                   d1.getDate() === d2.getDate();
+        }
+
+        function hasEditRights() {
+            const token = JSON.parse(localStorage.getItem('calm_edit_token'));
+            if (token && token.expiry > Date.now()) return true;
+            return false;
+        }
+
+        function grantTestEditRights() {
+            const expiry = Date.now() + (5 * 60 * 1000); // 5 minutes
+            localStorage.setItem('calm_edit_token', JSON.stringify({ expiry }));
+            alert('Quyền chỉnh sửa đã được cấp trong 5 phút để test!');
+            if (currentlyViewingId) openDiaryEntry(currentlyViewingId); // Refresh view
+        }
+
+        function openDiaryEntry(id) {
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const entry = logs.find(l => l.id === id);
+            if (!entry) return;
+
+            currentlyViewingId = id;
+            if (entry.moodSymbol) currentMood = entry.moodSymbol;
+            
+            const viewIcon = document.getElementById('view-mood-icon');
+            const isImg = entry.moodIcon && entry.moodIcon.startsWith('http');
+            if (isImg) {
+                viewIcon.innerHTML = `<img src="${entry.moodIcon}" class="w-16 h-16 object-contain">`;
+            } else {
+                viewIcon.innerText = entry.moodIcon;
+            }
+
+            document.getElementById('view-date-display').innerText = new Date(entry.timestamp).toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+            document.getElementById('view-mood-badge').innerText = entry.moodText;
+            
+            const isToday = isSameDay(new Date(entry.timestamp), new Date());
+            const hasToken = hasEditRights();
+            const editable = isToday || hasToken;
+
+            const oldContentEl = document.getElementById('view-old-content');
+            const appendSection = document.getElementById('append-section');
+            const statusBadge = document.getElementById('edit-status-badge');
+            const saveBtn = document.getElementById('view-save-btn');
+            const moodDisplay = document.getElementById('view-mood-display');
+
+            oldContentEl.innerHTML = entry.note;
+            
+            if (editable) {
+                currentActiveEditor = 'view-old-content';
+                oldContentEl.contentEditable = "true";
+                oldContentEl.classList.add('ruled-lines', 'min-h-[300px]');
+                appendSection.classList.add('hidden');
+                statusBadge.innerText = hasToken ? "Chế độ Test (Có quyền sửa)" : "Cùng ngày (Có quyền sửa)";
+                statusBadge.classList.replace('bg-surface-container-highest', 'bg-primary-container');
+                saveBtn.innerText = "LƯU THAY ĐỔI";
+                moodDisplay.classList.add('cursor-pointer');
+            } else {
+                currentActiveEditor = 'append-content';
+                oldContentEl.contentEditable = "false";
+                oldContentEl.classList.remove('ruled-lines', 'min-h-[300px]');
+                appendSection.classList.remove('hidden');
+                document.getElementById('append-content').innerText = '';
+                statusBadge.innerText = "Khác ngày (Chỉ xem & thêm)";
+                statusBadge.classList.replace('bg-primary-container', 'bg-surface-container-highest');
+                saveBtn.innerText = "THÊM VÀO TRANG";
+                moodDisplay.classList.remove('cursor-pointer');
+            }
+            
+            window.location.hash = '#view-entry';
+        }
+
+        async function handleViewSave() {
+            if (!currentlyViewingId) return;
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const entryIndex = logs.findIndex(l => l.id === currentlyViewingId);
+            if (entryIndex === -1) return;
+
+            const isToday = isSameDay(new Date(logs[entryIndex].timestamp), new Date());
+            const hasToken = hasEditRights();
+            const editable = isToday || hasToken;
+
+            if (editable) {
+                // OVERWRITE MODE - Save content AND current mood state
+                logs[entryIndex].note = document.getElementById('view-old-content').innerHTML;
+                logs[entryIndex].moodSymbol = currentMood;
+                logs[entryIndex].moodIcon = getEmoji(currentMood);
+                logs[entryIndex].moodText = getMoodText(currentMood);
+            } else {
+                // APPEND MODE
+                const newContent = document.getElementById('append-content').innerHTML;
+                if (!newContent || newContent.trim() === '' || newContent.trim() === '<br>') return alert('Hãy viết thêm gì đó nhé!');
+                
+                const separator = '<div class="my-8 border-t border-dashed border-outline-variant opacity-50"></div>';
+                const timestampLabel = `<div class="text-[10px] font-bold text-primary opacity-50 uppercase tracking-widest mb-4">Thêm lúc ${new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</div>`;
+                logs[entryIndex].note += separator + timestampLabel + newContent;
+            }
+
+            localStorage.setItem('calm_diary_entries', JSON.stringify(logs));
+            const btn = document.getElementById('view-save-btn');
+            btn.innerText = 'ĐANG LƯU...';
+            btn.disabled = true;
+
+            if (typeof sendToDatabase === 'function') {
+                const response = await sendToDatabase({ action: "LOG_CALM_DIARY", ...logs[entryIndex] });
+                if (response && response.streak !== undefined) {
+                    const updatedUser = getSession();
+                    if (updatedUser) {
+                        updatedUser.streak = response.streak;
+                        localStorage.setItem('user', JSON.stringify(updatedUser));
+                        syncUI();
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                btn.innerText = editable ? "LƯU THAY ĐỔI" : "THÊM VÀO TRANG";
+                btn.disabled = false;
+                window.location.hash = '#diary';
+                renderDiaryEntries();
+            }, 600);
+        }
+
+        window.deleteDiaryEntry = async (id) => {
+            if(!confirm('Bạn có chắc muốn xóa trang nhật ký này?')) return;
+            
+            const user = getSession();
+            let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            localStorage.setItem('calm_diary_entries', JSON.stringify(logs.filter(l => l.id !== id)));
+            renderDiaryEntries();
+
+            if (typeof sendToDatabase === 'function') {
+                await sendToDatabase({ 
+                    action: "DELETE_LOG", 
+                    id: id, 
+                    tab: "CalmDiary",
+                    email: user ? user.email : 'guest'
+                });
+            }
+        };
+
+        function initCalendar() {
+            const grid = document.getElementById('calendar-grid'); if(!grid) return;
+            grid.innerHTML = '';
+            
+            // Lấy dữ liệu thật từ LocalStorage
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            
+            // Map các ngày có bài viết (ví dụ bài viết trong tháng 5/2026)
+            const entryDays = new Set();
+            logs.forEach(log => {
+                const date = new Date(log.timestamp);
+                if (date.getMonth() === 4 && date.getFullYear() === 2026) { // Tháng 5 (index 4)
+                    entryDays.add(date.getDate());
+                }
+            });
+
+            // Tạo các ô trống đầu tháng (May 2026 bắt đầu từ Thứ 6 -> 5 ô trống)
+            for(let i=0; i<5; i++) grid.innerHTML += `<div class="p-2"></div>`;
+            
+            // Vẽ 31 ngày
+            for(let day=1; day<=31; day++) {
+                const hasEntry = entryDays.has(day);
+                // Nếu có bài viết, lấy icon của bài viết đầu tiên trong ngày đó (hoặc icon mặc định)
+                let icon = day;
+                if (hasEntry) {
+                    const entry = logs.find(l => new Date(l.timestamp).getDate() === day);
+                    const isImg = entry.moodIcon && entry.moodIcon.startsWith('http');
+                    if (isImg) {
+                        icon = `<img src="${entry.moodIcon}" class="w-6 h-6 object-contain">`;
+                    } else {
+                        icon = `<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1">mood</span>`;
+                    }
+                }
+                
+                grid.innerHTML += `
+                    <div class="hand-drawn-circle h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center font-bold text-[9px] sm:text-xs 
+                        ${hasEntry ? 'bg-primary-container scale-110' : 'bg-surface-container-lowest opacity-40'} 
+                        cursor-pointer hover:scale-110 transition-transform relative overflow-hidden">
+                        ${icon}
+                    </div>`;
+            }
+        }
+
+        function setMoodView(mode) {
+            const weeklyBtn = document.getElementById('toggle-weekly');
+            const monthlyBtn = document.getElementById('toggle-monthly');
+            if (!weeklyBtn || !monthlyBtn) return;
+
+            if (mode === 'weekly') {
+                weeklyBtn.classList.add('bg-primary', 'text-white');
+                weeklyBtn.classList.remove('text-on-surface-variant');
+                monthlyBtn.classList.remove('bg-primary', 'text-white');
+                monthlyBtn.classList.add('text-on-surface-variant');
+                renderWeeklyMood();
+            } else {
+                monthlyBtn.classList.add('bg-primary', 'text-white');
+                monthlyBtn.classList.remove('text-on-surface-variant');
+                weeklyBtn.classList.remove('bg-primary', 'text-white');
+                weeklyBtn.classList.add('text-on-surface-variant');
+                renderMonthlyMood();
+            }
+        }
+
+        function renderWeeklyMood() {
+            const container = document.getElementById('weekly-mood-container');
+            const labels = document.getElementById('mood-labels-grid');
+            if(!container || !labels) return;
+            
+            container.className = "grid grid-cols-7 gap-2 h-40 items-end border-b-2 border-outline-variant pb-2";
+            labels.className = "grid grid-cols-7 gap-2 mt-4 text-center";
+            labels.innerHTML = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => `<div class="text-[8px] font-bold uppercase tracking-widest ${i===6?'text-error':'opacity-40'}">${d}</div>`).join('');
+
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const today = new Date();
+            const currentDay = today.getDay();
+            const diff = today.getDate() - (currentDay === 0 ? 6 : currentDay - 1);
+            const monday = new Date(new Date().setDate(diff));
+            monday.setHours(0, 0, 0, 0);
+
+            const moodScores = {
+                "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9": 80, 
+                "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY": 100,
+                "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB": 90,
+                "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb": 30,
+                "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY": 20,
+                "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1": 40 
+            };
+
+            let html = '';
+            for(let i=0; i<7; i++) {
+                const checkDate = new Date(monday);
+                checkDate.setDate(monday.getDate() + i);
+                const log = logs.find(l => new Date(l.timestamp).toDateString() === checkDate.toDateString());
+                let h = "10%", c = "bg-surface-container-highest";
+                if (log) {
+                    const s = moodScores[log.moodIcon] || 50;
+                    h = s + "%";
+                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
+                }
+                html += `<div class="flex flex-col items-center gap-2 h-full justify-end"><div class="${c} w-full hand-drawn-border-alt transition-all duration-700" style="height: ${h}"></div></div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function renderMonthlyMood() {
+            const container = document.getElementById('weekly-mood-container');
+            const labels = document.getElementById('mood-labels-grid');
+            if(!container || !labels) return;
+
+            const daysInMonth = 31; // May 2026
+            container.className = "grid grid-cols-[repeat(31,1fr)] gap-0.5 h-40 items-end border-b-2 border-outline-variant pb-2";
+            labels.className = "flex justify-between mt-4 text-center px-1";
+            labels.innerHTML = `<div class="text-[8px] font-bold opacity-40 uppercase">Day 1</div><div class="text-[8px] font-bold opacity-40 uppercase">Day 31</div>`;
+
+            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const moodScores = {
+                "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9": 80, 
+                "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY": 100,
+                "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB": 90,
+                "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb": 30,
+                "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY": 20,
+                "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1": 40 
+            };
+
+            let html = '';
+            for(let day=1; day<=31; day++) {
+                const log = logs.find(l => {
+                    const d = new Date(l.timestamp);
+                    return d.getDate() === day && d.getMonth() === 4 && d.getFullYear() === 2026;
+                });
+                let h = "8%", c = "bg-surface-container-highest";
+                if (log) {
+                    const s = moodScores[log.moodIcon] || 50;
+                    h = s + "%";
+                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
+                }
+                html += `<div class="h-full flex items-end"><div class="${c} w-full transition-all duration-700" style="height: ${h}; border-radius: 2px;"></div></div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function getEmoji(i) { 
+            const m = { 
+                "sentiment_satisfied": "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9", 
+                "mood": "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY", 
+                "auto_awesome": "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB", 
+                "sentiment_very_dissatisfied": "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb", 
+                "mood_bad": "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY", 
+                "coffee": "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1" 
+            }; 
+            return m[i] || "📝"; 
+        }
+        function getMoodText(i) { const m = { "sentiment_satisfied": "Feeling Good", "sentiment_neutral": "Just Okay", "sentiment_dissatisfied": "A Bit Sad", "sentiment_very_dissatisfied": "Tired", "mood_bad": "Rough Day", "coffee": "Coffee Time", "auto_awesome": "Magic Day", "mood": "Peaceful" }; return m[i] || "Reflections"; }
+
+        window.addEventListener('hashchange', navigate);
+        window.addEventListener('load', () => { 
+            const savedIntro = localStorage.getItem('user_intro');
+            if(savedIntro) userData.intro = savedIntro;
+
+            // Handle Login Form
+            const loginForm = document.getElementById('calm-login-form');
+            if (loginForm) {
+                loginForm.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('calm-login-email').value.trim().toLowerCase();
+                    const pass = document.getElementById('calm-login-pass').value.trim();
+                    const btn = loginForm.querySelector('button');
+                    btn.innerText = 'CHECKING...';
+
+                    try {
+                        const inputHash = await hashPassword(pass);
+                        const result = await fetchFromDatabase({
+                            action: "LOGIN",
+                            email: email,
+                            password: inputHash // Send password for backend verification
+                        });
+
+                        if (result && result.result === 'success') {
+                            localStorage.setItem('user', JSON.stringify({ 
+                                name: result.name, 
+                                email: result.email,
+                                streak: result.streak || 0
+                            }));
+                            syncUI();
+                            window.location.hash = '#calendar';
+                        } else {
+                            const msg = result ? result.message : 'Tài khoản hoặc mật khẩu không chính xác';
+                            alert(msg + '! Hãy đảm bảo bạn đã đăng ký đúng thông tin nhé.');
+                        }
+                    } catch (err) {
+                        console.error('Database Connection Error:', err);
+                        alert('Lỗi kết nối database! Chi tiết: ' + err.message);
+                    } finally {
+                        btn.innerText = 'Log In';
+                    }
+                };
+            }
+
+            // Handle Signup Form
+            const signupForm = document.getElementById('calm-signup-form');
+            if (signupForm) {
+                signupForm.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('calm-reg-name').value.trim();
+                    const email = document.getElementById('calm-reg-email').value.trim().toLowerCase();
+                    const pass = document.getElementById('calm-reg-pass').value.trim();
+                    const confirm = document.getElementById('calm-reg-confirm').value.trim();
+                    
+                    if (pass !== confirm) {
+                        return alert('Mật khẩu xác nhận không khớp!');
+                    }
+
+                    const btn = signupForm.querySelector('button');
+                    btn.innerText = 'CREATING...';
+
+                    try {
+                        const hashedPassword = await hashPassword(pass);
+                        const result = await fetchFromDatabase({
+                            action: "REGISTER",
+                            name: name,
+                            email: email,
+                            password: hashedPassword
+                        });
+                        
+                        if (result && result.result === "success") {
+                            alert('Đăng ký thành công! Hãy đăng nhập nhé.');
+                            window.location.hash = '#login';
+                        } else {
+                            const msg = result ? result.message : "Server không phản hồi";
+                            alert('Đăng ký thất bại: ' + msg);
+                        }
+                    } catch (err) {
+                        console.error('Signup Error:', err);
+                        alert('Đăng ký thất bại! Lỗi kết nối: ' + err.message);
+                    } finally {
+                        btn.innerText = 'Create Account';
+                    }
+                };
+            }
+
+            // Handle Reset Password Form
+            const resetForm = document.getElementById('reset-password-form');
+            if (resetForm) {
+                resetForm.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const pass = document.getElementById('reset-pass').value.trim();
+                    const confirm = document.getElementById('reset-confirm').value.trim();
+                    
+                    if (pass !== confirm) return alert('Mật khẩu xác nhận không khớp!');
+                    
+                    // Extract email from URL hash/query
+                    const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
+                    const email = urlParams.get('email');
+                    
+                    if (!email) {
+                        alert('Lỗi: Không tìm thấy thông tin email trong link reset. Vui lòng thử lại từ bước Quên mật khẩu.');
+                        return window.location.hash = '#forgot-password';
+                    }
+
+                    const btn = resetForm.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+                    btn.innerText = 'UPDATING...';
+                    btn.disabled = true;
+
+                    try {
+                        const hashedPass = await hashPassword(pass);
+                        const result = await sendToDatabase({
+                            action: "RESET_PASSWORD",
+                            email: email,
+                            newPassword: hashedPass
+                        });
+
+                        if (result.result === 'success') {
+                            alert('Password updated successfully! You can now log in with your new safe word.');
+                            window.location.hash = '#login';
+                        } else {
+                            alert('Lỗi: ' + (result.message || 'Không thể đặt lại mật khẩu.'));
+                        }
+                    } catch (err) {
+                        alert('Lỗi kết nối: ' + err.message);
+                    } finally {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
+                };
+            }
+
+            syncUI(); navigate(); 
+            initAvatarEditor();
+            initDragAndDrop();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mood Selection - Calm Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#8a5d6d",
+                      "surface-container-high": "#eae8e7",
+                      "primary-container": "#ffeba7",
+                      "surface-container": "#efeded",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "on-surface-variant": "#4b463a",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#1b1c1c",
+                      "outline-variant": "#cdc6b6",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "surface-bright": "#fbf9f8",
+                      "tertiary-fixed": "#ffd9e4",
+                      "on-primary-container": "#786932",
+                      "surface-variant": "#e4e2e2",
+                      "inverse-on-surface": "#f2f0f0",
+                      "surface-container-low": "#f5f3f3",
+                      "surface": "#fbf9f8",
+                      "secondary-container": "#b6dffd",
+                      "on-primary-fixed-variant": "#524612",
+                      "on-secondary-fixed": "#001e2e",
+                      "secondary": "#3a637c",
+                      "primary-fixed": "#f5e29f",
+                      "inverse-primary": "#d8c685",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "secondary-fixed": "#c7e7ff",
+                      "tertiary-container": "#ffe5ec",
+                      "on-secondary-container": "#3b637d",
+                      "background": "#fbf9f8",
+                      "on-primary-fixed": "#221b00",
+                      "surface-tint": "#6b5e28",
+                      "inverse-surface": "#303030",
+                      "on-error": "#ffffff",
+                      "tertiary": "#7e5262",
+                      "on-tertiary-fixed": "#31101e",
+                      "on-surface": "#1b1c1c",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#e4e2e2",
+                      "tertiary-fixed-dim": "#efb7ca",
+                      "primary-fixed-dim": "#d8c685",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "outline": "#7c7769",
+                      "surface-dim": "#dbd9d9",
+                      "primary": "#6b5e28"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-lg": "32px",
+                      "stack-md": "16px",
+                      "margin-page": "20px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-lg": ["Quicksand"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "label-sm": ["Quicksand"],
+                      "body-md": ["Quicksand"]
+              },
+              "fontSize": {
+                      "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+                      "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #4b463a;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-drawn-circle {
+            border: 2px solid #4b463a;
+            border-radius: 48% 52% 49% 51% / 51% 49% 52% 48%;
+        }
+        .hand-drawn-shadow {
+            box-shadow: 4px 4px 0px 0px #ffeba7;
+        }
+        .hand-drawn-shadow-hover:hover {
+            box-shadow: 2px 2px 0px 0px #ffeba7;
+            transform: translate(2px, 2px);
+        }
+        
+        .blur-overlay {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .mood-ring {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        .mood-item {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            margin: -40px;
+            transition: transform 0.2s ease;
+        }
+
+        .mood-item:hover {
+            transform: scale(1.1);
+        }
+
+        /* Positioning for 6 items in a circle */
+        .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
+        .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
+        .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
+        .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
+        .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
+        .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
+
+        .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
+        .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
+        .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
+        .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
+        .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
+        .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+<!-- Desktop SideNav (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col w-[240px] bg-surface h-screen border-r-2 border-outline-variant/30 flex-shrink-0 relative z-10 py-stack-lg">
+<div class="px-margin-page mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Calm Diary</h1>
+</div>
+<div class="flex flex-col gap-stack-sm px-gutter flex-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+<span>Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">local_mall</span>
+<span>Store</span>
+</a>
+<!-- Active State using semantic intent matching Diary/Compose -->
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl hand-drawn-border font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">book</span>
+<span>Diary</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-body-lg text-body-lg mt-auto" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span>Account</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area (Blurred Background) -->
+<main class="flex-1 relative h-screen w-full bg-surface-bright flex flex-col items-center justify-center">
+<!-- Mock background content to be blurred -->
+<div class="absolute inset-0 p-8 flex flex-col gap-6 opacity-40 pointer-events-none">
+<div class="max-w-3xl w-full mx-auto space-y-6">
+<div class="h-12 w-48 bg-surface-variant rounded-md hand-drawn-border"></div>
+<div class="space-y-4">
+<div class="h-4 w-full bg-surface-variant rounded"></div>
+<div class="h-4 w-5/6 bg-surface-variant rounded"></div>
+<div class="h-4 w-4/6 bg-surface-variant rounded"></div>
+<div class="h-4 w-full bg-surface-variant rounded"></div>
+<div class="h-4 w-3/4 bg-surface-variant rounded"></div>
+</div>
+</div>
+</div>
+<!-- Blur Overlay -->
+<div class="absolute inset-0 bg-surface/30 blur-overlay z-20 flex flex-col items-center justify-center">
+<!-- Circular Modal -->
+<div class="relative bg-surface w-[450px] h-[450px] rounded-full hand-drawn-circle flex flex-col items-center justify-center shadow-lg mb-8">
+<!-- Central Text -->
+<div class="absolute inset-0 flex items-center justify-center flex-col z-10 pointer-events-none">
+<h2 class="font-headline-md text-headline-md text-on-surface text-center px-8">How are you<br/>today?</h2>
+</div>
+<!-- Mood Ring -->
+<div class="mood-ring z-20">
+<!-- Calm -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_satisfied</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
+</button>
+<!-- Happy -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_very_satisfied</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
+</button>
+<!-- Excited -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_excited</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
+</button>
+<!-- Angry -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_very_dissatisfied</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
+</button>
+<!-- Sad -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_sad</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
+</button>
+<!-- Tired -->
+<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_dissatisfied</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
+</button>
+</div>
+</div>
+<!-- Close Button -->
+<button class="w-14 h-14 bg-surface rounded-full hand-drawn-circle flex items-center justify-center hand-drawn-shadow hand-drawn-shadow-hover transition-all focus:outline-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+</div>
+</main>
+</body></html>

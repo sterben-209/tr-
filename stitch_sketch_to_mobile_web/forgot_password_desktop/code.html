@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @id tailwind-config;
+        /* Hand-drawn effect filter */
+        .sketch-border {
+            filter: url(#wobble);
+            border: 2px solid #7c7769;
+        }
+        .offset-shadow {
+            box-shadow: 6px 6px 0px 0px #7c7769;
+        }
+        .sketch-input {
+            border: none;
+            border-bottom: 2px solid #7c7769;
+            background: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen flex">
+<!-- SVG Filter for Hand-Drawn Wobble -->
+<svg style="position: absolute; width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg">
+<filter id="wobble">
+<feturbulence basefrequency="0.02" numoctaves="3" result="noise" type="fractalNoise"></feturbulence>
+<fedisplacementmap in="SourceGraphic" in2="noise" scale="2"></fedisplacementmap>
+</filter>
+</svg>
+<!-- Sidebar Navigation (Desktop Version of BottomNavBar) -->
+<aside class="hidden md:flex flex-col w-64 bg-surface border-r-2 border-outline-variant py-stack-lg px-gutter h-screen sticky top-0">
+<div class="mb-stack-lg px-4">
+<span class="font-headline-lg text-headline-lg text-primary">Calm Diary</span>
+</div>
+<nav class="flex flex-col gap-stack-sm flex-1">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-stack-md flex items-center gap-3 bg-primary-container rounded-2xl sketch-border">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed" data-icon="mood">mood</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-primary-container">How are you today?</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-h-screen relative overflow-y-auto">
+<!-- Top App Bar (Contextual) -->
+<header class="docked full-width top-0 z-10 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-page py-stack-sm w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="mood">mood</span>
+<h1 class="font-headline-md text-headline-md text-on-surface">Calm Diary</h1>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="menu_book">menu_book</span>
+</div>
+</header>
+<!-- Centered Forgot Password Card Section -->
+<section class="flex-1 flex items-center justify-center p-gutter">
+<div class="max-w-md w-full bg-surface-container-lowest p-stack-lg rounded-xl sketch-border offset-shadow relative">
+<!-- Decorative Washi Tape -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-tertiary-fixed opacity-60 rotate-2 sketch-border" style="clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);"></div>
+<div class="text-center mt-stack-md">
+<!-- Illustration Placeholder -->
+<div class="mb-stack-md flex justify-center">
+<div class="relative w-32 h-32 bg-primary-container rounded-full flex items-center justify-center sketch-border">
+<span class="material-symbols-outlined text-primary scale-[2.5]" data-icon="mail">mail</span>
+<!-- Sketchy decorative sparkles -->
+<span class="absolute top-2 right-2 material-symbols-outlined text-secondary scale-75" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Forgot Password?</h2>
+<p class="font-body-md text-on-surface-variant mb-stack-lg">
+                        Don't worry! It happens to the best of us. Enter your email below and we'll send you a link to reset your password.
+                    </p>
+<!-- Input Field -->
+<div class="text-left mb-stack-lg">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-2 mb-1 block" for="email">Email Address</label>
+<div class="relative">
+<span class="absolute left-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="alternate_email">alternate_email</span>
+<input class="w-full pl-8 py-3 sketch-input focus:ring-0 focus:border-primary font-body-md" id="email" placeholder="hello@example.com" type="email"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary py-4 px-stack-md rounded-xl font-headline-md sketch-border hover:scale-[0.98] transition-transform active:translate-y-1 active:shadow-none mb-stack-md">
+                        Send Reset Link
+                    </button>
+<!-- Back to Login -->
+<a class="inline-flex items-center gap-2 text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+                        Back to Login
+                    </a>
+</div>
+</div>
+</section>
+<!-- Decorative Elements for "Scrapbook" feel -->
+<div class="absolute bottom-10 right-10 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]" data-icon="draw">draw</span>
+</div>
+<div class="absolute top-40 left-10 opacity-10 pointer-events-none rotate-12">
+<span class="material-symbols-outlined text-[80px]" data-icon="potted_plant">potted_plant</span>
+</div>
+</main>
+<!-- Mobile Bottom Navigation (Hidden on Desktop) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 border-t-2 border-outline-variant z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</button>
+</nav>
+</body></html>

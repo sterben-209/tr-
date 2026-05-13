@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bind Mailbox - Calm Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-container-high": "#eae8e7",
+                            "on-surface-variant": "#4b463a",
+                            "inverse-on-surface": "#f2f0f0",
+                            "on-primary-container": "#786932",
+                            "on-error": "#ffffff",
+                            "secondary-container": "#b6dffd",
+                            "primary-fixed-dim": "#d8c685",
+                            "on-primary": "#ffffff",
+                            "on-secondary-fixed": "#001e2e",
+                            "secondary-fixed": "#c7e7ff",
+                            "tertiary-fixed": "#ffd9e4",
+                            "on-background": "#1b1c1c",
+                            "surface": "#fbf9f8",
+                            "on-tertiary-container": "#8a5d6d",
+                            "surface-container": "#efeded",
+                            "surface-bright": "#fbf9f8",
+                            "error-container": "#ffdad6",
+                            "tertiary-container": "#ffe5ec",
+                            "on-tertiary-fixed": "#31101e",
+                            "on-secondary": "#ffffff",
+                            "surface-tint": "#6b5e28",
+                            "primary": "#6b5e28",
+                            "secondary": "#3a637c",
+                            "on-primary-fixed-variant": "#524612",
+                            "on-primary-fixed": "#221b00",
+                            "on-secondary-container": "#3b637d",
+                            "surface-container-highest": "#e4e2e2",
+                            "outline-variant": "#cdc6b6",
+                            "inverse-primary": "#d8c685",
+                            "error": "#ba1a1a",
+                            "on-secondary-fixed-variant": "#204b63",
+                            "surface-container-low": "#f5f3f3",
+                            "on-error-container": "#93000a",
+                            "background": "#fbf9f8",
+                            "tertiary-fixed-dim": "#efb7ca",
+                            "outline": "#7c7769",
+                            "on-surface": "#1b1c1c",
+                            "on-tertiary": "#ffffff",
+                            "secondary-fixed-dim": "#a3cce9",
+                            "surface-dim": "#dbd9d9",
+                            "tertiary": "#7e5262",
+                            "on-tertiary-fixed-variant": "#633b4a",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-variant": "#e4e2e2",
+                            "inverse-surface": "#303030",
+                            "primary-fixed": "#f5e29f",
+                            "primary-container": "#ffeba7"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "margin-page": "20px",
+                            "stack-lg": "32px",
+                            "stack-md": "16px",
+                            "gutter": "12px",
+                            "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                            "body-md": [
+                                    "Quicksand"
+                            ],
+                            "headline-md": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "body-lg": [
+                                    "Quicksand"
+                            ],
+                            "label-sm": [
+                                    "Quicksand"
+                            ],
+                            "headline-lg": [
+                                    "Plus Jakarta Sans"
+                            ]
+                    },
+                    "fontSize": {
+                            "body-md": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "22px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "26px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "label-sm": [
+                                    "12px",
+                                    {
+                                            "lineHeight": "16px",
+                                            "letterSpacing": "0.05em",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-lg": [
+                                    "28px",
+                                    {
+                                            "lineHeight": "36px",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "700"
+                                    }
+                            ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Notebook Grid Background */
+        .bg-notebook-grid {
+            background-color: #fbf9f8;
+            background-image: 
+                linear-gradient(rgba(205, 198, 182, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(205, 198, 182, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Hand-drawn offset shadow simulation */
+        .hand-drawn-shadow {
+            box-shadow: 4px 4px 0px 0px #4b463a;
+        }
+        
+        .hand-drawn-shadow:hover {
+            box-shadow: 0px 0px 0px 0px #4b463a;
+            transform: translate(4px, 4px);
+        }
+
+        /* Irregular border radii for organic feel */
+        .organic-box {
+            border-radius: 12px 14px 10px 16px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-notebook-grid min-h-screen flex flex-col items-center px-margin-page py-stack-lg text-on-surface">
+<!-- Top Action Bar (Custom for Transactional Screen) -->
+<header class="w-full max-w-md flex justify-start items-center mb-stack-lg">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container">
+<span class="material-symbols-outlined" style="font-size: 28px;">chevron_left</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="w-full max-w-md flex flex-col items-center flex-1 pt-8">
+<!-- Page Title -->
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-12">
+            Bind Mailbox
+        </h1>
+<!-- Combined Input Form Card -->
+<div class="w-full organic-box bg-surface-container-lowest border-2 border-on-surface-variant hand-drawn-shadow flex flex-col mb-10 overflow-hidden transition-transform duration-200">
+<!-- Email Input Row -->
+<div class="flex items-center px-4 py-3 border-b-[1.5px] border-outline-variant relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant w-16 shrink-0 tracking-wide" for="email">Email</label>
+<!-- Hand-drawn style vertical separator -->
+<div class="h-5 w-[1.5px] bg-outline-variant rounded-full mx-2 transform rotate-2"></div>
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-outline p-0 outline-none w-full" id="email" placeholder="" type="email"/>
+<!-- Subtle focus glow mimicking pastel highlighter -->
+<div class="absolute inset-0 bg-primary-container opacity-0 group-focus-within:opacity-10 pointer-events-none transition-opacity duration-300"></div>
+</div>
+<!-- Code Input Row -->
+<div class="flex items-center px-4 py-3 relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant w-16 shrink-0 tracking-wide" for="code">Code</label>
+<!-- Hand-drawn style vertical separator -->
+<div class="h-5 w-[1.5px] bg-outline-variant rounded-full mx-2 transform -rotate-1"></div>
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-outline p-0 outline-none w-full" id="code" placeholder="" type="text"/>
+<button class="ml-3 font-label-sm text-label-sm text-outline hover:text-on-surface-variant transition-colors whitespace-nowrap px-2 py-1 rounded-md hover:bg-surface-container-high focus:outline-none" type="button">
+                    Send Code
+                </button>
+<!-- Subtle focus glow mimicking pastel highlighter -->
+<div class="absolute inset-0 bg-primary-container opacity-0 group-focus-within:opacity-10 pointer-events-none transition-opacity duration-300"></div>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="mt-4 px-8 py-3 bg-surface-container-lowest border-2 border-on-surface-variant text-outline font-label-sm text-label-sm tracking-widest uppercase transition-all hover:text-on-surface-variant hover:border-on-surface relative group" type="button">
+<span class="relative z-10 border-b border-outline group-hover:border-on-surface-variant pb-0.5 transition-colors">Confirm Binding</span>
+</button>
+</main>
+</body></html>

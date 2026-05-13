@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Calm Diary - Calendar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Hand-drawn organic touches */
+        .organic-border {
+            border: 2px solid #1b1c1c;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .organic-card {
+            border: 2px solid #1b1c1c;
+            border-radius: 12px 12px 12px 12px / 25px 5px 25px 5px;
+        }
+        .organic-circle {
+            border: 1.5px solid #1b1c1c;
+            border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+        }
+        .hand-drawn-rect {
+            border: 1.5px solid #7c7769;
+            border-radius: 4px 4px 4px 4px / 8px 2px 8px 2px;
+        }
+        .flat-shadow {
+            box-shadow: 4px 4px 0px 0px #1b1c1c;
+        }
+        .pencil-shadow {
+            box-shadow: 4px 4px 0px 0px #7c7769;
+        }
+        
+        /* Specific wobbly calendar border */
+        .calendar-outer-box {
+            border: 2px solid #1b1c1c;
+            border-radius: 10px 10px 10px 10px / 50px 10px 50px 10px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cdc6b6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c7769; }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6b5e28",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ffeba7",
+                        "on-primary-container": "#786932",
+                        "secondary": "#3a637c",
+                        "secondary-container": "#b6dffd",
+                        "on-secondary-container": "#3b637d",
+                        "tertiary": "#7e5262",
+                        "tertiary-container": "#ffe5ec",
+                        "on-tertiary-container": "#8a5d6d",
+                        "background": "#fbf9f8",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#4b463a",
+                        "outline": "#7c7769",
+                        "outline-variant": "#cdc6b6",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-container-high": "#eae8e7",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Quicksand", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="hidden md:flex flex-col w-72 h-screen bg-surface border-r-2 border-outline-variant py-10 px-6 shrink-0 z-50">
+        <div class="mb-16 px-4 flex items-center gap-4">
+            <div class="w-10 h-10 organic-circle flex items-center justify-center border-2 border-on-surface">
+                <span class="material-symbols-outlined fill text-on-surface text-2xl">sentiment_satisfied</span>
+            </div>
+            <h1 class="font-headline text-3xl font-bold tracking-tight text-on-surface">Scrapbook</h1>
+        </div>
+        
+        <nav class="flex flex-col gap-2 flex-grow">
+            <!-- Active: Calendar -->
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl bg-primary-container text-on-primary-container border-2 border-outline flat-shadow transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">calendar_month</span>
+                <span class="font-bold text-base uppercase tracking-widest">Calendar</span>
+            </a>
+            <!-- Inactive -->
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">local_mall</span>
+                <span class="font-bold text-base uppercase tracking-widest">Store</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">book</span>
+                <span class="font-bold text-base uppercase tracking-widest">Diary</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
+                <span class="font-bold text-base uppercase tracking-widest">Account</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto">
+            <button class="w-full py-4 bg-[#b6dffd] text-on-surface rounded-xl border-2 border-on-surface flex items-center justify-center gap-2 transition-all flat-shadow font-bold text-sm uppercase tracking-widest">
+                <span class="material-symbols-outlined">edit</span>
+                <span>New Entry</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 md:ml-72 h-screen overflow-y-auto relative bg-surface-bright flex flex-col lg:flex-row">
+        <!-- Calendar Section -->
+        <div class="flex-1 p-8 md:p-12">
+            <div class="flex justify-between items-center mb-6 pb-2 border-b-2 border-dashed border-outline-variant max-w-4xl">
+                <h2 class="font-headline text-3xl font-bold">May 2026</h2>
+                <div class="flex gap-2">
+                    <button class="w-10 h-10 border-2 border-on-surface rounded-lg flex items-center justify-center hover:bg-surface-container-high transition-all flat-shadow bg-white">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="w-10 h-10 border-2 border-on-surface rounded-lg flex items-center justify-center hover:bg-surface-container-high transition-all flat-shadow bg-white">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Calendar Container -->
+            <div class="calendar-outer-box bg-white p-8 md:p-14 min-h-[850px] flex flex-col max-w-4xl shadow-sm">
+                <!-- Days Header -->
+                <div class="grid grid-cols-7 text-center mb-8 px-4">
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Sun</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Mon</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Tue</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Wed</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Thu</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Fri</div>
+                    <div class="font-bold text-[10px] uppercase tracking-[0.2em] opacity-40">Sat</div>
+                </div>
+
+                <!-- Days Grid -->
+                <div class="grid grid-cols-7 gap-4 flex-grow px-4">
+                    <!-- Empty slots -->
+                    <div class="p-2"></div><div class="p-2"></div><div class="p-2"></div><div class="p-2"></div><div class="p-2"></div>
+                    
+                    <!-- Day 1 -->
+                    <div class="hand-drawn-rect p-3 flex flex-col items-center justify-between min-h-[140px] bg-white group cursor-pointer hover:bg-primary-container/5 transition-all">
+                        <span class="text-[11px] font-bold opacity-30 self-end">1</span>
+                        <div class="w-11 h-11 organic-circle bg-[#ffeba7] flex items-center justify-center border-[1.5px] border-on-surface group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined fill text-on-surface text-xl">sentiment_satisfied</span>
+                        </div>
+                    </div>
+                    <!-- Day 2 -->
+                    <div class="hand-drawn-rect p-3 flex flex-col items-center justify-between min-h-[140px] bg-white group cursor-pointer hover:bg-primary-container/5 transition-all">
+                        <span class="text-[11px] font-bold opacity-30 self-end">2</span>
+                        <div class="w-11 h-11 organic-circle bg-[#b6dffd] flex items-center justify-center border-[1.5px] border-on-surface group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined fill text-on-surface text-xl">sentiment_neutral</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hand-drawn-rect p-3 flex flex-col min-h-[140px] bg-white"><span class="text-[11px] font-bold opacity-30 self-end">3</span></div>
+                    
+                    <!-- Day 4 -->
+                    <div class="hand-drawn-rect p-3 flex flex-col items-center justify-between min-h-[140px] bg-white group cursor-pointer hover:bg-primary-container/5 transition-all">
+                        <span class="text-[11px] font-bold opacity-30 self-end">4</span>
+                        <div class="w-11 h-11 organic-circle bg-[#ffe5ec] flex items-center justify-center border-[1.5px] border-on-surface group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined fill text-on-surface text-xl">sentiment_dissatisfied</span>
+                        </div>
+                    </div>
+
+                    <div class="hand-drawn-rect p-3 flex flex-col min-h-[140px] bg-white"><span class="text-[11px] font-bold opacity-30 self-end">5</span></div>
+                    <div class="hand-drawn-rect p-3 flex flex-col min-h-[140px] bg-white"><span class="text-[11px] font-bold opacity-30 self-end">6</span></div>
+                    
+                    <!-- Day 7 -->
+                    <div class="hand-drawn-rect p-3 flex flex-col items-center justify-between min-h-[140px] bg-white group cursor-pointer hover:bg-primary-container/5 transition-all">
+                        <span class="text-[11px] font-bold opacity-30 self-end">7</span>
+                        <div class="w-11 h-11 organic-circle bg-[#ffeba7] flex items-center justify-center border-[1.5px] border-on-surface group-hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined fill text-on-surface text-xl">sentiment_satisfied</span>
+                        </div>
+                    </div>
+
+                    <!-- Highlighted Day 8 -->
+                    <div class="border-2 border-on-surface rounded-sm p-3 flex flex-col justify-between min-h-[140px] bg-[#f5e29f] shadow-[5px_5px_0px_0px_#1b1c1c] -translate-y-1">
+                        <div class="flex justify-between items-start">
+                             <span class="material-symbols-outlined fill text-on-surface text-sm">star</span>
+                             <span class="text-[12px] font-bold">8</span>
+                        </div>
+                        <p class="text-[10px] italic font-bold leading-tight opacity-70">Had coffee...</p>
+                    </div>
+
+                    <!-- Rest -->
+                    <script>
+                        for(let i=9; i<=31; i++) {
+                            document.write(`<div class="hand-drawn-rect p-3 flex flex-col min-h-[140px] bg-white"><span class="text-[11px] font-bold opacity-30 self-end">${i}</span></div>`);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets -->
+        <div class="w-full lg:w-[320px] xl:w-[400px] p-8 md:p-10 bg-surface-bright border-l-2 border-outline-variant flex flex-col gap-8 shrink-0 shadow-[-10px_0px_30px_-15px_rgba(0,0,0,0.05)]">
+            <!-- Check-in Widget -->
+            <div class="organic-card bg-[#ffeba7] p-8 flex flex-col items-center text-center relative border-2 border-on-surface">
+                <h3 class="font-headline text-xl font-bold mb-3 text-on-surface">How are you feeling today?</h3>
+                <p class="text-on-surface-variant font-medium text-xs mb-6 leading-relaxed">Take a moment to check in with yourself.</p>
+                <button class="bg-white border-2 border-on-surface px-6 py-2 rounded-md font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 flat-shadow hover:translate-y-1 transition-all">
+                    <span class="material-symbols-outlined text-lg">edit_note</span> Write Entry
+                </button>
+            </div>
+
+            <!-- Weekly Mood Analysis Widget -->
+            <div class="organic-card bg-white p-6 flex flex-col border-2 border-on-surface flat-shadow">
+                <div class="flex items-center gap-2 mb-6 pb-3 border-b border-dashed border-outline-variant">
+                    <span class="material-symbols-outlined text-secondary text-2xl">monitoring</span>
+                    <h3 class="font-bold text-xs uppercase tracking-widest">Mood Analysis</h3>
+                </div>
+                <div class="flex items-end justify-between h-24 px-4 mb-4">
+                    <div class="w-3.5 h-[20%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[40%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[30%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[55%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[45%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[65%] bg-on-surface rounded-sm"></div>
+                    <div class="w-3.5 h-[85%] bg-on-surface rounded-sm relative">
+                        <span class="absolute -top-7 left-1/2 -translate-x-1/2 material-symbols-outlined text-sm fill text-on-surface">star</span>
+                    </div>
+                </div>
+                <div class="flex justify-between px-2 text-[9px] font-bold opacity-30 uppercase tracking-[0.2em]">
+                    <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                </div>
+                <p class="mt-4 text-[10px] text-center font-medium text-on-surface-variant italic">Weekly Mood Trend</p>
+            </div>
+
+            <!-- Streak Widget -->
+            <div class="organic-card bg-white p-6 flex flex-col border-2 border-on-surface flat-shadow">
+                <div class="flex items-center gap-2 mb-6 pb-3 border-b border-dashed border-outline-variant">
+                    <span class="material-symbols-outlined text-tertiary text-2xl">local_fire_department</span>
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-on-surface">Diary Streak</h3>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="w-14 h-14 organic-circle flex items-center justify-center bg-[#ffe5ec] text-on-surface text-2xl font-bold border-2 border-on-surface">5</div>
+                    <div>
+                        <p class="font-bold text-lg text-on-surface leading-tight">Days in a row!</p>
+                        <p class="text-[10px] font-medium text-on-surface-variant opacity-60">Keep it up!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

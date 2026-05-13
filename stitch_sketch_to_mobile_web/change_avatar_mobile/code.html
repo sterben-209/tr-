@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #4b463a;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .sketch-shadow {
+            box-shadow: 4px 4px 0px 0px #7c7769;
+        }
+        .active-sketch-shadow {
+            box-shadow: 2px 2px 0px 0px #7c7769;
+            transform: translate(2px, 2px);
+        }
+        .wobble-circle {
+            border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+            border: 2px solid #4b463a;
+        }
+        .scribble-bg {
+            background-image: radial-gradient(#cdc6b6 0.5px, transparent 0.5px);
+            background-size: 8px 8px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e4e2e2",
+                        "primary-fixed": "#f5e29f",
+                        "on-surface-variant": "#4b463a",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "surface-tint": "#6b5e28",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "on-primary-fixed-variant": "#524612",
+                        "background": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#6b5e28",
+                        "secondary": "#3a637c",
+                        "tertiary-fixed": "#ffd9e4",
+                        "secondary-container": "#b6dffd",
+                        "primary-fixed-dim": "#d8c685",
+                        "secondary-fixed": "#c7e7ff",
+                        "tertiary": "#7e5262",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "on-error-container": "#93000a",
+                        "surface": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001e2e",
+                        "on-primary-container": "#786932",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#cdc6b6",
+                        "primary-container": "#ffeba7",
+                        "outline": "#7c7769",
+                        "surface-dim": "#dbd9d9",
+                        "inverse-primary": "#d8c685",
+                        "on-primary-fixed": "#221b00",
+                        "tertiary-container": "#ffe5ec",
+                        "surface-variant": "#e4e2e2",
+                        "on-tertiary-container": "#8a5d6d",
+                        "surface-container": "#efeded",
+                        "on-tertiary-fixed": "#31101e",
+                        "inverse-on-surface": "#f2f0f0",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#3b637d",
+                        "on-surface": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "gutter": "12px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-page": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full bg-surface z-50 flex justify-between items-center px-margin-page py-stack-sm border-b-2 border-outline-variant">
+<button class="flex items-center justify-center p-2 text-primary active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Change Avatar</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="pt-20 px-margin-page flex flex-col items-center">
+<!-- Avatar Preview Section -->
+<div class="mt-stack-lg mb-stack-lg flex flex-col items-center">
+<div class="relative w-40 h-40 wobble-circle p-1 bg-surface-container-lowest">
+<img alt="Current Avatar" class="w-full h-full object-cover rounded-full" data-alt="A gentle, hand-drawn character illustration of a young person with soft features and messy hair, set against a cream-colored paper background. The drawing uses delicate charcoal-like outlines and a limited palette of muted yellows and soft beige. The style is minimalist and empathetic, evoking the quiet introspection of a personal digital diary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL0w4doEUozGOGm2LwTpRlO-_uLGoFYB9_0GaBrCsrxFHACJQ9tRrXb-EsFgHdarFdr3dmA7SvKHOzKB2nyIIUhLGJXAvqdejEruH0FoC4vWo0pFKA5p2N3qJhdAQ94GAvAwNkem2ldx2hKWdDUa8gVnr9iChmtPmVlfrBfitiwV-ccvKm6uKIiVS_wLygoVZpppWHZTzlCbZsEj7eilh3fp2J2qHqudw-pIo32_rDfb-6V1vTni5I2t_kdABT3cbouCacxBWc8bU3"/>
+<div class="absolute -bottom-2 -right-2 bg-primary-container p-2 rounded-full border-2 border-outline sketch-shadow">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="edit">edit</span>
+</div>
+</div>
+<p class="font-label-sm text-label-sm mt-4 text-on-surface-variant uppercase tracking-widest">Current Profile Picture</p>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-gutter w-full mb-stack-lg">
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container hand-drawn-border sketch-shadow active:active-sketch-shadow transition-all">
+<span class="material-symbols-outlined text-primary mb-2 text-3xl" data-icon="add_a_photo">add_a_photo</span>
+<span class="font-label-sm text-label-sm text-on-surface">Upload Photo</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-primary-container hand-drawn-border sketch-shadow active:active-sketch-shadow transition-all">
+<span class="material-symbols-outlined text-primary mb-2 text-3xl" data-icon="palette">palette</span>
+<span class="font-label-sm text-label-sm text-on-surface">Choose Art</span>
+</button>
+</div>
+<!-- Illustration Grid -->
+<div class="w-full">
+<div class="flex items-center gap-2 mb-stack-md">
+<span class="material-symbols-outlined text-primary" data-icon="draw">draw</span>
+<h2 class="font-headline-md text-headline-md">Illustrations</h2>
+</div>
+<div class="grid grid-cols-3 gap-gutter">
+<!-- Avatar Option 1 -->
+<button class="aspect-square bg-surface-container-lowest hand-drawn-border flex items-center justify-center p-1 active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A charming, hand-sketched avatar of a small cat with simple charcoal lines and soft yellow watercolor accents on the ears. The background is a textured cream paper, maintaining a scrapbook aesthetic. The style is intentionally imperfect and warm, suitable for a personal wellness and journaling application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmr8zDXGag6TA1rUbvjAHomdTjKN_WWsFJOJ64A_Nf0p5WRWUEYkHkG7pbvJVz9Zf4Vn6calE2d2AVwhtktUm1m6bXIv966-ZSXteanZiQh-M10fJj3fkhP1Xr-o8Y-5UM0NBh3l8jKDFy9YBpWbRXLzeLyJswvsfteSsQFHHwccjUMhlhiEdHGs2-AE5WOXI1rB7A4XvaybJfhhLMVV7WEP8tw0KfzappS3uSW78-Gu6sT1N7iM38ylzU1tD20ViWeTD5gJ030GZB"/>
+</button>
+<!-- Avatar Option 2 (Active/Selected) -->
+<button class="relative aspect-square bg-primary-container border-4 border-primary hand-drawn-border flex items-center justify-center p-1 sketch-shadow active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg opacity-80" data-alt="A minimalist line-art character of a smiling person with round glasses, drawn with a digital pen that simulates a pencil on paper. The illustration features soft, pastel yellow fills that slightly bleed over the charcoal outlines. The overall mood is cheerful, serene, and friendly, designed for a safe digital diary space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAARKaox-7B6otJ_KWAP9vv4_0RXIXug2HgXKsufthkgQm1qlyM1yzQohzkE7ZgGrrtlRyINtbarFnCLUnyZdIoJDB3JCXTjPeOm-_X3_UG-VnK-CQNAojkQt-J2S7SY-dKKDGW65kfo8PZ1oJLr4l7l9vE6F4V63qqxJ7JTfv2Jry_VTFWaU7V6INy4d6GVEV84JsvKxy2czQQrpLMDdtIaPHUX6R0kK0VikfmzEf48V3P3iv0PikT1mKkcOd75hv4b3T1L-QXzyT6"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl font-bold" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Avatar Option 3 -->
+<button class="aspect-square bg-surface-container-lowest hand-drawn-border flex items-center justify-center p-1 active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A whimsical, hand-drawn character of a plant in a small pot with a tiny smiley face, representing growth and mindfulness. The drawing style uses soft graphite lines and muted olive and cream tones. It sits on a background that resembles the grainy texture of a physical scrapbook page." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Tc2TIvXo46NxZ50m51Uw8K_XSR0iFJ7759zdBh8ZHx3k3fe4N_WCl59aQG-JjrhjYnX2fa7iuwvjahuJMyGTPRFzB5wXwmMQTOdH5A6fSKBmhnpTtRwcmZyQVxWHxGuHPk9RKYm9I0RZOTlV8tZR12osGEPaq7rPSr_WaeUy00RjoMUfsIw9kY1_bYJZT3_Z9ym-teXcIZTAOwSaBgZsQ3vlz16906brbRjA6v_K_d2OA_shONlkFsqL-IsZW8EjZgmfTCBAxNNA"/>
+</button>
+<!-- Avatar Option 4 -->
+<button class="aspect-square bg-surface-container-lowest hand-drawn-border flex items-center justify-center p-1 active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A soft-edged digital sketch of a person wearing a cozy beanie, rendered in a simple, kawaii art style. The color palette is restricted to warm creams and soft grays, with a single pastel yellow highlight. The illustration feels personal and hand-crafted, fitting the empathetic narrative of a daily reflection tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOaxaBarN2ij4thDW89y2F1O9PNT8yUExKdG8-EmcSVPGbH-vNWab60F4K2dj-XLLNcVim-1XJUILB-_HHWYEzqWUiB8lnGWAjKjI2Gqiikkg5JqJ6KsjVtq52OZDOBdPUEjyhHRWtRo7fB4tKXF57TFjY1hToDOn8h6wZyTLNUpsU6uCr4ryqVMR0-6yAEP0pOQD_K1JRquCf_SPVuPoaAvjxXLAmfh3-VMl-lQ4xFXiaEpTc13-n-Eq6F2W-ve98EWZeEIruaaU"/>
+</button>
+<!-- Avatar Option 5 -->
+<button class="aspect-square bg-surface-container-lowest hand-drawn-border flex items-center justify-center p-1 active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A simple, hand-drawn doodle of a sleepy moon character with closed eyes and a small smile, drawn with thick charcoal lines. Soft yellow stippling creates a gentle glow effect against a textured cream background. The design is calm and unassuming, perfect for a night-time journaling app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAfQj5WM2Q8VJiIRUD5kHk4cu_vVPXBHJj9UHQHuZAzB2jnF6DK4uI3hZtnqJyYmAZUOEktPVeEn2fELdMKaiHzUV1z1BcT8d7yKvXFU5BdXHwrAnnDSJY_wiGEcr5_jP2XH_i_FpzI-HBYiU04a0NtD9mSidQAN33cFaTveyen0y6w4Sgu-Vdrq1MytgorY6sIrdJuzL3brWk-UEHmfGcN76mOTDxmHslnPZ5zDt3rDDXsr3UrEngULOzRKS0ft8jsHQDkRfiwLJu"/>
+</button>
+<!-- Avatar Option 6 -->
+<button class="aspect-square bg-surface-container-lowest hand-drawn-border flex items-center justify-center p-1 active:scale-95 transition-transform overflow-hidden">
+<img class="w-full h-full object-cover rounded-lg" data-alt="An organic, minimalist illustration of a bird in flight, captured with a few expressive brush strokes. The style is inspired by Zen ink drawings, adapted for a modern scrapbook UI. The palette uses muted browns and a light cream background, evoking a sense of freedom and creative expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQZx1EUaSBashf3uwmRJM5Q5u_VrWWhBpQn44BY0ueVKjL6KrCkWcZRrW49QocqgIdjX20HjsjrH5dIuIA1ZKsWHMjk9SgdPgBoLy9P8dAeIfyJUSPXMgMOlR1CgIeNRhFKOyEtrQiEtEEGEF5Q8VCnDBVggLU4YfnOrNIs2oEj2fj0F38LJB6iJP5sUkcLm4p9irJErOFZHz3xneIvEvhQqvol7SlnbMYDKJ67UbrU9PZjscAoNEJYcbGjwTLtrZ1NNXqcqFxZ37e"/>
+</button>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="w-full mt-stack-lg flex gap-gutter">
+<button class="flex-1 py-3 px-4 font-headline-md text-on-surface-variant border-2 border-outline hand-drawn-border active:scale-95 transition-transform">
+                Cancel
+            </button>
+<button class="flex-1 py-3 px-4 font-headline-md bg-primary text-on-primary hand-drawn-border sketch-shadow active:active-sketch-shadow transition-all">
+                Save Changes
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 border-t-2 border-outline-variant z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="book">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+</body></html>

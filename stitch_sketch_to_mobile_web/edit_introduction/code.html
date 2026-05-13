@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Profile - Calm Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#eae8e7",
+                      "on-surface-variant": "#4b463a",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-primary-container": "#786932",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#b6dffd",
+                      "primary-fixed-dim": "#d8c685",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#001e2e",
+                      "secondary-fixed": "#c7e7ff",
+                      "tertiary-fixed": "#ffd9e4",
+                      "on-background": "#1b1c1c",
+                      "surface": "#fbf9f8",
+                      "on-tertiary-container": "#8a5d6d",
+                      "surface-container": "#efeded",
+                      "surface-bright": "#fbf9f8",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#ffe5ec",
+                      "on-tertiary-fixed": "#31101e",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#6b5e28",
+                      "primary": "#6b5e28",
+                      "secondary": "#3a637c",
+                      "on-primary-fixed-variant": "#524612",
+                      "on-primary-fixed": "#221b00",
+                      "on-secondary-container": "#3b637d",
+                      "surface-container-highest": "#e4e2e2",
+                      "outline-variant": "#cdc6b6",
+                      "inverse-primary": "#d8c685",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "surface-container-low": "#f5f3f3",
+                      "on-error-container": "#93000a",
+                      "background": "#fbf9f8",
+                      "tertiary-fixed-dim": "#efb7ca",
+                      "outline": "#7c7769",
+                      "on-surface": "#1b1c1c",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "surface-dim": "#dbd9d9",
+                      "tertiary": "#7e5262",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e4e2e2",
+                      "inverse-surface": "#303030",
+                      "primary-fixed": "#f5e29f",
+                      "primary-container": "#ffeba7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-page": "20px",
+                      "stack-lg": "32px",
+                      "stack-md": "16px",
+                      "gutter": "12px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Quicksand"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Quicksand"
+                      ],
+                      "label-sm": [
+                              "Quicksand"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Grid Paper Background */
+        .bg-grid-paper {
+            background-color: #fbf9f8; /* surface */
+            background-image: 
+                linear-gradient(to right, #e4e2e2 1px, transparent 1px), /* surface-variant */
+                linear-gradient(to bottom, #e4e2e2 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Irregular Border for Text Area */
+        .hand-drawn-border {
+            border: 1.5px solid #4b463a; /* on-surface-variant */
+            border-radius: 8px;
+            /* Simple SVG filter for wobble effect if desired, omitted for brevity but simulated with soft radius */
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col items-center justify-center bg-surface-container-high md:p-8">
+<!-- Mobile Device Container -->
+<div class="w-full h-full max-w-md bg-grid-paper relative overflow-hidden flex flex-col mx-auto border-x md:border-y border-outline-variant md:rounded-2xl md:shadow-xl md:h-[850px]">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-margin-page py-stack-md w-full sticky top-0 z-10">
+<button class="p-2 -ml-2 text-on-surface hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md font-bold">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Editing Brief</h1>
+<button class="p-2 -mr-2 text-on-surface hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-headline-md font-bold">check</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow px-margin-page py-stack-lg flex flex-col relative z-0">
+<!-- Text Area Wrapper -->
+<div class="relative w-full h-48 hand-drawn-border bg-surface-container/50">
+<textarea class="w-full h-full bg-transparent border-none focus:ring-0 resize-none font-body-md text-body-md text-on-surface p-4 placeholder:text-on-surface-variant/50" placeholder="You can fill in your interests, mood and wishes, introduce yourself"></textarea>
+<!-- Simulated Cursor -->
+<div class="absolute top-4 left-4 w-0.5 h-5 bg-on-surface animate-pulse"></div>
+</div>
+</main>
+<!-- Simulated Mobile Keyboard Area (Static Visual Representation) -->
+<div class="w-full bg-[#D1D5DB] pb-safe z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] border-t border-outline-variant">
+<!-- Suggestion Bar -->
+<div class="flex justify-between items-center px-2 py-2 border-b border-[#9CA3AF]/30">
+<div class="flex-1 text-center font-body-md text-sm text-on-surface-variant border-r border-[#9CA3AF]/30">em</div>
+<div class="flex-1 text-center font-body-md text-sm text-on-surface-variant border-r border-[#9CA3AF]/30">tôi</div>
+<div class="flex-1 text-center font-body-md text-sm text-on-surface-variant">anh</div>
+</div>
+<!-- Keys Container -->
+<div class="p-2 space-y-2">
+<!-- Row 1 -->
+<div class="flex justify-center gap-1">
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">q</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">w</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">e</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">r</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">t</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">y</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">u</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">i</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">o</div>
+<div class="w-[8%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">p</div>
+</div>
+<!-- Row 2 -->
+<div class="flex justify-center gap-1 px-4">
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">a</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">s</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">d</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">f</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">g</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">h</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">j</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">k</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">l</div>
+</div>
+<!-- Row 3 -->
+<div class="flex justify-center gap-1">
+<div class="w-[12%] h-10 bg-[#9CA3AF] rounded shadow-sm flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-lg">arrow_upward</span>
+</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">z</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">x</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">c</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">v</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">b</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">n</div>
+<div class="w-[9%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">m</div>
+<div class="w-[12%] h-10 bg-[#9CA3AF] rounded shadow-sm flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-lg">backspace</span>
+</div>
+</div>
+<!-- Spacebar Row -->
+<div class="flex justify-center gap-1 pt-1 pb-4">
+<div class="w-[20%] h-10 bg-[#9CA3AF] rounded shadow-sm flex items-center justify-center font-body-md text-sm text-on-surface">123</div>
+<div class="w-[50%] h-10 bg-white rounded shadow-sm flex items-center justify-center font-body-md text-on-surface">space</div>
+<div class="w-[20%] h-10 bg-[#9CA3AF] rounded shadow-sm flex items-center justify-center font-body-md text-sm text-on-surface">return</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

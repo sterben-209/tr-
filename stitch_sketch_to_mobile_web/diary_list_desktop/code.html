@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Calm Diary - Your Reflections</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6b5e28",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ffeba7",
+                        "on-primary-container": "#786932",
+                        "secondary": "#3a637c",
+                        "secondary-container": "#b6dffd",
+                        "on-secondary-container": "#3b637d",
+                        "tertiary": "#7e5262",
+                        "tertiary-container": "#ffe5ec",
+                        "on-tertiary-container": "#8a5d6d",
+                        "background": "#fbf9f8",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#4b463a",
+                        "outline": "#7c7769",
+                        "outline-variant": "#cdc6b6",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-container-high": "#eae8e7",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Quicksand", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Hand-drawn organic touches */
+        .organic-border {
+            border: 2px solid #1b1c1c;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .organic-card {
+            border: 2px solid #1b1c1c;
+            border-radius: 20px 20px 25px 15px/15px 25px 20px 20px;
+        }
+        .flat-shadow {
+            box-shadow: 4px 4px 0px 0px #7c7769;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cdc6b6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c7769; }
+
+        .washi-tape {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 80px;
+            height: 24px;
+            opacity: 0.8;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%, 5% 50%);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="hidden md:flex flex-col w-72 h-screen bg-surface border-r-2 border-outline-variant py-10 px-6 shrink-0 z-50">
+        <div class="mb-16 px-4 flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">auto_stories</span>
+            <h1 class="font-headline text-2xl font-bold tracking-tight text-primary">Calm Diary</h1>
+        </div>
+        
+        <nav class="flex flex-col gap-2 flex-grow">
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">calendar_month</span>
+                <span class="font-bold text-sm uppercase tracking-widest">Calendar</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">local_mall</span>
+                <span class="font-bold text-sm uppercase tracking-widest">Store</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl bg-primary-container text-on-primary-container border-2 border-outline transition-all group">
+                <span class="material-symbols-outlined text-2xl fill">book</span>
+                <span class="font-bold text-sm uppercase tracking-widest">Diary</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-5 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all group">
+                <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
+                <span class="font-bold text-sm uppercase tracking-widest">Account</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto">
+            <button class="w-full py-4 bg-surface-container-high text-on-surface rounded-xl border-2 border-outline flex items-center justify-center gap-2 hover:bg-surface-dim transition-all">
+                <span class="material-symbols-outlined">add</span>
+                <span class="font-bold text-xs uppercase tracking-widest">New Entry</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 h-screen overflow-y-auto relative bg-surface-bright pb-20">
+        <!-- TOP HEADER -->
+        <header class="flex justify-between items-center px-10 py-6 sticky top-0 bg-surface/80 backdrop-blur-sm z-40">
+            <span class="material-symbols-outlined text-on-surface-variant cursor-pointer">sentiment_satisfied</span>
+            <h2 class="font-headline text-xl font-bold tracking-tight text-on-surface/80">May 2026</h2>
+            <div class="w-6"></div> <!-- Spacer -->
+        </header>
+
+        <div class="px-10 md:px-20 py-10 max-w-7xl mx-auto w-full">
+            <!-- Title Area -->
+            <div class="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h2 class="font-headline text-4xl font-bold mb-3">Your reflections</h2>
+                    <p class="text-on-surface-variant font-medium text-lg leading-relaxed">Take a deep breath. Here are your past thoughts.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button class="px-6 py-2 border-2 border-outline rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-surface-container-high transition-all">
+                        <span class="material-symbols-outlined text-lg">filter_list</span> Filter
+                    </button>
+                    <button class="px-6 py-2 bg-secondary-container text-on-secondary-container border-2 border-outline rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 shadow-[2px_2px_0px_0px_#1b1c1c]">
+                        <span class="material-symbols-outlined text-lg">grid_view</span> Grid
+                    </button>
+                </div>
+            </div>
+
+            <!-- BENTO GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Card 1: Large Highlight -->
+                <article class="col-span-1 md:col-span-2 bg-white organic-card p-10 relative flex flex-col group hover:translate-y-1 transition-all">
+                    <div class="washi-tape bg-tertiary-container/30"></div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full border-2 border-outline bg-primary-container flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-primary-container text-3xl">sentiment_satisfied</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-[10px] uppercase tracking-[0.2em] text-outline">Today, 10:45 AM</h3>
+                                <p class="font-bold text-lg text-primary">Morning Walk in the Park</p>
+                            </div>
+                        </div>
+                        <button class="text-outline hover:text-on-surface transition-colors"><span class="material-symbols-outlined">more_horiz</span></button>
+                    </div>
+                    <h4 class="font-headline text-3xl font-bold text-on-surface mb-4 leading-tight">The air feels different when you actually stop to breathe it in.</h4>
+                    <p class="text-on-surface-variant text-lg font-medium leading-relaxed italic mb-8">
+                        I decided to leave my phone at home today. Just me, the path, and the absurdly loud birds. It's funny how much noise we carry around in our heads until we're forced to listen to the actual world. Found a strange...
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="px-4 py-1 border-2 border-outline rounded-full font-bold text-[10px] uppercase tracking-widest bg-surface-container">Nature</span>
+                        <span class="px-4 py-1 border-2 border-outline rounded-full font-bold text-[10px] uppercase tracking-widest bg-surface-container">Mindful</span>
+                    </div>
+                </article>
+
+                <!-- Card 2: Image Focus -->
+                <article class="col-span-1 bg-white organic-card p-5 flex flex-col group hover:translate-y-1 transition-all">
+                    <div class="aspect-square rounded-xl border-2 border-outline overflow-hidden mb-6 relative">
+                        <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover grayscale-[10%] opacity-90 group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="material-symbols-outlined text-tertiary text-lg">sentiment_content</span>
+                        <span class="font-bold text-[10px] uppercase tracking-widest text-outline">Yesterday</span>
+                    </div>
+                    <p class="font-bold text-lg text-on-surface leading-tight">Finally organized the workspace. Small wins feel enormous lately.</p>
+                </article>
+
+                <!-- Card 3: Quote -->
+                <article class="col-span-1 bg-white organic-card p-10 flex flex-col justify-center relative group hover:translate-y-1 transition-all">
+                    <div class="absolute top-6 right-8 opacity-10">
+                        <span class="material-symbols-outlined text-[80px]">format_quote</span>
+                    </div>
+                    <div class="flex items-center gap-2 mb-8">
+                        <span class="material-symbols-outlined text-secondary text-lg">sentiment_satisfied</span>
+                        <span class="font-bold text-[10px] uppercase tracking-widest text-outline">May 14, 2026</span>
+                    </div>
+                    <p class="font-headline text-2xl font-bold text-on-surface leading-relaxed italic">
+                        "Productivity is a trap if you forget why you're producing in the first place."
+                    </p>
+                </article>
+
+                <!-- Card 4: Colored Theme -->
+                <article class="col-span-1 bg-primary-container/40 organic-card p-10 flex flex-col group hover:translate-y-1 transition-all border-dashed">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-full border-2 border-outline bg-white flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary">sentiment_dissatisfied</span>
+                        </div>
+                        <span class="font-bold text-[10px] uppercase tracking-widest text-outline">May 12, 2026</span>
+                    </div>
+                    <h4 class="font-bold text-xl text-on-primary-container mb-4">A bit overwhelming</h4>
+                    <p class="text-on-primary-container/80 font-medium leading-relaxed italic">
+                        Too many tabs open in my browser and in my brain. Need to remember the 5-minute rule. If it takes less than 5 minutes...
+                    </p>
+                </article>
+
+                <!-- Card 5: Empty Prompt -->
+                <article class="col-span-1 bg-surface-container-high/20 border-2 border-dashed border-outline rounded-[2rem] p-10 flex flex-col items-center justify-center text-center group hover:bg-surface-container-high/40 transition-all cursor-pointer min-h-[300px]">
+                    <span class="material-symbols-outlined text-outline text-5xl mb-6">edit_note</span>
+                    <h4 class="font-bold text-xl text-on-surface mb-2 tracking-tight">How are you feeling now?</h4>
+                    <p class="font-bold text-[10px] uppercase tracking-[0.2em] text-outline mb-8">Tap to add a quick thought</p>
+                    <button class="px-10 py-3 bg-white border-2 border-outline rounded-full font-bold text-xs uppercase tracking-widest hover:shadow-[2px_2px_0px_0px_#1b1c1c] transition-all">
+                        Write
+                    </button>
+                </article>
+
+            </div>
+
+            <!-- Empty State Decorations -->
+            <div class="mt-20 flex justify-center opacity-10">
+                <div class="flex gap-20">
+                    <span class="material-symbols-outlined text-6xl">cloud</span>
+                    <span class="material-symbols-outlined text-6xl rotate-12">star</span>
+                    <span class="material-symbols-outlined text-6xl -rotate-12">auto_awesome</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

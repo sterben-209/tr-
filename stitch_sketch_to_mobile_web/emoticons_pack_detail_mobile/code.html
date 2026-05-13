@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calm Diary - Store Item</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#c7e7ff",
+                      "on-tertiary-container": "#8a5d6d",
+                      "on-primary-container": "#786932",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#ffe5ec",
+                      "surface-container-high": "#eae8e7",
+                      "outline-variant": "#cdc6b6",
+                      "inverse-surface": "#303030",
+                      "primary-container": "#ffeba7",
+                      "inverse-on-surface": "#f2f0f0",
+                      "secondary-container": "#b6dffd",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#6b5e28",
+                      "surface-bright": "#fbf9f8",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#efeded",
+                      "primary": "#6b5e28",
+                      "on-secondary-fixed": "#001e2e",
+                      "on-tertiary-fixed-variant": "#633b4a",
+                      "outline": "#7c7769",
+                      "on-background": "#1b1c1c",
+                      "on-primary-fixed": "#221b00",
+                      "inverse-primary": "#d8c685",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#d8c685",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#a3cce9",
+                      "surface-variant": "#e4e2e2",
+                      "surface-container-low": "#f5f3f3",
+                      "surface": "#fbf9f8",
+                      "tertiary-fixed": "#ffd9e4",
+                      "surface-container-highest": "#e4e2e2",
+                      "primary-fixed": "#f5e29f",
+                      "on-surface-variant": "#4b463a",
+                      "on-secondary-fixed-variant": "#204b63",
+                      "secondary": "#3a637c",
+                      "tertiary": "#7e5262",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#dbd9d9",
+                      "on-secondary-container": "#3b637d",
+                      "on-tertiary-fixed": "#31101e",
+                      "background": "#fbf9f8",
+                      "on-primary-fixed-variant": "#524612",
+                      "on-surface": "#1b1c1c",
+                      "tertiary-fixed-dim": "#efb7ca"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "gutter": "12px",
+                      "stack-md": "16px",
+                      "margin-page": "20px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Quicksand"
+                      ],
+                      "body-lg": [
+                              "Quicksand"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Quicksand"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "22px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .hand-drawn-shadow {
+            box-shadow: 4px 4px 0px 0px #7c7769;
+        }
+        .hand-drawn-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #7c7769;
+        }
+        .wobble-border {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .wobble-border-alt {
+            border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container pb-32">
+<!-- Sub-page Header (Navigation Suppressed, Task-Focused) -->
+<header class="flex justify-between items-center px-margin-page py-stack-sm w-full bg-surface border-b-2 border-outline-variant sticky top-0 z-50">
+<button class="text-primary hover:bg-primary-container dark:hover:bg-primary-fixed-variant rounded-full p-2 transition-transform duration-150 active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 400;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Pack Details</h1>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<main class="px-margin-page py-stack-lg flex flex-col gap-stack-lg max-w-md mx-auto w-full">
+<!-- Hero Preview Image -->
+<div class="w-full aspect-[4/3] border-2 border-outline wobble-border overflow-hidden hand-drawn-shadow bg-surface-container-low relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-container to-tertiary-container opacity-50 mix-blend-multiply"></div>
+<img class="w-full h-full object-cover" data-alt="A charming, hand-drawn style banner illustration for a digital sticker pack. The image features a sunny, vibrant composition with warm pastel yellows and soft rosy pinks. Sketchy, imperfect charcoal-like outlines define playful shapes such as smiling suns, gentle clouds, and little blooming flowers scattered across a textured paper-like background. The overall aesthetic is calm, whimsical, and perfectly fits a cozy digital scrapbook vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBXPyhODPz3dG4nri6XbTIIfbXrvNsA64zsSDSXl73QoGsvT8oGj8lQuUNj4nBsqrYNyDEBhYnpUk9LlcALis6f0E-FScz3pEKccMVEQ599Vrl5h8vyymXh2MbMIusSuqz--p1va4UyXWFC6KUkNusXyALifzGlLLjzPUnlFB-hTOtlVo75DMBUxYuQjhvO1_DUVwlsDMeN2JymLtYl1vqlXqVtWV86Rekan1NqM8FUsPa1teVoMZC6h9rvAEytJ2A58WGPAXi21op"/>
+</div>
+<!-- Pack Info -->
+<section class="flex flex-col items-center text-center gap-stack-sm">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Sunny Days Pack</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px]">Brighten your diary with these cheerful hand-drawn expressions.</p>
+</section>
+<!-- Emoticons Grid -->
+<section class="grid grid-cols-4 gap-gutter pt-stack-sm">
+<!-- Icon 1 -->
+<div class="aspect-square bg-primary-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform -rotate-2">
+<span class="material-symbols-outlined text-on-primary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">sentiment_satisfied</span>
+</div>
+<!-- Icon 2 -->
+<div class="aspect-square bg-secondary-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform rotate-1">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">wb_sunny</span>
+</div>
+<!-- Icon 3 -->
+<div class="aspect-square bg-tertiary-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform -rotate-1">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">local_florist</span>
+</div>
+<!-- Icon 4 -->
+<div class="aspect-square bg-surface-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform rotate-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">sentiment_very_satisfied</span>
+</div>
+<!-- Icon 5 -->
+<div class="aspect-square bg-surface-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform rotate-3">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">favorite</span>
+</div>
+<!-- Icon 6 -->
+<div class="aspect-square bg-tertiary-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform -rotate-2">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">star</span>
+</div>
+<!-- Icon 7 -->
+<div class="aspect-square bg-primary-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform rotate-1">
+<span class="material-symbols-outlined text-on-primary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">mood</span>
+</div>
+<!-- Icon 8 -->
+<div class="aspect-square bg-secondary-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform -rotate-3">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">cruelty_free</span>
+</div>
+<!-- Icon 9 -->
+<div class="aspect-square bg-secondary-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform -rotate-1">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">spa</span>
+</div>
+<!-- Icon 10 -->
+<div class="aspect-square bg-primary-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform rotate-2">
+<span class="material-symbols-outlined text-on-primary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">emoji_nature</span>
+</div>
+<!-- Icon 11 -->
+<div class="aspect-square bg-surface-container border-2 border-outline wobble-border-alt flex items-center justify-center hand-drawn-shadow-sm transform -rotate-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">water_drop</span>
+</div>
+<!-- Icon 12 -->
+<div class="aspect-square bg-tertiary-container border-2 border-outline wobble-border flex items-center justify-center hand-drawn-shadow-sm transform rotate-1">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-size: 32px; font-variation-settings: 'FILL' 0, 'wght' 300;">cloud</span>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action -->
+<div class="fixed bottom-0 left-0 w-full px-margin-page py-stack-md bg-gradient-to-t from-background via-background to-transparent z-40">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary-container border-2 border-outline wobble-border py-4 px-6 flex items-center justify-center gap-2 hand-drawn-shadow active:shadow-none active:translate-y-[4px] active:translate-x-[4px] transition-all duration-150">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 0, 'wght' 500;">shopping_bag</span>
+<span class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Buy Pack - $1.99</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up - Calm Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#786932",
+                        "background": "#fbf9f8",
+                        "primary-fixed-dim": "#d8c685",
+                        "on-surface": "#1b1c1c",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container-low": "#f5f3f3",
+                        "outline": "#7c7769",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#303030",
+                        "on-secondary-fixed": "#001e2e",
+                        "tertiary": "#7e5262",
+                        "outline-variant": "#cdc6b6",
+                        "surface-container-high": "#eae8e7",
+                        "surface": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#4b463a",
+                        "tertiary-container": "#ffe5ec",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "primary": "#6b5e28",
+                        "tertiary-fixed": "#ffd9e4",
+                        "secondary-container": "#b6dffd",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efeded",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#3b637d",
+                        "surface-dim": "#dbd9d9",
+                        "primary-container": "#ffeba7",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c7e7ff",
+                        "surface-tint": "#6b5e28",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-tertiary-fixed": "#31101e",
+                        "on-primary-fixed": "#221b00",
+                        "primary-fixed": "#f5e29f",
+                        "secondary": "#3a637c",
+                        "surface-bright": "#fbf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "on-primary-fixed-variant": "#524612",
+                        "surface-container-highest": "#e4e2e2",
+                        "inverse-primary": "#d8c685"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "margin-page": "20px",
+                        "gutter": "12px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hand-drawn-border {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .hand-drawn-button-border {
+            border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center p-margin-page selection:bg-primary-container selection:text-on-primary-container">
+<!-- Suppressed Nav Shells due to Transactional/Linear intent -->
+<main class="w-full max-w-md relative z-10">
+<!-- Offset Shadow Block -->
+<div class="absolute inset-0 bg-primary-container hand-drawn-border translate-x-[6px] translate-y-[6px] -z-10"></div>
+<!-- Main Card Container -->
+<div class="bg-surface-container-lowest border-[2px] border-outline hand-drawn-border p-8 md:p-10 relative overflow-hidden">
+<!-- Washi Tape Decorative Element -->
+<div class="absolute top-[-10px] left-1/2 -translate-x-1/2 w-24 h-6 bg-tertiary-container/80 rotate-[-3deg] opacity-70"></div>
+<!-- Header Section -->
+<div class="flex flex-col items-center mb-stack-lg relative z-10">
+<div class="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center mb-stack-md border-[1.5px] border-outline shadow-[2px_2px_0_0_theme(colors.outline)] rotate-3">
+<span class="material-symbols-outlined text-[32px] text-on-primary-container" style="font-variation-settings: 'wght' 300;">edit</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface text-center tracking-tight mb-2">Start Your Diary</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">A quiet space for your thoughts.</p>
+</div>
+<!-- Form Section -->
+<form class="flex flex-col gap-stack-md relative z-10">
+<!-- Nickname Input -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-1 bottom-3 text-on-surface-variant transition-colors group-focus-within:text-primary" style="font-variation-settings: 'wght' 300;">person</span>
+<input class="w-full bg-transparent border-0 border-b-[1.5px] border-outline-variant focus:border-outline focus:ring-0 pl-10 pr-2 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 transition-colors bg-gradient-to-t from-primary-container/0 to-transparent focus:from-primary-container/10" placeholder="Nickname" type="text"/>
+</div>
+<!-- Email Input -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-1 bottom-3 text-on-surface-variant transition-colors group-focus-within:text-primary" style="font-variation-settings: 'wght' 300;">mail</span>
+<input class="w-full bg-transparent border-0 border-b-[1.5px] border-outline-variant focus:border-outline focus:ring-0 pl-10 pr-2 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 transition-colors bg-gradient-to-t from-primary-container/0 to-transparent focus:from-primary-container/10" placeholder="Email address" type="email"/>
+</div>
+<!-- Password Input -->
+<div class="relative group mt-2">
+<span class="material-symbols-outlined absolute left-1 bottom-3 text-on-surface-variant transition-colors group-focus-within:text-primary" style="font-variation-settings: 'wght' 300;">lock</span>
+<input class="w-full bg-transparent border-0 border-b-[1.5px] border-outline-variant focus:border-outline focus:ring-0 pl-10 pr-2 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 transition-colors bg-gradient-to-t from-primary-container/0 to-transparent focus:from-primary-container/10" placeholder="Create a password" type="password"/>
+</div>
+<!-- Confirm Password Input -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-1 bottom-3 text-on-surface-variant transition-colors group-focus-within:text-primary" style="font-variation-settings: 'wght' 300;">lock_reset</span>
+<input class="w-full bg-transparent border-0 border-b-[1.5px] border-outline-variant focus:border-outline focus:ring-0 pl-10 pr-2 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 transition-colors bg-gradient-to-t from-primary-container/0 to-transparent focus:from-primary-container/10" placeholder="Confirm password" type="password"/>
+</div>
+<!-- Submit Button -->
+<div class="mt-stack-lg">
+<button class="w-full block bg-primary-fixed border-[2px] border-outline hand-drawn-button-border py-4 font-label-sm text-label-sm text-on-primary-fixed uppercase tracking-wider shadow-[4px_4px_0_0_theme(colors.outline)] hover:bg-primary-fixed-dim active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_0_theme(colors.outline)] transition-all outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-fixed" type="button">
+                        Create Account
+                    </button>
+</div>
+</form>
+<!-- Footer Link -->
+<div class="mt-stack-lg text-center relative z-10">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Already have a notebook? 
+                    <a class="text-on-surface font-semibold relative inline-block group" href="#">
+                        Log In
+                        <span class="absolute -bottom-1 left-0 w-full h-[2px] bg-primary rounded-full origin-left scale-x-100 group-hover:scale-x-110 transition-transform"></span>
+</a>
+</p>
+</div>
+</div>
+</main>
+</body></html>

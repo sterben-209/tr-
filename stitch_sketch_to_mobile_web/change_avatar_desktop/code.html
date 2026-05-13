@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Change Avatar - Digital Scrapbook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .hand-drawn-border {
+            border: 2px solid #4b463a;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        .sketchy-card {
+            border: 2px solid #4b463a;
+            border-radius: 4px 10px 4px 10px/10px 4px 10px 4px;
+            box-shadow: 6px 6px 0px 0px #6b5e28;
+            transition: all 0.2s ease;
+        }
+        .sketchy-card:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #6b5e28;
+        }
+        .wobble-circle {
+            border: 2.5px solid #4b463a;
+            border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
+        }
+        .scribble-bg {
+            background-image: radial-gradient(#cdc6b6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .active-highlight {
+            position: relative;
+        }
+        .active-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 8px;
+            background: #f5e29f;
+            z-index: -1;
+            border-radius: 100%;
+            opacity: 0.6;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e5262",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "primary": "#6b5e28",
+                        "on-surface-variant": "#4b463a",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-on-surface": "#f2f0f0",
+                        "background": "#fbf9f8",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "on-primary-container": "#786932",
+                        "primary-fixed": "#f5e29f",
+                        "surface-dim": "#dbd9d9",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#221b00",
+                        "surface-variant": "#e4e2e2",
+                        "inverse-primary": "#d8c685",
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed": "#c7e7ff",
+                        "on-background": "#1b1c1c",
+                        "tertiary-container": "#ffe5ec",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed-dim": "#d8c685",
+                        "on-secondary-container": "#3b637d",
+                        "surface-container": "#efeded",
+                        "on-tertiary-fixed": "#31101e",
+                        "primary-container": "#ffeba7",
+                        "outline-variant": "#cdc6b6",
+                        "surface": "#fbf9f8",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "inverse-surface": "#303030",
+                        "outline": "#7c7769",
+                        "tertiary-fixed": "#ffd9e4",
+                        "secondary-container": "#b6dffd",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-fixed-variant": "#524612",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-secondary-fixed": "#001e2e",
+                        "surface-tint": "#6b5e28",
+                        "secondary": "#3a637c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fbf9f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-page": "20px",
+                        "gutter": "12px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-container min-h-screen flex overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col w-64 h-screen bg-surface border-r-2 border-outline-variant p-stack-lg z-50">
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">book</span>
+                Diary
+            </h1>
+</div>
+<nav class="flex-1 space-y-4">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+<span class="font-body-lg text-body-lg">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">local_mall</span>
+<span class="font-body-lg text-body-lg">Store</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined text-[24px]">book</span>
+<span class="font-body-lg text-body-lg">Diary</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl transition-all group shadow-[4px_4px_0px_0px_#6b5e28]" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-body-lg text-body-lg font-bold">Account</span>
+</a>
+</nav>
+<div class="mt-auto pt-8">
+<div class="p-4 bg-tertiary-container rounded-xl border-2 border-on-tertiary-container border-dashed">
+<p class="font-label-sm text-label-sm text-on-tertiary-container">DAILY QUOTE</p>
+<p class="font-body-md text-body-md mt-2 italic text-on-tertiary-container">"Every small step is a sketch in the journey of life."</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto relative scribble-bg">
+<!-- Top App Bar (Desktop Context) -->
+<header class="sticky top-0 bg-surface/80 backdrop-blur-md flex justify-between items-center px-margin-page py-stack-md border-b-2 border-outline-variant z-40">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full transition-transform active:scale-90">arrow_back</button>
+<h2 class="font-headline-md text-headline-md text-primary">Change Avatar</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">mood</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Editing Profile</span>
+</div>
+</header>
+<div class="max-w-4xl mx-auto px-margin-page py-stack-lg">
+<!-- Hero Selection Area -->
+<section class="flex flex-col lg:flex-row items-center gap-12 mb-stack-lg">
+<div class="relative group">
+<div class="w-48 h-48 bg-white wobble-circle overflow-hidden p-2 flex items-center justify-center">
+<img alt="Current Profile" class="w-full h-full object-cover rounded-full" data-alt="A charming hand-drawn illustration of a generic user silhouette. The style is minimalist with charcoal pencil outlines on a warm cream background. Soft yellow highlights give it a gentle, friendly appearance. The image feels like it was sketched on high-quality paper." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3JSYeGNOpexAQycUDqkRzC-3Hfea2RgPQX5a6z_vCFXzusCc7EjQDvdOieQ4VBRQFDBHLSKH7RJuSbeIRT7fwyNiGUGQYuAbkzflKDO4Dejb-YSK0RRCJQ6L5ct1C3JDdjUu4xTKdIOlqhiUzDFig_nQa6FpR27nQ3a6yg8ga8NtGXBP4t9xZdmjtnbXKoMpfswMhviPjCuYuX7oRB-Jblg_eiHUWsCRrcA6BrupirTYbq5Zo2ZUj2i9uxJ7loRJW2SJQ-f_Unzs8"/>
+</div>
+<button class="absolute bottom-2 right-2 bg-primary text-white p-3 rounded-full shadow-[3px_3px_0px_0px_#1b1c1c] active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+<p class="text-center mt-4 font-label-sm text-label-sm uppercase tracking-widest text-outline">Current Profile</p>
+</div>
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-gutter w-full">
+<button class="sketchy-card bg-primary-container p-stack-md flex flex-col items-center justify-center text-center group">
+<span class="material-symbols-outlined text-4xl mb-2 text-primary">upload</span>
+<span class="font-headline-md text-headline-md text-primary">Upload Photo</span>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">JPEG or PNG up to 5MB</p>
+</button>
+<button class="sketchy-card bg-secondary-container p-stack-md flex flex-col items-center justify-center text-center group">
+<span class="material-symbols-outlined text-4xl mb-2 text-secondary">brush</span>
+<span class="font-headline-md text-headline-md text-secondary">Choose Art</span>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Pick from our library</p>
+</button>
+</div>
+</section>
+<!-- Illustrations Grid -->
+<section class="mt-12">
+<div class="flex items-center gap-3 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Illustrations</h3>
+<div class="h-[2px] flex-1 bg-outline-variant rounded-full opacity-30"></div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-gutter">
+<!-- Cat Avatar -->
+<div class="sketchy-card bg-white p-4 flex flex-col items-center hover:scale-105 cursor-pointer border-primary">
+<div class="w-24 h-24 mb-3 flex items-center justify-center">
+<img alt="Cat Avatar" class="w-full" data-alt="A simple, cute hand-drawn cat avatar in a minimalist sketchy style. The cat has oversized eyes and a tiny smile, drawn with thick charcoal-colored brushstrokes. Pastel peach and yellow watercolor accents fill the ears and cheeks. The background is a clean off-white texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoZ26J3iwk2rZxulnpHIk2-XqpOMVPul6JsOdA0l4z1a3gsjgNaKH-yRqRLIg2-YuPecXRmaXaeBZ9evmaU5SYjCJTPwm6tIzXPsr3McSXnDynHU1_Qb0sbeRNHYQ-_MGZzaaoVYx8dRPF9VUTKEqTHlqdLnarxCSzgJRKc0MJlSPgkwN8ggISLCHr1Q-l_2JxLlNsrmGdKUl1omOoFwt0XWsQaCmox6yYfN583PuT9M8wWvAu9xSrQDcUDdhOf8P5tMuCHeYUqdvZ"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cat</span>
+</div>
+<!-- Plant Avatar -->
+<div class="sketchy-card bg-white p-4 flex flex-col items-center hover:scale-105 cursor-pointer">
+<div class="w-24 h-24 mb-3 flex items-center justify-center">
+<img alt="Plant Avatar" class="w-full" data-alt="A whimsical hand-drawn potted plant illustration. The leaves are stylized with varying organic shapes and soft green watercolor fills. The pot is sketched with a slightly uneven, hand-drawn charcoal outline. The aesthetic is calm, earthy, and fits a digital scrapbook theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX0u4NDXmPt-OqjL_VJbBbxLAE_u_srzwPWKS556hBL1a68eqIpz7nPyX_N6H5ihV_RqpNXRQLEYjvp0bcE_Mbg6XNb3WJ3h4vDunnV4F3jBharsFvD-gO62Syj5QiAfs0jp68OWBRv1k-inNKPSkkBbAn4ShlvodytVZVi3bAw6IRg-_-W9MkAqlz6ehHB-sdTswr7aULdlaVdZhh3uGRchpckobQ85mHXz7WwE4AZKFkJ4CJidG7xqEgbSwU_Uqm3WWkDWMXnlnU"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Plant</span>
+</div>
+<!-- Person Avatar -->
+<div class="sketchy-card bg-primary-container p-4 flex flex-col items-center ring-2 ring-primary border-primary hover:scale-105 cursor-pointer">
+<div class="w-24 h-24 mb-3 flex items-center justify-center relative">
+<img alt="Person Avatar" class="w-full" data-alt="A minimalist hand-drawn human figure avatar. The drawing uses simple charcoal lines for the silhouette and features. Soft pastel yellow highlights represent the character's hair or skin tone. The style is gentle and non-specific, emphasizing a friendly and approachable feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApzG9OGx5rkPfenn4cYz55HG65dXNUEdGs9VuKWualun6wc0SYmcC5Fcmynyaias1QUEdT_wdgjeCJWUoinkyTjxb2JiI_B-O0-24SoqEvYEmTs-a4yhnYSfdfn8m73kiArqLXk3Jyd9M4UeatsK9mCekr3i1LbIiQXjIenL9BhfCIkwWmAEqjPLrZJ9AGjGqXt5Ncl6nBsTVSVgsupsFI4R_RC54Fiv1SVhkPnLxQwmP5ZjBMilO-PqM5sbw2gRQsWu4jt80Rm85R"/>
+<div class="absolute -top-2 -right-2 bg-primary text-white p-1 rounded-full text-[10px] material-symbols-outlined">check</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-primary-container font-bold">Selected</span>
+</div>
+<!-- Moon Avatar -->
+<div class="sketchy-card bg-white p-4 flex flex-col items-center hover:scale-105 cursor-pointer">
+<div class="w-24 h-24 mb-3 flex items-center justify-center">
+<img alt="Moon Avatar" class="w-full" data-alt="A hand-drawn crescent moon with a sleepy, serene face. Small, sketchy stars surround the moon. The outlines are dark charcoal, and the moon is filled with a soft, glowing pastel yellow. The overall mood is peaceful and introspective, consistent with a nighttime diary theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgfbfsUVnmwcsjXZvyyXpYrP8lIwz_Oly5Ug5wyn3shLdB1fFilpNiTcz8-Lte86Gt3c0_Jm3xoJvymJsz9UxobaV1HCLMmsPn5i8fnB1Q_VFDsK5jyTqoEDrJdRuoiEB8YB_g21yzhwbOybn_ZMn6bW1XhCMZjvqo0jtTavDZj2gK0mjfF-QsY-Sq-QPHkbRjr3hOvod1Ucd3IPJPOTpmViIKhqN94eW9C2w2t9NcYTCu4ct9qWmscgFo-nS22d7_uHZBfEW5su_R"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Moon</span>
+</div>
+<!-- Bird Avatar -->
+<div class="sketchy-card bg-white p-4 flex flex-col items-center hover:scale-105 cursor-pointer">
+<div class="w-24 h-24 mb-3 flex items-center justify-center">
+<img alt="Bird Avatar" class="w-full" data-alt="A cute, round hand-drawn bird in a minimalist sketch style. The bird has tiny wings and thin, stick-like legs. It is colored with soft pastel blue and cream tones. The charcoal outlines are slightly wobbly, giving it a charming, human-made character suitable for a wellness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9Hjidd8vQTJbpT8_Lnl45IdBMDxdpQb4iAU9nX6T9hvLVtLIPE2APvCV0oVEgLnB8DZK_f554OoPPaOHMVi73nu4hXSieL8yUMowkvNA8E1tRUoguKuKwxwBddLqYLeMcZrwkAqUr_FuFT5gu7V5sXoVwsiPSpR_0SHbombd7beQ-QB-6MVrWn7ofSNA5trSjqshfsEcn4NwCU418rg-aeQJVOKDPBT1nrYab3cXSpXxsvaF1ZKuPTkSG0XKcnJV_SoCF395ArtY7"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bird</span>
+</div>
+</div>
+</section>
+<!-- Bottom Actions -->
+<footer class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 pb-24">
+<button class="w-full sm:w-auto px-12 py-4 bg-surface-container-high border-2 border-outline-variant font-headline-md text-headline-md text-on-surface-variant rounded-xl hover:bg-surface-dim transition-colors active:scale-95">
+                    Cancel
+                </button>
+<button class="w-full sm:w-auto px-16 py-4 bg-primary border-2 border-on-surface font-headline-md text-headline-md text-white rounded-xl shadow-[6px_6px_0px_0px_#1b1c1c] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#1b1c1c] active:translate-y-[4px] active:shadow-none transition-all">
+                    Save Changes
+                </button>
+</footer>
+</div>
+</main>
+<!-- Mobile Navigation Shell (Suppressed on large screens, but keeping logic for responsiveness) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 border-t-2 border-outline-variant z-50 rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</div>
+</div>
+</body></html>

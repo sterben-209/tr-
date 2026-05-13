@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compose Diary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#e4e2e2",
+                        "inverse-surface": "#303030",
+                        "outline": "#7c7769",
+                        "on-surface": "#1b1c1c",
+                        "surface-bright": "#fbf9f8",
+                        "secondary": "#3a637c",
+                        "primary-container": "#ffeba7",
+                        "on-primary-fixed-variant": "#524612",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#8a5d6d",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "on-background": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#d8c685",
+                        "surface-container-low": "#f5f3f3",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "on-primary-container": "#786932",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "secondary-fixed": "#c7e7ff",
+                        "primary-fixed-dim": "#d8c685",
+                        "surface-tint": "#6b5e28",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed": "#001e2e",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dbd9d9",
+                        "tertiary-fixed": "#ffd9e4",
+                        "outline-variant": "#cdc6b6",
+                        "on-primary-fixed": "#221b00",
+                        "background": "#fbf9f8",
+                        "inverse-on-surface": "#f2f0f0",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed": "#f5e29f",
+                        "tertiary": "#7e5262",
+                        "secondary-container": "#b6dffd",
+                        "on-tertiary-fixed": "#31101e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#6b5e28",
+                        "on-secondary-container": "#3b637d",
+                        "on-surface-variant": "#4b463a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#ffe5ec",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "surface-variant": "#e4e2e2",
+                        "surface-container": "#efeded"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-page": "20px",
+                        "gutter": "12px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "label-sm": ["Quicksand"],
+                        "body-lg": ["Quicksand"]
+                    },
+                    fontSize: {
+                        "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Hand-drawn block shadow simulation */
+        .hand-drawn-shadow {
+            box-shadow: 4px 4px 0px 0px #7c7769;
+        }
+        .hand-drawn-shadow:hover {
+            box-shadow: 2px 2px 0px 0px #7c7769;
+            transform: translate(2px, 2px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen w-screen overflow-hidden flex font-body-md selection:bg-primary-container">
+<!-- Desktop Sidebar (Adapted from Shared Components JSON) -->
+<nav class="w-64 h-full border-r-2 border-outline flex flex-col bg-surface z-10 shrink-0 relative">
+<!-- Decor line to simulate a notebook margin -->
+<div class="absolute left-[20px] top-0 bottom-0 w-[2px] bg-outline-variant opacity-30"></div>
+<div class="px-margin-page py-stack-lg z-10 relative">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-stack-lg">May 2026</h1>
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="local_mall">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+</li>
+<!-- Active Item -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary-container text-on-primary-container border-2 border-outline hand-drawn-shadow transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl icon-fill" data-icon="book" data-weight="fill">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 h-full bg-surface-bright flex flex-col overflow-y-auto px-[10%] py-stack-lg gap-stack-lg">
+<!-- Header Actions -->
+<header class="flex justify-between items-center w-full max-w-5xl mx-auto">
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Thursday, 14th</p>
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-xl border-2 border-outline text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm transition-colors">
+                    Discard
+                </button>
+<button class="px-6 py-2 rounded-xl bg-primary-container text-on-primary-container border-2 border-outline hand-drawn-shadow font-label-sm text-label-sm transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="save">save</span>
+                    Save Entry
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout for Composer -->
+<div class="w-full max-w-5xl mx-auto flex gap-stack-lg items-start h-[calc(100vh-160px)] min-h-[600px]">
+<!-- Central Writing Area (Spacious Notebook) -->
+<section class="flex-[2.5] h-full bg-surface border-2 border-outline rounded-xl flex flex-col overflow-hidden relative hand-drawn-shadow">
+<!-- Top binder holes simulation -->
+<div class="absolute left-4 top-0 bottom-0 w-8 flex flex-col justify-around py-8 pointer-events-none opacity-20">
+<div class="w-4 h-4 rounded-full bg-outline"></div>
+<div class="w-4 h-4 rounded-full bg-outline"></div>
+<div class="w-4 h-4 rounded-full bg-outline"></div>
+<div class="w-4 h-4 rounded-full bg-outline"></div>
+<div class="w-4 h-4 rounded-full bg-outline"></div>
+</div>
+<div class="pl-16 pr-8 pt-8 pb-4 border-b-2 border-outline-variant">
+<input class="w-full bg-transparent border-none outline-none font-headline-lg text-headline-lg text-on-surface placeholder:text-outline-variant focus:ring-0 p-0" placeholder="A quiet morning..." type="text"/>
+</div>
+<div class="flex-1 pl-16 pr-8 py-4 relative">
+<!-- Ruled lines background -->
+<div id="diary-editor" class="w-full h-full bg-transparent border-none outline-none font-body-lg text-body-lg text-on-surface focus:ring-0 p-0 z-10 relative overflow-y-auto" contenteditable="true" placeholder="Dear diary..." style="line-height: 2rem; background-image: repeating-linear-gradient(transparent, transparent 31px, #cdc6b6 31px, #cdc6b6 32px); background-attachment: local;">Dear diary...</div>
+</div>
+</section>
+<!-- Right Sidebar Tools Panel -->
+<aside class="flex-1 flex flex-col gap-stack-lg max-w-[320px]">
+<!-- Mood Selector -->
+<div class="bg-surface border-2 border-outline rounded-xl p-stack-md hand-drawn-shadow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Mood</h3>
+<div class="flex justify-between items-center mt-4">
+<button class="w-12 h-12 rounded-full border-2 border-transparent hover:border-outline-variant flex items-center justify-center text-outline transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="sentiment_very_dissatisfied">sentiment_very_dissatisfied</span>
+</button>
+<button class="w-12 h-12 rounded-full border-2 border-transparent hover:border-outline-variant flex items-center justify-center text-outline transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="sentiment_dissatisfied">sentiment_dissatisfied</span>
+</button>
+<!-- Selected Mood -->
+<button class="w-12 h-12 rounded-full border-2 border-outline bg-primary-container text-on-primary-container flex items-center justify-center transition-colors relative">
+<span class="absolute -top-1 -right-1 material-symbols-outlined text-sm icon-fill text-primary" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-3xl icon-fill" data-icon="sentiment_satisfied" data-weight="fill">sentiment_satisfied</span>
+</button>
+<button class="w-12 h-12 rounded-full border-2 border-transparent hover:border-outline-variant flex items-center justify-center text-outline transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+</button>
+</div>
+</div>
+<!-- Image Attachment (Hand-drawn frame style) -->
+<div class="bg-surface border-2 border-outline rounded-xl p-stack-md hand-drawn-shadow flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm flex justify-between items-center">
+                        Memories
+                        <button class="text-outline hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="add_photo_alternate">add_photo_alternate</span>
+</button>
+</h3>
+<div class="mt-2 relative group cursor-pointer">
+<!-- Washi tape decoration -->
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-tertiary-fixed-dim/50 rotate-3 z-20 shadow-sm"></div>
+<div class="w-full aspect-square bg-surface-container-low border-2 border-outline border-dashed rounded-lg p-2 transition-colors group-hover:bg-surface-container-high overflow-hidden relative">
+<img alt="A stylized, slightly messy watercolor sketch of a quiet coffee shop corner. The painting features warm pastel yellows and muted blues, with deliberate pencil outlines visible beneath the paint. The aesthetic is cozy, hand-drawn, and fits a minimalist digital scrapbook." class="w-full h-full object-cover rounded filter sepia-[0.2] contrast-[0.9]" data-alt="A stylized, slightly messy watercolor sketch of a quiet coffee shop corner. The painting features warm pastel yellows and muted blues, with deliberate pencil outlines visible beneath the paint. The aesthetic is cozy, hand-drawn, and fits a minimalist digital scrapbook." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6pP04LnKC0hoNhEy2Da8p947hqHuH0eTaRnbZUm07n9jRSmOegRHqT1Sm7vMmyXy4JBDF4pVUwCM0Vylkrb7SWIepqIXwcERRUAaFqAlKSefLKVNbbhHo4Hu3q-OZgnphbYUlhiv12qT4sPC7zISrA1Ulta7dUrLFRMTzPaa0XDoIUvM_Pp-JQpjhkkmXJ71aqJBtVq7CfC6nMahyaPIfeV2gXd0qgLrZ9_coVqLOyleYV0JugYEwFOwU9EmQylrKUtNKlFi2_RcT"/>
+</div>
+</div>
+</div>
+<!-- Pen Color Picker & Rich Text Tools -->
+<div class="bg-surface border-2 border-outline rounded-xl p-stack-md hand-drawn-shadow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Writing Tools</h3>
+
+<div class="flex flex-wrap gap-2 mb-4 pb-4 border-b border-dashed border-outline">
+    <button id="btn-bold" onclick="formatDoc('bold')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Bold">
+        <span class="material-symbols-outlined" data-icon="format_bold">format_bold</span>
+    </button>
+    <button id="btn-italic" onclick="formatDoc('italic')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Italic">
+        <span class="material-symbols-outlined" data-icon="format_italic">format_italic</span>
+    </button>
+    <button id="btn-underline" onclick="formatDoc('underline')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Underline">
+        <span class="material-symbols-outlined" data-icon="format_underlined">format_underlined</span>
+    </button>
+</div>
+
+<div class="flex flex-wrap gap-2 mb-4 pb-4 border-b border-dashed border-outline">
+    <select onchange="formatDoc('fontName', this.value); this.selectedIndex=0;" class="flex-1 h-10 bg-surface-container-low border-2 border-outline rounded-lg text-xs font-bold focus:ring-primary cursor-pointer">
+        <option value="" selected disabled>Font Style</option>
+        <option value="Quicksand">Quicksand</option>
+        <option value="Plus Jakarta Sans">Jakarta</option>
+        <option value="Courier New">Monospace</option>
+    </select>
+</div>
+
+<div class="flex flex-wrap gap-2 mb-4 pb-4 border-b border-dashed border-outline">
+    <button id="btn-justifyLeft" onclick="formatDoc('justifyLeft')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Align Left">
+        <span class="material-symbols-outlined" data-icon="format_align_left">format_align_left</span>
+    </button>
+    <button id="btn-justifyCenter" onclick="formatDoc('justifyCenter')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Align Center">
+        <span class="material-symbols-outlined" data-icon="format_align_center">format_align_center</span>
+    </button>
+    <button id="btn-justifyRight" onclick="formatDoc('justifyRight')" class="w-10 h-10 hover:bg-surface-container transition-colors rounded-lg flex items-center justify-center border-2 border-transparent" title="Align Right">
+        <span class="material-symbols-outlined" data-icon="format_align_right">format_align_right</span>
+    </button>
+</div>
+
+<h4 class="text-[10px] font-bold uppercase tracking-widest text-outline mb-2">Ink Color</h4>
+<div class="flex gap-4 mt-2">
+<button onclick="applyTextColor('#1b1c1c')" class="w-8 h-8 rounded-full bg-on-surface border-2 border-outline flex items-center justify-center relative">
+<!-- Active indicator scribble -->
+<div class="absolute inset-0 m-auto w-3 h-3 bg-surface rounded-full"></div>
+</button>
+<button onclick="applyTextColor('#3a637c')" class="w-8 h-8 rounded-full bg-secondary border-2 border-outline hover:scale-110 transition-transform"></button>
+<button onclick="applyTextColor('#7e5262')" class="w-8 h-8 rounded-full bg-tertiary border-2 border-outline hover:scale-110 transition-transform"></button>
+<button onclick="applyTextColor('#6b5e28')" class="w-8 h-8 rounded-full bg-primary border-2 border-outline hover:scale-110 transition-transform"></button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<script>
+    function applyTextColor(color) {
+        const editor = document.getElementById('diary-editor');
+        editor.focus();
+        document.execCommand('foreColor', false, color);
+        
+        // Update active state UI for color buttons
+        document.querySelectorAll('.rounded-full[onclick^="applyTextColor"]').forEach(btn => {
+            btn.innerHTML = '';
+        });
+        const activeBtn = Array.from(document.querySelectorAll('.rounded-full[onclick^="applyTextColor"]'))
+            .find(btn => btn.getAttribute('onclick').includes(color));
+        if (activeBtn) {
+            activeBtn.innerHTML = '<div class="absolute inset-0 m-auto w-3 h-3 bg-surface rounded-full"></div>';
+        }
+    }
+
+    function formatDoc(cmd, value = null) {
+        const editor = document.getElementById('diary-editor');
+        editor.focus();
+        document.execCommand(cmd, false, value);
+        updateToolbarState();
+    }
+
+    function updateToolbarState() {
+        const buttons = {
+            'bold': 'btn-bold',
+            'italic': 'btn-italic',
+            'underline': 'btn-underline',
+            'justifyLeft': 'btn-justifyLeft',
+            'justifyCenter': 'btn-justifyCenter',
+            'justifyRight': 'btn-justifyRight'
+        };
+
+        for (const [cmd, id] of Object.entries(buttons)) {
+            const btn = document.getElementById(id);
+            if (btn) {
+                if (document.queryCommandState(cmd)) {
+                    btn.classList.add('bg-primary-container', 'pencil-shadow', 'border-on-surface');
+                } else {
+                    btn.classList.remove('bg-primary-container', 'pencil-shadow', 'border-on-surface');
+                }
+            }
+        }
+    }
+
+    ['click', 'keyup'].forEach(evt => {
+        document.getElementById('diary-editor')?.addEventListener(evt, updateToolbarState);
+    });
+</script>
+</body></html>

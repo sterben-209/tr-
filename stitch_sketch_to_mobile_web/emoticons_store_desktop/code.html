@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Store - Digital Scrapbook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Quicksand:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fbf9f8",
+                        "outline": "#7c7769",
+                        "on-primary-fixed-variant": "#524612",
+                        "surface-container": "#efeded",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#f5e29f",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#204b63",
+                        "inverse-surface": "#303030",
+                        "surface": "#fbf9f8",
+                        "surface-tint": "#6b5e28",
+                        "surface-container-highest": "#e4e2e2",
+                        "primary": "#6b5e28",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#221b00",
+                        "on-background": "#1b1c1c",
+                        "secondary-container": "#b6dffd",
+                        "on-tertiary-fixed-variant": "#633b4a",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#d8c685",
+                        "tertiary-fixed-dim": "#efb7ca",
+                        "surface-container-high": "#eae8e7",
+                        "primary-container": "#ffeba7",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#d8c685",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-container": "#ffe5ec",
+                        "on-secondary-container": "#3b637d",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf9f8",
+                        "secondary-fixed": "#c7e7ff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a3cce9",
+                        "on-secondary-fixed": "#001e2e",
+                        "tertiary": "#7e5262",
+                        "outline-variant": "#cdc6b6",
+                        "on-surface-variant": "#4b463a",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-container": "#8a5d6d",
+                        "on-tertiary-fixed": "#31101e",
+                        "secondary": "#3a637c",
+                        "on-primary-container": "#786932",
+                        "surface-variant": "#e4e2e2",
+                        "surface-dim": "#dbd9d9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffd9e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "margin-page": "20px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Quicksand"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Quicksand"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom organic border styles simulating hand-drawn lines */
+        .organic-border {
+            border: 2px solid #7c7769;
+            border-radius: 8px 12px 10px 8px / 10px 8px 12px 10px;
+        }
+        .organic-btn-border {
+            border: 2px solid #7c7769;
+            border-radius: 20px 18px 22px 16px / 18px 22px 16px 20px;
+        }
+        .organic-shadow {
+            box-shadow: 4px 4px 0 0 #cdc6b6;
+        }
+        .organic-shadow-active:active {
+            box-shadow: 1px 1px 0 0 #cdc6b6;
+            transform: translate(3px, 3px);
+        }
+        
+        /* Simulating washi tape */
+        .washi-tape-pink {
+            background-color: #ffe5ec;
+            clip-path: polygon(2% 0%, 98% 3%, 100% 97%, 0% 100%);
+        }
+        .washi-tape-blue {
+            background-color: #b6dffd;
+            clip-path: polygon(0% 2%, 100% 0%, 98% 98%, 3% 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Top Navigation (Mobile Only) / Shell Header -->
+<header class="md:hidden flex justify-between items-center px-margin-page py-stack-sm w-full bg-surface border-b-2 border-outline-variant">
+<button class="text-on-surface-variant hover:bg-primary-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined font-headline-md text-headline-md">mood</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">Store</h1>
+
+</header>
+<!-- Side Navigation (Desktop Only) -->
+<nav class="hidden md:flex flex-col w-64 bg-surface border-r-2 border-outline-variant min-h-screen fixed left-0 top-0 py-stack-lg px-margin-page">
+<div class="flex items-center gap-3 mb-12 px-2">
+<span class="material-symbols-outlined font-headline-lg text-headline-lg text-primary">mood</span>
+<span class="font-headline-lg text-headline-lg text-on-surface">Scrapbook</span>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">calendar_month</span>
+<span class="font-label-sm text-label-sm uppercase">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full bg-primary-container text-on-primary-container group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+<span class="font-label-sm text-label-sm uppercase">Store</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">book</span>
+<span class="font-label-sm text-label-sm uppercase">Diary</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">person</span>
+<span class="font-label-sm text-label-sm uppercase">Account</span>
+</a>
+</div>
+
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-page md:p-stack-lg max-w-7xl mx-auto w-full pb-24 md:pb-stack-lg">
+<!-- Desktop Header Title -->
+<div class="hidden md:flex justify-between items-end mb-stack-lg border-b-2 border-outline-variant pb-stack-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Store</h1>
+</div>
+<!-- Hero Banner -->
+<section class="mb-stack-lg relative overflow-hidden organic-border bg-tertiary-container p-6 md:p-10 organic-shadow">
+<div class="relative z-10 max-w-md">
+<span class="inline-block px-3 py-1 bg-surface organic-btn-border font-label-sm text-label-sm uppercase text-on-surface mb-4">New Arrivals</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Summer Breezes Pack</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Capture the warmth of sunny days with our latest hand-drawn emoticons.</p>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 organic-btn-border organic-shadow organic-shadow-active font-label-sm text-label-sm uppercase inline-flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                    Get Now
+                </button>
+</div>
+<!-- Decorative Elements simulating sketches -->
+<div class="absolute right-0 top-0 bottom-0 w-1/2 opacity-20 pointer-events-none hidden md:block">
+<svg class="w-full h-full" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M47.7,-57.2C59.4,-44.6,65.1,-26.8,68.4,-8.2C71.7,10.4,72.6,29.9,64.2,45.3C55.8,60.7,38.1,72.1,19.2,76.5C0.3,81,-19.7,78.5,-36.8,69.5C-53.9,60.5,-68.1,45,-75.6,26.7C-83.1,8.4,-83.9,-12.7,-75.9,-29.4C-67.9,-46.1,-51.1,-58.4,-34.5,-69.5C-17.9,-80.6,-1.5,-90.5,12.7,-85.7C26.9,-80.9,36,-69.8,47.7,-57.2Z" fill="#7e5262" transform="translate(100 100)"></path>
+</svg>
+</div>
+</section>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter md:gap-stack-lg">
+<!-- Item 1 -->
+<article class="bg-surface organic-border p-4 organic-shadow flex flex-col relative group hover:-translate-y-1 transition-transform duration-300">
+<div class="washi-tape-pink absolute -top-3 left-4 w-20 h-6 z-10"></div>
+<div class="aspect-square bg-surface-container-low organic-border mb-4 flex items-center justify-center p-6 relative overflow-hidden">
+<img alt="Emoticon sketch" class="object-cover w-full h-full mix-blend-multiply opacity-80" data-alt="A close-up, top-down shot of a sketchbook page filled with minimalist, hand-drawn kawaii faces in black ink. The style is loose and imperfect, resembling quick doodles on slightly textured, warm off-white paper. Soft, natural lighting creates a gentle, analog feel, perfectly matching a calm digital scrapbook aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT9SCkiVYN3NNqN8L8HJJTa9AdT1fqPXGuKPhzpOZ_XNQRUwfabfx0QE2Gne7UEaZvLexu18ZUrsWmMcO2BJ0JmbUXHaAeyTa1LCBKjXi3imrPD28mOqyeAVznOTypJ6uvb_1FHuydt5ijBR0hV_Mqr7S8U4S4tqvyj3bptXiB2wq7SAZJE_VCQgTjoYc0ypdKH-Y8cobyUDqu3BcQqIye2uHiKk_6y_Ilz_bst_k9Uizg7HWeJa5fB50LJxxWzEcYuIzUeQmHr_s7"/>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">EMMO System</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">The classic collection of essential expressions for everyday journaling.</p>
+<div class="mt-auto pt-4 border-t-2 border-outline-variant border-dashed flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-outline">Owned</span>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 organic-btn-border font-label-sm text-label-sm uppercase opacity-70 cursor-not-allowed">
+                            Already Owned
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 2 -->
+<article class="bg-surface organic-border p-4 organic-shadow flex flex-col relative group hover:-translate-y-1 transition-transform duration-300">
+<div class="washi-tape-blue absolute -top-2 right-6 w-24 h-5 z-10 transform rotate-2"></div>
+<div class="aspect-square bg-surface-container-low organic-border mb-4 flex items-center justify-center p-6 relative overflow-hidden">
+<img alt="Cloud sketch" class="object-cover w-full h-full mix-blend-multiply opacity-80" data-alt="A minimalistic, hand-drawn illustration of fluffy, stylized clouds floating on a textured, warm beige paper background. The lines are slightly irregular, suggesting a pencil sketch, with very faint pastel blue watercolor washes adding a touch of color. The mood is dreamy and gentle, designed for a relaxing journaling experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhYixWt2hvsk157Smw_GzxBeBtTB0HYW3uAbk1zyfimn1js2bezByyjAMA5cHEkEg7ptDnPZ2OF2GE75cpSxm8_S60va2HCbgR6ecjc375RkKzsKrhGPtrNqEAAraA88ykn6ymW0ioULQc84bi4UsTKbEoAYEZEH-r6NJvH7l6O3r-WrifGAE8Q3S95oPfyLb1gHprzTHQkNB8wyLAtmml_5qptqUPw_M6mDNqqBXJ7ox3xMZmgJ9FiedX0R7uxAa1W4WehRk-odlw"/>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Small Clouds</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">Add a touch of weather and whimsy to your daily entries.</p>
+<div class="mt-auto pt-4 border-t-2 border-outline-variant border-dashed flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface">$1.99</span>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 organic-btn-border organic-shadow organic-shadow-active font-label-sm text-label-sm uppercase transition-all">
+                            Buy Pack
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 3 -->
+<article class="bg-surface organic-border p-4 organic-shadow flex flex-col relative group hover:-translate-y-1 transition-transform duration-300">
+<div class="aspect-square bg-surface-container-low organic-border mb-4 flex items-center justify-center p-6 relative overflow-hidden">
+<img alt="Floral sketch" class="object-cover w-full h-full mix-blend-multiply opacity-80" data-alt="A delicate, minimalist line-art drawing of simple flowers and leaves scattered across a light, warm cream-colored canvas. The strokes look like dark charcoal with slight imperfections, accompanied by soft, muted pink accents that bleed slightly outside the lines. The aesthetic is organic, peaceful, and perfect for a digital scrapbook." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLl7U1h1Xlfg9kuuIkgyv4B9h_jg0I4CcDSgTsX23bhf4PG922hpBzsdlfHyxJ3DFOetqTiJt0pS5fEQozb1ygcBxRMRAMmTNelClQp6GfLAABayXmcG0MAndE3QKj9GYwyvQ7NSv2iqWBZ7JYdDag4qrjtFPENAiSZSl92xKgqLWZqv4Hx_uq3roe08oFhnlqx-mODWViOGgJ1havom2pkFjtwIJLApTRPhMOxdh-oQlaer51RTff32dyVqkMHa1g58XNw-aCjhvZ"/>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Spring Botanicals</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">Gentle floral accents to brighten your pages.</p>
+<div class="mt-auto pt-4 border-t-2 border-outline-variant border-dashed flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface">$2.49</span>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 organic-btn-border organic-shadow organic-shadow-active font-label-sm text-label-sm uppercase transition-all">
+                            Buy Pack
+                        </button>
+</div>
+</div>
+</article>
+<!-- Item 4 -->
+<article class="bg-surface organic-border p-4 organic-shadow flex flex-col relative group hover:-translate-y-1 transition-transform duration-300">
+<div class="washi-tape-pink absolute top-1/2 -left-3 w-16 h-6 z-10 transform -rotate-12"></div>
+<div class="aspect-square bg-surface-container-low organic-border mb-4 flex items-center justify-center p-6 relative overflow-hidden">
+<img alt="Coffee sketch" class="object-cover w-full h-full mix-blend-multiply opacity-80" data-alt="A simple, hand-drawn sketch of coffee cups, mugs, and small pastries arranged haphazardly on a textured, off-white surface. The drawing style uses thick, wobbly charcoal-like lines with subtle, warm brown pastel accents highlighting the cups. The overall feel is cozy, imperfect, and inviting, fitting a relaxed diary app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU4fmgV9fqKQAXSWkejpIBgsEEji2iBb2SKlCozRiEWh05yjErDhWcMmdE9LqnuYnuFiEb0e_EdLzZrGx85Oy4eI_4Sk75HmCd-oFKWe3NaGkblQ35US98fHtdRjSmK2WvRc1yCHcutlCH9bGwbU_-8PzZjOUzTYwuPqsxQC_ve_GW7Uo0EAJaF4LEAglGXn9U0KRJk52aZtQQhdjtWUeClkPgXsuE_s1XMJrooyTH3PwB8mqIwx9LIiX5Bo4YZjJocg_7-DImV-5E"/>
+</div>
+<div class="flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Cozy Cafe</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">For those slow mornings and warm beverage moments.</p>
+<div class="mt-auto pt-4 border-t-2 border-outline-variant border-dashed flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface">$1.99</span>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 organic-btn-border organic-shadow organic-shadow-active font-label-sm text-label-sm uppercase transition-all">
+                            Buy Pack
+                        </button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface px-2 py-3 border-t-2 border-outline-variant rounded-t-xl z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">calendar_month</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+<span class="font-label-sm text-label-sm">Store</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">book</span>
+<span class="font-label-sm text-label-sm">Diary</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+</body></html>
