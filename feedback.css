@@ -81,19 +81,28 @@
 /* Hiệu ứng Emoji Rating */
 .emoji-btn {
     font-size: 2rem;
-    filter: grayscale(100%) opacity(0.5);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.emoji-btn img {
+    border-radius: 50%;
+    background: transparent;
+    mix-blend-mode: multiply;
+    transition: all 0.4s ease;
 }
 .emoji-btn:hover {
-    filter: grayscale(0%) opacity(1);
     transform: scale(1.2) translateY(-5px);
 }
 .emoji-btn.active {
-    filter: grayscale(0%) opacity(1);
     transform: scale(1.4) translateY(-10px);
-    text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+.emoji-btn.active img {
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
 
 .fade-in {

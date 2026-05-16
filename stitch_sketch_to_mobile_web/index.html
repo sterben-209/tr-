@@ -404,7 +404,9 @@
                 <div class="max-w-3xl mx-auto">
                     <div class="flex flex-col items-center mb-14">
                         <div id="mood-btn" onclick="toggleMoodPicker()" class="w-28 h-28 bg-primary-container hand-drawn-circle flex items-center justify-center pencil-shadow cursor-pointer hover:scale-105 transition-all relative">
-                            <span id="current-mood-icon" class="material-symbols-outlined text-6xl text-on-primary-container">sentiment_satisfied</span>
+                            <span id="current-mood-icon" class="flex items-center justify-center w-full h-full">
+                                <img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-16 h-16 object-contain rounded-full">
+                            </span>
                             <div class="absolute -bottom-4 bg-tertiary-container border-2 border-on-surface px-3 py-1 rotate-3 text-[10px] font-black uppercase tracking-widest">Mood</div>
                         </div>
                         <h2 class="font-headline text-3xl font-bold mt-10">How's your day?</h2>
@@ -1086,7 +1088,7 @@
         <!-- Blur Overlay -->
         <div class="absolute inset-0 bg-surface/30 backdrop-blur-md flex flex-col items-center justify-center">
             <!-- Circular Modal -->
-            <div class="animate-pop relative bg-surface w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full hand-drawn-circle flex flex-col items-center justify-center shadow-lg mb-8">
+            <div class="animate-pop relative bg-transparent w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full hand-drawn-circle flex flex-col items-center justify-center shadow-none mb-8">
                 <!-- Central Text -->
                 <div class="absolute inset-0 flex items-center justify-center flex-col z-10 pointer-events-none">
                     <h2 class="font-headline text-xl md:text-2xl text-on-surface text-center px-8">How are you<br/>today?</h2>
@@ -1095,43 +1097,43 @@
                 <div class="mood-ring z-20">
                     <!-- Calm -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_satisfied', 'Feeling Calm')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
                     </button>
                     <!-- Happy -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood', 'Happy')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
                     </button>
                     <!-- Excited -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('auto_awesome', 'Excited')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
                     </button>
                     <!-- Angry -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_very_dissatisfied', 'Angry')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
                     </button>
                     <!-- Sad -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood_bad', 'Sad')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
                     </button>
                     <!-- Tired -->
                     <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('coffee', 'Tired')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1" class="w-8 h-8 md:w-12 md:h-12 object-contain">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
+                            <img src="https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
                         </div>
                         <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
                     </button>
@@ -1169,6 +1171,41 @@
         // --- STATE & SESSION ---
         let userData = { nickname: "Khách", intro: "...", avatar: "", email: "" };
         let currentMood = "sentiment_satisfied";
+        
+        // Emoji Cache to prevent "undefined" and flickering
+        const emojiCache = {};
+        const emojiList = [
+            { id: "sentiment_satisfied", url: "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" },
+            { id: "mood", url: "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY" },
+            { id: "auto_awesome", url: "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1" },
+            { id: "sentiment_very_dissatisfied", url: "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA" },
+            { id: "mood_bad", url: "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy" },
+            { id: "coffee", url: "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU" },
+            { id: "emo_angry_red", url: "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA" },
+            { id: "emo_attention_red", url: "https://lh3.googleusercontent.com/d/10vJy3OoGAcqgk1muy_taTMR3Yw4O1_nd" },
+            { id: "emo_confuse_blue", url: "https://lh3.googleusercontent.com/d/1-8GT1AlrkOolZ_A-HW-RyLjhg34twZaS" },
+            { id: "emo_contempt_green", url: "https://lh3.googleusercontent.com/d/1_BW552J6Lz1Omsf06SVHWjaPMPkgq42a" },
+            { id: "emo_cry_blue", url: "https://lh3.googleusercontent.com/d/1tCAKb8zM3U0AMEVHqPwPNK31rqI-g2JC" },
+            { id: "emo_die_red", url: "https://lh3.googleusercontent.com/d/1rCpZaPxiJ7NP05Ch9l4RydN3xWvIBdtc" },
+            { id: "emo_exicted_red", url: "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1" },
+            { id: "emo_happy_green", url: "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY" },
+            { id: "emo_hehe_blue", url: "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" },
+            { id: "emo_huh_green", url: "https://lh3.googleusercontent.com/d/1V99iVPWZ9NVTDB7MdRNmq0D4_t6i-31M" },
+            { id: "emo_opposite_red", url: "https://lh3.googleusercontent.com/d/1IMzUgrz1f45UfgO8QejkkVUHtyD3DHjC" },
+            { id: "emo_sad_blue", url: "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy" },
+            { id: "emo_stun_green", url: "https://lh3.googleusercontent.com/d/1xftdOQCr-gpAlNa0wmYWVRUnyvrAvkc7" },
+            { id: "emo_tired_blue", url: "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU" },
+            { id: "emo_wao_green", url: "https://lh3.googleusercontent.com/d/1u57iUT7yXwm7imuzQ779D7Lze62OYkdC" }
+        ];
+
+        function preloadEmojis() {
+            emojiList.forEach(emoji => {
+                const img = new Image();
+                img.src = emoji.url;
+                emojiCache[emoji.id] = emoji.url;
+            });
+        }
+        preloadEmojis();
 
         const stickerPacks = [
             { 
@@ -1178,16 +1215,23 @@
                 price: '$0.00', 
                 owned: true, 
                 tape: '#ffeba7', 
-                img: 'https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9',
+                img: 'https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY', // happy_green
                 icons: [
-                    'https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9',
-                    'https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY',
-                    'https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB',
-                    'https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb',
-                    'https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY',
-                    'https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1',
-                    'https://lh3.googleusercontent.com/d/1-W0qOXnFgmAn59cV7wWGxlZpOmCyUEvk',
-                    'https://lh3.googleusercontent.com/d/13E4N-OO1plPU95sf8JTJM5wm-yUcXdZD'
+                    'https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA', // angry
+                    'https://lh3.googleusercontent.com/d/10vJy3OoGAcqgk1muy_taTMR3Yw4O1_nd', // attention
+                    'https://lh3.googleusercontent.com/d/1-8GT1AlrkOolZ_A-HW-RyLjhg34twZaS', // confuse
+                    'https://lh3.googleusercontent.com/d/1_BW552J6Lz1Omsf06SVHWjaPMPkgq42a', // contempt
+                    'https://lh3.googleusercontent.com/d/1tCAKb8zM3U0AMEVHqPwPNK31rqI-g2JC', // cry
+                    'https://lh3.googleusercontent.com/d/1rCpZaPxiJ7NP05Ch9l4RydN3xWvIBdtc', // die
+                    'https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1', // excited
+                    'https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY', // happy
+                    'https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc', // hehe
+                    'https://lh3.googleusercontent.com/d/1V99iVPWZ9NVTDB7MdRNmq0D4_t6i-31M', // huh
+                    'https://lh3.googleusercontent.com/d/1IMzUgrz1f45UfgO8QejkkVUHtyD3DHjC', // opposite
+                    'https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy', // sad
+                    'https://lh3.googleusercontent.com/d/1xftdOQCr-gpAlNa0wmYWVRUnyvrAvkc7', // stun
+                    'https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU', // tired
+                    'https://lh3.googleusercontent.com/d/1u57iUT7yXwm7imuzQ779D7Lze62OYkdC'  // wao
                 ]
             },
             { 
@@ -1302,6 +1346,13 @@
             if (hash === '#change-avatar') renderIllustrations();
             if (hash === '#compose') {
                 currentlyViewingId = 'mood_' + Date.now(); // Generate ID at creation start
+                currentMood = "sentiment_satisfied";
+                const composeIcon = document.getElementById('current-mood-icon');
+                if (composeIcon) composeIcon.innerHTML = `<img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-16 h-16 object-contain rounded-full">`;
+                const composeHeader = document.querySelector('#compose h2');
+                if (composeHeader) composeHeader.innerText = "Feeling Good";
+                const composeContent = document.getElementById('diary-content');
+                if (composeContent) composeContent.innerText = 'Dear Diary, today was...';
                 toggleMoodPicker();
             }
             syncUI();
@@ -1605,11 +1656,14 @@
             }
 
             const grid = document.getElementById('pack-icons-grid');
-            grid.innerHTML = (pack.icons || []).map(icon => `
-                <div class="aspect-square bg-surface-container-high p-2 flex items-center justify-center hand-drawn-border-alt hover:bg-primary-container transition-colors cursor-pointer">
-                    <span class="material-symbols-outlined text-4xl text-primary">${icon}</span>
-                </div>
-            `).join('');
+            grid.innerHTML = (pack.icons || []).map(icon => {
+                const isUrl = icon.startsWith('http');
+                return `
+                    <div class="aspect-square bg-transparent p-2 flex items-center justify-center hand-drawn-circle hover:bg-primary-container transition-colors cursor-pointer overflow-hidden">
+                        ${isUrl ? `<img src="${icon}" class="w-full h-full object-contain rounded-full">` : `<span class="material-symbols-outlined text-4xl text-primary">${icon}</span>`}
+                    </div>
+                `;
+            }).join('');
         }
 
         async function sendResetLink() {
@@ -1698,13 +1752,29 @@
             // Update Compose Section
             const composeIcon = document.getElementById('current-mood-icon');
             const composeHeader = document.querySelector('#compose h2');
-            if (composeIcon) composeIcon.innerText = iconName;
+            if (composeIcon) {
+                if (emoji.startsWith('http')) {
+                    composeIcon.innerHTML = `<img src="${emoji}" class="w-16 h-16 object-contain rounded-full" style="mix-blend-mode: multiply;">`;
+                } else {
+                    composeIcon.innerHTML = `<span class="material-symbols-outlined text-6xl text-on-primary-container">${iconName}</span>`;
+                }
+            }
             if (composeHeader) composeHeader.innerText = moodText;
 
             // Update View/Read Section
             const viewIcon = document.getElementById('view-mood-icon');
             const viewBadge = document.getElementById('view-mood-badge');
-            if (viewIcon) viewIcon.innerText = emoji;
+            if (viewIcon) {
+                if (emoji.startsWith('http')) {
+                    viewIcon.innerHTML = `<img src="${emoji}" class="w-16 h-16 object-contain rounded-full" style="mix-blend-mode: multiply;">`;
+                    viewIcon.classList.remove('text-6xl');
+                    viewIcon.classList.add('flex', 'items-center', 'justify-center', 'w-full', 'h-full');
+                } else {
+                    viewIcon.innerText = emoji;
+                    viewIcon.classList.add('text-6xl');
+                    viewIcon.classList.remove('flex', 'items-center', 'justify-center', 'w-full', 'h-full');
+                }
+            }
             if (viewBadge) viewBadge.innerText = moodText;
 
             closeMoodModal();
@@ -1802,7 +1872,7 @@
                 email: user ? user.email : 'guest' 
             };
             
-            let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            let logs = getDiaryLogs();
             // Remove existing entry if it was an "auto-save" or update of the same session ID
             logs = logs.filter(l => l.id !== entryId);
             logs.unshift(logEntry);
@@ -1828,7 +1898,7 @@
                 btn.innerText = 'Save Page'; btn.disabled = false;
                 document.getElementById('diary-content').innerText = 'Dear Diary, today was...';
                 currentMood = "sentiment_satisfied";
-                document.getElementById('current-mood-icon').innerText = "sentiment_satisfied";
+                document.getElementById('current-mood-icon').innerHTML = `<img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-16 h-16 object-contain rounded-full">`;
                 document.querySelector('#compose h2').innerText = "How's your day?";
                 currentlyViewingId = null; // Clear ID after successful save
                 window.location.hash = '#diary';
@@ -1843,7 +1913,7 @@
                 const result = await response.json();
                 if (result.result === 'success') {
                     const serverLogs = result.data;
-                    let localLogs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+                    let localLogs = getDiaryLogs();
                     const logMap = new Map();
                     localLogs.forEach(l => logMap.set(l.id, l));
                     serverLogs.forEach(l => logMap.set(l.id, l));
@@ -1869,7 +1939,7 @@
 
         // --- STREAK CALCULATION ---
         function calculateStreak() {
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             if (logs.length === 0) return 0;
 
             // Get unique days (YYYY-MM-DD)
@@ -1924,7 +1994,7 @@
             document.getElementById('edit-intro-display').innerText = userData.intro;
             document.getElementById('input-nickname').value = userData.nickname;
             document.getElementById('input-intro').value = userData.intro;
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             document.getElementById('stat-entries').innerText = logs.length;
             const goodMoods = logs.filter(l => ["😊", "✨", "🙂"].includes(l.moodIcon)).length;
             if(document.getElementById('stat-good-moods')) {
@@ -1943,7 +2013,7 @@
         function renderDiaryEntries() {
             const container = document.getElementById('diary-list-container');
             if(!container) return;
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             if (logs.length === 0) { container.innerHTML = ''; document.getElementById('empty-diary-msg').classList.remove('hidden'); return; }
             document.getElementById('empty-diary-msg').classList.add('hidden');
 
@@ -1959,7 +2029,7 @@
                             <h3 class="font-bold text-xl md:text-2xl mt-1 leading-tight">${log.moodText}</h3>
                         </div>
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-on-surface bg-primary-container flex items-center justify-center rotate-6 overflow-hidden">
-                            ${isImg ? `<img src="${log.moodIcon}" class="w-8 h-8 md:w-10 md:h-10 object-contain">` : `<span class="text-3xl md:text-4xl">${log.moodIcon}</span>`}
+                            ${isImg ? `<img src="${log.moodIcon}" class="w-8 h-8 md:w-10 md:h-10 object-contain rounded-full" style="mix-blend-mode: multiply;">` : `<span class="text-3xl md:text-4xl">${log.moodIcon}</span>`}
                         </div>
                     </div>
                     <p class="text-on-surface-variant text-base md:text-lg font-medium leading-relaxed italic line-clamp-3 mb-6 md:mb-8">${log.note}</p>
@@ -1994,7 +2064,7 @@
         }
 
         function openDiaryEntry(id) {
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             const entry = logs.find(l => l.id === id);
             if (!entry) return;
 
@@ -2004,9 +2074,13 @@
             const viewIcon = document.getElementById('view-mood-icon');
             const isImg = entry.moodIcon && entry.moodIcon.startsWith('http');
             if (isImg) {
-                viewIcon.innerHTML = `<img src="${entry.moodIcon}" class="w-16 h-16 object-contain">`;
+                viewIcon.innerHTML = `<img src="${entry.moodIcon}" class="w-16 h-16 object-contain rounded-full" style="mix-blend-mode: multiply;">`;
+                viewIcon.classList.remove('text-6xl');
+                viewIcon.classList.add('flex', 'items-center', 'justify-center', 'w-full', 'h-full');
             } else {
                 viewIcon.innerText = entry.moodIcon;
+                viewIcon.classList.add('text-6xl');
+                viewIcon.classList.remove('flex', 'items-center', 'justify-center', 'w-full', 'h-full');
             }
 
             document.getElementById('view-date-display').innerText = new Date(entry.timestamp).toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
@@ -2050,7 +2124,7 @@
 
         async function handleViewSave() {
             if (!currentlyViewingId) return;
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             const entryIndex = logs.findIndex(l => l.id === currentlyViewingId);
             if (entryIndex === -1) return;
 
@@ -2103,7 +2177,7 @@
             if(!confirm('Bạn có chắc muốn xóa trang nhật ký này?')) return;
             
             const user = getSession();
-            let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            let logs = getDiaryLogs();
             localStorage.setItem('calm_diary_entries', JSON.stringify(logs.filter(l => l.id !== id)));
             renderDiaryEntries();
 
@@ -2120,46 +2194,40 @@
         function initCalendar() {
             const grid = document.getElementById('calendar-grid'); if(!grid) return;
             grid.innerHTML = '';
-            
-            // Lấy dữ liệu thật từ LocalStorage
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
-            
-            // Map các ngày có bài viết (ví dụ bài viết trong tháng 5/2026)
+
+            const logs = getDiaryLogs();
             const entryDays = new Set();
             logs.forEach(log => {
                 const date = new Date(log.timestamp);
-                if (date.getMonth() === 4 && date.getFullYear() === 2026) { // Tháng 5 (index 4)
+                if (date.getMonth() === 4 && date.getFullYear() === 2026) {
                     entryDays.add(date.getDate());
                 }
             });
 
-            // Tạo các ô trống đầu tháng (May 2026 bắt đầu từ Thứ 6 -> 5 ô trống)
             for(let i=0; i<5; i++) grid.innerHTML += `<div class="p-2"></div>`;
-            
-            // Vẽ 31 ngày
+
             for(let day=1; day<=31; day++) {
                 const hasEntry = entryDays.has(day);
-                // Nếu có bài viết, lấy icon của bài viết đầu tiên trong ngày đó (hoặc icon mặc định)
-                let icon = day;
+                let content = day;
+
                 if (hasEntry) {
                     const entry = logs.find(l => new Date(l.timestamp).getDate() === day);
                     const isImg = entry.moodIcon && entry.moodIcon.startsWith('http');
                     if (isImg) {
-                        icon = `<img src="${entry.moodIcon}" class="w-6 h-6 object-contain">`;
+                        content = `<img src="${entry.moodIcon}" class="w-6 h-6 object-contain rounded-full" style="mix-blend-mode: multiply;">`;
                     } else {
-                        icon = `<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1">mood</span>`;
+                        content = `<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1">mood</span>`;
                     }
                 }
-                
+
                 grid.innerHTML += `
                     <div class="hand-drawn-circle h-8 w-8 sm:h-12 sm:w-12 flex items-center justify-center font-bold text-[9px] sm:text-xs 
                         ${hasEntry ? 'bg-primary-container scale-110' : 'bg-surface-container-lowest opacity-40'} 
                         cursor-pointer hover:scale-110 transition-transform relative overflow-hidden">
-                        ${icon}
+                        ${content}
                     </div>`;
             }
         }
-
         function setMoodView(mode) {
             const weeklyBtn = document.getElementById('toggle-weekly');
             const monthlyBtn = document.getElementById('toggle-monthly');
@@ -2189,7 +2257,7 @@
             labels.className = "grid grid-cols-7 gap-2 mt-4 text-center";
             labels.innerHTML = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => `<div class="text-[8px] font-bold uppercase tracking-widest ${i===6?'text-error':'opacity-40'}">${d}</div>`).join('');
 
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             const today = new Date();
             const currentDay = today.getDay();
             const diff = today.getDate() - (currentDay === 0 ? 6 : currentDay - 1);
@@ -2197,12 +2265,12 @@
             monday.setHours(0, 0, 0, 0);
 
             const moodScores = {
-                "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9": 80, 
-                "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY": 100,
-                "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB": 90,
-                "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb": 30,
-                "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY": 20,
-                "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1": 40 
+                "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc": 80, // hehe
+                "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY": 100, // happy
+                "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1": 90, // excited
+                "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA": 30, // angry
+                "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy": 20, // sad
+                "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU": 40  // tired
             };
 
             let html = '';
@@ -2231,14 +2299,14 @@
             labels.className = "flex justify-between mt-4 text-center px-1";
             labels.innerHTML = `<div class="text-[8px] font-bold opacity-40 uppercase">Day 1</div><div class="text-[8px] font-bold opacity-40 uppercase">Day 31</div>`;
 
-            const logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            const logs = getDiaryLogs();
             const moodScores = {
-                "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9": 80, 
-                "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY": 100,
-                "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB": 90,
-                "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb": 30,
-                "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY": 20,
-                "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1": 40 
+                "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc": 80, // hehe
+                "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY": 100, // happy
+                "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1": 90, // excited
+                "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA": 30, // angry
+                "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy": 20, // sad
+                "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU": 40  // tired
             };
 
             let html = '';
@@ -2258,14 +2326,42 @@
             container.innerHTML = html;
         }
 
+        function getDiaryLogs() {
+            let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
+            return logs.map(log => {
+                if (!log.moodSymbol || log.moodSymbol === 'undefined') log.moodSymbol = 'sentiment_satisfied';
+                if (!log.moodIcon || log.moodIcon === 'undefined') log.moodIcon = getEmoji(log.moodSymbol);
+                if (!log.moodText || log.moodText === 'undefined') log.moodText = getMoodText(log.moodSymbol);
+                return log;
+            });
+        }
+
         function getEmoji(i) { 
             const m = { 
-                "sentiment_satisfied": "https://lh3.googleusercontent.com/d/1nwlBelkHad6UtnuppNr2mgLrz4C755g9", 
-                "mood": "https://lh3.googleusercontent.com/d/1DfxTuG4VokW_uONOXBicc38sJM3PfYdY", 
-                "auto_awesome": "https://lh3.googleusercontent.com/d/1XucFMEGXoCA4I_L0TTXfFMtNYDyq6PnB", 
-                "sentiment_very_dissatisfied": "https://lh3.googleusercontent.com/d/1zON1icU3w4jkfpP4PzIqsbEtc1ljwwPb", 
-                "mood_bad": "https://lh3.googleusercontent.com/d/1BO0-i-NX7v5FSzl1Lv0z_7h9Vnuv5KvY", 
-                "coffee": "https://lh3.googleusercontent.com/d/1hgXo11k_zki2P48ZjX9BMWP19tGxQKA1" 
+                // Existing mappings
+                "sentiment_satisfied": "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc", // hehe
+                "mood": "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY", // happy
+                "auto_awesome": "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1", // excited
+                "sentiment_very_dissatisfied": "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA", // angry
+                "mood_bad": "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy", // sad
+                "coffee": "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU", // tired
+                
+                // Full 15 emojis mapping
+                "emo_angry_red": "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA",
+                "emo_attention_red": "https://lh3.googleusercontent.com/d/10vJy3OoGAcqgk1muy_taTMR3Yw4O1_nd",
+                "emo_confuse_blue": "https://lh3.googleusercontent.com/d/1-8GT1AlrkOolZ_A-HW-RyLjhg34twZaS",
+                "emo_contempt_green": "https://lh3.googleusercontent.com/d/1_BW552J6Lz1Omsf06SVHWjaPMPkgq42a",
+                "emo_cry_blue": "https://lh3.googleusercontent.com/d/1tCAKb8zM3U0AMEVHqPwPNK31rqI-g2JC",
+                "emo_die_red": "https://lh3.googleusercontent.com/d/1rCpZaPxiJ7NP05Ch9l4RydN3xWvIBdtc",
+                "emo_exicted_red": "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1",
+                "emo_happy_green": "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY",
+                "emo_hehe_blue": "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc",
+                "emo_huh_green": "https://lh3.googleusercontent.com/d/1V99iVPWZ9NVTDB7MdRNmq0D4_t6i-31M",
+                "emo_opposite_red": "https://lh3.googleusercontent.com/d/1IMzUgrz1f45UfgO8QejkkVUHtyD3DHjC",
+                "emo_sad_blue": "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy",
+                "emo_stun_green": "https://lh3.googleusercontent.com/d/1xftdOQCr-gpAlNa0wmYWVRUnyvrAvkc7",
+                "emo_tired_blue": "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU",
+                "emo_wao_green": "https://lh3.googleusercontent.com/d/1u57iUT7yXwm7imuzQ779D7Lze62OYkdC"
             }; 
             return m[i] || "📝"; 
         }
