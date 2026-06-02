@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link rel="icon" href="../img/mas_gte_green.png" type="image/png">
     <title>Calm Diary - Digital Scrapbook</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -2084,7 +2085,14 @@
                 const response = await fetch(`${CONFIG_GOOGLE_URL}?action=GET_CALM_DIARY&email=${user.email}`);
                 const result = await response.json();
                 if (result.result === 'success') {
-                    const serverLogs = result.data;
+                    const serverLogs = result.data.map(log => {
+                        // Normalize right after fetch
+                        if (log.content && !log.note) log.note = log.content;
+                        if (log.mood_icon && !log.moodIcon) log.moodIcon = log.mood_icon;
+                        if (log.mood_text && !log.moodText) log.moodText = log.mood_text;
+                        return log;
+                    });
+                    
                     let localLogs = getDiaryLogs();
                     const logMap = new Map();
                     localLogs.forEach(l => logMap.set(l.id, l));
@@ -2441,6 +2449,16 @@
             }
         }
 
+        const moodScores = {
+            "sentiment_satisfied": 80, "mood": 100, "auto_awesome": 95, 
+            "sentiment_very_dissatisfied": 30, "mood_bad": 20, "coffee": 60,
+            "emo_angry_red": 15, "emo_attention_red": 45, "emo_confuse_blue": 40,
+            "emo_contempt_green": 35, "emo_cry_blue": 10, "emo_die_red": 5,
+            "emo_exicted_red": 90, "emo_happy_green": 100, "emo_hehe_blue": 85,
+            "emo_huh_green": 50, "emo_opposite_red": 25, "emo_sad_blue": 20,
+            "emo_stun_green": 45, "emo_tired_blue": 30, "emo_wao_green": 95
+        };
+
         function renderWeeklyMood() {
             const container = document.getElementById('weekly-mood-container');
             const labels = document.getElementById('mood-labels-grid');
@@ -2457,15 +2475,6 @@
             const monday = new Date(new Date().setDate(diff));
             monday.setHours(0, 0, 0, 0);
 
-            const moodScores = {
-                "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc": 80, // hehe
-                "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY": 100, // happy
-                "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1": 90, // excited
-                "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA": 30, // angry
-                "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy": 20, // sad
-                "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU": 40  // tired
-            };
-
             let html = '';
             for(let i=0; i<7; i++) {
                 const checkDate = new Date(monday);
@@ -2473,7 +2482,7 @@
                 const log = logs.find(l => new Date(l.timestamp).toDateString() === checkDate.toDateString());
                 let h = "10%", c = "bg-surface-container-highest";
                 if (log) {
-                    const s = moodScores[log.moodIcon] || 50;
+                    const s = moodScores[log.moodSymbol] || 50;
                     h = s + "%";
                     c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
                 }
@@ -2493,14 +2502,6 @@
             labels.innerHTML = `<div class="text-[8px] font-bold opacity-40 uppercase">Day 1</div><div class="text-[8px] font-bold opacity-40 uppercase">Day 31</div>`;
 
             const logs = getDiaryLogs();
-            const moodScores = {
-                "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc": 80, // hehe
-                "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY": 100, // happy
-                "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1": 90, // excited
-                "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA": 30, // angry
-                "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy": 20, // sad
-                "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU": 40  // tired
-            };
 
             let html = '';
             for(let day=1; day<=31; day++) {
@@ -2510,7 +2511,7 @@
                 });
                 let h = "8%", c = "bg-surface-container-highest";
                 if (log) {
-                    const s = moodScores[log.moodIcon] || 50;
+                    const s = moodScores[log.moodSymbol] || 50;
                     h = s + "%";
                     c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
                 }
@@ -2521,17 +2522,43 @@
 
         function getDiaryLogs() {
             let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
-            return logs.map(log => {
-                // Fix Backend Sync Mismatch (Restore missing content)
+            
+            // 1. Pre-process and Normalize
+            logs = logs.map(log => {
                 if (log.content && !log.note) log.note = log.content;
                 if (log.mood_icon && !log.moodIcon) log.moodIcon = log.mood_icon;
                 if (log.mood_text && !log.moodText) log.moodText = log.mood_text;
-
                 if (!log.moodSymbol || log.moodSymbol === 'undefined') log.moodSymbol = 'sentiment_satisfied';
                 if (!log.moodIcon || log.moodIcon === 'undefined') log.moodIcon = getEmoji(log.moodSymbol);
                 if (!log.moodText || log.moodText === 'undefined') log.moodText = getMoodText(log.moodSymbol);
                 return log;
             });
+
+            // 2. De-duplicate by Day (Merge content if same day but different IDs)
+            const dayMap = new Map();
+            logs.forEach(log => {
+                const date = new Date(log.timestamp);
+                const dayKey = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                
+                if (dayMap.has(dayKey)) {
+                    const existing = dayMap.get(dayKey);
+                    // If content is different, merge it
+                    if (existing.note !== log.note) {
+                        const separator = '<div class="my-4 border-t border-dashed border-outline-variant opacity-30"></div>';
+                        // Keep the one with later timestamp as the base, but combine notes
+                        if (log.timestamp > existing.timestamp) {
+                            log.note = existing.note + separator + log.note;
+                            dayMap.set(dayKey, log);
+                        } else {
+                            existing.note = log.note + separator + existing.note;
+                        }
+                    }
+                } else {
+                    dayMap.set(dayKey, log);
+                }
+            });
+
+            return Array.from(dayMap.values()).sort((a, b) => b.timestamp - a.timestamp);
         }
 
         function getEmoji(i) { 
@@ -2814,3 +2841,6 @@
     </script>
 </body>
 </html>
+
+
+

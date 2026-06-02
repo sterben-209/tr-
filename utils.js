@@ -66,7 +66,7 @@ async function hashPassword(password) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbxP4MSii24vi0fJwsEHonZRHF4NBIfNwjnWPtbKu8NzyuvT5QRhvmPibNu1r8zCavPU/exec';
+const CONFIG_GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbyH3s3NFqDczsd9s8I8XDEG2V4bih-HJYw7AxbOSidkolmEujNBYNop7CKyTXEhfZig/exec';
 
 // Tự động xác định Base URL cho Link Reset (Local vs Deploy)
 function getBaseURL() {
@@ -149,6 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Luôn cập nhật badge khi load
     updateCartBadge();
 });
+
+
+
 
 
 
