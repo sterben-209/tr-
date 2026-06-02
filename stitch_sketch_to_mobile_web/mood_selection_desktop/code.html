@@ -115,41 +115,59 @@
             -webkit-backdrop-filter: blur(8px);
         }
 
+        /* --- Mood Popup - Clean Rewrite --- */
         .mood-ring {
-            position: relative;
-            width: 320px;
-            height: 320px;
-            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            z-index: 20;
         }
 
         .mood-item {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 80px;
             height: 80px;
-            top: 50%;
+            /* Geometric positioning: 
+               1. translate(-50%, -50%) centers the item itself on the center point
+               2. rotate(var(--angle)) rotates the coordinate system
+               3. translate(var(--distance)) moves the item outward along the rotated axis
+               4. rotate(calc(-1 * var(--angle))) counter-rotates the content to keep it upright
+            */
+            transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--distance)) rotate(calc(-1 * var(--angle)));
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mood-label {
+            position: absolute;
+            top: 100%;
             left: 50%;
-            margin: -40px;
-            transition: transform 0.2s ease;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            white-space: nowrap;
+            pointer-events: none;
         }
 
-        .mood-item:hover {
-            transform: scale(1.1);
+
+        .edit-mode .mood-item::after {
+            content: 'edit';
+            font-family: 'Material Symbols Outlined';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ffeba7;
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 16px;
+            border: 1px solid #4b463a;
+            pointer-events: none;
         }
-
-        /* Positioning for 6 items in a circle */
-        .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
-        .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
-        .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
-        .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
-        .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
-        .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
-
-        .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
-        .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
-        .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
-        .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
-        .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
-        .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
@@ -180,6 +198,28 @@
 </nav>
 <!-- Main Content Area (Blurred Background) -->
 <main class="flex-1 relative h-screen w-full bg-surface-bright flex flex-col items-center justify-center">
+<!-- Edit Mode Toggle -->
+<div class="absolute top-8 right-8 z-30 flex gap-4">
+    <button id="toggle-edit" class="px-6 py-2 bg-surface border-2 border-outline-variant rounded-xl hand-drawn-shadow hand-drawn-shadow-hover transition-all flex items-center gap-2 text-on-surface-variant font-bold">
+        <span class="material-symbols-outlined">edit_note</span>
+        <span>Customize Icons</span>
+    </button>
+</div>
+
+<!-- Icon Gallery Modal (Hidden by default) -->
+<div id="icon-gallery" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div class="absolute inset-0 bg-surface/80 blur-overlay" id="gallery-overlay"></div>
+    <div class="relative bg-surface w-[320px] p-6 rounded-3xl hand-drawn-border hand-drawn-shadow z-50">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-headline-md text-xl">Pick an Icon</h3>
+            <button id="close-gallery" class="material-symbols-outlined">close</button>
+        </div>
+        <div class="grid grid-cols-4 gap-4 max-h-[300px] overflow-y-auto p-2" id="icon-list">
+            <!-- Icons will be injected here -->
+        </div>
+    </div>
+</div>
+
 <!-- Mock background content to be blurred -->
 <div class="absolute inset-0 p-8 flex flex-col gap-6 opacity-40 pointer-events-none">
 <div class="max-w-3xl w-full mx-auto space-y-6">
@@ -202,48 +242,48 @@
 <h2 class="font-headline-md text-headline-md text-on-surface text-center px-8">How are you<br/>today?</h2>
 </div>
 <!-- Mood Ring -->
-<div class="mood-ring z-20">
+<div id="mood-ring" class="mood-ring z-20">
 <!-- Calm -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: -90deg; --distance: 140px;" data-mood="calm">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_satisfied</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_satisfied</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
 </button>
 <!-- Happy -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: -30deg; --distance: 140px;" data-mood="happy">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_very_satisfied</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_very_satisfied</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
 </button>
 <!-- Excited -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: 30deg; --distance: 140px;" data-mood="excited">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_excited</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_excited</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
 </button>
 <!-- Angry -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: 90deg; --distance: 140px;" data-mood="angry">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_very_dissatisfied</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_very_dissatisfied</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
 </button>
 <!-- Sad -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: 150deg; --distance: 140px;" data-mood="sad">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_sad</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_sad</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
 </button>
 <!-- Tired -->
-<button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none">
+<button class="mood-item group cursor-pointer focus:outline-none" style="--angle: 210deg; --distance: 140px;" data-mood="tired">
 <div class="w-16 h-16 bg-surface rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">sentiment_dissatisfied</span>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant icon-display" style="font-variation-settings: 'FILL' 0;">sentiment_dissatisfied</span>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
+<span class="mood-label font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
 </button>
 </div>
 </div>
@@ -253,4 +293,85 @@
 </button>
 </div>
 </main>
+
+<script>
+    const ICONS = [
+        'sentiment_satisfied', 'sentiment_very_satisfied', 'sentiment_excited', 
+        'sentiment_very_dissatisfied', 'sentiment_sad', 'sentiment_dissatisfied',
+        'favorite', 'star', 'wb_sunny', 'nightlight_round', 'cloud', 'eco',
+        'auto_awesome', 'pets', 'rocket_launch', 'local_florist',
+        'face', 'mood', 'mood_bad', 'sentiment_neutral'
+    ];
+
+    let isEditMode = false;
+    let selectedMoodBtn = null;
+
+    const toggleBtn = document.getElementById('toggle-edit');
+    const moodRing = document.getElementById('mood-ring');
+    const gallery = document.getElementById('icon-gallery');
+    const iconList = document.getElementById('icon-list');
+    const closeGallery = document.getElementById('close-gallery');
+    const galleryOverlay = document.getElementById('gallery-overlay');
+
+    // Load saved icons
+    const savedIcons = JSON.parse(localStorage.getItem('customMoodIcons') || '{}');
+    document.querySelectorAll('.mood-item').forEach(btn => {
+        const mood = btn.dataset.mood;
+        if (savedIcons[mood]) {
+            btn.querySelector('.icon-display').textContent = savedIcons[mood];
+        }
+    });
+
+    toggleBtn.addEventListener('click', () => {
+        isEditMode = !isEditMode;
+        moodRing.classList.toggle('edit-mode', isEditMode);
+        toggleBtn.querySelector('span:last-child').textContent = isEditMode ? 'Finish Customizing' : 'Customize Icons';
+        toggleBtn.classList.toggle('bg-primary-container', isEditMode);
+    });
+
+    moodRing.addEventListener('click', (e) => {
+        if (!isEditMode) return;
+        
+        const btn = e.target.closest('.mood-item');
+        if (btn) {
+            selectedMoodBtn = btn;
+            openGallery();
+        }
+    });
+
+    function openGallery() {
+        iconList.innerHTML = '';
+        ICONS.forEach(iconName => {
+            const iconBtn = document.createElement('button');
+            iconBtn.className = 'w-12 h-12 flex items-center justify-center rounded-xl hover:bg-surface-container-high transition-colors text-2xl material-symbols-outlined';
+            iconBtn.textContent = iconName;
+            iconBtn.onclick = () => selectIcon(iconName);
+            iconList.appendChild(iconBtn);
+        });
+        gallery.classList.remove('hidden');
+    }
+
+    function selectIcon(iconName) {
+        if (selectedMoodBtn) {
+            const iconDisplay = selectedMoodBtn.querySelector('.icon-display');
+            iconDisplay.textContent = iconName;
+            
+            // Save to localStorage
+            const mood = selectedMoodBtn.dataset.mood;
+            const savedIcons = JSON.parse(localStorage.getItem('customMoodIcons') || '{}');
+            savedIcons[mood] = iconName;
+            localStorage.setItem('customMoodIcons', JSON.stringify(savedIcons));
+            
+            closeGalleryModal();
+        }
+    }
+
+    function closeGalleryModal() {
+        gallery.classList.add('hidden');
+        selectedMoodBtn = null;
+    }
+
+    closeGallery.addEventListener('click', closeGalleryModal);
+    galleryOverlay.addEventListener('click', closeGalleryModal);
+</script>
 </body></html>

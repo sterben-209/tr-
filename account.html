@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="account.css">
     <link rel="stylesheet" href="feedback.css" />
+    <link rel="stylesheet" href="cam-frame.css" />
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -31,7 +33,7 @@
           <span class="font-serif text-3xl tracking-tight font-bold text-[#d4a373] transition-colors group-hover:text-stone-900">Emotea</span>
           <span class="text-[0.5rem] tracking-[0.4em] uppercase text-stone-400 font-bold">Mental Care Tea</span>
         </a>
-        <div class="hidden md:flex items-center space-x-12 text-[0.8rem] tracking-[0.2em] font-bold uppercase">
+        <div class="hidden md:flex items-center space-x-12 text-[0.8rem] tracking-[0.2em] font-bold">
           <a href="index.html" class="text-stone-800 hover:text-[#d4a373] transition-colors">Trang Chủ</a>
           <a href="index.html#slider" class="text-stone-800 hover:text-[#d4a373] transition-colors">Sản Phẩm</a>
         </div>
@@ -52,7 +54,7 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu-dropdown" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center space-y-8 text-xl tracking-widest uppercase font-light">
+    <div id="mobile-menu-dropdown" class="fixed inset-0 bg-white z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center space-y-8 text-xl tracking-widest font-light">
       <a href="index.html" class="mobile-link">Trang Chủ</a>
       <a href="index.html#slider" class="mobile-link">Sản Phẩm</a>
       <a href="cart.html" class="mobile-link">Giỏ Hàng</a>
@@ -62,6 +64,12 @@
     <div class="main-container pt-24">
       <aside class="sidebar">
         <div class="user-hero">
+          <div id="user-avatar-trigger" title="Nhấn để đổi ảnh đại diện">
+            <img id="user-avatar" src="img/mas_gte_green.png" alt="Avatar" onerror="this.src='https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1'">
+            <div class="avatar-overlay">
+              <i class="fas fa-camera"></i>
+            </div>
+          </div>
           <h1>Xin chào, Nguyễn An</h1>
           <p>Thành viên từ 12/2023</p>
           <button class="logout-btn">
@@ -75,6 +83,15 @@
               <a href="#">
                 <i class="fas fa-user" style="width: 24px;"></i>
                 Hồ sơ cá nhân
+              </a>
+            </li>
+            <li id="menu-cam-trigger">
+              <a href="javascript:void(0)" class="flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                  <i class="fas fa-camera" style="width: 24px;"></i>
+                  <span>Chụp ảnh Mascot</span>
+                </div>
+                <span class="bg-[#d4a373] text-white text-[10px] px-2 py-0.5 rounded-full font-bold">MỚI</span>
               </a>
             </li>
             <li>
@@ -219,14 +236,6 @@
             window.location.href = 'auth.html';
         });
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-
         editBtn.addEventListener('click', () => {
             if (editBtn.innerText === 'CHỈNH SỬA THÔNG TIN') {
                 formInputs.forEach(input => input.disabled = false);
@@ -337,7 +346,208 @@
             </div>
         </div>
     </div>
+    <!-- Cam Frame Modal -->
+    <div id="cam-frame-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="booth-container">
+                <h1>BẠN TRONG LY TRÀ!</h1>
+                
+                <div class="capture-area-wrapper">
+                    <div class="capture-area" id="captureArea">
+                        <div class="mascot-wrapper">
+                            <div class="floating-container liquid-mascot">
+                                <div class="camera-container" id="imageContainer">
+                                    <img id="userBoothImage" src="" alt="" style="display: none;">
+                                </div>
+                                <div class="leg-l left"></div>
+                                <div class="leg-l right"></div>
+                                <div class="shoe-l left"></div>
+                                <div class="shoe-l right"></div>
+                                <div class="head-shell">
+                                    <div class="shell-gloss"></div>
+                                    <div class="cup-inner-shadow"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-panel">
+                    <div class="upload-section">
+                        <input type="file" id="boothFileInput" accept="image/*" style="display: none;">
+                        <button id="boothUploadBtn" class="btn-primary-booth">📁 Tải Ảnh Lên</button>
+                    </div>
+
+                    <div id="boothAdjustmentControls" class="adjustment-controls hidden">
+                        <div class="control-row">
+                            <label>Cỡ ảnh:</label>
+                            <input type="range" id="boothZoomRange" min="0.5" max="3" step="0.05" value="1">
+                        </div>
+                        <div class="control-row">
+                            <label>Xoay:</label>
+                            <input type="range" id="boothRotateRange" min="-180" max="180" step="1" value="0">
+                        </div>
+                        <p class="hint-small">Bạn có thể kéo ảnh để di chuyển vào giữa ly nhé!</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="boothCaptureBtn" class="btn-capture-booth" disabled>📸 Chụp Ảnh!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Container -->
+    <div id="boothPreviewContainer" class="preview-container-booth hidden">
+        <div class="preview-content-booth">
+            <h3 class="text-xl font-bold mb-4">Xong rồi nè! ✨</h3>
+            <img id="boothPhotoPreview" src="" alt="Preview">
+            <div class="preview-actions">
+                <button id="boothClosePreview" class="btn-secondary-booth">Chụp lại</button>
+                <button id="boothSaveBtn" class="btn-save-booth">Lưu làm Avatar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="feedback.js"></script>
+    <script>
+        // Cam Frame Logic Integration
+        const avatarTrigger = document.getElementById('user-avatar-trigger');
+        const menuCamTrigger = document.getElementById('menu-cam-trigger');
+        const camModal = document.getElementById('cam-frame-modal');
+        const closeModal = document.querySelector('.close-modal');
+        
+        const openBooth = () => {
+            camModal.classList.add('active');
+        };
+
+        avatarTrigger.addEventListener('click', openBooth);
+        menuCamTrigger.addEventListener('click', openBooth);
+
+        closeModal.addEventListener('click', () => {
+            camModal.classList.remove('active');
+        });
+
+        // Booth Logic
+        const boothUploadBtn = document.getElementById('boothUploadBtn');
+        const boothFileInput = document.getElementById('boothFileInput');
+        const userBoothImage = document.getElementById('userBoothImage');
+        const imageContainer = document.getElementById('imageContainer');
+        const boothAdjustmentControls = document.getElementById('boothAdjustmentControls');
+        const boothZoomRange = document.getElementById('boothZoomRange');
+        const boothRotateRange = document.getElementById('boothRotateRange');
+        const boothCaptureBtn = document.getElementById('boothCaptureBtn');
+        const captureArea = document.getElementById('captureArea');
+        const boothPreviewContainer = document.getElementById('boothPreviewContainer');
+        const boothPhotoPreview = document.getElementById('boothPhotoPreview');
+        const boothClosePreview = document.getElementById('boothClosePreview');
+        const boothSaveBtn = document.getElementById('boothSaveBtn');
+        const mainAvatar = document.getElementById('user-avatar');
+
+        let currentScale = 1;
+        let currentRotation = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        boothUploadBtn.addEventListener('click', () => boothFileInput.click());
+
+        boothFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    userBoothImage.src = event.target.result;
+                    userBoothImage.style.display = 'block';
+                    boothAdjustmentControls.classList.remove('hidden');
+                    boothCaptureBtn.disabled = false;
+                    
+                    currentScale = 1; currentRotation = 0; currentX = 0; currentY = 0;
+                    boothZoomRange.value = 1; boothRotateRange.value = 0;
+                    updateImageTransform();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updateImageTransform() {
+            userBoothImage.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentScale}) rotate(${currentRotation}deg)`;
+        }
+
+        boothZoomRange.addEventListener('input', (e) => {
+            currentScale = parseFloat(e.target.value);
+            updateImageTransform();
+        });
+
+        boothRotateRange.addEventListener('input', (e) => {
+            currentRotation = parseInt(e.target.value);
+            updateImageTransform();
+        });
+
+        imageContainer.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', endDrag);
+        imageContainer.addEventListener('touchstart', (e) => startDrag(e.touches[0]));
+        window.addEventListener('touchmove', (e) => drag(e.touches[0]));
+        window.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            if (!userBoothImage.src || userBoothImage.style.display === 'none') return;
+            isDragging = true;
+            startX = e.clientX - currentX;
+            startY = e.clientY - currentY;
+        }
+        function drag(e) {
+            if (!isDragging) return;
+            currentX = e.clientX - startX;
+            currentY = e.clientY - startY;
+            updateImageTransform();
+        }
+        function endDrag() { isDragging = false; }
+
+        boothCaptureBtn.addEventListener('click', async () => {
+            boothCaptureBtn.disabled = true;
+            boothCaptureBtn.innerText = "Đang xử lý...";
+
+            try {
+                const canvas = await html2canvas(captureArea, {
+                    backgroundColor: null,
+                    scale: 3,
+                    useCORS: true
+                });
+
+                const imageData = canvas.toDataURL('image/png');
+                boothPhotoPreview.src = imageData;
+                boothPreviewContainer.classList.remove('hidden');
+            } catch (err) {
+                alert("Có lỗi xảy ra. Hãy thử lại!");
+            } finally {
+                boothCaptureBtn.disabled = false;
+                boothCaptureBtn.innerText = "📸 Chụp Ảnh!";
+            }
+        });
+
+        boothClosePreview.addEventListener('click', () => {
+            boothPreviewContainer.classList.add('hidden');
+        });
+
+        boothSaveBtn.addEventListener('click', () => {
+            const imageData = boothPhotoPreview.src;
+            mainAvatar.src = imageData;
+            localStorage.setItem('user_avatar', imageData);
+            boothPreviewContainer.classList.add('hidden');
+            camModal.classList.remove('active');
+        });
+
+        // Load saved avatar
+        const savedAvatar = localStorage.getItem('user_avatar');
+        if (savedAvatar) {
+            mainAvatar.src = savedAvatar;
+        }
+    </script>
   </body>
-  <script src="feedback.js"></script>
 </html>
 

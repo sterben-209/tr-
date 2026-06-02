@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-color: #f7f3f0;
+    --ink-color: #2c2926;
+    --mascot-color: #ffe899; /* Softer yellow */
+    --accent-pink: #ffb8d1;
+    --accent-green: #a8e6cf;
+    --shadow-color: rgba(44, 41, 38, 0.8);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--ink-color);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 80px 60px;
+    border: 3.5px solid var(--ink-color);
+    border-radius: 40px;
+    box-shadow: 15px 15px 0px 0px var(--shadow-color);
+    position: relative;
+}
+
+.mascot-wrapper {
+    margin: 40px auto;
+    width: 240px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    perspective: 1200px;
+}
+
+.floating-container {
+    animation: organicFloat 6s infinite ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.mascot {
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+/* --- BLENDED PREMIUM GLASS CUP DESIGN --- */
+.liquid-mascot {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    margin: 0 auto;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+}
+
+/* 1. Head Shell: Light blue with 3D Radial Gradient & Gloss */
+.head-shell {
+    position: absolute;
+    width: 320px;
+    height: 180px;
+    background: radial-gradient(circle at 30% 20%, #ffffff, rgba(225, 245, 254, 0.4) 40%, rgba(147, 198, 238, 0.3));
+    border: 5px solid rgba(255, 255, 255, 0.8); /* Refined glass border */
+    border-radius: 0 0 160px 160px;
+    top: 50px;
+    left: 0;
+    z-index: 3;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05), 0 15px 30px rgba(147, 198, 238, 0.2);
+}
+
+.shell-gloss {
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    transform: rotate(-20deg);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* 2. Liquid / Hair: Animated asymmetric wavy hair with clear padding */
+.liquid-hair {
+    position: absolute;
+    top: 20px; /* Increased padding from top */
+    left: 20px; /* Increased padding from sides */
+    width: calc(100% - 40px);
+    height: 140px;
+    background: linear-gradient(135deg, #4DA8FF, #3b82f6);
+    /* Shrunken border radius to match the shell with a gap */
+    border-radius: 0 0 140px 140px; 
+    /* Asymmetric Wavy Path adjusted for shrunken width (280px) */
+    clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z');
+    z-index: 1;
+    opacity: 0.95;
+    animation: liquidSway 4s infinite ease-in-out;
+}
+
+@keyframes liquidSway {
+    0%, 100% { clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z'); }
+    50% { clip-path: path('M 0 0 H 280 V 85 C 220 130, 190 80, 140 80 C 90 80, 50 110, 0 85 Z'); }
+}
+
+/* Bubbles in liquid */
+.bubbles span {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: bubbleUp 3s infinite ease-in;
+    bottom: -10px;
+}
+.bubbles span:nth-child(1) { width: 8px; height: 8px; left: 20%; animation-delay: 0s; }
+.bubbles span:nth-child(2) { width: 5px; height: 5px; left: 50%; animation-delay: 1s; }
+.bubbles span:nth-child(3) { width: 10px; height: 10px; left: 80%; animation-delay: 2s; }
+
+@keyframes bubbleUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 0.5; }
+    100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+}
+
+/* 3. Eyes: Vertical elipses with Glint */
+.eye-l {
+    position: absolute;
+    width: 30px;
+    height: 64px;
+    background-color: #1e293b;
+    border-radius: 50%;
+    z-index: 10;
+    top: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+}
+
+.glint-l {
+    width: 6px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    right: 8px;
+    opacity: 0.8;
+}
+
+/* Blush */
+.blush-l {
+    position: absolute;
+    width: 30px;
+    height: 12px;
+    background: rgba(255, 184, 209, 0.4);
+    filter: blur(4px);
+    border-radius: 50%;
+    bottom: 55px;
+    z-index: 2;
+}
+.blush-l.left { left: 60px; }
+.blush-l.right { right: 60px; }
+.eye-l.left { left: 95px; }
+.eye-l.right { left: 195px; }
+
+/* 4. Mouth: Semicircle with soft edges */
+.mouth-l {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    background-color: #8b5cf6;
+    border-radius: 0 0 18px 18px;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+}
+
+/* 5. Legs: Slightly rounded and gradient depth */
+.leg-l {
+    position: absolute;
+    width: 30px;
+    height: 180px;
+    background: linear-gradient(to bottom, rgba(186, 230, 253, 0.9), rgba(125, 211, 252, 0.6));
+    top: 200px;
+    border-radius: 10px; /* Softer than sharp rect */
+    z-index: 1;
+    box-shadow: inset -4px 0 8px rgba(0,0,0,0.03);
+}
+.leg-l.left { left: 105px; }
+.leg-l.right { left: 185px; }
+
+/* 6. Shoes: Large domes with rich volume */
+.shoe-l {
+    position: absolute;
+    width: 155px;
+    height: 85px;
+    background: radial-gradient(circle at 50% 0%, #7CAAE1, #1e40af);
+    border-radius: 80px 80px 15px 15px; /* More organic dome */
+    bottom: 0;
+    z-index: 2;
+    box-shadow: 0 12px 25px rgba(30, 64, 175, 0.4);
+}
+.shoe-l.left { left: 30px; }
+.shoe-l.right { left: 135px; }
+
+/* Hide previous designs */
+.svg-design, .canvas-design, .json-mascot-v2, .new-design, .mascot-body, #mascot-img, .eye-container, .head, .body, .sprout, .ear, .blush, .mouth, .heart, .arm, .leg { display: none; }
+
+
+/* --- ANIMATIONS --- */
+@keyframes organicFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(2deg); }
+    66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+@keyframes organicWave {
+    0%, 100% { transform: rotate(25deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.hint {
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #57534e;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.mascot.jiggle {
+    animation: artisticJiggle 0.4s ease-out;
+}
+
+@keyframes artisticJiggle {
+    0% { transform: scale(1) rotate(0); }
+    20% { transform: scale(1.1, 0.9) rotate(-3deg); }
+    50% { transform: scale(0.9, 1.1) rotate(3deg); }
+    80% { transform: scale(1.05, 0.95) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0); }
+}

@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-color: #f1f5f9;
+    --ink-color: #0f172a;
+    --mascot-color: #ffe899;
+    --accent-blue: #6366f1;
+    --accent-pink: #ec4899;
+    --shadow-color: rgba(15, 23, 42, 0.15);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--ink-color);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.booth-container {
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+}
+
+h1 {
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: var(--ink-color);
+}
+
+/* --- THE CAPTURE AREA (Isolated Mascot) --- */
+.capture-area-wrapper {
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.capture-area {
+    position: relative;
+    width: 320px;
+    height: 480px; /* Increased to fit taller character */
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.mascot-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.floating-container {
+    animation: organicFloat 6s infinite ease-in-out;
+    height: 100%;
+}
+
+/* --- THE FACE MATCH AREA --- */
+.camera-container {
+    position: absolute;
+    width: 320px;
+    height: 260px;
+    top: 20px;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 0 0 160px 160px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: move;
+    touch-action: none;
+    border: none;
+}
+
+#userImage {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.upload-placeholder {
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* --- MASCOT GLASS CUP (HEAD SHELL) --- */
+.head-shell {
+    position: absolute;
+    width: 320px;
+    height: 260px;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), rgba(225, 245, 254, 0.15) 40%, rgba(147, 198, 238, 0.1));
+    border: 5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 0 0 160px 160px;
+    top: 20px;
+    left: 0;
+    z-index: 5;
+    overflow: hidden;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.cup-inner-shadow {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    box-shadow: inset 0 20px 40px rgba(0,0,0,0.2);
+    border-radius: inherit;
+}
+
+.shell-gloss {
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    transform: rotate(-20deg);
+    z-index: 10;
+}
+
+/* --- Mascot Body --- */
+.leg-l {
+    position: absolute;
+    width: 25px;
+    height: 110px; /* Shortened to fit shoes correctly */
+    background: white;
+    border: 3.5px solid var(--ink-color);
+    top: 270px; /* Slight overlap with cup bottom (280px) */
+    border-radius: 10px;
+    z-index: 3;
+}
+.leg-l.left { left: 120px; }
+.leg-l.right { left: 175px; }
+
+.shoe-l {
+    position: absolute;
+    width: 130px;
+    height: 65px;
+    background: white;
+    border: 3.5px solid var(--ink-color);
+    border-radius: 80px 80px 10px 10px;
+    bottom: 35px; /* Adjusted spacing */
+    z-index: 4;
+}
+.shoe-l.left { left: 45px; }
+.shoe-l.right { left: 145px; }
+
+/* --- UI PANEL --- */
+.ui-panel {
+    background: white;
+    padding: 20px;
+    border-radius: 30px;
+    border: 3px solid var(--ink-color);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: white;
+    border: 3px solid var(--ink-color);
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--ink-color);
+}
+
+.adjustment-controls {
+    margin-top: 20px;
+    border-top: 2px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+.control-row {
+    display: flex; align-items: center; gap: 15px; margin-bottom: 12px;
+}
+
+.control-row label { font-weight: 700; min-width: 80px; font-size: 0.85rem; }
+.control-row input { flex: 1; }
+
+.hint-small { font-size: 0.75rem; font-weight: 600; color: #64748b; font-style: italic; }
+
+.btn-capture {
+    background-color: var(--accent-pink);
+    color: white;
+    border: 3.5px solid var(--ink-color);
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px var(--ink-color);
+}
+.btn-capture:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* --- PREVIEW --- */
+.preview-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(241, 245, 249, 0.98);
+    z-index: 1000; display: flex; justify-content: center; align-items: center;
+}
+
+.preview-content {
+    background: white; padding: 30px; border: 3.5px solid var(--ink-color); border-radius: 40px;
+}
+
+#photoPreview { max-width: 100%; max-height: 60vh; border: 3px solid var(--ink-color); border-radius: 20px; margin-bottom: 20px; }
+
+.btn-secondary {
+    background-color: white; color: var(--ink-color); border: 2.5px solid var(--ink-color);
+    padding: 10px 25px; font-weight: 700; border-radius: 15px; cursor: pointer;
+}
+
+.hidden { display: none; }
+
+@keyframes organicFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}

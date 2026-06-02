@@ -9,6 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
     <script src="../utils.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../cam-frame.css" />
+    <style>
+        /* Override some booth styles for the scrapbook theme */
+        #cam-frame-modal { z-index: 2000; }
+        .booth-container h1 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -149,75 +156,52 @@
             border-radius: 50% 45% 52% 48% / 48% 52% 45% 50%;
         }
 
-        /* --- Mood Selection Styles --- */
+        /* --- Mood Popup - Clean Rewrite --- */
         .mood-ring {
-            position: relative;
-            width: 260px;
-            height: 260px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .mood-ring {
-                width: 380px;
-                height: 380px;
-            }
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            z-index: 20;
         }
 
         .mood-item {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            top: 50%;
-            left: 50%;
-            margin: -30px;
-            transition: transform 0.2s ease;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            /* Geometric positioning: 
+               1. translate(-50%, -50%) centers the item itself on the center point
+               2. rotate(var(--angle)) rotates the coordinate system
+               3. translate(var(--distance)) moves the item outward along the rotated axis
+               4. rotate(calc(-1 * var(--angle))) counter-rotates the content to keep it upright
+            */
+            transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--distance)) rotate(calc(-1 * var(--angle)));
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (min-width: 768px) {
             .mood-item {
-                width: 80px;
-                height: 80px;
-                margin: -40px;
+                width: 110px;
+                height: 110px;
             }
         }
 
-        .mood-item:hover {
-            transform: scale(1.1);
+        .mood-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            white-space: nowrap;
+            pointer-events: none;
         }
 
-        /* Positioning for 6 items in a circle */
-        .mood-item:nth-child(1) { transform: rotate(270deg) translate(90px) rotate(-270deg); }
-        .mood-item:nth-child(2) { transform: rotate(330deg) translate(90px) rotate(-330deg); }
-        .mood-item:nth-child(3) { transform: rotate(30deg) translate(90px) rotate(-30deg); }
-        .mood-item:nth-child(4) { transform: rotate(90deg) translate(90px) rotate(-90deg); }
-        .mood-item:nth-child(5) { transform: rotate(150deg) translate(90px) rotate(-150deg); }
-        .mood-item:nth-child(6) { transform: rotate(210deg) translate(90px) rotate(-210deg); }
-
-        @media (min-width: 768px) {
-            .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
-            .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
-            .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
-            .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
-            .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
-            .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
-        }
-
-        .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(90px) rotate(-270deg) scale(1.1); }
-        .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(90px) rotate(-330deg) scale(1.1); }
-        .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(90px) rotate(-30deg) scale(1.1); }
-        .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(90px) rotate(-90deg) scale(1.1); }
-        .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(90px) rotate(-150deg) scale(1.1); }
-        .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(90px) rotate(-210deg) scale(1.1); }
-
-        @media (min-width: 768px) {
-            .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
-            .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
-            .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
-            .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
-            .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
-            .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
-        }
 
         @keyframes pop-in {
             0% { transform: scale(0.5); opacity: 0; }
@@ -253,19 +237,19 @@
         <nav class="flex flex-col gap-2 flex-grow">
             <a href="#calendar" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
                 <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">calendar_month</span>
-                <span class="font-bold text-[10px] uppercase tracking-widest">Calendar</span>
+                <span class="font-bold text-[10px] tracking-widest">Calendar</span>
             </a>
             <a href="#diary" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
                 <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">book</span>
-                <span class="font-bold text-[10px] uppercase tracking-widest">Diary</span>
+                <span class="font-bold text-[10px] tracking-widest">Diary</span>
             </a>
             <a href="#store" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
                 <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">local_mall</span>
-                <span class="font-bold text-[10px] uppercase tracking-widest">Store</span>
+                <span class="font-bold text-[10px] tracking-widest">Store</span>
             </a>
             <a href="#profile" class="nav-item relative flex items-center gap-4 px-5 py-3 rounded-xl transition-all group border-2 border-transparent">
                 <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">person</span>
-                <span class="font-bold text-[10px] uppercase tracking-widest">Account</span>
+                <span class="font-bold text-[10px] tracking-widest">Account</span>
             </a>
         </nav>
 
@@ -289,7 +273,6 @@
             </div>
             <div class="flex items-center gap-1">
                 <a href="../index.html" class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">home</span></a>
-                <button class="p-2 hover:bg-primary-container rounded-full transition-colors"><span class="material-symbols-outlined text-primary">menu_book</span></button>
             </div>
         </header>
 
@@ -586,7 +569,10 @@
                             <div class="absolute inset-0 bg-secondary-fixed translate-x-4 translate-y-4 border-2 border-outline avatar-shape"></div>
                             <div class="absolute inset-0 bg-primary-fixed translate-x-2 translate-y-2 border-2 border-outline avatar-shape"></div>
                             <img id="profile-img" src="" class="relative w-full h-full object-cover border-2 border-outline avatar-shape z-10 bg-white">
-                            <button onclick="window.location.hash='#edit-profile'" class="absolute -bottom-2 -right-2 bg-tertiary-container border-2 border-on-surface rounded-full p-3 z-20 hover:scale-110 transition-transform pencil-shadow"><span class="material-symbols-outlined text-on-tertiary-container">edit</span></button>
+                            <div class="absolute -bottom-2 -right-2 flex flex-col gap-2 z-20">
+                                <button id="open-booth-btn" class="bg-primary-container border-2 border-on-surface rounded-full p-3 hover:scale-110 transition-transform pencil-shadow" title="Chụp ảnh Mascot"><span class="material-symbols-outlined text-on-primary-container">camera</span></button>
+                                <button onclick="window.location.hash='#edit-profile'" class="bg-tertiary-container border-2 border-on-surface rounded-full p-3 hover:scale-110 transition-transform pencil-shadow" title="Chỉnh sửa hồ sơ"><span class="material-symbols-outlined text-on-tertiary-container">edit</span></button>
+                            </div>
                         </div>
 
                         <div class="space-y-10">
@@ -1039,7 +1025,7 @@
                     <!-- Back Navigation -->
                     <div onclick="window.location.hash='#store'" class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface cursor-pointer w-max transition-colors">
                         <span class="material-symbols-outlined">arrow_back</span>
-                        <span class="font-bold text-[10px] uppercase tracking-widest">Back to Store</span>
+                        <span class="font-bold text-[10px] tracking-widest">Back to Store</span>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
@@ -1094,51 +1080,15 @@
                     <h2 class="font-headline text-xl md:text-2xl text-on-surface text-center px-8">How are you<br/>today?</h2>
                 </div>
                 <!-- Mood Ring -->
-                <div class="mood-ring z-20">
-                    <!-- Calm -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_satisfied', 'Feeling Calm')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Calm</span>
-                    </button>
-                    <!-- Happy -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood', 'Happy')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-primary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Happy</span>
-                    </button>
-                    <!-- Excited -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('auto_awesome', 'Excited')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-tertiary-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Excited</span>
-                    </button>
-                    <!-- Angry -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('sentiment_very_dissatisfied', 'Angry')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-error-container transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Angry</span>
-                    </button>
-                    <!-- Sad -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('mood_bad', 'Sad')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-secondary-fixed-dim transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Sad</span>
-                    </button>
-                    <!-- Tired -->
-                    <button class="mood-item flex flex-col items-center justify-center gap-2 group cursor-pointer focus:outline-none" onclick="selectDiaryMood('coffee', 'Tired')">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center group-hover:bg-surface-variant transition-colors">
-                            <img src="https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU" class="w-8 h-8 md:w-12 md:h-12 object-contain rounded-full" style="mix-blend-mode: multiply;">
-                        </div>
-                        <span class="font-bold text-[10px] md:text-xs text-on-surface-variant group-hover:text-on-surface transition-colors">Tired</span>
-                    </button>
+                <div id="mood-ring-container" class="mood-ring z-20">
+                    <!-- Dynamic Mood Items will be injected here -->
                 </div>
             </div>
+            <!-- Edit Button -->
+            <button id="toggle-mood-edit" class="mb-4 px-4 py-1.5 bg-white border-2 border-outline-variant rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-primary-container transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">edit_note</span>
+                <span>Customize</span>
+            </button>
             <!-- Close Button -->
             <button onclick="closeMoodModal()" class="w-14 h-14 bg-surface rounded-full hand-drawn-circle flex items-center justify-center flat-shadow focus:outline-none text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
                 <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">close</span>
@@ -1146,22 +1096,90 @@
         </div>
     </div>
 
+    <!-- Mood Gallery Modal -->
+    <div id="mood-gallery" class="fixed inset-0 z-[1100] hidden items-center justify-center">
+        <div class="absolute inset-0 bg-surface/80 backdrop-blur-sm" onclick="closeMoodGallery()"></div>
+        <div class="relative bg-white w-[90vw] max-w-[600px] p-8 md:p-12 rounded-[3rem] hand-drawn-border pencil-shadow z-10">
+            <div class="flex justify-between items-center mb-8 md:mb-10">
+                <h3 class="font-headline text-2xl md:text-4xl font-bold">Pick a Mood</h3>
+                <button onclick="closeMoodGallery()" class="material-symbols-outlined text-3xl md:text-4xl">close</button>
+            </div>
+            <div id="mood-gallery-list" class="grid grid-cols-3 sm:grid-cols-4 gap-6 md:gap-8 max-h-[65vh] overflow-y-auto p-2 custom-scrollbar">
+                <!-- Moods will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cam Frame Modal -->
+    <div id="cam-frame-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="booth-container">
+                <h1 class="font-headline">BẠN TRONG LY TRÀ!</h1>
+                
+                <div class="capture-area-wrapper">
+                    <div class="capture-area" id="captureArea">
+                        <div class="mascot-wrapper">
+                            <div class="floating-container liquid-mascot">
+                                <div class="camera-container" id="boothImageContainer">
+                                    <img id="userBoothImage" src="" alt="" style="display: none;">
+                                </div>
+                                <div class="leg-l left"></div>
+                                <div class="leg-l right"></div>
+                                <div class="shoe-l left"></div>
+                                <div class="shoe-l right"></div>
+                                <div class="head-shell">
+                                    <div class="shell-gloss"></div>
+                                    <div class="cup-inner-shadow"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-panel">
+                    <div class="upload-section">
+                        <input type="file" id="boothFileInput" accept="image/*" style="display: none;">
+                        <button id="boothUploadBtn" class="btn-primary-booth">📁 Tải Ảnh Lên</button>
+                    </div>
+
+                    <div id="boothAdjustmentControls" class="adjustment-controls hidden">
+                        <div class="control-row">
+                            <label>Cỡ ảnh:</label>
+                            <input type="range" id="boothZoomRange" min="0.5" max="3" step="0.05" value="1">
+                        </div>
+                        <div class="control-row">
+                            <label>Xoay:</label>
+                            <input type="range" id="boothRotateRange" min="-180" max="180" step="1" value="0">
+                        </div>
+                        <p class="hint-small">Kéo ảnh để di chuyển nhé!</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="boothCaptureBtn" class="btn-capture-booth" disabled>✨ Lưu Avatar</button>
+                    <button onclick="document.getElementById('cam-frame-modal').classList.remove('active')" class="btn-secondary-booth mt-4">Bỏ qua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- MOBILE BOTTOM NAV -->
     <nav id="bottom-nav" class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-surface border-t-2 border-outline-variant py-5 px-2 z-50 rounded-t-[3rem]">
         <a href="#calendar" class="nav-item flex flex-col items-center gap-1 w-16">
-            <span class="material-symbols-outlined text-2xl">calendar_month</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Calendar</span>
+            <span class="material-symbols-outlined text-2xl">calendar_month</span><span class="text-[9px] font-bold opacity-30 tracking-tighter">Calendar</span>
         </a>
         <a href="#diary" class="nav-item flex flex-col items-center gap-1 w-16">
-            <span class="material-symbols-outlined text-2xl">book</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Diary</span>
+            <span class="material-symbols-outlined text-2xl">book</span><span class="text-[9px] font-bold opacity-30 tracking-tighter">Diary</span>
         </a>
         <a href="#compose" onclick="toggleMoodPicker()" class="bg-primary-container p-4 rounded-full hand-drawn-border -mt-14 pencil-shadow active:translate-y-1 transition-all">
             <span class="material-symbols-outlined text-3xl">add</span>
         </a>
         <a href="#store" class="nav-item flex flex-col items-center gap-1 w-16">
-            <span class="material-symbols-outlined text-2xl">local_mall</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Store</span>
+            <span class="material-symbols-outlined text-2xl">local_mall</span><span class="text-[9px] font-bold opacity-30 tracking-tighter">Store</span>
         </a>
         <a href="#profile" class="nav-item flex flex-col items-center gap-1 w-16">
-            <span class="material-symbols-outlined text-2xl">person</span><span class="text-[9px] font-bold uppercase opacity-30 tracking-tighter">Account</span>
+            <span class="material-symbols-outlined text-2xl">person</span><span class="text-[9px] font-bold opacity-30 tracking-tighter">Account</span>
         </a>
     </nav>
 
@@ -1217,21 +1235,21 @@
                 tape: '#ffeba7', 
                 img: 'https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY', // happy_green
                 icons: [
-                    'https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA', // angry
-                    'https://lh3.googleusercontent.com/d/10vJy3OoGAcqgk1muy_taTMR3Yw4O1_nd', // attention
-                    'https://lh3.googleusercontent.com/d/1-8GT1AlrkOolZ_A-HW-RyLjhg34twZaS', // confuse
-                    'https://lh3.googleusercontent.com/d/1_BW552J6Lz1Omsf06SVHWjaPMPkgq42a', // contempt
-                    'https://lh3.googleusercontent.com/d/1tCAKb8zM3U0AMEVHqPwPNK31rqI-g2JC', // cry
-                    'https://lh3.googleusercontent.com/d/1rCpZaPxiJ7NP05Ch9l4RydN3xWvIBdtc', // die
-                    'https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1', // excited
-                    'https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY', // happy
-                    'https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc', // hehe
-                    'https://lh3.googleusercontent.com/d/1V99iVPWZ9NVTDB7MdRNmq0D4_t6i-31M', // huh
-                    'https://lh3.googleusercontent.com/d/1IMzUgrz1f45UfgO8QejkkVUHtyD3DHjC', // opposite
-                    'https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy', // sad
-                    'https://lh3.googleusercontent.com/d/1xftdOQCr-gpAlNa0wmYWVRUnyvrAvkc7', // stun
-                    'https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU', // tired
-                    'https://lh3.googleusercontent.com/d/1u57iUT7yXwm7imuzQ779D7Lze62OYkdC'  // wao
+                    { id: "emo_angry_red", url: "https://lh3.googleusercontent.com/d/1ONr82v78tfUMI5W5T-bPs6YtmmLZVWvA" },
+                    { id: "emo_attention_red", url: "https://lh3.googleusercontent.com/d/10vJy3OoGAcqgk1muy_taTMR3Yw4O1_nd" },
+                    { id: "emo_confuse_blue", url: "https://lh3.googleusercontent.com/d/1-8GT1AlrkOolZ_A-HW-RyLjhg34twZaS" },
+                    { id: "emo_contempt_green", url: "https://lh3.googleusercontent.com/d/1_BW552J6Lz1Omsf06SVHWjaPMPkgq42a" },
+                    { id: "emo_cry_blue", url: "https://lh3.googleusercontent.com/d/1tCAKb8zM3U0AMEVHqPwPNK31rqI-g2JC" },
+                    { id: "emo_die_red", url: "https://lh3.googleusercontent.com/d/1rCpZaPxiJ7NP05Ch9l4RydN3xWvIBdtc" },
+                    { id: "emo_exicted_red", url: "https://lh3.googleusercontent.com/d/15rz8zIyZDweMRnjEIs9pY0waOQZQjgv1" },
+                    { id: "emo_happy_green", url: "https://lh3.googleusercontent.com/d/14J0bMNaPeskCjUnAT6esGodSI2-kVZVY" },
+                    { id: "emo_hehe_blue", url: "https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" },
+                    { id: "emo_huh_green", url: "https://lh3.googleusercontent.com/d/1V99iVPWZ9NVTDB7MdRNmq0D4_t6i-31M" },
+                    { id: "emo_opposite_red", url: "https://lh3.googleusercontent.com/d/1IMzUgrz1f45UfgO8QejkkVUHtyD3DHjC" },
+                    { id: "emo_sad_blue", url: "https://lh3.googleusercontent.com/d/1qw0mgF_dT9xhO28typpwCjzCLVOW9IIy" },
+                    { id: "emo_stun_green", url: "https://lh3.googleusercontent.com/d/1xftdOQCr-gpAlNa0wmYWVRUnyvrAvkc7" },
+                    { id: "emo_tired_blue", url: "https://lh3.googleusercontent.com/d/1Z5M0zzpLN5_zjUITfo0NRn8x_9QfurRU" },
+                    { id: "emo_wao_green", url: "https://lh3.googleusercontent.com/d/1u57iUT7yXwm7imuzQ779D7Lze62OYkdC" }
                 ]
             },
             { 
@@ -1242,7 +1260,16 @@
                 owned: true, 
                 tape: '#efb7ca', 
                 img: 'https://api.dicebear.com/7.x/bottts/svg?seed=emmo',
-                icons: ['sentiment_satisfied', 'sentiment_neutral', 'sentiment_dissatisfied', 'mood_bad', 'sentiment_very_satisfied', 'face', 'potted_plant', 'bedtime']
+                icons: [
+                    { id: 'sentiment_satisfied', url: 'sentiment_satisfied' },
+                    { id: 'sentiment_neutral', url: 'sentiment_neutral' },
+                    { id: 'sentiment_dissatisfied', url: 'sentiment_dissatisfied' },
+                    { id: 'mood_bad', url: 'mood_bad' },
+                    { id: 'sentiment_very_satisfied', url: 'sentiment_very_satisfied' },
+                    { id: 'face', url: 'face' },
+                    { id: 'potted_plant', url: 'potted_plant' },
+                    { id: 'bedtime', url: 'bedtime' }
+                ]
             },
             { 
                 id: 'clouds', 
@@ -1252,7 +1279,16 @@
                 owned: false, 
                 tape: '#b6dffd', 
                 img: 'https://api.dicebear.com/7.x/shapes/svg?seed=clouds',
-                icons: ['cloud', 'cloud_queue', 'filter_drama', 'thunderstorm', 'rainy', 'wb_cloudy', 'air', 'wb_twilight']
+                icons: [
+                    { id: 'cloud', url: 'cloud' },
+                    { id: 'cloud_queue', url: 'cloud_queue' },
+                    { id: 'filter_drama', url: 'filter_drama' },
+                    { id: 'thunderstorm', url: 'thunderstorm' },
+                    { id: 'rainy', url: 'rainy' },
+                    { id: 'wb_cloudy', url: 'wb_cloudy' },
+                    { id: 'air', url: 'air' },
+                    { id: 'wb_twilight', url: 'wb_twilight' }
+                ]
             }
         ];
         function getSession() { return JSON.parse(localStorage.getItem('user')); }
@@ -1345,6 +1381,16 @@
             if (hash === '#store') renderStore();
             if (hash === '#change-avatar') renderIllustrations();
             if (hash === '#compose') {
+                // Fix: Check for existing entry for today
+                const logs = getDiaryLogs();
+                const todayEntry = logs.find(l => isSameDay(new Date(l.timestamp), new Date()));
+                
+                if (todayEntry) {
+                    // Already have an entry for today, redirect to view/edit instead of creating new
+                    openDiaryEntry(todayEntry.id);
+                    return; 
+                }
+
                 currentlyViewingId = 'mood_' + Date.now(); // Generate ID at creation start
                 currentMood = "sentiment_satisfied";
                 const composeIcon = document.getElementById('current-mood-icon');
@@ -1598,6 +1644,11 @@
                 }
                 userData.avatar = finalUrl;
                 localStorage.setItem('user_avatar', finalUrl);
+                
+                // If it's a built-in illustration, treat as mascot
+                const isIllustration = illustrations.some(ill => ill.url === finalUrl);
+                localStorage.setItem('is_mascot_avatar', isIllustration ? 'true' : 'false');
+                
                 syncUI();
                 goBack();
             }
@@ -1657,10 +1708,12 @@
 
             const grid = document.getElementById('pack-icons-grid');
             grid.innerHTML = (pack.icons || []).map(icon => {
-                const isUrl = icon.startsWith('http');
+                const symbol = icon.id;
+                const emoji = icon.url;
+                const isUrl = emoji.startsWith('http');
                 return `
                     <div class="aspect-square bg-transparent p-2 flex items-center justify-center hand-drawn-circle hover:bg-primary-container transition-colors cursor-pointer overflow-hidden">
-                        ${isUrl ? `<img src="${icon}" class="w-full h-full object-contain rounded-full">` : `<span class="material-symbols-outlined text-4xl text-primary">${icon}</span>`}
+                        ${isUrl ? `<img src="${emoji}" class="w-full h-full object-contain rounded-full">` : `<span class="material-symbols-outlined text-4xl text-primary">${symbol}</span>`}
                     </div>
                 `;
             }).join('');
@@ -1713,10 +1766,129 @@
         function logout() { localStorage.removeItem('user'); window.location.hash = '#guest'; navigate(); }
         function goBack() { history.back(); }
 
+        // --- MOOD RING CUSTOMIZATION ---
+        let currentMoodSlots = ["sentiment_satisfied", "mood", "auto_awesome", "sentiment_very_dissatisfied", "mood_bad", "coffee"];
+        let isMoodEditMode = false;
+        let editingSlotIndex = -1;
+
+        function loadMoodSettings() {
+            const saved = localStorage.getItem('calm_mood_slots');
+            if (saved) currentMoodSlots = JSON.parse(saved);
+        }
+
+        function renderMoodRing() {
+            const container = document.getElementById('mood-ring-container');
+            if (!container) return;
+            
+            const isMobile = window.innerWidth < 768;
+            const distance = isMobile ? '100px' : '150px';
+
+            container.innerHTML = currentMoodSlots.map((symbol, i) => {
+                const emoji = getEmoji(symbol);
+                const text = getMoodText(symbol);
+                const isImg = emoji.startsWith('http');
+                const angle = (i * 60) - 90; // Start at top (-90deg/270deg)
+                
+                const bgColorClass = ['group-hover:bg-secondary-container','group-hover:bg-primary-container','group-hover:bg-tertiary-container','group-hover:bg-error-container','group-hover:bg-secondary-fixed-dim','group-hover:bg-surface-container-highest'][i] || 'group-hover:bg-primary-container';
+
+                return `
+                    <button class="mood-item group cursor-pointer focus:outline-none" 
+                            style="--angle: ${angle}deg; --distance: ${distance};"
+                            onclick="${isMoodEditMode ? `openMoodGallery(${i})` : `selectDiaryMood('${symbol}', '${text}')`}">
+                        <div class="w-16 h-16 md:w-24 md:h-24 bg-transparent rounded-full hand-drawn-circle flex items-center justify-center ${bgColorClass} transition-colors">
+                            ${isImg ? `<img src="${emoji}" class="w-10 h-10 md:w-16 md:h-16 object-contain rounded-full" style="mix-blend-mode: multiply;">` 
+                                    : `<span class="material-symbols-outlined text-4xl md:text-5xl text-on-surface-variant">${symbol}</span>`}
+                        </div>
+                        <span class="mood-label font-bold text-[10px] md:text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">${text}</span>
+                        ${isMoodEditMode ? `
+                            <div class="absolute -top-2 -right-2 bg-white border border-on-surface rounded-full p-1.5 shadow-sm z-30 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[12px]">edit</span>
+                            </div>
+                        ` : ''}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function toggleMoodEdit() {
+            isMoodEditMode = !isMoodEditMode;
+            const btn = document.getElementById('toggle-mood-edit');
+            if (btn) {
+                btn.classList.toggle('bg-primary-container', isMoodEditMode);
+                btn.querySelector('span:last-child').innerText = isMoodEditMode ? 'Done' : 'Customize';
+            }
+            renderMoodRing();
+        }
+
+        function openMoodGallery(index) {
+            editingSlotIndex = index;
+            const gallery = document.getElementById('mood-gallery');
+            const list = document.getElementById('mood-gallery-list');
+            if (!gallery || !list) return;
+
+            list.innerHTML = stickerPacks.map(pack => {
+                const iconsHtml = pack.icons.map(icon => {
+                    const symbol = icon.id;
+                    const emoji = icon.url;
+                    const isImg = emoji.startsWith('http');
+                    const isLocked = !pack.owned;
+                    
+                    return `
+                        <button ${isLocked ? `onclick="alert('Gói này chưa được sở hữu. Hãy ghé qua Store nhé!')"` : `onclick="selectMoodForSlot('${symbol}')"`} 
+                                class="aspect-square flex items-center justify-center p-4 rounded-2xl transition-all border-2 border-transparent 
+                                       ${isLocked ? 'opacity-40 grayscale' : 'hover:bg-primary-container hover:border-on-surface hover:pencil-shadow'} relative group/icon">
+                            ${isImg ? `<img src="${emoji}" class="w-16 h-16 md:w-20 md:h-20 object-contain rounded-full">` 
+                                    : `<span class="material-symbols-outlined text-4xl md:text-5xl">${symbol}</span>`}
+                            ${isLocked ? `
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-base text-on-surface bg-white/90 rounded-full p-1.5 border border-on-surface">lock</span>
+                                </div>
+                            ` : ''}
+                        </button>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="col-span-4 mt-4 first:mt-0">
+                        <div class="flex items-center gap-2 mb-3">
+                            <h4 class="font-bold text-[10px] uppercase tracking-widest text-outline">${pack.title}</h4>
+                            <div class="h-[1px] flex-1 bg-outline-variant opacity-30"></div>
+                            ${!pack.owned ? '<span class="text-[8px] font-black text-error border border-error px-1.5 rounded-sm">LOCKED</span>' : ''}
+                        </div>
+                        <div class="grid grid-cols-4 gap-2">
+                            ${iconsHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            gallery.classList.remove('hidden');
+            gallery.classList.add('flex');
+        }
+
+        function closeMoodGallery() {
+            const gallery = document.getElementById('mood-gallery');
+            if (gallery) {
+                gallery.classList.add('hidden');
+                gallery.classList.remove('flex');
+            }
+        }
+
+        function selectMoodForSlot(symbol) {
+            if (editingSlotIndex !== -1) {
+                currentMoodSlots[editingSlotIndex] = symbol;
+                localStorage.setItem('calm_mood_slots', JSON.stringify(currentMoodSlots));
+                renderMoodRing();
+                closeMoodGallery();
+            }
+        }
+
         function toggleMoodPicker() {
             const modal = document.getElementById('mood-selection-modal');
             const content = modal ? modal.querySelector('.animate-pop, .animate-pop-out') : null;
             if (modal) {
+                loadMoodSettings();
+                renderMoodRing();
                 if (content) {
                     content.classList.remove('animate-pop-out');
                     content.classList.add('animate-pop');
@@ -1980,28 +2152,49 @@
             if (user) {
                 userData.nickname = user.name;
                 userData.email = user.email;
-                // Prioritize user avatar from session, then local storage, then fallback to seed
                 userData.avatar = user.avatar || localStorage.getItem('user_avatar') || `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.email}`;
+                userData.intro = user.intro || localStorage.getItem('user_intro') || "Hành trình tìm lại sự bình yên...";
             } else {
                 userData.avatar = localStorage.getItem('user_avatar') || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear';
+                userData.intro = localStorage.getItem('user_intro') || "Hành trình tìm lại sự bình yên...";
             }
             document.querySelectorAll('.nickname-display').forEach(el => el.innerText = userData.nickname);
             document.querySelectorAll('.nickname-greeting').forEach(el => el.innerText = `Hello, ${userData.nickname}!`);
-            document.getElementById('profile-img').src = userData.avatar || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear';
+            
+            const profileImg = document.getElementById('profile-img');
+            const avatarUrl = userData.avatar || 'https://api.dicebear.com/7.x/adventurer/svg?seed=Bear';
+            profileImg.src = avatarUrl;
+            
+            // --- Mascot Dynamic Styling (More robust detection) ---
+            const isBoothImage = avatarUrl.startsWith('data:image/png;base64');
+            const isIllustration = illustrations.some(ill => avatarUrl.includes(ill.url.split('/').pop().split('?')[0]));
+            const isMascot = isBoothImage || isIllustration || localStorage.getItem('is_mascot_avatar') === 'true';
+            
+            const avatarContainer = profileImg.parentElement;
+            const bgShapes = avatarContainer.querySelectorAll('.avatar-shape:not(#profile-img)');
+            
+            if (isMascot) {
+                bgShapes.forEach(s => s.classList.add('hidden'));
+                profileImg.className = "relative w-full h-full object-contain z-10 scale-125 drop-shadow-2xl transition-all duration-500";
+            } else {
+                bgShapes.forEach(s => s.classList.remove('hidden'));
+                profileImg.className = "relative w-full h-full object-cover border-2 border-outline avatar-shape z-10 bg-white transition-all duration-500";
+            }
+            
             document.getElementById('profile-intro').innerText = `"${userData.intro}"`;
-            document.getElementById('edit-avatar-preview').src = document.getElementById('profile-img').src;
+            document.getElementById('edit-avatar-preview').src = avatarUrl;
             document.getElementById('edit-nickname-display').innerText = userData.nickname;
             document.getElementById('edit-intro-display').innerText = userData.intro;
             document.getElementById('input-nickname').value = userData.nickname;
             document.getElementById('input-intro').value = userData.intro;
+            
             const logs = getDiaryLogs();
             document.getElementById('stat-entries').innerText = logs.length;
-            const goodMoods = logs.filter(l => ["😊", "✨", "🙂"].includes(l.moodIcon)).length;
+            const goodMoods = logs.filter(l => ["😊", "✨", "🙂"].includes(l.moodIcon) || l.moodText.includes('Good') || l.moodText.includes('Happy')).length;
             if(document.getElementById('stat-good-moods')) {
                 document.getElementById('stat-good-moods').innerText = goodMoods;
             }
             
-            // Calculate and Update Streak
             const streakCount = calculateStreak();
             const streakDisplay = document.querySelector('.page-section#profile .font-headline.text-tertiary');
             if (streakDisplay) streakDisplay.innerText = streakCount;
@@ -2329,6 +2522,11 @@
         function getDiaryLogs() {
             let logs = JSON.parse(localStorage.getItem('calm_diary_entries')) || [];
             return logs.map(log => {
+                // Fix Backend Sync Mismatch (Restore missing content)
+                if (log.content && !log.note) log.note = log.content;
+                if (log.mood_icon && !log.moodIcon) log.moodIcon = log.mood_icon;
+                if (log.mood_text && !log.moodText) log.moodText = log.mood_text;
+
                 if (!log.moodSymbol || log.moodSymbol === 'undefined') log.moodSymbol = 'sentiment_satisfied';
                 if (!log.moodIcon || log.moodIcon === 'undefined') log.moodIcon = getEmoji(log.moodSymbol);
                 if (!log.moodText || log.moodText === 'undefined') log.moodText = getMoodText(log.moodSymbol);
@@ -2503,6 +2701,115 @@
             syncUI(); navigate(); 
             initAvatarEditor();
             initDragAndDrop();
+
+            // Mood Customization
+            const moodEditBtn = document.getElementById('toggle-mood-edit');
+            if (moodEditBtn) moodEditBtn.onclick = toggleMoodEdit;
+            loadMoodSettings();
+
+            // --- BOOTH LOGIC ---
+            const openBoothBtn = document.getElementById('open-booth-btn');
+            const camModal = document.getElementById('cam-frame-modal');
+            const closeModal = camModal.querySelector('.close-modal');
+            const boothUploadBtn = document.getElementById('boothUploadBtn');
+            const boothFileInput = document.getElementById('boothFileInput');
+            const userBoothImage = document.getElementById('userBoothImage');
+            const boothImageContainer = document.getElementById('boothImageContainer');
+            const boothAdjustmentControls = document.getElementById('boothAdjustmentControls');
+            const boothZoomRange = document.getElementById('boothZoomRange');
+            const boothRotateRange = document.getElementById('boothRotateRange');
+            const boothCaptureBtn = document.getElementById('boothCaptureBtn');
+            const captureArea = document.getElementById('captureArea');
+            const boothPreviewContainer = document.getElementById('boothPreviewContainer');
+            const boothPhotoPreview = document.getElementById('boothPhotoPreview');
+            const boothClosePreview = document.getElementById('boothClosePreview');
+            const boothSaveBtn = document.getElementById('boothSaveBtn');
+
+            let boothScale = 1;
+            let boothRotate = 0;
+            let boothX = 0;
+            let boothY = 0;
+            let isDraggingBooth = false;
+            let boothStartPos = { x: 0, y: 0 };
+
+            if (openBoothBtn) openBoothBtn.onclick = () => camModal.classList.add('active');
+            if (closeModal) closeModal.onclick = () => camModal.classList.remove('active');
+
+            if (boothUploadBtn) boothUploadBtn.onclick = () => boothFileInput.click();
+            if (boothFileInput) boothFileInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        userBoothImage.src = event.target.result;
+                        userBoothImage.style.display = 'block';
+                        boothAdjustmentControls.classList.remove('hidden');
+                        boothCaptureBtn.disabled = false;
+                        boothScale = 1; boothRotate = 0; boothX = 0; boothY = 0;
+                        boothZoomRange.value = 1; boothRotateRange.value = 0;
+                        updateBoothTransform();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            function updateBoothTransform() {
+                userBoothImage.style.transform = `translate(${boothX}px, ${boothY}px) scale(${boothScale}) rotate(${boothRotate}deg)`;
+            }
+
+            if (boothZoomRange) boothZoomRange.oninput = (e) => { boothScale = parseFloat(e.target.value); updateBoothTransform(); };
+            if (boothRotateRange) boothRotateRange.oninput = (e) => { boothRotate = parseInt(e.target.value); updateBoothTransform(); };
+
+            if (boothImageContainer) {
+                boothImageContainer.onmousedown = (e) => startBoothDrag(e.clientX, e.clientY);
+                window.addEventListener('mousemove', (e) => doBoothDrag(e.clientX, e.clientY));
+                window.addEventListener('mouseup', endBoothDrag);
+                boothImageContainer.ontouchstart = (e) => startBoothDrag(e.touches[0].clientX, e.touches[0].clientY);
+                window.addEventListener('touchmove', (e) => { if(isDraggingBooth) e.preventDefault(); doBoothDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
+                window.addEventListener('touchend', endBoothDrag);
+            }
+
+            function startBoothDrag(x, y) {
+                if (!userBoothImage.src || userBoothImage.style.display === 'none') return;
+                isDraggingBooth = true;
+                boothStartPos = { x: x - boothX, y: y - boothY };
+            }
+            function doBoothDrag(x, y) {
+                if (!isDraggingBooth) return;
+                boothX = x - boothStartPos.x;
+                boothY = y - boothStartPos.y;
+                updateBoothTransform();
+            }
+            function endBoothDrag() { isDraggingBooth = false; }
+
+            if (boothCaptureBtn) boothCaptureBtn.onclick = async () => {
+                boothCaptureBtn.disabled = true;
+                boothCaptureBtn.innerText = "✨ ĐANG LƯU...";
+                try {
+                    const canvas = await html2canvas(captureArea, { backgroundColor: null, scale: 3, useCORS: true });
+                    const dataUrl = canvas.toDataURL('image/png');
+                    
+                    // Save logic merged directly here
+                    userData.avatar = dataUrl;
+                    localStorage.setItem('user_avatar', dataUrl);
+                    localStorage.setItem('is_mascot_avatar', 'true');
+                    
+                    const user = getSession();
+                    if (user) { 
+                        user.avatar = dataUrl; 
+                        localStorage.setItem('user', JSON.stringify(user)); 
+                    }
+                    
+                    syncUI();
+                    camModal.classList.remove('active');
+                    alert("Đã cập nhật Avatar Mascot thành công! ✨");
+                } catch (err) { 
+                    alert("Lỗi khi lưu ảnh! Hãy thử lại."); 
+                } finally { 
+                    boothCaptureBtn.disabled = false; 
+                    boothCaptureBtn.innerText = "✨ Lưu Avatar"; 
+                }
+            };
         });
     </script>
 </body>

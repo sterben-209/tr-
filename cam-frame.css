@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-color-booth: #f1f5f9;
+    --ink-color-booth: #0f172a;
+    --mascot-color-booth: #ffe899;
+    --accent-blue-booth: #6366f1;
+    --accent-pink-booth: #ec4899;
+    --shadow-color-booth: rgba(15, 23, 42, 0.15);
+}
+
+/* Modal Styles */
+#cam-frame-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+#cam-frame-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--bg-color-booth);
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--ink-color-booth);
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Booth Styles */
+.booth-container {
+    text-align: center;
+    width: 100%;
+}
+
+.booth-container h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--ink-color-booth);
+}
+
+.capture-area-wrapper {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.capture-area {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed var(--shadow-color-booth);
+    border-radius: 20px;
+}
+
+.mascot-wrapper {
+    width: 260px;
+    height: 390px;
+    position: relative;
+    transform: scale(0.8); /* Scale down to fit in square */
+    flex-shrink: 0;
+}
+
+.floating-container {
+    animation: organicFloat 6s infinite ease-in-out;
+    height: 100%;
+}
+
+.camera-container {
+    position: absolute;
+    width: 260px;
+    height: 211px;
+    top: 16px;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 0 0 130px 130px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: move;
+    touch-action: none;
+}
+
+#userBoothImage {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.head-shell {
+    position: absolute;
+    width: 260px;
+    height: 211px;
+    background: transparent;
+    border: 3px solid var(--ink-color-booth); /* Solid dark border like the rest of the mascot */
+    border-radius: 0 0 130px 130px;
+    top: 16px;
+    left: 0;
+    z-index: 5;
+    overflow: hidden;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.cup-inner-shadow {
+    display: none;
+}
+
+.shell-gloss {
+    display: none;
+}
+
+.leg-l {
+    position: absolute;
+    width: 20px;
+    height: 89px;
+    background: white;
+    border: 3px solid var(--ink-color-booth);
+    top: 219px;
+    border-radius: 8px;
+    z-index: 3;
+}
+.leg-l.left { left: 97px; }
+.leg-l.right { left: 142px; }
+
+.shoe-l {
+    position: absolute;
+    width: 105px;
+    height: 53px;
+    background: white;
+    border: 3px solid var(--ink-color-booth);
+    border-radius: 65px 65px 8px 8px;
+    bottom: 28px;
+    z-index: 4;
+}
+.shoe-l.left { left: 36px; }
+.shoe-l.right { left: 118px; }
+
+.ui-panel {
+    background: white;
+    padding: 15px;
+    border-radius: 24px;
+    border: 2px solid var(--ink-color-booth);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.btn-primary-booth {
+    background-color: var(--accent-blue-booth);
+    color: white;
+    border: 2px solid var(--ink-color-booth);
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--ink-color-booth);
+    transition: all 0.2s;
+}
+
+.btn-primary-booth:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--ink-color-booth);
+}
+
+.adjustment-controls {
+    margin-top: 15px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+.control-row {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+}
+
+.control-row label { font-weight: 700; min-width: 60px; font-size: 0.75rem; color: var(--ink-color-booth); }
+.control-row input { flex: 1; accent-color: var(--accent-blue-booth); }
+
+.hint-small { font-size: 0.65rem; font-weight: 600; color: #64748b; font-style: italic; }
+
+.btn-capture-booth {
+    background-color: var(--accent-pink-booth);
+    color: white;
+    border: 3px solid var(--ink-color-booth);
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 5px 5px 0px var(--ink-color-booth);
+    transition: all 0.2s;
+}
+
+.btn-capture-booth:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0px var(--ink-color-booth);
+}
+
+.btn-capture-booth:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.preview-container-booth {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(241, 245, 249, 0.98);
+    z-index: 1100; display: flex; justify-content: center; align-items: center;
+}
+
+.preview-content-booth {
+    background: white; padding: 25px; border: 3px solid var(--ink-color-booth); border-radius: 32px;
+    text-align: center;
+}
+
+#photoPreview { max-width: 100%; max-height: 50vh; border: 2.5px solid var(--ink-color-booth); border-radius: 16px; margin-bottom: 15px; }
+
+.preview-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-secondary-booth {
+    background-color: white; color: var(--ink-color-booth); border: 2px solid var(--ink-color-booth);
+    padding: 8px 20px; font-weight: 700; border-radius: 12px; cursor: pointer;
+}
+
+.btn-save-booth {
+    background-color: #10b981;
+    color: white;
+    border: 2px solid var(--ink-color-booth);
+    padding: 8px 20px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--ink-color-booth);
+}
+
+.hidden { display: none; }
+
+@keyframes organicFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

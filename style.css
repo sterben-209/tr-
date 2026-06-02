@@ -1448,74 +1448,45 @@ body::-webkit-scrollbar {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
-
+/* --- Mood Popup - Clean Rewrite --- */
 .mood-ring {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-    .mood-ring {
-        width: 320px;
-        height: 320px;
-    }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 20;
 }
 
 .mood-item {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 60px;
     height: 60px;
-    top: 50%;
-    left: 50%;
-    margin: -30px;
-    transition: transform 0.2s ease;
+    /* Geometric positioning logic */
+    transform: translate(-50%, -50%) rotate(var(--angle)) translate(var(--distance)) rotate(calc(-1 * var(--angle)));
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (min-width: 768px) {
     .mood-item {
         width: 80px;
         height: 80px;
-        margin: -40px;
     }
 }
 
-.mood-item:hover {
-    transform: scale(1.1);
-}
-
-/* Positioning for 6 items in a circle */
-.mood-item:nth-child(1) { transform: rotate(270deg) translate(90px) rotate(-270deg); }
-.mood-item:nth-child(2) { transform: rotate(330deg) translate(90px) rotate(-330deg); }
-.mood-item:nth-child(3) { transform: rotate(30deg) translate(90px) rotate(-30deg); }
-.mood-item:nth-child(4) { transform: rotate(90deg) translate(90px) rotate(-90deg); }
-.mood-item:nth-child(5) { transform: rotate(150deg) translate(90px) rotate(-150deg); }
-.mood-item:nth-child(6) { transform: rotate(210deg) translate(90px) rotate(-210deg); }
-
-@media (min-width: 768px) {
-    .mood-item:nth-child(1) { transform: rotate(270deg) translate(140px) rotate(-270deg); }
-    .mood-item:nth-child(2) { transform: rotate(330deg) translate(140px) rotate(-330deg); }
-    .mood-item:nth-child(3) { transform: rotate(30deg) translate(140px) rotate(-30deg); }
-    .mood-item:nth-child(4) { transform: rotate(90deg) translate(140px) rotate(-90deg); }
-    .mood-item:nth-child(5) { transform: rotate(150deg) translate(140px) rotate(-150deg); }
-    .mood-item:nth-child(6) { transform: rotate(210deg) translate(140px) rotate(-210deg); }
-}
-
-.mood-item:nth-child(1):hover { transform: rotate(270deg) translate(90px) rotate(-270deg) scale(1.1); }
-.mood-item:nth-child(2):hover { transform: rotate(330deg) translate(90px) rotate(-330deg) scale(1.1); }
-.mood-item:nth-child(3):hover { transform: rotate(30deg) translate(90px) rotate(-30deg) scale(1.1); }
-.mood-item:nth-child(4):hover { transform: rotate(90deg) translate(90px) rotate(-90deg) scale(1.1); }
-.mood-item:nth-child(5):hover { transform: rotate(150deg) translate(90px) rotate(-150deg) scale(1.1); }
-.mood-item:nth-child(6):hover { transform: rotate(210deg) translate(90px) rotate(-210deg) scale(1.1); }
-
-@media (min-width: 768px) {
-    .mood-item:nth-child(1):hover { transform: rotate(270deg) translate(140px) rotate(-270deg) scale(1.1); }
-    .mood-item:nth-child(2):hover { transform: rotate(330deg) translate(140px) rotate(-330deg) scale(1.1); }
-    .mood-item:nth-child(3):hover { transform: rotate(30deg) translate(140px) rotate(-30deg) scale(1.1); }
-    .mood-item:nth-child(4):hover { transform: rotate(90deg) translate(140px) rotate(-90deg) scale(1.1); }
-    .mood-item:nth-child(5):hover { transform: rotate(150deg) translate(140px) rotate(-150deg) scale(1.1); }
-    .mood-item:nth-child(6):hover { transform: rotate(210deg) translate(140px) rotate(-210deg) scale(1.1); }
+.mood-label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 4px;
+    white-space: nowrap;
+    pointer-events: none;
 }
 /* --- End Mood Selection Styles --- */
 

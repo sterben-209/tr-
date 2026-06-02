@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trà Camera Booth - Calm Diary</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- html2canvas for capturing DOM as image -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="booth-container">
+        <h1>BẠN TRONG LY TRÀ!</h1>
+        
+        <div class="capture-area-wrapper">
+            <div class="capture-area" id="captureArea">
+                <div class="mascot-wrapper">
+                    <div class="floating-container liquid-mascot">
+                        <!-- Uploaded Image (Face Match Area) -->
+                        <div class="camera-container" id="imageContainer">
+                            <img id="userImage" src="" alt="" style="display: none;">
+                        </div>
+
+                        <!-- Mascot Suit Layers -->
+                        <!-- Layer 1: Legs -->
+                        <div class="leg-l left"></div>
+                        <div class="leg-l right"></div>
+                        
+                        <!-- Layer 2: Shoes -->
+                        <div class="shoe-l left"></div>
+                        <div class="shoe-l right"></div>
+                        
+                        <!-- Layer 3: Head Shell (THE GLASS CUP) -->
+                        <div class="head-shell">
+                            <div class="shell-gloss"></div>
+                            <!-- Interior depth shadow -->
+                            <div class="cup-inner-shadow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="ui-panel">
+            <div class="upload-section">
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button id="uploadBtn" class="btn-primary">📁 Tải Ảnh Lên</button>
+            </div>
+
+            <div id="adjustmentControls" class="adjustment-controls hidden">
+                <div class="control-row">
+                    <label>Cỡ ảnh:</label>
+                    <input type="range" id="zoomRange" min="0.5" max="3" step="0.05" value="1">
+                </div>
+                <div class="control-row">
+                    <label>Xoay:</label>
+                    <input type="range" id="rotateRange" min="-180" max="180" step="1" value="0">
+                </div>
+                <p class="hint-small">Bạn có thể kéo ảnh để di chuyển vào giữa ly nhé!</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="captureBtn" class="btn-capture" disabled>📸 Chụp Ảnh Ngay!</button>
+        </div>
+        
+        <div id="previewContainer" class="preview-container hidden">
+            <div class="preview-content">
+                <h3>Xong rồi nè! ✨</h3>
+                <img id="photoPreview" src="" alt="Preview">
+                <div class="preview-actions">
+                    <button id="closePreview" class="btn-secondary">Chụp lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
