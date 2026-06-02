@@ -2055,27 +2055,31 @@
             btn.innerText = 'SAVING...';
             btn.disabled = true;
 
-            if (typeof sendToDatabase === 'function') {
-                const response = await sendToDatabase(logEntry);
-                if (response && response.streak !== undefined) {
-                    const updatedUser = getSession();
-                    if (updatedUser) {
-                        updatedUser.streak = response.streak;
-                        localStorage.setItem('user', JSON.stringify(updatedUser));
-                        syncUI();
+            try {
+                if (typeof sendToDatabase === 'function') {
+                    const response = await sendToDatabase(logEntry);
+                    if (response && response.streak !== undefined) {
+                        const updatedUser = getSession();
+                        if (updatedUser) {
+                            updatedUser.streak = response.streak;
+                            localStorage.setItem('user', JSON.stringify(updatedUser));
+                            syncUI();
+                        }
                     }
                 }
+            } catch (err) {
+                console.error("Database sync failed, but entry is saved locally.", err);
+            } finally {
+                setTimeout(() => {
+                    btn.innerText = 'Save Page'; btn.disabled = false;
+                    document.getElementById('diary-content').innerText = 'Dear Diary, today was...';
+                    currentMood = "sentiment_satisfied";
+                    document.getElementById('current-mood-icon').innerHTML = `<img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-16 h-16 object-contain rounded-full">`;
+                    document.querySelector('#compose h2').innerText = "How's your day?";
+                    currentlyViewingId = null; // Clear ID after successful save
+                    window.location.hash = '#diary';
+                }, 800);
             }
-
-            setTimeout(() => {
-                btn.innerText = 'Save Page'; btn.disabled = false;
-                document.getElementById('diary-content').innerText = 'Dear Diary, today was...';
-                currentMood = "sentiment_satisfied";
-                document.getElementById('current-mood-icon').innerHTML = `<img src="https://lh3.googleusercontent.com/d/1-S5DHvwLY_u6g8kcW-jYvWf6h4poVQYc" class="w-16 h-16 object-contain rounded-full">`;
-                document.querySelector('#compose h2').innerText = "How's your day?";
-                currentlyViewingId = null; // Clear ID after successful save
-                window.location.hash = '#diary';
-            }, 800);
         }
 
         async function syncDiaryFromServer() {
@@ -2086,10 +2090,13 @@
                 const result = await response.json();
                 if (result.result === 'success') {
                     const serverLogs = result.data.map(log => {
-                        // Normalize right after fetch
-                        if (log.content && !log.note) log.note = log.content;
-                        if (log.mood_icon && !log.moodIcon) log.moodIcon = log.mood_icon;
-                        if (log.mood_text && !log.moodText) log.moodText = log.mood_text;
+                        // Better normalization: check for property existence from Backend
+                        if (log.hasOwnProperty('content') && (log.note === undefined || log.note === null)) {
+                            log.note = log.content;
+                        }
+                        if (log.hasOwnProperty('mood_symbol') && !log.moodSymbol) log.moodSymbol = log.mood_symbol;
+                        if (log.hasOwnProperty('mood_icon') && !log.moodIcon) log.moodIcon = log.mood_icon;
+                        if (log.hasOwnProperty('mood_text') && !log.moodText) log.moodText = log.mood_text;
                         return log;
                     });
                     
@@ -2354,24 +2361,28 @@
             btn.innerText = 'ĐANG LƯU...';
             btn.disabled = true;
 
-            if (typeof sendToDatabase === 'function') {
-                const response = await sendToDatabase({ action: "LOG_CALM_DIARY", ...logs[entryIndex] });
-                if (response && response.streak !== undefined) {
-                    const updatedUser = getSession();
-                    if (updatedUser) {
-                        updatedUser.streak = response.streak;
-                        localStorage.setItem('user', JSON.stringify(updatedUser));
-                        syncUI();
+            try {
+                if (typeof sendToDatabase === 'function') {
+                    const response = await sendToDatabase({ action: "LOG_CALM_DIARY", ...logs[entryIndex] });
+                    if (response && response.streak !== undefined) {
+                        const updatedUser = getSession();
+                        if (updatedUser) {
+                            updatedUser.streak = response.streak;
+                            localStorage.setItem('user', JSON.stringify(updatedUser));
+                            syncUI();
+                        }
                     }
                 }
+            } catch (err) {
+                console.error("Database sync failed, but changes are saved locally.", err);
+            } finally {
+                setTimeout(() => {
+                    btn.innerText = editable ? "LƯU THAY ĐỔI" : "THÊM VÀO TRANG";
+                    btn.disabled = false;
+                    window.location.hash = '#diary';
+                    renderDiaryEntries();
+                }, 600);
             }
-
-            setTimeout(() => {
-                btn.innerText = editable ? "LƯU THAY ĐỔI" : "THÊM VÀO TRANG";
-                btn.disabled = false;
-                window.location.hash = '#diary';
-                renderDiaryEntries();
-            }, 600);
         }
 
         window.deleteDiaryEntry = async (id) => {
@@ -2533,6 +2544,7 @@
                 if (log.hasOwnProperty('content') && (log.note === undefined || log.note === null)) {
                     log.note = log.content;
                 }
+                if (log.hasOwnProperty('mood_symbol') && !log.moodSymbol) log.moodSymbol = log.mood_symbol;
                 if (log.hasOwnProperty('mood_icon') && !log.moodIcon) log.moodIcon = log.mood_icon;
                 if (log.hasOwnProperty('mood_text') && !log.moodText) log.moodText = log.mood_text;
                 
@@ -2544,31 +2556,7 @@
                 return log;
             });
 
-            // 2. De-duplicate by Day (Merge content if same day but different IDs)
-            const dayMap = new Map();
-            logs.forEach(log => {
-                const date = new Date(log.timestamp);
-                const dayKey = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-                
-                if (dayMap.has(dayKey)) {
-                    const existing = dayMap.get(dayKey);
-                    // If content is different, merge it
-                    if (existing.note !== log.note) {
-                        const separator = '<div class="my-4 border-t border-dashed border-outline-variant opacity-30"></div>';
-                        // Keep the one with later timestamp as the base, but combine notes
-                        if (log.timestamp > existing.timestamp) {
-                            log.note = existing.note + separator + log.note;
-                            dayMap.set(dayKey, log);
-                        } else {
-                            existing.note = log.note + separator + existing.note;
-                        }
-                    }
-                } else {
-                    dayMap.set(dayKey, log);
-                }
-            });
-
-            return Array.from(dayMap.values()).sort((a, b) => b.timestamp - a.timestamp);
+            return logs.sort((a, b) => b.timestamp - a.timestamp);
         }
 
         function getEmoji(i) { 
@@ -2851,6 +2839,7 @@
     </script>
 </body>
 </html>
+
 
 
 
