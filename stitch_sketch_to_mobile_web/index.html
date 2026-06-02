@@ -2450,13 +2450,13 @@
         }
 
         const moodScores = {
-            "sentiment_satisfied": 80, "mood": 100, "auto_awesome": 95, 
-            "sentiment_very_dissatisfied": 30, "mood_bad": 20, "coffee": 60,
-            "emo_angry_red": 15, "emo_attention_red": 45, "emo_confuse_blue": 40,
-            "emo_contempt_green": 35, "emo_cry_blue": 10, "emo_die_red": 5,
-            "emo_exicted_red": 90, "emo_happy_green": 100, "emo_hehe_blue": 85,
-            "emo_huh_green": 50, "emo_opposite_red": 25, "emo_sad_blue": 20,
-            "emo_stun_green": 45, "emo_tired_blue": 30, "emo_wao_green": 95
+            "sentiment_satisfied": 75, "mood": 100, "auto_awesome": 90, 
+            "sentiment_very_dissatisfied": 25, "mood_bad": 15, "coffee": 65,
+            "emo_angry_red": 10, "emo_attention_red": 40, "emo_confuse_blue": 35,
+            "emo_contempt_green": 40, "emo_cry_blue": 5, "emo_die_red": 0,
+            "emo_exicted_red": 95, "emo_happy_green": 100, "emo_hehe_blue": 80,
+            "emo_huh_green": 45, "emo_opposite_red": 20, "emo_sad_blue": 15,
+            "emo_stun_green": 50, "emo_tired_blue": 25, "emo_wao_green": 95
         };
 
         function renderWeeklyMood() {
@@ -2483,8 +2483,8 @@
                 let h = "10%", c = "bg-surface-container-highest";
                 if (log) {
                     const s = moodScores[log.moodSymbol] || 50;
-                    h = s + "%";
-                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
+                    h = Math.max(15, s) + "%"; // Minimum height to be visible
+                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-error-container");
                 }
                 html += `<div class="flex flex-col items-center gap-2 h-full justify-end"><div class="${c} w-full hand-drawn-border-alt transition-all duration-700" style="height: ${h}"></div></div>`;
             }
@@ -2496,24 +2496,28 @@
             const labels = document.getElementById('mood-labels-grid');
             if(!container || !labels) return;
 
-            const daysInMonth = 31; // May 2026
-            container.className = "grid grid-cols-[repeat(31,1fr)] gap-0.5 h-40 items-end border-b-2 border-outline-variant pb-2";
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            container.className = `grid grid-cols-[repeat(${daysInMonth},1fr)] gap-0.5 h-40 items-end border-b-2 border-outline-variant pb-2`;
             labels.className = "flex justify-between mt-4 text-center px-1";
-            labels.innerHTML = `<div class="text-[8px] font-bold opacity-40 uppercase">Day 1</div><div class="text-[8px] font-bold opacity-40 uppercase">Day 31</div>`;
+            labels.innerHTML = `<div class="text-[8px] font-bold opacity-40 uppercase">Day 1</div><div class="text-[8px] font-bold opacity-40 uppercase">Day ${daysInMonth}</div>`;
 
             const logs = getDiaryLogs();
 
             let html = '';
-            for(let day=1; day<=31; day++) {
+            for(let day=1; day<=daysInMonth; day++) {
                 const log = logs.find(l => {
                     const d = new Date(l.timestamp);
-                    return d.getDate() === day && d.getMonth() === 4 && d.getFullYear() === 2026;
+                    return d.getDate() === day && d.getMonth() === month && d.getFullYear() === year;
                 });
                 let h = "8%", c = "bg-surface-container-highest";
                 if (log) {
                     const s = moodScores[log.moodSymbol] || 50;
-                    h = s + "%";
-                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-surface-container-highest");
+                    h = Math.max(12, s) + "%";
+                    c = s >= 80 ? "bg-primary-container" : (s >= 50 ? "bg-secondary-container" : "bg-error-container");
                 }
                 html += `<div class="h-full flex items-end"><div class="${c} w-full transition-all duration-700" style="height: ${h}; border-radius: 2px;"></div></div>`;
             }
@@ -2841,6 +2845,7 @@
     </script>
 </body>
 </html>
+
 
 
 
