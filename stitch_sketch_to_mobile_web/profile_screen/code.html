@@ -49,6 +49,234 @@
       border: 2.5px solid #292524;
       border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
     }
+
+    .sketch-border-alt {
+      border: 2.5px solid #292524;
+      border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+    }
+
+    /* --- MASCOT FOLLOW STYLES --- */
+    .mascot-area {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .mascot-container {
+        perspective: 1200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 280px;
+        width: 100%;
+        position: relative;
+        z-index: 20;
+        pointer-events: none;
+    }
+    .mascot-wrapper-follow {
+        width: 320px;
+        height: 420px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        transform: scale(0.55);
+        position: relative;
+        z-index: 30;
+        pointer-events: auto;
+    }
+    .mascot-follow {
+        position: relative;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: transform 0.1s ease-out;
+    }
+    .liquid-mascot-follow {
+        position: relative;
+        width: 320px;
+        height: 420px;
+        margin: 0 auto;
+        filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    }
+    .head-shell-follow {
+        position: absolute;
+        width: 320px;
+        height: 180px;
+        background: var(--mascot-shell-color, radial-gradient(circle at 30% 20%, #ffffff, rgba(225, 245, 254, 0.4) 40%, rgba(177, 224, 230, 0.3)));
+        border: 5px solid rgba(255, 255, 255, 0.8);
+        border-radius: 0 0 160px 160px;
+        top: 50px;
+        left: 0;
+        z-index: 3;
+        overflow: hidden;
+        box-sizing: border-box;
+        box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05), 0 15px 30px rgba(147, 198, 238, 0.1);
+        transition: all 0.5s ease;
+    }
+    .shell-gloss-follow {
+        position: absolute;
+        top: -50%;
+        left: -10%;
+        width: 120%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+        transform: rotate(-20deg);
+        z-index: 10;
+        pointer-events: none;
+    }
+    .liquid-hair-follow {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 140px;
+        background: var(--mascot-hair-color, linear-gradient(135deg, #B1E0E6, #8ABCC2));
+        border-radius: 0 0 140px 140px; 
+        clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z');
+        z-index: 1;
+        opacity: 0.95;
+        animation: liquidSwayFollow 4s infinite ease-in-out;
+        transition: all 0.5s ease;
+    }
+
+    .leg-l-follow {
+        position: absolute;
+        width: 30px;
+        height: 180px;
+        background: var(--mascot-leg-color, linear-gradient(to bottom, rgba(177, 224, 230, 0.9), rgba(177, 224, 230, 0.6)));        
+        top: 200px;
+        border-radius: 10px;
+        z-index: 1;
+        box-shadow: inset -4px 0 8px rgba(0,0,0,0.03);
+        transition: all 0.5s ease;
+    }
+    .leg-l-follow.left { left: 105px; }
+    .leg-l-follow.right { left: 185px; }
+
+    .shoe-l-follow {
+        position: absolute;
+        width: 155px;
+        height: 85px;
+        background: var(--mascot-shoe-color, radial-gradient(circle at 50% 0%, #B1E0E6, #8ABCC2));
+        border-radius: 80px 80px 15px 15px;
+        bottom: 0;
+        z-index: 2;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+    }
+    .shoe-l-follow.left { left: 30px; }
+    .shoe-l-follow.right { left: 135px; }
+
+    /* Color Switcher Styles */
+    .mascot-color-switcher {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin: 10px auto;
+        padding: 10px;
+        background: white;
+        border-radius: 50px;
+        width: fit-content;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        position: relative;
+        z-index: 100;
+        pointer-events: auto;
+    }
+    .color-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .color-dot:hover { transform: scale(1.2) translateY(-2px); }
+    .color-dot.active { border-color: #1b1c1c; transform: scale(1.1); box-shadow: 0 0 0 2px rgba(0,0,0,0.05); }
+    .dot-blue { background: #B1E0E6; }
+    .dot-green { background: #9DCB3B; }
+    .dot-red { background: #C36565; }
+
+    @keyframes liquidSwayFollow {
+        0%, 100% { clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z'); }
+        50% { clip-path: path('M 0 0 H 280 V 85 C 220 130, 190 80, 140 80 C 90 80, 50 110, 0 85 Z'); }
+    }
+    .eye-l-follow {
+        position: absolute;
+        width: 30px;
+        height: 64px;
+        background-color: #1e293b;
+        border-radius: 50%;
+        z-index: 10;
+        top: 115px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    }
+    .glint-l-follow {
+        width: 6px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 15px;
+        right: 8px;
+        opacity: 0.8;
+    }
+    .eye-l-follow.left { left: 95px; }
+    .eye-l-follow.right { left: 195px; }
+    .blush-l-follow {
+        position: absolute;
+        width: 30px;
+        height: 12px;
+        background: rgba(255, 184, 209, 0.4);
+        filter: blur(4px);
+        border-radius: 50%;
+        bottom: 55px;
+        z-index: 2;
+    }
+    .blush-l-follow.left { left: 60px; }
+    .blush-l-follow.right { right: 60px; }
+    .mouth-l-follow {
+        position: absolute;
+        width: 36px;
+        height: 18px;
+        background-color: #8b5cf6;
+        border-radius: 0 0 18px 18px;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+    }
+    .mascot-follow.jiggle { animation: artisticJiggle 0.4s ease-out; }
+    @keyframes artisticJiggle {
+        0% { transform: scale(1) rotate(0); }
+        20% { transform: scale(1.1, 0.9) rotate(-3deg); }
+        50% { transform: scale(0.9, 1.1) rotate(3deg); }
+        80% { transform: scale(1.05, 0.95) rotate(-1deg); }
+        100% { transform: scale(1) rotate(0); }
+    }
+    .floating-container-follow {
+        animation: organicFloatFollow 6s infinite ease-in-out;
+        transform-style: preserve-3d;
+    }
+    @keyframes organicFloatFollow {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        33% { transform: translateY(-15px) rotate(2deg); }
+        66% { transform: translateY(-5px) rotate(-1deg); }
+    }
+    @keyframes mascotJumpSpin {
+        0% { transform: scale(1, 1) rotateY(0deg); }
+        15% { transform: scale(1.3, 0.7) rotateY(0deg); } /* Squash */
+        45% { transform: translateY(-100px) scale(0.8, 1.2) rotateY(180deg); } /* Jump & Half-turn */
+        65% { transform: translateY(-120px) scale(1, 1) rotateY(360deg); } /* Peak & Full-turn */
+        85% { transform: translateY(0) scale(1.2, 0.8) rotateY(360deg); } /* Land & Squash */
+        100% { transform: translateY(0) scale(1, 1) rotateY(360deg); } /* Recover */
+    }
+
     .sketch-button {
       transition: all 0.2s ease;
     }
@@ -61,6 +289,127 @@
     .avatar-border {
       border: 2.5px solid #292524;
       border-radius: 50% 45% 55% 48% / 48% 55% 45% 50%;
+    }
+
+    .mascot-speech-bubble {
+        position: fixed;
+        background: white;
+        border: 2px solid #1e293b;
+        padding: 12px 18px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e293b;
+        z-index: 3000;
+        pointer-events: none;
+        transform: translate(-50%, 0);
+        transition: all 0.3s ease-out;
+        box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+        max-width: 250px;
+        width: max-content;
+        line-height: 1.4;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        text-align: center;
+    }
+    .mascot-speech-bubble:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #1e293b;
+    }
+
+    /* --- MASCOT CHAT INTERFACE --- */
+    .mascot-chat-container {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        z-index: 150;
+    }
+    .chat-history {
+        display: none;
+        height: 200px;
+        overflow-y: auto;
+        background: #ffffff;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-image: radial-gradient(#cdc6b6 0.5px, transparent 0.5px);
+        background-size: 15px 15px;
+    }
+    .chat-message {
+        max-width: 85%;
+        padding: 10px 14px;
+        font-size: 14px;
+        line-height: 1.5;
+        position: relative;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+    .message-user {
+        align-self: flex-end;
+        background: #ffeba7;
+        border-radius: 15px 15px 0 15px;
+        border: 1.5px solid #1b1c1c;
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+    .message-mascot {
+        align-self: flex-start;
+        background: #ffffff;
+        border-radius: 15px 15px 15px 0;
+        border: 1.5px solid #1b1c1c;
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+    .chat-input-area {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    .chat-input {
+        flex: 1;
+        background: #ffffff;
+        border: 2px solid #1b1c1c;
+        border-radius: 12px;
+        padding: 10px 15px;
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.2s ease;
+    }
+    .chat-input:focus {
+        box-shadow: 3px 3px 0px #ffeba7;
+        transform: translate(-1px, -1px);
+    }
+    .chat-send-btn {
+        background: #ffeba7;
+        border: 2px solid #1b1c1c;
+        border-radius: 12px;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 3px 3px 0px #1b1c1c;
+        transition: all 0.1s ease;
+    }
+    .chat-send-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 0px 0px 0px #1b1c1c;
+    }
+
+    @keyframes floatUpMascot {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
     }
   </style>
 </head>
@@ -133,63 +482,72 @@
 <!-- Decorative line behind text -->
 <div class="absolute w-full h-[1.5px] bg-ink/10 top-1/2 left-0 -translate-y-1/2 z-0"></div>
 </h2>
-<!-- Custom SVG Teacup Illustration -->
-<div class="w-full max-w-[320px] aspect-square relative flex items-center justify-center">
-<svg height="100%" viewbox="0 0 300 250" width="100%" xmlns="http://www.w3.org/2000/svg">
-<!-- Wavy background line inside cup -->
-<path d="M 40 100 Q 150 140, 260 90" fill="none" stroke="#dbd9d9" stroke-dasharray="6 4" stroke-linecap="round" stroke-width="2"></path>
-<!-- Left Foot -->
-<ellipse cx="90" cy="205" fill="white" rx="25" ry="12" stroke="#292524" stroke-width="2.5" transform="rotate(-15 90 205)"></ellipse>
-<!-- Right Foot -->
-<ellipse cx="210" cy="205" fill="white" rx="25" ry="12" stroke="#292524" stroke-width="2.5" transform="rotate(15 210 205)"></ellipse>
-<!-- Teacup Bowl Background Fill -->
-<path d="M 40 70 C 40 220, 260 220, 260 70 Z" fill="white"></path>
-<!-- Handle -->
-<path d="M 250 100 C 310 100, 310 160, 240 170" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2.5"></path>
-<path d="M 255 115 C 290 115, 290 145, 245 155" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="1.5"></path>
-<!-- Emoticon 1: Angry/Sad (Pink) -->
-<g transform="translate(95, 175)">
-<circle cx="0" cy="0" fill="#fbcfe8" r="28" stroke="#292524" stroke-width="2.5"></circle>
-<!-- Cross eyes -->
-<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-10" x2="-4" y1="-8" y2="-2"></line>
-<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-4" x2="-10" y1="-8" y2="-2"></line>
-<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="4" x2="10" y1="-8" y2="-2"></line>
-<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="10" x2="4" y1="-8" y2="-2"></line>
-<!-- Frown -->
-<path d="M -8 10 Q 0 4, 8 10" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
-</g>
-<!-- Emoticon 2: Neutral/Sad (Blue) -->
-<g transform="translate(150, 185)">
-<circle cx="0" cy="0" fill="#bae6fd" r="28" stroke="#292524" stroke-width="2.5"></circle>
-<circle cx="-8" cy="-4" fill="#292524" r="2"></circle>
-<circle cx="8" cy="-4" fill="#292524" r="2"></circle>
-<!-- Flat line mouth -->
-<line stroke="#292524" stroke-linecap="round" stroke-width="2" x1="-6" x2="6" y1="8" y2="8"></line>
-</g>
-<!-- Emoticon 3: Happy (Yellow) -->
-<g transform="translate(205, 160)">
-<circle cx="0" cy="0" fill="#ffeba7" r="28" stroke="#292524" stroke-width="2.5"></circle>
-<!-- Happy eyes -->
-<path d="M -12 -2 Q -8 -8, -4 -2" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
-<path d="M 4 -2 Q 8 -8, 12 -2" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
-<!-- Smile -->
-<path d="M -10 6 Q 0 16, 10 6" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="2"></path>
-</g>
-<!-- Teacup Bowl Outline (Drawn last to cover faces slightly at edges) -->
-<path d="M 40 70 C 40 220, 260 220, 260 70" fill="none" stroke="#292524" stroke-linecap="round" stroke-width="3"></path>
-<!-- Teacup Rim -->
-<ellipse cx="150" cy="70" fill="white" rx="110" ry="12" stroke="#292524" stroke-width="2.5"></ellipse>
-<!-- Inner rim detail -->
-<ellipse cx="150" cy="72" fill="none" opacity="0.3" rx="100" ry="6" stroke="#292524" stroke-width="1"></ellipse>
-<!-- Tea Tag String -->
-<path d="M 120 75 Q 110 100, 95 125" fill="none" stroke="#292524" stroke-dasharray="2 2" stroke-width="1.5"></path>
-<!-- Tea Tag -->
-<g transform="translate(95, 125) rotate(-10)">
-<rect fill="white" height="30" rx="2" stroke="#292524" stroke-width="2" width="24" x="-12" y="0"></rect>
-<!-- Staple -->
-<line stroke="#292524" stroke-width="1.5" x1="-4" x2="4" y1="4" y2="4"></line>
-</g>
-</svg>
+<!-- Custom Mascot Follow Component -->
+<div class="mascot-area">
+    <div class="mascot-container">
+        <div class="mascot-wrapper-follow">
+            <div class="mascot-follow" id="mascot-follow-component">
+                <div class="floating-container-follow liquid-mascot-follow">
+                    <!-- Layer 1: Legs -->
+                    <div class="leg-l-follow left"></div>
+                    <div class="leg-l-follow right"></div>
+                    
+                    <!-- Layer 2: Shoes -->
+                    <div class="shoe-l-follow left"></div>
+                    <div class="shoe-l-follow right"></div>
+                    
+                    <!-- Layer 3: Head Shell & Content -->
+                    <div class="head-shell-follow">
+                        <div class="shell-gloss-follow"></div>
+                        <div class="liquid-hair-follow">
+                        </div>
+                        <!-- Layer 4: Mouth & Blush (Inside shell) -->
+                        <div class="blush-l-follow left"></div>
+                        <div class="blush-l-follow right"></div>
+                        <div class="mouth-l-follow"></div>
+                    </div>
+                    
+                    <!-- Layer 5: Eyes (On top of everything) -->
+                    <div class="eye-l-follow left"><div class="glint-l-follow"></div></div>
+                    <div class="eye-l-follow right"><div class="glint-l-follow"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mascot-color-switcher mb-4">
+        <div class="color-dot dot-blue active" onclick="setMascotColor('blue', this)"></div>
+        <div class="color-dot dot-green" onclick="setMascotColor('green', this)"></div>
+        <div class="color-dot dot-red" onclick="setMascotColor('red', this)"></div>
+    </div>
+
+    <!-- Mascot Chat Interface -->
+    <div class="mascot-chat-container mx-auto px-4 mb-8">
+        <div class="flex justify-between items-center mb-2">
+            <h4 class="text-[10px] font-bold uppercase tracking-widest opacity-50">Mascot Chat</h4>
+            <div class="flex gap-2">
+                <button onclick="toggleChatLog()" id="toggle-log-btn" class="p-1 rounded hover:bg-black/5 transition-colors" title="Bật/Tắt lịch sử chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </button>
+                <button onclick="toggleMascotVoice()" id="toggle-voice-btn" class="p-1 rounded hover:bg-black/5 transition-colors" title="Bật/Tắt tiếng mascot">
+                    <svg id="voice-icon-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 10 0 0 1 0 7.07"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mascot-chat-history" class="chat-history hand-drawn-border-alt rounded-2xl mb-4">
+            <div class="chat-message message-mascot">Chào bạn! Tui là Mascot của Calm Diary. Bạn muốn tâm sự gì với tui không? ✨</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="mascot-chat-input" class="chat-input" placeholder="Nhắn tin hoặc nói chuyện với tui..." onkeypress="if(event.key === 'Enter') handleMascotChat()">
+            <button onclick="startVoiceRecognition()" id="mascot-voice-btn" class="chat-send-btn !bg-white mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
+            <button onclick="handleMascotChat()" class="chat-send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+        <p id="voice-status" class="text-[10px] text-center font-bold text-ink-light mt-2 opacity-0 transition-opacity">Đang nghe nè...</p>
+    </div>
 </div>
 </section>
 <!-- END: Emotional Trend Graphic -->
@@ -250,4 +608,435 @@
 </nav>
 <!-- END: Bottom Navigation -->
 </div>
+<script>
+    // --- MASCOT EYE FOLLOW LOGIC ---
+    const MASCOT_LERP = 0.1;
+    let mMouseX = window.innerWidth / 2;
+    let mMouseY = window.innerHeight / 2;
+    let mCurrentTiltX = 0;
+    let mCurrentTiltY = 0;
+    let isSpinning = false;
+
+    document.addEventListener('mousemove', (e) => {
+        mMouseX = e.clientX;
+        mMouseY = e.clientY;
+    });
+
+    function updateMascotFollow() {
+        const mascot = document.getElementById('mascot-follow-component');
+        if (!mascot) {
+            requestAnimationFrame(updateMascotFollow);
+            return;
+        }
+
+        const eyes = mascot.querySelectorAll('.eye-l-follow');
+        const blushes = mascot.querySelectorAll('.blush-l-follow');
+        
+        // Calculate mascot center
+        const mRect = mascot.getBoundingClientRect();
+        const mCenterX = mRect.left + mRect.width / 2;
+        const mCenterY = mRect.top + mRect.height / 2;
+
+        // Smooth Tilt
+        if (!isSpinning) {
+            const targetTiltX = (mMouseX - mCenterX) / 60;
+            const targetTiltY = (mMouseY - mCenterY) / 60;
+            
+            mCurrentTiltX += (targetTiltX - mCurrentTiltX) * MASCOT_LERP;
+            mCurrentTiltY += (targetTiltY - mCurrentTiltY) * MASCOT_LERP;
+            
+            mascot.style.transform = `rotateX(${-mCurrentTiltY}deg) rotateY(${mCurrentTiltX}deg)`;
+        }
+
+        // Distance to mascot
+        const distToCenter = Math.hypot(mMouseX - mCenterX, mMouseY - mCenterY);
+        const proximity = Math.max(0, 1 - distToCenter / 300);
+        
+        // Dynamic Blush
+        blushes.forEach(blush => {
+            blush.style.opacity = 0.4 + (proximity * 0.6);
+            blush.style.transform = `scale(${1 + proximity * 0.5})`;
+        });
+
+        // Eyes movement
+        eyes.forEach(eye => {
+            const rect = eye.getBoundingClientRect();
+            const eyeCenterX = rect.left + rect.width / 2;
+            const eyeCenterY = rect.top + rect.height / 2;
+
+            const deltaX = mMouseX - eyeCenterX;
+            const deltaY = mMouseY - eyeCenterY;
+            const angle = Math.atan2(deltaY, deltaX);
+            
+            const maxEyeDist = 8; 
+            const distRatio = Math.min(1, Math.hypot(deltaX, deltaY) / 200);
+            
+            const moveX = Math.cos(angle) * maxEyeDist * distRatio;
+            const moveY = Math.sin(angle) * maxEyeDist * distRatio;
+
+            if (eye.style.height !== '2px') { // Don't move if blinking
+                eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+            
+            const glint = eye.querySelector('.glint-l-follow');
+            if (glint) {
+                glint.style.transform = `translate(${moveX * 0.3}px, ${moveY * 0.3}px)`;
+            }
+        });
+
+        requestAnimationFrame(updateMascotFollow);
+    }
+
+    // Start mascot animation
+    updateMascotFollow();
+
+    // Mascot Chat Logic
+    let conversationContext = [];
+    let isContinuousVoice = false;
+    const mascotBotMessages = [
+        "Tui nghe nè, bạn cứ nói đi...",
+        "Thương thương bạn nhen! ❤️",
+        "Đừng lo, mọi chuyện sẽ ổn thôi.",
+        "Bạn đã làm rất tốt rồi đó!",
+        "Hãy hít thở thật sâu nhen...",
+        "Tui luôn ở đây lắng nghe bạn.",
+        "Hôm nay của bạn thế nào? Kể tui nghe thêm đi."
+    ];
+
+    let isMascotMuted = false;
+    window.toggleMascotVoice = function() {
+        isMascotMuted = !isMascotMuted;
+        const iconSvg = document.getElementById('voice-icon-svg');
+        const btn = document.getElementById('toggle-voice-btn');
+        if (isMascotMuted) {
+            iconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+            btn.classList.add('bg-red-50');
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+        } else {
+            iconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 10 0 0 1 0 7.07"></path>';
+            btn.classList.remove('bg-red-50');
+        }
+    };
+
+    window.toggleChatLog = function() {
+        const history = document.getElementById('mascot-chat-history');
+        const btn = document.getElementById('toggle-log-btn');
+        if (history.style.display === 'none' || getComputedStyle(history).display === 'none') {
+            history.style.display = 'flex';
+            btn.classList.add('bg-blue-50');
+        } else {
+            history.style.display = 'none';
+            btn.classList.remove('bg-blue-50');
+        }
+    };
+
+    window.handleMascotChat = function(voiceText = null) {
+        const input = document.getElementById('mascot-chat-input');
+        const history = document.getElementById('mascot-chat-history');
+        if (!input || !history) return;
+        const text = voiceText || input.value.trim();
+
+        if (!text) return;
+
+        // Add User Message
+        addChatMessage('user', text);
+        conversationContext.push({ role: 'user', text: text });
+
+        if (!voiceText) input.value = '';
+        history.scrollTop = history.scrollHeight;
+
+        // Show "Thinking"
+        showMascotMessage("...");
+
+        // Mascot Response
+        setTimeout(() => {
+            const responseText = mascotBotMessages[Math.floor(Math.random() * mascotBotMessages.length)];
+            conversationContext.push({ role: 'mascot', text: responseText });
+
+            // Stream response
+            streamMascotResponse(responseText);
+        }, 1000);
+    };
+
+    function addChatMessage(role, text) {
+        const history = document.getElementById('mascot-chat-history');
+        const msg = document.createElement('div');
+        msg.className = `chat-message message-${role === 'user' ? 'user' : 'mascot'}`;
+        msg.innerText = text;
+        history.appendChild(msg);
+        history.scrollTop = history.scrollHeight;
+    }
+
+    function streamMascotResponse(fullText) {
+        const history = document.getElementById('mascot-chat-history');
+        const msgElement = document.createElement('div');
+        msgElement.className = 'chat-message message-mascot';
+        history.appendChild(msgElement);
+        
+        let i = 0;
+        const bubble = document.querySelector('.mascot-speech-bubble');
+        if (bubble) bubble.innerText = "";
+
+        const interval = setInterval(() => {
+            if (i < fullText.length) {
+                const char = fullText.charAt(i);
+                msgElement.innerText += char;
+                if (bubble) bubble.innerText += char;
+                history.scrollTop = history.scrollHeight;
+                i++;
+            } else {
+                clearInterval(interval);
+                finishMascotResponse(fullText);
+            }
+        }, 40);
+    }
+
+    function getBestViVoice() {
+        if (!window.speechSynthesis) return null;
+        const voices = window.speechSynthesis.getVoices();
+        return voices.find(v => v.lang === 'vi-VN' && v.name.includes('Google')) ||
+               voices.find(v => v.lang === 'vi-VN' && (v.name.includes('Female') || v.name.includes('Nữ'))) ||
+               voices.find(v => v.lang === 'vi-VN') ||
+               voices[0];
+    }
+
+    function finishMascotResponse(text) {
+        // Mascot SPEAKS (TTS)
+        if (!isMascotMuted && 'speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = getBestViVoice();
+            utterance.lang = 'vi-VN';
+            utterance.rate = 1.15;
+            utterance.pitch = 1.4;
+            
+            utterance.onend = () => {
+                if (isContinuousVoice) {
+                    setTimeout(() => startVoiceRecognition(true), 500);
+                }
+            };
+            
+            window.speechSynthesis.speak(utterance);
+        } else if (isContinuousVoice) {
+            setTimeout(() => startVoiceRecognition(true), 1500);
+        }
+        
+        // Trigger Mascot Jiggle
+        const mascot = document.getElementById('mascot-follow-component');
+        if (mascot) {
+            mascot.classList.add('jiggle');
+            setTimeout(() => mascot.classList.remove('jiggle'), 400);
+        }
+    }
+
+    // Voice Recognition (STT)
+    let recognition;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = 'vi-VN';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onresult = (event) => {
+            const text = event.results[0][0].transcript;
+            handleMascotChat(text);
+            const status = document.getElementById('voice-status');
+            if (status) status.style.opacity = '0';
+        };
+
+        recognition.onerror = () => {
+            const status = document.getElementById('voice-status');
+            if (status) status.style.opacity = '0';
+            isContinuousVoice = false;
+            document.getElementById('mascot-voice-btn').classList.remove('bg-primary-container');
+        };
+
+        recognition.onend = () => {
+            const status = document.getElementById('voice-status');
+            if (status) status.style.opacity = '0';
+        };
+    }
+
+    window.startVoiceRecognition = function(auto = false) {
+        if (recognition) {
+            try {
+                recognition.start();
+                if (!auto) isContinuousVoice = true;
+                const status = document.getElementById('voice-status');
+                if (status) status.style.opacity = '1';
+                document.getElementById('mascot-voice-btn').classList.add('bg-primary-container');
+            } catch(e) {}
+        } else {
+            alert("Trình duyệt của bạn không hỗ trợ giọng nói.");
+        }
+    };
+
+    // Mascot Color Theme Logic
+    window.setMascotColor = function(color, el) {
+        const root = document.documentElement;
+        let hair, leg, shoe, shell;
+        
+        if (color === 'green') {
+            hair = 'linear-gradient(135deg, #9DCB3B, #82A832)';
+            leg = 'linear-gradient(to bottom, rgba(157, 203, 59, 0.9), rgba(157, 203, 59, 0.6))';
+            shoe = 'radial-gradient(circle at 50% 0%, #9DCB3B, #5E8022)';
+            shell = 'radial-gradient(circle at 30% 20%, #ffffff, rgba(230, 245, 220, 0.4) 40%, rgba(157, 203, 59, 0.3))';
+        } else if (color === 'red') {
+            hair = 'linear-gradient(135deg, #C36565, #A14F4F)';
+            leg = 'linear-gradient(to bottom, rgba(195, 101, 101, 0.9), rgba(195, 101, 101, 0.6))';
+            shoe = 'radial-gradient(circle at 50% 0%, #C36565, #7D3E3E)';
+            shell = 'radial-gradient(circle at 30% 20%, #ffffff, rgba(245, 230, 230, 0.4) 40%, rgba(195, 101, 101, 0.3))';
+        } else { // blue/original
+            hair = 'linear-gradient(135deg, #B1E0E6, #8ABCC2)';
+            leg = 'linear-gradient(to bottom, rgba(177, 224, 230, 0.9), rgba(177, 224, 230, 0.6))';
+            shoe = 'radial-gradient(circle at 50% 0%, #B1E0E6, #8ABCC2)';
+            shell = 'radial-gradient(circle at 30% 20%, #ffffff, rgba(225, 245, 254, 0.4) 40%, rgba(177, 224, 230, 0.3))';
+        }
+        
+        root.style.setProperty('--mascot-hair-color', hair);
+        root.style.setProperty('--mascot-leg-color', leg);
+        root.style.setProperty('--mascot-shoe-color', shoe);
+        root.style.setProperty('--mascot-shell-color', shell);
+        localStorage.setItem('mascot_theme_color', color);
+
+        // Update UI active state
+        document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+        if (el) el.classList.add('active');
+    };
+
+    // Load saved color preference
+    const savedTheme = localStorage.getItem('mascot_theme_color');
+    if (savedTheme) {
+        const targetDot = document.querySelector(`.dot-${savedTheme}`);
+        setMascotColor(savedTheme, targetDot);
+    }
+
+    // Random Blinking Logic
+    function randomBlink() {
+        const mascot = document.getElementById('mascot-follow-component');
+        if (mascot) {
+            const eyes = mascot.querySelectorAll('.eye-l-follow');
+            const isWink = Math.random() > 0.8;
+            const eyeToBlink = isWink ? [eyes[Math.floor(Math.random() * 2)]] : eyes;
+
+            eyeToBlink.forEach(eye => {
+                eye.style.transition = 'height 0.1s ease';
+                eye.style.height = '2px';
+            });
+            
+            setTimeout(() => {
+                eyeToBlink.forEach(eye => {
+                    eye.style.height = '64px';
+                });
+            }, 150);
+        }
+        setTimeout(randomBlink, 3000 + Math.random() * 5000);
+    }
+    randomBlink();
+
+    // Mascot Interaction
+    const mascotComp = document.getElementById('mascot-follow-component');
+    const mascotMessages = [
+        "Chào bạn nhen! ❤️",
+        "Bạn hôm nay thế nào?",
+        "Tui yêu bạn lắm á!",
+        "Cười lên cái coi!",
+        "Mọi chuyện sẽ ổn thôi!",
+        "Boop! Hehe",
+        "Stay calm & hydrated!",
+        "Bạn là nhất luôn!"
+    ];
+
+    if (mascotComp) {
+        mascotComp.addEventListener('click', function() {
+            if (isSpinning) return;
+            
+            this.classList.add('jiggle');
+            const eyes = this.querySelectorAll('.eye-l-follow');
+            eyes.forEach(eye => {
+                eye.style.transition = 'height 0.1s ease';
+                eye.style.height = '2px';
+            });
+            
+            setTimeout(() => {
+                this.classList.remove('jiggle');
+                eyes.forEach(eye => {
+                    eye.style.height = '64px';
+                });
+            }, 400);
+
+            // Create heart
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = mMouseX + 'px';
+            heart.style.top = mMouseY + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.fontSize = '24px';
+            heart.style.zIndex = '3000';
+            heart.style.animation = 'floatUpMascot 1s ease-out forwards';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
+
+            // Show message
+            const msg = mascotMessages[Math.floor(Math.random() * mascotMessages.length)];
+            showMascotMessage(msg);
+        });
+
+        mascotComp.addEventListener('dblclick', function() {
+            if (isSpinning) return;
+            isSpinning = true;
+            
+            // Trigger the Jump & Spin animation
+            this.style.animation = 'mascotJumpSpin 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+            
+            setTimeout(() => {
+                this.style.animation = '';
+                isSpinning = false;
+                // Reset rotation smoothly
+                this.style.transition = 'transform 0.3s ease-out';
+            }, 800);
+            
+            showMascotMessage("Wheeeeeee! 🌀");
+        });
+    }
+
+    function showMascotMessage(text) {
+        const existing = document.querySelector('.mascot-speech-bubble');
+        if (existing) existing.remove();
+
+        const bubble = document.createElement('div');
+        bubble.className = 'mascot-speech-bubble';
+        bubble.innerText = text;
+        document.body.appendChild(bubble);
+
+        const mRect = mascotComp.getBoundingClientRect();
+        bubble.style.left = (mRect.left + mRect.width / 2) + 'px';
+        bubble.style.top = (mRect.top - 40) + 'px';
+
+        setTimeout(() => {
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'translate(-50%, -20px)';
+            setTimeout(() => bubble.remove(), 300);
+        }, 2000);
+    }
+
+    // Add heart and bubble animation styles
+    const hStyle = document.createElement('style');
+    hStyle.innerHTML = `
+        @keyframes floatUpMascot {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        @keyframes mascotJumpSpin {
+            0% { transform: scale(1, 1) rotateY(0deg); }
+            15% { transform: scale(1.3, 0.7) rotateY(0deg); } /* Squash */
+            45% { transform: translateY(-100px) scale(0.8, 1.2) rotateY(180deg); } /* Jump & Half-turn */
+            65% { transform: translateY(-120px) scale(1, 1) rotateY(360deg); } /* Peak & Full-turn */
+            85% { transform: translateY(0) scale(1.2, 0.8) rotateY(360deg); } /* Land & Squash */
+            100% { transform: translateY(0) scale(1, 1) rotateY(360deg); } /* Recover */
+        }
+    `;
+    document.head.appendChild(hStyle);
+</script>
 </body></html>
