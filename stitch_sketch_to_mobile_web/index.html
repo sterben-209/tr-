@@ -5,6 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link rel="icon" href="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/eco/default/24px.svg" type="image/svg+xml">
     <title>Calm Diary - Digital Scrapbook</title>
+    <!-- Puter.js for Keyless AI -->
+    <script src="https://js.puter.com/v2/"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -1439,7 +1441,7 @@
                                 </div>
                                 <div class="chat-input-area">
                                     <input type="text" id="mascot-chat-input" class="chat-input" placeholder="Nhắn tin hoặc nói chuyện với tui..." onkeypress="if(event.key === 'Enter') handleMascotChat()">
-                                    <button onclick="startVoiceRecognition()" id="mascot-voice-btn" class="chat-send-btn !bg-white mr-2">
+                                    <button onclick="startVoiceRecognition()" id="mascot-voice-btn" class="chat-send-btn bg-white mr-2 transition-colors">
                                         <span class="material-symbols-outlined text-primary">mic</span>
                                     </button>
                                     <button onclick="handleMascotChat()" class="chat-send-btn">
@@ -3796,31 +3798,84 @@
                 }
             };
 
-            window.handleMascotChat = function(voiceText = null) {
+            window.handleMascotChat = async function(voiceText = null) {
                 const input = document.getElementById('mascot-chat-input');
                 const history = document.getElementById('mascot-chat-history');
                 const text = voiceText || input.value.trim();
 
                 if (!text) return;
 
+                // Load Context from Local Storage
+                let mascotMemory = localStorage.getItem('mascot_user_context') || "Chưa có thông tin gì.";
+
                 // Add User Message to UI & Context
                 addChatMessage('user', text);
-                conversationContext.push({ role: 'user', text: text });
+                conversationContext.push({ role: 'user', content: text });
 
                 if (!voiceText) input.value = '';
                 history.scrollTop = history.scrollHeight;
 
                 // Show "Thinking" state
-                showMascotMessage("...");
+                showMascotMessage("Đang suy nghĩ xíu nha...");
                 
-                // Simulate "AI" Response Delay
-                setTimeout(() => {
-                    const responseText = mascotBotMessages[Math.floor(Math.random() * mascotBotMessages.length)];
-                    conversationContext.push({ role: 'mascot', text: responseText });
+                try {
+                    // Call Puter AI
+                    const systemPrompt = `Bạn là An, mascot nhỏ dễ thương của ứng dụng Calm Diary. Hãy trả lời thật ngắn gọn (chỉ từ 1 đến 2 câu ngắn), dễ thương, sử dụng emoji và ngôn ngữ Tiếng Việt thân thiện, đôi khi dùng từ 'nhen', 'nha', 'á'.
+ĐÂY LÀ NHỮNG GÌ BẠN ĐÃ NHỚ VỀ NGƯỜI DÙNG TỪ TRƯỚC ĐẾN NAY:
+${mascotMemory}
+QUAN TRỌNG: Nếu người dùng vừa chia sẻ thông tin gì đó mới đáng nhớ (như cảm xúc hôm nay, sở thích, tên gọi, v.v.), hãy tự động cập nhật trí nhớ của bạn bằng cách CHÈN THÊM dòng sau vào CUỐI câu trả lời của bạn: "[MEMORY: <thông tin muốn nhớ>]". Không giải thích thêm.`;
+                    
+                    const messages = [
+                        { role: "system", content: systemPrompt },
+                        // Optional: Include last few messages for context (keeping it lean)
+                        ...conversationContext.slice(-5)
+                    ];
 
-                    // Stream response to Speech Bubble & History
-                    streamMascotResponse(responseText);
-                }, 1000);
+                    const response = await puter.ai.chat(messages);
+                    let responseText = "Tui không biết nói gì luôn á!";
+                    
+                    // Handle different possible response structures from puter.ai
+                    if (response && response.message && response.message.content) {
+                        responseText = response.message.content;
+                    } else if (typeof response === 'string') {
+                        responseText = response;
+                    } else if (response && response.text) {
+                        responseText = response.text;
+                    }
+
+                    // Extract memory instruction
+                    const memoryRegex = /\[MEMORY:\s*(.*?)\]/ig;
+                    let match;
+                    let hasNewMemory = false;
+
+                    while ((match = memoryRegex.exec(responseText)) !== null) {
+                        if (mascotMemory === "Chưa có thông tin gì.") mascotMemory = "";
+                        mascotMemory += (mascotMemory ? " | " : "") + match[1].trim();
+                        hasNewMemory = true;
+                    }
+
+                    if (hasNewMemory) {
+                        localStorage.setItem('mascot_user_context', mascotMemory);
+                    }
+
+                    // Clean the response text to show to the user
+                    let cleanResponse = responseText.replace(memoryRegex, '').trim();
+                    if (!cleanResponse) cleanResponse = "Tui ghi nhớ rồi nhen! ❤️";
+
+                    conversationContext.push({ role: 'assistant', content: cleanResponse });
+                    
+                    // Hide thinking message implicitly by streaming the new response
+                    const existingBubble = document.querySelector('.mascot-speech-bubble');
+                    if(existingBubble) existingBubble.remove();
+                    
+                    streamMascotResponse(cleanResponse);
+
+                } catch (error) {
+                    console.error("Puter AI Error:", error);
+                    const errorMsg = "Tui bị mất mạng rồi, bạn chờ xíu thử lại nhen! 🥺";
+                    conversationContext.push({ role: 'assistant', content: errorMsg });
+                    streamMascotResponse(errorMsg);
+                }
             };
 
             function addChatMessage(role, text) {
@@ -3866,33 +3921,50 @@
                        voices[0];
             }
 
-            function finishMascotResponse(text) {
-                // Mascot SPEAKS (TTS)
-                if (!isMascotMuted && 'speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.voice = getBestViVoice();
-                    utterance.lang = 'vi-VN';
-                    utterance.rate = 1.15; // Slightly faster for energy
-                    utterance.pitch = 1.4; // Cutier, higher pitch
-                    
-                    utterance.onend = () => {
-                        // RE-START VOICE if in continuous mode
-                        if (isContinuousVoice) {
-                            setTimeout(() => startVoiceRecognition(true), 500);
-                        }
-                    };
-                    
-                    window.speechSynthesis.speak(utterance);
-                } else if (isContinuousVoice) {
-                    // Even if muted, re-start mic for continuous conversation
-                    setTimeout(() => startVoiceRecognition(true), 1500);
-                }
-                
+            async function finishMascotResponse(text) {
                 // Trigger Mascot Jiggle
                 const mascot = document.getElementById('mascot-follow-component');
                 if (mascot) {
                     mascot.classList.add('jiggle');
                     setTimeout(() => mascot.classList.remove('jiggle'), 400);
+                }
+
+                if (!isMascotMuted) {
+                    try {
+                        // Try Puter AI Voice (OpenAI's Nova voice sounds cute and supports VN)
+                        const audio = await puter.ai.txt2speech(text, {
+                            provider: 'openai',
+                            voice: 'nova'
+                        });
+                        
+                        audio.onended = () => {
+                            if (isContinuousVoice) {
+                                setTimeout(() => startVoiceRecognition(true), 500);
+                            }
+                        };
+                        audio.play();
+                        
+                    } catch (e) {
+                        console.error("Puter TTS Error, falling back to browser TTS:", e);
+                        if ('speechSynthesis' in window) {
+                            const utterance = new SpeechSynthesisUtterance(text);
+                            utterance.voice = getBestViVoice();
+                            utterance.lang = 'vi-VN';
+                            utterance.rate = 1.15;
+                            utterance.pitch = 1.4;
+                            
+                            utterance.onend = () => {
+                                if (isContinuousVoice) {
+                                    setTimeout(() => startVoiceRecognition(true), 500);
+                                }
+                            };
+                            window.speechSynthesis.speak(utterance);
+                        } else if (isContinuousVoice) {
+                            setTimeout(() => startVoiceRecognition(true), 1500);
+                        }
+                    }
+                } else if (isContinuousVoice) {
+                    setTimeout(() => startVoiceRecognition(true), 1500);
                 }
             }
 
