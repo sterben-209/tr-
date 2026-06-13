@@ -160,17 +160,22 @@
 
   .ilu {
     display: block;
-    width: 60vw;
-    height: 60vw;
+    width: 35vw;
+    height: 48vw;
     margin: 0 auto;
-    border-radius: 4vw;
+    border-radius: 3vw;
     transform: none !important; /* Remove rotation on mobile for cleaner look */
   }
 
   .slide3 .ilu {
     border-radius: 50%;
-    width: 50vw;
-    height: 50vw;
+    width: 35vw;
+    height: 35vw;
+  }
+
+  .ilu img {
+    transform: scale(1.5);
+    transform-origin: center center;
   }
 
   .deco { 

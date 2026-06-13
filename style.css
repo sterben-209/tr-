@@ -1100,9 +1100,9 @@ body::-webkit-scrollbar {
 
 .ilu {
   position: relative;
-  width: 22vw;
-  height: 32vw;
-  border-radius: 8vw 0;
+  width: 16vw;
+  height: 23vw;
+  border-radius: 5vw 0;
   border: 0.1vw solid rgba(255, 255, 255, 0.4);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -1112,13 +1112,13 @@ body::-webkit-scrollbar {
 
 .slide2 .ilu {
   transform: rotate(5deg);
-  border-radius: 0 8vw;
+  border-radius: 0 5vw;
 }
 
 .slide3 .ilu {
   border-radius: 50%;
-  width: 25vw;
-  height: 25vw;
+  width: 18vw;
+  height: 18vw;
   transform: rotate(0);
 }
 
@@ -1127,6 +1127,8 @@ body::-webkit-scrollbar {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.9);
+  transform: scale(1.5); /* Zoom in the image */
+  transform-origin: center center;
 }
 
 .deco {
