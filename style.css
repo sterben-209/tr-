@@ -162,7 +162,7 @@ body::-webkit-scrollbar {
 }
 
 .logo-2 {
-  font-family: "Playfair Display", serif;
+  font-family: "Sigmar", sans-serif;
   font-size: 10vw;
   color: #d4a373;
   text-decoration: none;
@@ -194,10 +194,14 @@ body::-webkit-scrollbar {
   z-index: 1;
 }
 
+.sub2-logo h1:last-of-type {
+  font-size: 4vw;
+}
+
 .sub2-logo p:first-child {
   color: #d4a373;
-  font-family: "Playfair Display", serif;
-  font-size: 1vw;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 3vw;
 }
 
 .logo-2 {
@@ -208,7 +212,7 @@ body::-webkit-scrollbar {
 
 .sub2-logo p:last-child {
   font-family: "Inter", serif;
-  font-size: 1vw;
+  font-size: 1.2vw;
   /* color: #44190B; */
 }
 
@@ -934,7 +938,7 @@ body::-webkit-scrollbar {
 .slide1 {
   height: 100vh;
   width: 100vw;
-  background: #44192d;
+  background: #c36565;
   position: relative;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -942,7 +946,7 @@ body::-webkit-scrollbar {
 .slide2 {
   height: 100vh;
   width: 100vw;
-  background: #314373;
+  background: #84bfc7;
   position: relative;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -950,7 +954,7 @@ body::-webkit-scrollbar {
 .slide3 {
   height: 100vh;
   width: 100vw;
-  background: #4f772d;
+  background: #9ac53e;
   position: relative;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -988,7 +992,8 @@ body::-webkit-scrollbar {
   color: white;
   margin-bottom: 1vh;
   letter-spacing: 0.3em;
-  opacity: 0.8;
+  opacity: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .title {
@@ -997,6 +1002,7 @@ body::-webkit-scrollbar {
   color: white;
   margin-bottom: 2vh;
   letter-spacing: 0;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .title::first-letter {
@@ -1009,12 +1015,13 @@ body::-webkit-scrollbar {
   font-family: "Mulish", sans-serif;
   font-size: 1vw;
   line-height: 1.6;
-  font-weight: lighter;
+  font-weight: 400;
   color: white;
   width: 25vw;
   letter-spacing: 0.05vw;
-  opacity: 0.8;
+  opacity: 1;
   margin-bottom: 3vh;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .KEY {
@@ -1023,7 +1030,8 @@ body::-webkit-scrollbar {
   color: white;
   margin-bottom: 1.5vh;
   letter-spacing: 0.2em;
-  opacity: 0.5;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .ingre-contain {
@@ -1038,11 +1046,12 @@ body::-webkit-scrollbar {
   font-family: "Mulish", sans-serif;
   font-size: 0.5vw;
   color: white;
-  opacity: 0.8;
+  opacity: 1;
   border: 0.1vw solid rgba(255, 255, 255, 0.5);
   padding: 0.5vw 1vw;
   display: inline-block;
   letter-spacing: 0.15vw;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .learnmore {
@@ -1050,12 +1059,38 @@ body::-webkit-scrollbar {
   font-size: 0.75vw;
   color: white;
   letter-spacing: 0.3em;
-  opacity: 0.9;
+  opacity: 1;
   border: 0.1vw solid white;
   display: inline-block;
   padding: 0.8vw 2vw;
   text-decoration: none;
   transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific text colors for Light Background Slides (Slide 2 - FREE) */
+.slide2 .collection,
+.slide2 .title,
+.slide2 .description,
+.slide2 .KEY,
+.slide2 .ingre,
+.slide2 .learnmore,
+.slide2 .deco {
+    color: #1b1c1c;
+    text-shadow: none;
+}
+
+.slide2 .ingre {
+    border-color: rgba(27, 28, 28, 0.3);
+}
+
+.slide2 .learnmore {
+    border-color: #1b1c1c;
+}
+
+.slide2 .learnmore:hover {
+    background-color: #1b1c1c;
+    color: white;
 }
 
 .learnmore:hover {
