@@ -1,10 +1,54 @@
+const KEYS_TO_MANAGE = [
+    'user_avatar', 'is_mascot_avatar', 'calm_mood_slots', 
+    'calm_diary_entries', 'user_intro', 'calm_edit_token', 
+    'mascot_user_context', 'mascot_theme_color', 'user_profile', 'cart'
+];
+
+function backupLocalData(email) {
+    if (!email || email === 'guest') return;
+    const backup = {};
+    KEYS_TO_MANAGE.forEach(k => {
+        if (localStorage.getItem(k) !== null) {
+            backup[k] = localStorage.getItem(k);
+        }
+    });
+    localStorage.setItem('local_backup_' + email, JSON.stringify(backup));
+}
+
+function restoreLocalData(email) {
+    if (!email || email === 'guest') return;
+    const backupStr = localStorage.getItem('local_backup_' + email);
+    if (backupStr) {
+        const backup = JSON.parse(backupStr);
+        KEYS_TO_MANAGE.forEach(k => {
+            if (backup[k] !== undefined) localStorage.setItem(k, backup[k]);
+            else localStorage.removeItem(k);
+        });
+    }
+}
+
+// Hàm xóa toàn bộ dữ liệu cục bộ liên quan đến người dùng/guest
+function clearLocalData() {
+    KEYS_TO_MANAGE.forEach(key => localStorage.removeItem(key));
+}
+
+// Quản lý phiên (Session Management) cho Guest Mode
+if (!sessionStorage.getItem('guest_session_active')) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.email === 'guest') {
+        clearLocalData();
+        console.log("Phiên Guest đã kết thúc. Đã xóa dữ liệu cục bộ.");
+    }
+    sessionStorage.setItem('guest_session_active', 'true');
+}
+
 // Tự động đồng bộ giỏ hàng lên Server (Có Debounce để nhanh hơn)
 let syncTimeout;
 async function syncCartToServer() {
     const user = JSON.parse(localStorage.getItem('user'));
     const cart = localStorage.getItem('cart') || "[]";
     
-    if (user && user.email) {
+    if (user && user.email && user.email !== 'guest') {
         // Xóa timeout cũ nếu người dùng vẫn đang thao tác
         clearTimeout(syncTimeout);
         
@@ -94,6 +138,11 @@ function getBaseURL() {
 
 // Xử lý gửi dữ liệu khách hàng (Google Apps Script API)
 async function sendToDatabase(data) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if ((user && user.email === 'guest') || data.email === 'guest') {
+        console.log('Guest mode: Bỏ qua gửi dữ liệu DB.');
+        return { result: "success", message: "Guest mode" };
+    }
     try {
         const response = await fetch(CONFIG_GOOGLE_URL, {
             method: 'POST',
@@ -110,6 +159,11 @@ async function sendToDatabase(data) {
 // Xử lý lấy dữ liệu có phản hồi từ Server
 async function fetchFromDatabase(data) {
     console.log('--- Database Request ---', data);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if ((user && user.email === 'guest') || data.email === 'guest') {
+        console.log('Guest mode: Bỏ qua fetch từ DB.');
+        return { result: "success", data: {}, message: "Guest mode" };
+    }
     try {
         const response = await fetch(CONFIG_GOOGLE_URL, {
             method: 'POST',

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/eco/default/24px.svg" type="image/svg+xml">
+    <title>Emotea - Cổng B2B & Hợp Tác</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Mulish:ital,wght@0,200..900;1,200..900&family=Space+Grotesk:wght@300..700&family=Sigmar&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="phone.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'surface': '#fbf9f8',
+              'on-surface': '#1b1c1c',
+              'primary-scrapbook': '#6b5e28',
+              'primary-container': '#ffeba7',
+              'secondary-container': '#b6dffd',
+              'tertiary-container': '#ffe5ec',
+              'outline': '#7c7769',
+              'outline-variant': '#cdc6b6',
+              'brand': '#d4a373',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Mulish', sans-serif;
+        background-color: var(--background, #0c0c0c); /* Thống nhất dark mode của Emotea nếu cần, hoặc sáng tùy chỉnh */
+      }
+      .b2b-hero {
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=2000') center/cover;
+        color: white;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      /* Customize cho trang B2B */
+      .bg-dark { background-color: #0c0c0c; color: white; }
+    </style>
+  </head>
+  <body class="bg-dark text-white">
+
+    <!-- Navigation (Copied from index.html) -->
+    <div style="position: absolute; top: 0; width: 100%; z-index: 50; padding: 20px;">
+      <div class="flex justify-between items-center max-w-7xl mx-auto">
+        <div class="nav-logo">
+          <a href="index.html" class="logo text-brand font-playfair text-3xl font-bold" style="color: #d4a373; font-family: 'Playfair Display', serif; text-decoration: none;">Emotea</a>
+          <p class="sub-logo text-xs tracking-widest uppercase opacity-70">MENTAL CARE TEA</p>
+        </div>
+        <div class="hidden md:flex gap-8 font-bold">
+          <a href="index.html" class="hover:text-brand transition-colors">Trang Chủ</a>
+          <a href="index.html#healing" class="hover:text-brand transition-colors">Câu Chuyện</a>
+          <a href="index.html#slider" class="hover:text-brand transition-colors">Sản Phẩm</a>
+          <a href="b2b.html" class="text-brand border-b-2 border-brand">B2B / Doanh Nghiệp</a>
+        </div>
+        <div class="flex gap-4 items-center">
+            <a href="stitch_sketch_to_mobile_web/index.html" title="Viết nhật ký" class="hover:text-brand"><i class="fas fa-feather-alt"></i></a>
+            <a href="cart.html" class="hover:text-brand"><i class="fas fa-shopping-cart"></i></a>
+            <a href="account.html" class="hover:text-brand"><i class="fas fa-user"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="b2b-hero min-h-[60vh] flex items-center justify-center text-center px-4 pt-24">
+      <div class="max-w-3xl">
+        <p class="text-brand font-bold tracking-widest uppercase mb-4 text-sm">Cổng Đối Tác Doanh Nghiệp</p>
+        <h1 class="text-5xl md:text-6xl font-playfair font-bold mb-6">Giải Pháp Quà Tặng & Phân Phối</h1>
+        <p class="text-lg opacity-80 mb-8 leading-relaxed">Emotea tự hào mang đến những tách trà chăm sóc sức khỏe tinh thần chất lượng cao. Hãy để chúng tôi đồng hành cùng sự phát triển của doanh nghiệp bạn.</p>
+        <a href="#contact-form" class="inline-block bg-brand text-black font-bold py-4 px-8 rounded-full hover:bg-white transition-colors uppercase tracking-widest text-sm">Hợp tác ngay</a>
+      </div>
+    </section>
+
+    <!-- 2 Pillars Section -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        
+        <!-- Pillar 1: Retailers -->
+        <div class="glass-card rounded-3xl p-10 hover:-translate-y-2 transition-transform duration-300">
+          <div class="w-16 h-16 bg-brand/20 rounded-full flex items-center justify-center text-brand text-2xl mb-6">
+            <i class="fas fa-store"></i>
+          </div>
+          <h2 class="text-3xl font-playfair font-bold mb-4">Nhà Bán Lẻ / Phân Phối</h2>
+          <p class="opacity-70 mb-8">Dành cho các hệ thống siêu thị, cửa hàng tiện lợi (Circle K, FamilyMart...) và đại lý phân phối.</p>
+          
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <i class="fas fa-check text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">Bảng giá sỉ hấp dẫn</strong>
+                <span class="opacity-70 text-sm">Chiết khấu linh hoạt theo số lượng đơn hàng.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <i class="fas fa-check text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">MOQ thấp & Giao hàng nhanh</strong>
+                <span class="opacity-70 text-sm">Số lượng tối thiểu hợp lý, cam kết thời gian giao hàng đảm bảo tiến độ lên kệ.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <i class="fas fa-shield-alt text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">Hồ sơ pháp lý đầy đủ</strong>
+                <span class="opacity-70 text-sm">Giấy chứng nhận VSATTP, Giấy kiểm nghiệm NEWCENLAB đạt chuẩn quốc gia.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2: Corporate Gifts -->
+        <div class="glass-card rounded-3xl p-10 hover:-translate-y-2 transition-transform duration-300">
+          <div class="w-16 h-16 bg-brand/20 rounded-full flex items-center justify-center text-brand text-2xl mb-6">
+            <i class="fas fa-gift"></i>
+          </div>
+          <h2 class="text-3xl font-playfair font-bold mb-4">Quà Tặng Doanh Nghiệp</h2>
+          <p class="opacity-70 mb-8">Giải pháp chăm sóc nhân viên toàn diện cho bộ phận HR, sự kiện công ty, quà tặng mùa thi.</p>
+          
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <i class="fas fa-box-open text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">Combo thiết kế riêng</strong>
+                <span class="opacity-70 text-sm">Kết hợp báo cáo "Chỉ số căng thẳng" từ dữ liệu ẩn danh của app nhật ký để tư vấn đúng loại trà cần thiết.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <i class="fas fa-paint-brush text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">Tùy chỉnh Bao bì & Logo</strong>
+                <span class="opacity-70 text-sm">In ấn logo doanh nghiệp, thiết kế hộp quà tặng độc quyền sang trọng.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <i class="fas fa-file-invoice-dollar text-brand mt-1"></i>
+              <div>
+                <strong class="block text-brand">Hỗ trợ Hóa đơn VAT</strong>
+                <span class="opacity-70 text-sm">Xuất hóa đơn VAT minh bạch, hỗ trợ tối đa quy trình thanh toán của doanh nghiệp.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- B2B Contact Form -->
+    <section id="contact-form" class="py-20 px-4 bg-white/5">
+      <div class="max-w-2xl mx-auto glass-card rounded-3xl p-8 md:p-12">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-playfair font-bold text-brand mb-4">Liên Hệ Hợp Tác</h2>
+          <p class="opacity-70">Vui lòng để lại thông tin, đội ngũ Business của Emotea sẽ liên hệ lại với bạn trong vòng 24h qua Email / Zalo.</p>
+        </div>
+
+        <form id="b2b-form" class="space-y-6">
+          <div>
+            <label class="block text-sm font-bold text-brand mb-2">Loại hình hợp tác *</label>
+            <select id="b2b-type" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" required>
+              <option value="" disabled selected style="color: black;">-- Chọn loại hình --</option>
+              <option value="Đại lý / Phân phối bán lẻ" style="color: black;">Đại lý / Phân phối bán lẻ (Circle K, Siêu thị...)</option>
+              <option value="Quà tặng doanh nghiệp" style="color: black;">Quà tặng doanh nghiệp (HR, Sự kiện...)</option>
+            </select>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-bold text-brand mb-2">Tên công ty / Tổ chức *</label>
+              <input type="text" id="b2b-company" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" placeholder="Ví dụ: Công ty TNHH ABC" required>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-brand mb-2">Người liên hệ *</label>
+              <input type="text" id="b2b-name" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" placeholder="Họ và tên" required>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-bold text-brand mb-2">Số điện thoại (Zalo) *</label>
+              <input type="tel" id="b2b-phone" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" placeholder="0912345678" required>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-brand mb-2">Email doanh nghiệp *</label>
+              <input type="email" id="b2b-email" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" placeholder="email@company.com" required>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-brand mb-2">Yêu cầu chi tiết</label>
+            <textarea id="b2b-message" rows="4" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand" placeholder="Mô tả số lượng dự kiến, yêu cầu về thiết kế bao bì hoặc ngân sách..."></textarea>
+          </div>
+
+          <button type="submit" id="b2b-submit" class="w-full bg-brand text-black font-bold py-4 rounded-xl hover:bg-white transition-colors uppercase tracking-widest mt-4">
+            Gửi Yêu Cầu Hợp Tác
+          </button>
+        </form>
+        
+        <div id="b2b-success" class="hidden text-center py-10">
+          <div class="w-16 h-16 bg-brand/20 text-brand rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+            <i class="fas fa-check"></i>
+          </div>
+          <h3 class="text-2xl font-playfair font-bold text-brand mb-2">Gửi Thành Công!</h3>
+          <p class="opacity-70">Cảm ơn bạn đã quan tâm. Đội ngũ Emotea sẽ liên hệ lại qua Email / Zalo sớm nhất có thể.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 pt-10 pb-20 px-4 text-center">
+      <p class="opacity-50 text-sm">&copy; 2026 Emotea - Mental Care Tea. All rights reserved.</p>
+    </footer>
+
+    <script src="utils.js"></script>
+    <script>
+      const form = document.getElementById('b2b-form');
+      const successMsg = document.getElementById('b2b-success');
+      const submitBtn = document.getElementById('b2b-submit');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        submitBtn.innerText = 'ĐANG GỬI...';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50');
+
+        const data = {
+          action: "B2B_CONTACT",
+          type: document.getElementById('b2b-type').value,
+          company: document.getElementById('b2b-company').value,
+          name: document.getElementById('b2b-name').value,
+          phone: document.getElementById('b2b-phone').value,
+          email: document.getElementById('b2b-email').value,
+          message: document.getElementById('b2b-message').value,
+          date: new Date().toLocaleString()
+        };
+
+        try {
+          if (typeof sendToDatabase === 'function') {
+            await sendToDatabase(data);
+          } else {
+            console.log("Mock B2B Submit:", data);
+          }
+          form.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+        } catch (error) {
+          alert('Đã xảy ra lỗi khi gửi. Vui lòng thử lại sau.');
+          submitBtn.innerText = 'Gửi Yêu Cầu Hợp Tác';
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-50');
+        }
+      });
+    </script>
+  </body>
+</html>

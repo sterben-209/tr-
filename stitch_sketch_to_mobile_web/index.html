@@ -243,6 +243,8 @@
         .dot-blue { background: #B1E0E6; }
         .dot-green { background: #9DCB3B; }
         .dot-red { background: #C36565; }
+        .dot-mochi { background-image: url('../img/Mas_Mochi.png'); background-size: cover; background-position: center; background-color: #ffeba7; }
+        .dot-milo { background-image: url('../img/Mas_Milo.png'); background-size: cover; background-position: center; background-color: #dbd9d9; }
 
         @keyframes liquidSwayFollow {
             0%, 100% { clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z'); }
@@ -601,6 +603,8 @@
         .dot-blue { background: #B1E0E6; }
         .dot-green { background: #9DCB3B; }
         .dot-red { background: #C36565; }
+        .dot-mochi { background-image: url('../img/Mas_Mochi.png'); background-size: cover; background-position: center; background-color: #ffeba7; }
+        .dot-milo { background-image: url('../img/Mas_Milo.png'); background-size: cover; background-position: center; background-color: #dbd9d9; }
 
         @keyframes liquidSwayFollow {
             0%, 100% { clip-path: path('M 0 0 H 280 V 80 C 230 140, 180 70, 140 70 C 100 70, 50 100, 0 80 Z'); }
@@ -1421,6 +1425,8 @@
                                 <div class="color-dot dot-blue active" onclick="setMascotColor('blue', this)"></div>
                                 <div class="color-dot dot-green" onclick="setMascotColor('green', this)"></div>
                                 <div class="color-dot dot-red" onclick="setMascotColor('red', this)"></div>
+                                <div class="color-dot dot-mochi" onclick="setMascotColor('mochi', this)"></div>
+                                <div class="color-dot dot-milo" onclick="setMascotColor('milo', this)"></div>
                             </div>
 
                             <!-- Mascot Chat Interface -->
@@ -1621,7 +1627,7 @@
                         </div>
 
                         <!-- Guest Mode Card -->
-                        <div class="bg-surface-container-low border-2 border-outline-variant rounded-2xl p-5 flex items-center justify-between text-left cursor-pointer hover:bg-white transition-colors">
+                        <div class="bg-surface-container-low border-2 border-outline-variant rounded-2xl p-5 flex items-center justify-between text-left cursor-pointer hover:bg-white transition-colors" onclick="setGuestMode()">
                             <div>
                                 <h3 class="font-bold text-sm">Browse as Guest</h3>
                                 <p class="text-[10px] opacity-60">Data will only be saved to this device</p>
@@ -2598,7 +2604,21 @@
 
         // --- ACTIONS ---
         function login() { window.location.hash = '#login'; }
-        function logout() { localStorage.removeItem('user'); window.location.hash = '#guest'; navigate(); }
+        function logout() { 
+            const currentUser = getSession();
+            if (currentUser && currentUser.email && typeof backupLocalData === 'function') backupLocalData(currentUser.email);
+            if (typeof clearLocalData === 'function') clearLocalData(); else localStorage.removeItem('user'); 
+            window.location.hash = '#guest'; 
+            navigate(); 
+        }
+        function setGuestMode() { 
+            const currentUser = getSession();
+            if (currentUser && currentUser.email && typeof backupLocalData === 'function') backupLocalData(currentUser.email);
+            if (typeof clearLocalData === 'function') clearLocalData(); 
+            localStorage.setItem('user', JSON.stringify({ name: 'Khách', email: 'guest' })); 
+            window.location.hash = '#diary'; 
+            navigate(); 
+        }
         function goBack() { history.back(); }
 
         // --- MOOD RING CUSTOMIZATION ---
@@ -2918,7 +2938,7 @@
 
         async function syncDiaryFromServer() {
             const user = getSession();
-            if (!user || !user.email) return;
+            if (!user || !user.email || user.email === 'guest') return;
             try {
                 const response = await fetch(`${CONFIG_GOOGLE_URL}?action=GET_CALM_DIARY&email=${user.email}`);
                 const result = await response.json();
@@ -3807,6 +3827,18 @@
 
                 // Load Context from Local Storage
                 let mascotMemory = localStorage.getItem('mascot_user_context') || "Chưa có thông tin gì.";
+                
+                // Add diary context
+                let diaryContext = "";
+                try {
+                    let diaryEntries = JSON.parse(localStorage.getItem('calm_diary_entries') || "[]");
+                    if (diaryEntries.length > 0) {
+                        let recentEntries = diaryEntries.slice(0, 5).map(e => `[${new Date(e.timestamp).toLocaleDateString('vi-VN')}]: Cảm xúc ${e.moodText}, Nhật ký: "${e.note}"`).join('\n');
+                        diaryContext = `\nĐÂY LÀ NHỮNG NHẬT KÝ GẦN ĐÂY CỦA NGƯỜI DÙNG:\n${recentEntries}`;
+                    }
+                } catch(e) {
+                    console.error("Lỗi khi đọc nhật ký:", e);
+                }
 
                 // Add User Message to UI & Context
                 addChatMessage('user', text);
@@ -3822,7 +3854,7 @@
                     // Call Puter AI
                     const systemPrompt = `Bạn là An, mascot nhỏ dễ thương của ứng dụng Calm Diary. Hãy trả lời thật ngắn gọn (chỉ từ 1 đến 2 câu ngắn), dễ thương, sử dụng emoji và ngôn ngữ Tiếng Việt thân thiện, đôi khi dùng từ 'nhen', 'nha', 'á'.
 ĐÂY LÀ NHỮNG GÌ BẠN ĐÃ NHỚ VỀ NGƯỜI DÙNG TỪ TRƯỚC ĐẾN NAY:
-${mascotMemory}
+${mascotMemory}${diaryContext}
 QUAN TRỌNG: Nếu người dùng vừa chia sẻ thông tin gì đó mới đáng nhớ (như cảm xúc hôm nay, sở thích, tên gọi, v.v.), hãy tự động cập nhật trí nhớ của bạn bằng cách CHÈN THÊM dòng sau vào CUỐI câu trả lời của bạn: "[MEMORY: <thông tin muốn nhớ>]". Không giải thích thêm.`;
                     
                     const messages = [
@@ -4016,6 +4048,13 @@ QUAN TRỌNG: Nếu người dùng vừa chia sẻ thông tin gì đó mới đ�
                 const root = document.documentElement;
                 let hair, leg, shoe, shell;
                 
+                // Handle custom image vs liquid mascot
+                if (color === 'mochi' || color === 'milo') {
+                    if (typeof setMascotImage === 'function') setMascotImage(color);
+                } else {
+                    if (typeof setMascotImage === 'function') setMascotImage('default');
+                }
+                
                 if (color === 'green') {
                     hair = 'linear-gradient(135deg, #9DCB3B, #82A832)';
                     leg = 'linear-gradient(to bottom, rgba(157, 203, 59, 0.9), rgba(157, 203, 59, 0.6))';
@@ -4042,6 +4081,45 @@ QUAN TRỌNG: Nếu người dùng vừa chia sẻ thông tin gì đó mới đ�
                 // Update UI active state
                 document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
                 if (el) el.classList.add('active');
+            };
+
+            // Mascot Image Switch Logic
+            window.setMascotImage = function(imageName) {
+                const mascotComp = document.querySelector('#mascot-follow-component');
+                if (!mascotComp) return;
+                
+                let customImg = mascotComp.querySelector('.custom-mascot-img');
+                if (!customImg) {
+                    customImg = document.createElement('img');
+                    customImg.className = 'custom-mascot-img object-contain mx-auto';
+                    customImg.style.position = 'absolute';
+                    customImg.style.zIndex = '40';
+                    customImg.style.width = '300px';
+                    customImg.style.height = '300px';
+                    customImg.style.top = '50%';
+                    customImg.style.left = '50%';
+                    customImg.style.marginLeft = '-150px';
+                    customImg.style.marginTop = '-150px';
+                    customImg.style.animation = 'organicFloatFollow 6s infinite ease-in-out';
+                    mascotComp.appendChild(customImg);
+                }
+                
+                const liquidMascot = mascotComp.querySelector('.floating-container-follow');
+                
+                if (imageName === 'mochi' || imageName === 'milo') {
+                    if (liquidMascot) {
+                        liquidMascot.style.opacity = '0';
+                        liquidMascot.style.pointerEvents = 'none';
+                    }
+                    customImg.style.display = 'block';
+                    customImg.src = imageName === 'mochi' ? '../img/Mas_Mochi.png' : '../img/Mas_Milo.png';
+                } else {
+                    if (liquidMascot) {
+                        liquidMascot.style.opacity = '1';
+                        liquidMascot.style.pointerEvents = 'auto';
+                    }
+                    customImg.style.display = 'none';
+                }
             };
 
             // Load saved color preference

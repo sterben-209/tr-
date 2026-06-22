@@ -203,6 +203,7 @@
             // BƯỚC 2: CẬP NHẬT DỮ LIỆU MỚI NHẤT TỪ SERVER (Chạy ngầm)
             try {
                 if (typeof CONFIG_GOOGLE_URL === 'undefined') return;
+                if (userSession.email === 'guest') return;
 
                 const response = await fetch(`${CONFIG_GOOGLE_URL}?email=${userSession.email}`, {
                     method: 'GET',
@@ -233,7 +234,12 @@
 
         // ĐĂNG XUẤT
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('user');
+            const currentUser = JSON.parse(localStorage.getItem('user'));
+            if (currentUser && currentUser.email && typeof backupLocalData === 'function') {
+                backupLocalData(currentUser.email);
+            }
+            if (typeof clearLocalData === 'function') clearLocalData();
+            else localStorage.removeItem('user');
             window.location.href = 'auth.html';
         });
 
